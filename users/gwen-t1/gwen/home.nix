@@ -4,15 +4,16 @@
 }:
 
 {
-  # --- CORE HOME MANAGER SETTINGS ---
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
     stateVersion = "25.05"; 
   };
-}
 
-# TODO: Import optional modules
+  imports = [
+      ../../../modules/home/optional
+  ];
+}
 
 # --- EXAMPLES ---
 # link the configuration file in current directory to the specified location in home directory
