@@ -36,9 +36,12 @@
     }:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        # Pass 'inputs' and 'username' to all NixOS modules so we can use them there
+        # Pass the following to all NixOS modules so we can use them there
         specialArgs = {
-          inherit inputs username;
+          inherit
+            inputs
+            username
+            hostname;
         };
         modules = [
           # Host specific config
