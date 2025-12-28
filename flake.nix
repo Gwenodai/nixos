@@ -31,7 +31,6 @@
     # This function creates a system profile so we don't have to repeat code.
     mkSystem = {
       hostname,
-      username,
       system ? "x86_64-linux"
     }:
       nixpkgs.lib.nixosSystem {
@@ -40,14 +39,15 @@
         specialArgs = {
           inherit
             inputs
-            username
             hostname;
         };
         modules = [
           # Host specific config
           ./hosts/${hostname}
           # Common system config (timezone, locale, etc.)
-          ./modules/common.nix
+          ./modules/nixos/core
+          # Users for the host
+          ./users/${hostname}
           # Stylix Module
           inputs.stylix.nixosModules.stylix
           # Home Manager setup
@@ -56,10 +56,13 @@
             home-manager.useUserPackages = true;
             # Pass inputs to Home Manager modules as well
             home-manager.extraSpecialArgs = {
-              inherit inputs username;
+              inherit
+                inputs;
             };
-            # This expects a folder: ./users/gwen/home.nix
-            home-manager.users.${username} = import ./users/${username}/home.nix;
+            # Import for every user automatically
+            home-manager.sharedModules = [ 
+              ./modules/home/core
+            ];
           }
         ];
       };
@@ -68,12 +71,10 @@
       # Desktop
       gwen-t1 = mkSystem {
         hostname = "gwen-t1";
-        username = "gwen";
       };
       # # Server
       # my-server = mkSystem {
       #   hostname = "my-server";
-      #   username = "admin";
       # };
     };
   };

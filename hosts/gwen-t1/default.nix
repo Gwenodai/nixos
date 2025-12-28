@@ -1,13 +1,12 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 
 {
   imports = [
       ./hardware-configuration.nix  # Include the results of the hardware scan
-      ../../modules/nixos/desktop.nix # Import the common desktop config
+      ../../modules/nixos/optional/desktop.nix # Import the desktop config
   ];
 
   # --- BOOTLOADER ---
