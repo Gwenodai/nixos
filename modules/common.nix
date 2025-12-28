@@ -6,6 +6,11 @@
 }:
 
 {
+  # Common desktop imports
+  imports = [
+      ./network
+  ];
+
   # --- BASIC SYSTEM SETTINGS ---
   system.stateVersion = "25.05";
   # Enable Flakes and the new command-line tool
