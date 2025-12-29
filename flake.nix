@@ -5,6 +5,13 @@
   inputs = {
     # Core
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # import-tree
+    import-tree.url = "github:vic/import-tree";
+    # Flake-Parts
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     # Home & Theming
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,61 +28,68 @@
     # };
   };
 
-  # Outputs: The resulting system configurations
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    # This function creates a system profile so we don't have to repeat code.
-    mkSystem = {
-      hostname,
-      system ? "x86_64-linux"
-    }:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        # Pass the following to all NixOS modules so we can use them there
-        specialArgs = {
-          inherit
-            inputs
-            hostname;
-        };
-        modules = [
-          # Host specific config
-          ./hosts/${hostname}
-          # Common system config (timezone, locale, etc.)
-          ./modules/nixos/core
-          # Users for the host
-          ./users/${hostname}
-          # Stylix Module
-          inputs.stylix.nixosModules.stylix
-          # Home Manager setup
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            # Pass inputs to Home Manager modules as well
-            home-manager.extraSpecialArgs = {
-              inherit
-                inputs;
-            };
-            # Import for every user automatically
-            home-manager.sharedModules = [ 
-              ./modules/home/core
-            ];
-          }
-        ];
-      };
-  in {
-    nixosConfigurations = {
-      # Desktop
-      gwen-t1 = mkSystem {
-        hostname = "gwen-t1";
-      };
-      # # Server
-      # my-server = mkSystem {
-      #   hostname = "my-server";
-      # };
-    };
-  };
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; }
+      # Imports all of the top-level modules (the files under `./modules`)
+      (inputs.import-tree ./modules);
 }
+
+#   # Outputs: The resulting system configurations
+#   outputs = {
+#     self,
+#     nixpkgs,
+#     home-manager,
+#     ...
+#   } @ inputs: let
+#     # This function creates a system profile so we don't have to repeat code.
+#     mkSystem = {
+#       hostname,
+#       system ? "x86_64-linux"
+#     }:
+#       nixpkgs.lib.nixosSystem {
+#         inherit system;
+#         # Pass the following to all NixOS modules so we can use them there
+#         specialArgs = {
+#           inherit
+#             inputs
+#             hostname;
+#         };
+#         modules = [
+#           # Host specific config
+#           ./hosts/${hostname}
+#           # Common system config (timezone, locale, etc.)
+#           ./modules/nixos/core
+#           # Users for the host
+#           ./users/${hostname}
+#           # Stylix Module
+#           inputs.stylix.nixosModules.stylix
+#           # Home Manager setup
+#           home-manager.nixosModules.home-manager {
+#             home-manager.useGlobalPkgs = true;
+#             home-manager.useUserPackages = true;
+#             # Pass inputs to Home Manager modules as well
+#             home-manager.extraSpecialArgs = {
+#               inherit
+#                 inputs;
+#             };
+#             # Import for every user automatically
+#             home-manager.sharedModules = [ 
+#               ./modules/home/core
+#             ];
+#           }
+#         ];
+#       };
+#   in {
+#     nixosConfigurations = {
+#       # Desktop
+#       gwen-t1 = mkSystem {
+#         hostname = "gwen-t1";
+#       };
+#       # # Server
+#       # my-server = mkSystem {
+#       #   hostname = "my-server";
+#       # };
+#     };
+#   };
+# }
