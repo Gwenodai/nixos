@@ -12,6 +12,7 @@
       [
         system-default
         home-manager
+        # TODO: Implement:
         # impermanence
         # secrets
       ];
@@ -22,6 +23,7 @@
       with inputs.self.modules.homeManager;
       [
         system-default
+        # TODO: Implement:
         # impermanence
         # secrets
       ];
