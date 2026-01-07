@@ -9,8 +9,8 @@
   flake.modules.nixos.system-basic = {
     imports = with inputs.self.modules.nixos; [
       system-essential
-      # TODO: Implement:
-      # ssh
+      firmware
+      ssh
     ];
   };
 
