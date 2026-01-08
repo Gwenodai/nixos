@@ -27,6 +27,10 @@ let
     users.users."${username}" = {
       isNormalUser = true;
       initialPassword = "changeme";
+      extraGroups = [ 
+        "wheel"
+        "networkmanager"
+      ];
       shell = pkgs.zsh;
     };
     programs.zsh.enable = true;
