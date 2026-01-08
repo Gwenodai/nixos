@@ -13,8 +13,7 @@ let
 
   {
     imports = with inputs.self.modules.homeManager; [
-      # TODO: Define home modules to load here
-      # ex: system-cli
+      system-desktop
     ];
     home.username = "${username}";
     home.packages = with pkgs; [
