@@ -8,7 +8,6 @@ let
   username = "gwen";
 
   flake.modules.nixos."${username}" = {
-    lib,
     config,
     pkgs,
     ...
