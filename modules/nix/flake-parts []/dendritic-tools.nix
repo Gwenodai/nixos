@@ -9,7 +9,7 @@
     inputs.flake-parts.flakeModules.modules
   ];
 
-  # set flake.systems
+  # Set flake.systems
   systems = [
     "x86_64-linux"
   ];
