@@ -1,8 +1,5 @@
-{ ... }:
-
-{
+{ ... }: {
   # Default settings needed for all NixOS configurations
-
   flake.modules.nixos.system-default = {
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "25.05";

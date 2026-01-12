@@ -2,9 +2,7 @@
   flake.modules.nixos.gwen-t1 = {
     modulesPath,
     ...
-  }:
-  
-  {
+  }: {
     imports =[
       (modulesPath + "/profiles/qemu-guest.nix")
     ];

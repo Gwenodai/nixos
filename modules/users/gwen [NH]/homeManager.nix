@@ -1,17 +1,13 @@
 {
   inputs,
   ...
-}:
-
-let
+}: let
   username = "gwen";
 
   flake.modules.homeManager."${username}" = {
     pkgs,
     ...
-  }:
-
-  {
+  }: {
     imports = with inputs.self.modules.homeManager; [
       system-desktop
     ];
@@ -20,7 +16,6 @@ let
       # TODO: add home packages
     ];
   };
-in
-{
+in {
   inherit flake;
 }

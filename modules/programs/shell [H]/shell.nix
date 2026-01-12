@@ -2,9 +2,7 @@
   flake.modules.homeManager.shell = {
     config,
     ...
-  }:
-
-  {
+  }: {
     # Custom Aliases
     home.shellAliases = {
       ll = "eza -Al --icons --group-directories-first";

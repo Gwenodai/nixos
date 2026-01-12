@@ -1,11 +1,8 @@
 {
   inputs,
   ...
-}:
-
-{
-  # Import all essential nix-tools which which are used in all modules of specific class
-
+}: {
+  # Import all essentials which which are used in all modules
   flake.modules.nixos.system-essential = {
     imports = with inputs.self.modules.nixos; [
       system-default

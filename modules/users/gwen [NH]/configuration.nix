@@ -2,18 +2,14 @@
   inputs,
   self,
   ...
-}:
-
-let
+}: let
   username = "gwen";
 
   flake.modules.nixos."${username}" = {
     config,
     pkgs,
     ...
-  }:
-
-  {
+  }: {
     imports = with inputs.self.modules.nixos; [
       # TODO: Define more nix modules to load here
     ];
@@ -35,7 +31,6 @@ let
     };
     programs.zsh.enable = true;
   };
-in
-{
+in {
   inherit flake;
 }

@@ -2,9 +2,7 @@
   flake.modules.nixos.grub-boot = {
     pkgs,
     ...
-  }:
-
-  {
+  }: {
     boot = {
       loader = {
         grub.enable = true;

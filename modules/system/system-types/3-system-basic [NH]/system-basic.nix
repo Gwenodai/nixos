@@ -1,11 +1,8 @@
 {
   inputs,
   ...
-}:
-
-{
+}: {
   # Basic system with ssh
-
   flake.modules.nixos.system-basic = {
     imports = with inputs.self.modules.nixos; [
       system-essential
