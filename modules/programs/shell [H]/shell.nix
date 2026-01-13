@@ -3,13 +3,6 @@
     config,
     ...
   }: {
-    # # Custom Aliases
-    # home.shellAliases = {
-    #   ll = "eza -Al --icons --group-directories-first";
-    #   ls = "eza -A --icons --group-directories-first";
-    #   cat = "bat";
-    # };
-
     programs.zsh = {
       enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
