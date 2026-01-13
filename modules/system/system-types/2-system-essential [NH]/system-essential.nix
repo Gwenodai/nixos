@@ -7,6 +7,7 @@
     imports = with inputs.self.modules.nixos; [
       system-default
       home-manager
+      garbage-collection
       # TODO: Implement:
       # impermanence
       # secrets
