@@ -7,6 +7,7 @@
     imports = with inputs.self.modules.nixos; [
       system-basic
       cli-tools
+      archive-tools
     ];
   };
 

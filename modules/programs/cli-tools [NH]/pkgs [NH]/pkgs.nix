@@ -15,4 +15,13 @@
       gawk # GNU implementation of the Awk programming language
     ];
   };
+
+  flake.modules.homeManager.cli-tools = {
+    pkgs,
+    ...
+  }: {
+    home.packages = with pkgs; [
+      jq # Lightweight and flexible command-line JSON processor
+    ];
+  };
 }
