@@ -16,6 +16,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-basic
       cli-tools
+      sys-tools
       shell
       git
     ];
