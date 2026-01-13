@@ -13,6 +13,7 @@
   flake.modules.homeManager.system-cli = {
     imports = with inputs.self.modules.homeManager; [
       system-basic
+      cli-tools
       shell
       git
     ];
