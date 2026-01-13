@@ -8,6 +8,7 @@
       system-basic
       cli-tools
       archive-tools
+      sys-tools
     ];
   };
 
