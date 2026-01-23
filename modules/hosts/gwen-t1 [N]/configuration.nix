@@ -7,5 +7,6 @@
       grub-boot
       system-desktop
     ];
+    preservation.enable = true;
   };
 }

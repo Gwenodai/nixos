@@ -7,6 +7,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # import-tree
     import-tree.url = "github:vic/import-tree";
+    # Preservation
+    preservation.url = "github:nix-community/preservation";
     # Flake-Parts
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

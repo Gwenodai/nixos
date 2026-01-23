@@ -14,6 +14,7 @@
       "sr_mod"
       "virtio_blk"
     ];
+    boot.initrd.systemd.enable = true;
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
