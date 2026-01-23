@@ -4,6 +4,7 @@
   ...
 }: let
   username = "gwen";
+in {
 
   flake.modules.nixos."${username}" = {
     config,
@@ -31,6 +32,4 @@
     };
     programs.zsh.enable = true;
   };
-in {
-  inherit flake;
 }
