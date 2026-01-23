@@ -67,13 +67,38 @@
 
         find-ephemeral = pkgs.writeShellApplication {
           name = "find-ephemeral";
+          runtimeInputs = [ pkgs.tree ];
           text = ''
-            search_dir="''${1:-$HOME}"
+            show_tree=0
+            search_dir=""
 
-            find "''${search_dir}" \
-              -xdev \
-              ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-directories} \
-              -type f -printf "%p\\n"
+            while [[ $# -gt 0 ]]; do
+              case $1 in
+                -t|--tree)
+                  show_tree=1
+                  shift
+                  ;;
+                *)
+                  search_dir="$1"
+                  shift
+                  ;;
+              esac
+            done
+
+            search_dir="''${search_dir:-$HOME}"
+
+            run_search() {
+              find "$search_dir" \
+                -xdev \
+                ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-directories} \
+                -type f -printf "%p\\n"
+            }
+
+            if [ "$show_tree" -eq 1 ]; then
+              run_search | tree -a --fromfile
+            else
+              run_search
+            fi
           '';
         };
       in {
