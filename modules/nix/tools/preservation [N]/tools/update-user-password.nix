@@ -29,9 +29,9 @@
             echo
 
             while true; do
-                read -s -p "Enter New User Password: " p1
+                read -r -s -p "Enter New User Password: " p1
                 echo 
-                read -s -p "Password (again): " p2
+                read -r -s -p "Password (again): " p2
                 echo
 
                 if [[ "$p1" != "$p2" ]]; then
