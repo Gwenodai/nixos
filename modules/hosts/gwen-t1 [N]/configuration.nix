@@ -4,7 +4,7 @@
 }: {
   flake.modules.nixos.gwen-t1 = {
     imports = with inputs.self.modules.nixos; [
-      grub-boot
+      systemd-boot
       system-desktop
     ];
     preservation.enable = true;
