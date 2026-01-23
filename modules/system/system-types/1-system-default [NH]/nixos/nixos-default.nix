@@ -2,7 +2,7 @@
   # Default settings needed for all NixOS configurations
   flake.modules.nixos.system-default = {
     nixpkgs.config.allowUnfree = true;
-    system.stateVersion = "25.05";
+    system.stateVersion = "25.11";
 
     nix.settings = {
       # Enable Flakes and the new command-line tool        
