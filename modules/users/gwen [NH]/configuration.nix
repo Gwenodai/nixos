@@ -23,7 +23,8 @@ in {
 
     users.users."${username}" = {
       isNormalUser = true;
-      initialPassword = "changeme";
+      # initialPassword = "changeme";
+      hashedPasswordFile = "/persist/secrets/passwords/gwen";
       extraGroups = [ 
         "wheel"
         "networkmanager"
