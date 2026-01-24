@@ -1,5 +1,4 @@
 {
-  # TODO: Configure zsh
   # https://mynixos.com/home-manager/options/programs.zsh
   flake.modules.homeManager.shell = {
     config,
