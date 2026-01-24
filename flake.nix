@@ -9,6 +9,15 @@
     import-tree.url = "github:vic/import-tree";
     # Ephemeral state management
     preservation.url = "github:nix-community/preservation";
+    # Secrets
+    agenix = {
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = "";
+      };
+      url = "github:ryantm/agenix";
+    };
     # Flake splitting
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
