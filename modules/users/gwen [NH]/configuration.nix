@@ -24,7 +24,7 @@ in {
     users.users."${username}" = {
       isNormalUser = true;
       # initialPassword = "changeme";
-      hashedPasswordFile = "/persist/secrets/passwords/gwen";
+      hashedPasswordFile = "/persist/secrets/passwords/${username}";
       extraGroups = [ 
         "wheel"
         "networkmanager"
