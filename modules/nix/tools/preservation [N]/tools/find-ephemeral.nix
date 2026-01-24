@@ -70,7 +70,7 @@
           runtimeInputs = [ pkgs.tree ];
           text = ''
             show_tree=0
-            search_dir=""
+            input_dir="$HOME"
 
             while [[ $# -gt 0 ]]; do
               case $1 in
@@ -79,16 +79,16 @@
                   shift
                   ;;
                 *)
-                  search_dir="$1"
+                  input_dir="$1"
                   shift
                   ;;
               esac
             done
 
-            search_dir="''${search_dir:-$HOME}"
+            abs_dir="$(realpath "$input_dir")"
 
             run_search() {
-              find "$search_dir" \
+              find "$abs_dir" \
                 -xdev \
                 ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-directories} \
                 -type f -printf "%p\\n"
