@@ -7,23 +7,24 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # import-tree
     import-tree.url = "github:vic/import-tree";
-    # Preservation
+    # Ephemeral state management
     preservation.url = "github:nix-community/preservation";
-    # Flake-Parts
+    # Flake splitting
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    # Home & Theming
+    # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # # Window Manager & Extensions
+    # # Theming
+    # stylix = {
+    #   url = "github:nix-community/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # # Niri window manager
     # niri = {
     #   url = "github:sodiboo/niri-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
