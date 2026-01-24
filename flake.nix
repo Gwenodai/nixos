@@ -24,11 +24,11 @@
     #   url = "github:nix-community/stylix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    # # Niri window manager
-    # niri = {
-    #   url = "github:sodiboo/niri-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # Niri window manager
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
