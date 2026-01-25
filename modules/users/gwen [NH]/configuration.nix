@@ -12,6 +12,7 @@ in {
     ...
   }: {
     imports = with inputs.self.modules.nixos; [
+      niri
       # TODO: Define more nix modules to load here
     ];
 

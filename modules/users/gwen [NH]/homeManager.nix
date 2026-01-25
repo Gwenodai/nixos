@@ -11,6 +11,7 @@ in {
   }: {
     imports = with inputs.self.modules.homeManager; [
       system-desktop
+      niri
     ];
     home.username = "${username}";
     home.packages = with pkgs; [
