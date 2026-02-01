@@ -1,11 +1,21 @@
 {
   inputs,
+  self,
   ...
 }: {
   flake.modules.nixos.gwen-t1 = {
-    imports = with inputs.self.modules.nixos; [
-      gwen
-    ];
+    config,
+    ...
+  }: {
+    imports =
+      # nixos
+      with inputs.self.modules.nixos;
+      # factory
+      with inputs.self.factory;
+      [
+        # nixos import
+        gwen
+      ];
 
     home-manager.users.gwen = {
       ###

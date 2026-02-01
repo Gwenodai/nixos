@@ -1,11 +1,12 @@
+# Essentials for a minimal functioning system
 {
   inputs,
   ...
 }: {
-  # Import all essentials which which are used in all modules
-  flake.modules.nixos.system-essential = {
+  flake.modules.nixos.system-minimal = {
     imports = with inputs.self.modules.nixos; [
-      system-default
+      system-config
+
       home-manager
       garbage-collection
       # TODO: Implement:
@@ -13,9 +14,10 @@
     ];
   };
 
-  flake.modules.homeManager.system-essential = {
+  flake.modules.homeManager.system-minimal = {
     imports = with inputs.self.modules.homeManager; [
-      system-default
+      system-config
+      
       # TODO: Implement:
       # secrets
     ];

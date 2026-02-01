@@ -1,20 +1,25 @@
+# Expansion of system-minimal with full cli toolset
 {
   inputs,
   ...
 }: {
-  # Expansion of system-basic with cli-tools
   flake.modules.nixos.system-cli = {
     imports = with inputs.self.modules.nixos; [
-      system-basic
+      system-minimal
+
+      ssh
+      locale
+      firmware
       cli-tools
-      archive-tools
       sys-tools
+      archive-tools
     ];
   };
 
   flake.modules.homeManager.system-cli = {
     imports = with inputs.self.modules.homeManager; [
-      system-basic
+      system-minimal
+
       cli-tools
       sys-tools
       shell

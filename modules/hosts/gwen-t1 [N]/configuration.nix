@@ -8,9 +8,5 @@
       system-desktop
       preservation
     ];
-    users.mutableUsers = false;
-    security.sudo.extraConfig = ''
-      Defaults lecture = "never"
-    '';
   };
 }
