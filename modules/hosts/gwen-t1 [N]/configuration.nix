@@ -6,8 +6,8 @@
     imports = with inputs.self.modules.nixos; [
       systemd-boot
       system-desktop
+      preservation
     ];
-    preservation.enable = true;
     users.mutableUsers = false;
     security.sudo.extraConfig = ''
       Defaults lecture = "never"

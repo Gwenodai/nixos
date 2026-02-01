@@ -1,17 +1,18 @@
 {
+  inputs,
+  ...
+}: {
   flake.modules.homeManager.gwen = {
-    lib,
     config,
+    options,
     ...
   }: {
-    config = lib.mkIf config.preservation.enable {
-      home.preservation = {
-        preserveAt."/persist" = {
-          commonMountOptions = [
-            # Prevent Preservation mounts from appearing as such in graphical file managers
-            "x-gvfs-hide"
-          ];
-        };
+    config = inputs.self.lib.mkIfPreservation { inherit options; } {
+      preserveAt."/persist" = {
+        commonMountOptions = [
+          # Prevent Preservation mounts from appearing as such in graphical file managers
+          "x-gvfs-hide"
+        ];
       };
     };
   };

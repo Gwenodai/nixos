@@ -8,7 +8,6 @@
       system-default
       home-manager
       garbage-collection
-      preservation
       # TODO: Implement:
       # secrets
     ];
@@ -17,7 +16,6 @@
   flake.modules.homeManager.system-essential = {
     imports = with inputs.self.modules.homeManager; [
       system-default
-      preservation
       # TODO: Implement:
       # secrets
     ];
