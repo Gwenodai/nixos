@@ -32,8 +32,6 @@
   }: {
     # Define options available for use within Home Manager
     options = {
-      preservation.enable = lib.mkEnableOption "preservation (propagated from NixOS)";
-
       home.preservation.preserveAt = lib.mkOption {
         default = {};
         type = lib.types.attrsOf (lib.types.submodule {

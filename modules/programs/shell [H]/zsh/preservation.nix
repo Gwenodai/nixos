@@ -3,7 +3,6 @@
   ...
 }: {
   flake.modules.homeManager.shell = {
-    config,
     options,
     ...
   }: {

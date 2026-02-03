@@ -1,5 +1,6 @@
-# Basic system persistence
+# Minimal necessary preservation configuration
 {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = { ... }: {
     preservation = {
       preserveAt."/persist" = {
@@ -35,6 +36,20 @@
         ""
         "systemd-machine-id-setup --commit --root /persist"
       ];
+    };
+  };
+
+  # --- HOME MANAGER MODULE ---
+  flake.modules.homeManager.preservation = { ... }: {
+    home.preservation = {
+      preserveAt."/persist" = {
+        directories = [
+          { directory = "dots"; how = "symlink"; } # Nix flake directory
+        ];
+        commonMountOptions = [
+          "x-gvfs-hide" # Prevent Preservation mounts from appearing as such in graphical file managers
+        ];
+      };
     };
   };
 }

@@ -3,7 +3,6 @@
   ...
 }: {
   flake.modules.nixos.ssh = {
-    config,
     options,
     ...
   }: {
