@@ -1,32 +1,36 @@
 # A simple tool to list all files not preserved via preservation in any given directory
-{
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     pkgs,
     lib,
     config,
     ...
   }: let
-    getPreservedPaths =
-      preservationConfig:
+    # Retrieve declared preservation paths from raw `preservationConfig` input
+    getPreservationTargets = preservationConfig:
       let
-        stores = builtins.attrValues (preservationConfig.preserveAt or {});
-        
-        getPath =
-          x: 
-          if builtins.isString x then
-            x
-          else if x ? directory then
-            x.directory
-          else
-            x.file;
-
-        getEntries = store: (store.directories or []) ++ (store.files or []);
-        allEntries = builtins.concatMap getEntries stores;
+        # Store the raw values contained in `preservationConfig.preserveAt`
+        rawEntries = builtins.attrValues (preservationConfig.preserveAt or {});
+        # Filter input and only return attributes containing directory or file objects
+        filterEntries = x: (x.directories or []) ++ (x.files or []);
+        # Returns a mixed list of objects and strings
+        filteredList = builtins.concatMap filterEntries rawEntries;
+        # Takes filtered input and returns only the preservation target
+        getTarget = x: 
+          if builtins.isString x then # A plain string can only be a preservation target
+            x                         # └─Return the untouched variable
+          else if x ? directory then  # Check if input has the directory attribute
+            x.directory               # └─Return the variable of the directory attribute
+          else                        # Input must have file attribute
+            x.file;                   # └─Return the variable of the file attribute
       in
-      builtins.map (x: getPath x) allEntries;
+      builtins.map (x: getTarget x) filteredList; # Pass everything in `filteredList` to `getTarget`
 
-    systemPersistentStorageDirs = builtins.attrNames (config.preservation.preserveAt or {});
-    hmPersistentStorageDirs =
+    # System `preservationConfig.preserveAt` path
+    sysEternalPerstistDir = builtins.attrNames (config.preservation.preserveAt or {});
+    # Home Manager `preservationConfig.preserveAt` path
+    hmEternalPerstistDir =
       let
         hmUsers = config.home-manager.users or {};
         getUserStorage = _: userConfig:
@@ -34,22 +38,24 @@
       in
       lib.lists.flatten (lib.mapAttrsToList getUserStorage hmUsers);
 
-    systemPaths = getPreservedPaths config.preservation;
-
-    hmPaths =
+    # System preservation target paths
+    sysPersistTarget = getPreservationTargets config.preservation;
+    # System preservation target paths
+    hmPersistTarget =
       let
         hmUsers = config.home-manager.users or {};
         userPaths =
           username: userConfig:
           let
             userHome = config.users.users.${username}.home;
-            relativePaths = getPreservedPaths userConfig.home.preservation;
+            relativePaths = getPreservationTargets userConfig.home.preservation;
           in
           builtins.map (x: "${userHome}/${x}") relativePaths;
       in
       lib.lists.flatten (lib.mapAttrsToList userPaths hmUsers);
 
-    ignore-directories = [
+    # Static list of paths not worth scanning
+    ignore-paths = [
       "/boot"
       "/nix"
       "/proc"
@@ -58,11 +64,13 @@
       "/tmp"
       "/var/log"
     ]
-    ++ systemPersistentStorageDirs
-    ++ hmPersistentStorageDirs
-    ++ systemPaths
-    ++ hmPaths;
+    # Append paths gathered from preservation configuration 
+    ++ sysPerstistHostDir
+    ++ hmEternalPerstistDir
+    ++ sysPersistTarget
+    ++ hmPersistTarget;
 
+    # Create a shell application to find all files that aren't declared on the `ignore-paths` list
     find-ephemeral = pkgs.writeShellApplication {
       name = "find-ephemeral";
       runtimeInputs = [ pkgs.tree ];
@@ -88,7 +96,7 @@
         run_search() {
           find "$abs_dir" \
             -xdev \
-            ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-directories} \
+            ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-paths} \
             -type f -printf "%p\\n"
         }
 
