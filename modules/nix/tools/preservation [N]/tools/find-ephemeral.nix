@@ -65,7 +65,7 @@
       "/var/log"
     ]
     # Append paths gathered from preservation configuration 
-    ++ sysPerstistHostDir
+    ++ sysEternalPerstistDir
     ++ hmEternalPerstistDir
     ++ sysPersistTarget
     ++ hmPersistTarget;
