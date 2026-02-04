@@ -1,3 +1,4 @@
+# Declare tools for use in implementing the dendritic pattern
 {
   inputs,
   ...

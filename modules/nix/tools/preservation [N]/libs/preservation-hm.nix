@@ -1,5 +1,6 @@
-# Create a bridge module for use within Home Manager
-{
+# Create a preservation bridge module for use within Home Manager
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     config,
     lib,
@@ -25,12 +26,12 @@
     );
   };
 
-  # Creates a custom Preservation module for use within Home Manager
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.preservation = {
     lib,
     ...
   }: {
-    # Define options available for use within Home Manager
+    # Define custom Preservation options for use within Home Manager
     options = {
       home.preservation.preserveAt = lib.mkOption {
         default = {};

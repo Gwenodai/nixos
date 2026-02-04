@@ -1,5 +1,6 @@
-{
-  # Garbage collection config
+# Garbage collection config
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.garbage-collection = { ... }: {
     nix.gc = {
       automatic = true;

@@ -1,4 +1,5 @@
-{
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.cli-tools = {
     pkgs,
     ...
@@ -16,6 +17,7 @@
     ];
   };
 
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.cli-tools = {
     pkgs,
     ...

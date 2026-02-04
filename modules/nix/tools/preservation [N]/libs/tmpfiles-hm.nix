@@ -1,13 +1,14 @@
 # Passthrough of defined tmpfiles options within Home Manager
 # for use at a system level as needed for Preservation
-{
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     config,
     lib,
     ...
   }: {
-    # Construct a proper NixOS level `systemd.tmpfiles.settings.preservation`
-    # from all HM `setupDirectories` declarations
+    # Construct proper NixOS level `systemd.tmpfiles.settings.preservation`
+    # config from HM `setupDirectories` declarations
     systemd.tmpfiles.settings.preservation = lib.mkMerge (
       lib.flatten (
         lib.mapAttrsToList (
@@ -15,8 +16,7 @@
           lib.mapAttrsToList (
             dirPath: dirConfig:
             let
-              # Convert relative path to absolute: ".config" -> "/home/gwen/.config"
-              absPath =
+              absPath = # Convert relative path to absolute: ".config" -> "/home/gwen/.config"
                 if lib.hasPrefix "/" dirPath then
                   dirPath 
                 else
@@ -42,6 +42,7 @@
     );
   };
 
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.preservation = {
     lib,
     ...

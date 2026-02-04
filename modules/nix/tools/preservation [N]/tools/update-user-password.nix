@@ -1,11 +1,13 @@
 # Takes user input and writes a hashed password to `/persist/secrets/passwords/<USER>`
-{
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     pkgs,
     lib,
     config,
     ...
   }: let
+    # Create a shell application to automate the password setting process
     update-user-password = pkgs.writeShellApplication {
       name = "update-user-password";
       runtimeInputs = [ pkgs.mkpasswd ];

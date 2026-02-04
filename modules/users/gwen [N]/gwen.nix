@@ -11,8 +11,8 @@ in {
     (self.factory.user username true)
     # Manual input
     {
-      # Equates to `flake.modules.nixos.gwen`
-      nixos."${username}" = {
+      # --- NIXOS MODULE ---
+      nixos."${username}" = { # Equates to `flake.modules.nixos.gwen`
         imports = with self.modules.nixos; [
           # Define nixos modules to load here
         ];
@@ -21,8 +21,8 @@ in {
         };
       };
 
-      # Equates to `flake.modules.homeManager.gwen`
-      homeManager."${username}" = {
+      # --- HOME MANAGER MODULE ---
+      homeManager."${username}" = { # Equates to `flake.modules.homeManager.gwen`
         pkgs,
         ...
       }: {

@@ -3,13 +3,15 @@
   inputs,
   ...
 }: {
-  # Convenience function to set preservation settings only
-  # if Preservation module was imported
+  # Convenience function to set preservation settings
+  # only if the Preservation module was imported
   flake.lib = {
     mkIfPreservation = {
       options,
       ...
     }: settings:
+      # If the preservation option is present, the input
+      # is valid, else we replace it with nothing
       if (options ? home && options.home ? preservation) then
         { home.preservation = settings; }
       else if (options ? preservation) then
@@ -18,6 +20,7 @@
         { };
   };
 
+  # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     imports = [
       inputs.preservation.nixosModules.preservation
@@ -27,6 +30,7 @@
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.preservation
     ];
+
 
     preservation.enable = true;
   };

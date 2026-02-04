@@ -1,5 +1,6 @@
-{
-  # https://mynixos.com/home-manager/options/programs.zsh
+# https://mynixos.com/home-manager/options/programs.zsh
+{ ... }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.shell = {
     config,
     ...

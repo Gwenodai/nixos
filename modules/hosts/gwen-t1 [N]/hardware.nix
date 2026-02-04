@@ -1,4 +1,6 @@
-{
+# Host hardware config
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
     modulesPath,
     ...

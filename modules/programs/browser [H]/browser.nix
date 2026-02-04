@@ -1,4 +1,5 @@
-{
+{ ... }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.browser = {
     pkgs,
     ...

@@ -2,6 +2,7 @@
   inputs,
   ...
 }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.shell = {
     options,
     ...

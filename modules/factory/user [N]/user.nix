@@ -3,6 +3,7 @@
   self,
   ...
 }: {
+  # --- FACTORY ASPECT ---
   config.flake.factory.user = username: isAdmin: {
 
     nixos."${username}" = {

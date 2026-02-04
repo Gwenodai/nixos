@@ -1,5 +1,6 @@
-{
-  # Audio config
+# Audio config
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.audio = { ... }: {
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;

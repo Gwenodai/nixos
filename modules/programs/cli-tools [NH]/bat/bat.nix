@@ -1,5 +1,6 @@
-{
-  # Better cat with syntax highlighting
+# Better cat with syntax highlighting
+{ ... }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.cli-tools = {
     pkgs,
     ...

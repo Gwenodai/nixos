@@ -1,4 +1,5 @@
-{
+{ ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.sys-tools = {
     pkgs,
     ...

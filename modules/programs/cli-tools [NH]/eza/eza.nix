@@ -1,5 +1,6 @@
-{
-  # A modern replacement for 'ls'
+# A modern replacement for 'ls'
+{ ... }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.cli-tools = { ... }: {
     programs.eza = {
       enable = true;

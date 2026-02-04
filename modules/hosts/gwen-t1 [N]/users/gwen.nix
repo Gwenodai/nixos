@@ -1,8 +1,10 @@
+# Declare 'gwen' user for this host
 {
   inputs,
   self,
   ...
 }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
     config,
     ...

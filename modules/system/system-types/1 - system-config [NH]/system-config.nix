@@ -1,5 +1,6 @@
 # Core system config needed for all systems
 { ... }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.system-config = {
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "25.11";
@@ -24,6 +25,7 @@
     users.mutableUsers = false;
   };
 
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.system-config = {
     config,
     ...

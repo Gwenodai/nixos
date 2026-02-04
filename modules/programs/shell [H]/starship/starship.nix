@@ -1,6 +1,7 @@
-{
-  # TODO: Configure starship
-  # https://mynixos.com/home-manager/options/programs.starship
+# TODO: Configure starship
+# https://mynixos.com/home-manager/options/programs.starship
+{ ... }: {
+  # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.shell = { ... }: {
     programs.starship = {
       enable = true;

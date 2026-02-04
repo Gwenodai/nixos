@@ -2,6 +2,7 @@
   inputs,
   ...
 }: {
+  # --- NIXOS MODULE ---
   flake.modules.nixos.ssh = {
     options,
     ...
