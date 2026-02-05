@@ -19,6 +19,7 @@
       system-cli
 
       browser
+      kitty
     ];
   };
 }
