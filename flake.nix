@@ -19,6 +19,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Declarative disk partitioning
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # # Theming
     # stylix = {
     #   url = "github:nix-community/stylix";

@@ -8,6 +8,7 @@
     imports = with inputs.self.modules.nixos; [
       system-config
 
+      disko
       home-manager
       garbage-collection
       # TODO: Implement:

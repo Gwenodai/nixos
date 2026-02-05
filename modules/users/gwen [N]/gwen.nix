@@ -17,7 +17,8 @@ in {
           # Define nixos modules to load here
         ];
         users.users."${username}" = {
-          hashedPasswordFile = "/persist/secrets/passwords/${username}";
+          # hashedPasswordFile = "/persist/secrets/passwords/${username}";
+          initialPassword = "changeme";
         };
       };
 
