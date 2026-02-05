@@ -9,27 +9,29 @@
           "/etc/NetworkManager/system-connections"
           { directory = "/var/lib/nixos"; inInitrd = true; }
         ];
-        files = map (x: {
-          file = x;
-          how = "symlink";
-          inInitrd = true;
-          configureParent = true;
-        }) [
-          "/etc/machine-id"
-          "/var/lib/systemd/random-seed"
+        files = [
+          {
+            file = "/etc/machine-id";
+            how = "bindmount";
+            inInitrd = true;
+            configureParent = true;
+          }
+          {
+            file = "/var/lib/systemd/random-seed";
+            how = "symlink";
+            inInitrd = true;
+            configureParent = true;
+          }
         ];
       };
     };
 
-    # The following section is needed for compatibility with systemd's ConditionFirstBoot:
-    # Skips generating standard systemd configuration
-    systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
-    # Define our own service
+    # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
     systemd.services.systemd-machine-id-commit = {
-      # Ensure service will only run if this path is mounted
+      # Ensure service will only run if the persistent storage is mounted
       unitConfig.ConditionPathIsMountPoint = [
         ""
-        "/persist/etc/machine-id"
+        "/persist"
       ];
       # Ensure service commits the ID to the persistent volume
       serviceConfig.ExecStart = [
@@ -44,7 +46,11 @@
     home.preservation = {
       preserveAt."/persist" = {
         directories = [
-          { directory = "dots"; how = "symlink"; } # Nix flake directory
+          { # Nix flake directory
+            directory = "dots";
+            how = "symlink";
+            createLinkTarget = true;
+          }
         ];
         commonMountOptions = [
           "x-gvfs-hide" # Prevent Preservation mounts from appearing as such in graphical file managers
