@@ -20,6 +20,7 @@
 
       browser
       kitty
+      vscode
     ];
   };
 }
