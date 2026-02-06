@@ -10,7 +10,10 @@
     # Create a shell application to automate the password setting process
     update-user-password = pkgs.writeShellApplication {
       name = "update-user-password";
-      runtimeInputs = [ pkgs.mkpasswd ];
+      runtimeInputs = [
+        pkgs.coreutils # Provides mkdir, chmod, tee
+        pkgs.mkpasswd  # Provides mkpasswd
+      ];
       text = ''
         TARGET_USER="$USER"
 

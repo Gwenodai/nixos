@@ -73,7 +73,10 @@
     # Create a shell application to find all files that aren't declared on the `ignore-paths` list
     find-ephemeral = pkgs.writeShellApplication {
       name = "find-ephemeral";
-      runtimeInputs = [ pkgs.tree ];
+      runtimeInputs = [
+        pkgs.findutils # Provides find
+        pkgs.tree      # Provides tree
+      ];
       text = ''
         show_tree=0
         input_dir="$HOME"
