@@ -1,7 +1,10 @@
 # Minimal necessary preservation configuration
 {
   # --- NIXOS MODULE ---
-  flake.modules.nixos.preservation = { ... }: {
+  flake.modules.nixos.preservation = {
+    pkgs,
+    ...
+  }: {
     preservation = {
       preserveAt."/persist" = {
         directories = [
@@ -36,7 +39,7 @@
       # Ensure service commits the ID to the persistent volume
       serviceConfig.ExecStart = [
         ""
-        "systemd-machine-id-setup --commit --root /persist"
+        "${pkgs.systemd}/bin/systemd-machine-id-setup --commit --root /persist"
       ];
     };
   };
