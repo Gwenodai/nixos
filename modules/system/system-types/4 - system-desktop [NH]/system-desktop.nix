@@ -10,6 +10,7 @@
 
       audio
       fonts
+      files
     ];
   };
 
