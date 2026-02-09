@@ -1,7 +1,6 @@
 # Declare 'gwen' user for this host
 {
   inputs,
-  self,
   ...
 }: {
   # --- NIXOS MODULE ---
@@ -17,6 +16,20 @@
       [
         # nixos import
         gwen
+        # factory import
+        (mount-cifs-nixos {
+          host = "192.168.1.64"; # TODO: Use predefined server cifs config
+          resource = "Network-Storage";
+          destination = "/mnt/x370/root";
+          UID = "1000";
+          GID = "1000";
+          extraoptions = [
+            "guest"
+            "noperm"
+            "nounix"
+            "nobrl"
+          ];
+        })
       ];
 
     home-manager.users.gwen = {
