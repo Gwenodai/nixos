@@ -8,14 +8,16 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preserveAt."/persist" = {
-        files = [
-          { file = ".config/zsh/.zsh_history"; mode = "0600"; }
-        ];
-      };
-      setupDirectories = {
-        ".config" = { };
-        ".config/zsh" = { };
+      home.preservation = {
+        preserveAt."/persist" = {
+          files = [
+            { file = ".config/zsh/.zsh_history"; mode = "0600"; }
+          ];
+        };
+        setupDirectories = {
+          ".config" = { };
+          ".config/zsh" = { };
+        };
       };
     };
   };
