@@ -3,18 +3,21 @@
   # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
     modulesPath,
+    config,
     ...
   }: {
     imports =[
-      (modulesPath + "/profiles/qemu-guest.nix")
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     boot.initrd.availableKernelModules = [
+      "nvme"
       "ahci"
+      "sd_mod"
+      "usbhid"
       "xhci_pci"
-      "virtio_pci"
-      "sr_mod"
-      "virtio_blk"
+      "usb_storage"
+      "thunderbolt"
     ];
     boot.initrd.systemd.enable = true;
     boot.initrd.kernelModules = [ ];
@@ -22,6 +25,8 @@
     boot.extraModulePackages = [ ];
 
     networking.useDHCP = true;
+
+    hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
     nixpkgs.hostPlatform = "x86_64-linux";
   };

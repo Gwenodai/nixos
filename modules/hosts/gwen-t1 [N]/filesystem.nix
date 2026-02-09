@@ -5,11 +5,7 @@
     disko.devices = {
       disk = {
         Samsung-990-PRO-4TB = {
-          # Real device:
-          # device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_4TB_S7DPNF0XA42691V";
-          # OR
-          # device = "/dev/disk/by-id/nvme-eui.0025384a41bd2579";
-          device = "/dev/vda";
+          device = "/dev/disk/by-id/nvme-eui.0025384a41bd2579";
           type = "disk";
           content = {
             type = "gpt";
@@ -70,8 +66,7 @@
                     };
                     "swap" = {
                       mountpoint = "/swap";
-                      # TODO: Set propper swap size
-                      swap.swapfile.size = "8G";
+                      swap.swapfile.size = "64G";
                     };
                   };
                 };
