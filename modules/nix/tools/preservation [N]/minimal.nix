@@ -51,8 +51,7 @@
         directories = [
           { # Nix flake directory
             directory = "dots";
-            how = "symlink";
-            createLinkTarget = true;
+            how = "bindmount";
           }
         ];
         commonMountOptions = [

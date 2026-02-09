@@ -9,13 +9,11 @@
     mkIfPreservation = {
       options,
       ...
-    }: settings:
-      # If the preservation option is present, the input
-      # is valid, else we replace it with nothing
-      if (options ? home && options.home ? preservation) then
-        { home.preservation = settings; }
-      else if (options ? preservation) then
-        { preservation = settings; }
+    }: input:
+      # If the preservation option is present, the input is valid,
+      # else we replace it with nothing
+      if (options ? preservation || (options ? home && options.home ? preservation)) then
+        input
       else
         { };
   };
@@ -30,7 +28,6 @@
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.preservation
     ];
-
 
     preservation.enable = true;
   };
