@@ -6,6 +6,7 @@
   # --- FACTORY ASPECT ---
   config.flake.factory.user = username: isAdmin: {
 
+    # Creates a nixos module
     nixos."${username}" = {
       lib,
       pkgs,
@@ -29,6 +30,7 @@
       };
     };
 
+    # Creates a Home Manager module
     homeManager."${username}" = {
       home.username = "${username}";
     };

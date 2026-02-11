@@ -1,7 +1,6 @@
 # Imports Home-Manager for NixOS
 {
   inputs,
-  config,
   ...
 }: {
   # --- HOME MANAGER MODULE ---
