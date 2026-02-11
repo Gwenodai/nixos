@@ -26,6 +26,9 @@
           jetbrains-mono
         ];
       }
+      {
+        fonts.fontconfig.enable = true;
+      }
     ];
   };
 }
