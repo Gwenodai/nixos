@@ -14,6 +14,7 @@
       cli-tools
       sys-tools
       archive-tools
+      coolercontrol
     ];
   };
 
