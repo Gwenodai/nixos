@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  # --- HOME MANAGER MODULE ---
+  # --- NIXOS MODULE ---
   flake.modules.nixos.home-manager = {
     imports = [
       inputs.home-manager.nixosModules.home-manager

@@ -9,6 +9,7 @@
       profiles.default = {
         userSettings = {
           todohighlight = {
+            # Whitelisted files to highlight
             include = [
               "**/*.md"
               "**/*.sh"

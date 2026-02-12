@@ -8,16 +8,17 @@
         userSettings = {
           workbench = {
             settings.alwaysShowAdvancedSettings = true;
-            startupEditor = "none";
+            startupEditor = "none"; # Disable the welcome page
           };
           
+          # Disable vscode/extension updates (This is handled by vscode module)
           update.mode = "none";
-          security.workspace.trust.enabled = false;
-
           extensions = {
             autoUpdate = false;
+            autoCheckUpdates = false;
           };
-          
+
+          security.workspace.trust.enabled = false;
           # experimentalGpuAcceleration = "on";
         };
       };

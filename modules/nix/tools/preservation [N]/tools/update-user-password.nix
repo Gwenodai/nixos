@@ -15,6 +15,7 @@
         pkgs.mkpasswd  # Provides mkpasswd
       ];
       text = ''
+        # syntax: bash
         TARGET_USER="$USER"
 
         if [ "$TARGET_USER" = "root" ]; then

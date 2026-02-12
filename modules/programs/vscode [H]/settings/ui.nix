@@ -11,7 +11,6 @@
               enabled = true;
               expand = true;
             };
-            
             sortOrder = "foldersNestsFiles";
           };
 
@@ -21,15 +20,15 @@
             reduceMotion = "off";
           };
 
+          # Make sure we always use our defined colour schemes
           window = {
             autoDetectColorScheme = false;
             autoDetectHighContrast = false;
           };
 
           editor = {
-            cursorBlinking = "phase";
             cursorSmoothCaretAnimation = "on";
-            
+            cursorBlinking = "phase";
             smoothScrolling = true;
             linkedEditing = true;
           };

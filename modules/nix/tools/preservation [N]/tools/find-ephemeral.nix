@@ -78,6 +78,7 @@
         pkgs.tree      # Provides tree
       ];
       text = ''
+        # syntax: bash
         show_tree=0
         input_dir="$HOME"
 

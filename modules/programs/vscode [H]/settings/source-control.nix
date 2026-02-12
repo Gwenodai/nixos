@@ -6,13 +6,11 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          scm = {
-            defaultViewMode = "tree";
-          };
+          # Set source control to tree view for easier parsability
+          scm.defaultViewMode = "tree";
           
           diffEditor = {
             renderSideBySide = false;
-
             experimental = {
               useTrueInlineView = true;
               showMoves = false;

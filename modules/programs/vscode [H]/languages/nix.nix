@@ -10,17 +10,19 @@
           nix ={
             enableLanguageServer = true;
             serverPath = "${pkgs.nil}/bin/nil";
-            # serverSettings = {
-            #   nil = {
-            #     command = [ "${pkgs.nil}/bin/nil" ];
-            #   };
-            # };
           };
         };
 
         extensions = with pkgs.vscode-extensions; [
-          jnoortheen.nix-ide # Syntax highlighting, formatting, and error reporting
+          jnoortheen.nix-ide           # Syntax highlighting, formatting, etc
           jeff-hykin.better-nix-syntax # Syntax highlighting inside shellhooks
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          { # Syntax highlighting for embedded languages inside Nix multi-line strings
+            name = "nix-embedded-languages";
+            publisher = "coopermaruyama";
+            version = "1.1.1";
+            sha256 = "sha256-2VLX030Zc3kl6vozLr2cbcCREoDH6gywUHQqhNVb1G4=";
+          }
         ];
       };
     };

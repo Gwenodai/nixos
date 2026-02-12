@@ -9,14 +9,14 @@
         userSettings = {
           bashIde ={
             shellcheckPath = "${pkgs.shellcheck}/bin/shellcheck";
-            # TODO: To get documentation for flags on hover, setup up and configure explainshell
+            # TODO: To get documentation for flags on hover, setup and configure explainshell
             explainshellEndpoint = ""; # Disable explainshell
-            shfmt.path = ""; # Disable shfmt
+            shfmt.path = "";           # Disable shfmt
           };
         };
 
         extensions = with pkgs.vscode-extensions; [
-          mads-hartmann.bash-ide-vscode # Bash LSP that brings an IDE-like experience
+          mads-hartmann.bash-ide-vscode # Bash LSP for an IDE-like experience
         ];
       };
     };

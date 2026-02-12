@@ -7,19 +7,19 @@
       profiles.default = {
         userSettings = {
           editor = {
+            # -BRACKETS-
+            guides.bracketPairs = "active";
             bracketPairColorization = {
               enabled = true;
               independentColorPoolPerBracketType = false;
             };
-            
-            guides = {
-              bracketPairs = "active";
-            };
 
+            # -INDENTATION-
             insertSpaces = true;
             indentSize = "tabsize";
             tabSize = 2;
 
+            # -WRAPPING-
             wordWrap = "on";
             # wordWrapColumn = 80;
             wrapOnEscapedLineFeeds = false;

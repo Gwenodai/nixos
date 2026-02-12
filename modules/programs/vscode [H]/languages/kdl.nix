@@ -6,7 +6,6 @@
   }: {
     programs.vscode = {
       profiles.default = {
-
         extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "kdl";
