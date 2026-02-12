@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770779995,
-        "narHash": "sha256-Evbc+u49wYQ5uyEi/HHxVFEt3g/w4MZxkMXMe7McjRM=",
+        "lastModified": 1770915843,
+        "narHash": "sha256-ZwU5wXKNqpOQvjNz6aBp1j5peiBZow1++6pLnk5VAhs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b3f43db171474132528be57610bfa5fb3b766879",
+        "rev": "6a1f7101d2c3ee87d485a87880d73b4665c6a4bd",
         "type": "github"
       },
       "original": {
@@ -72,6 +72,22 @@
       "original": {
         "owner": "vic",
         "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "it87": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766723136,
+        "narHash": "sha256-iWyOctK+TFhVCOw2LiV4NiNFEAqNXOpSdGY//VwO8Ko=",
+        "owner": "frankcrawford",
+        "repo": "it87",
+        "rev": "a9eb2495220cba861ef3df63fa15265e878293b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "frankcrawford",
+        "repo": "it87",
         "type": "github"
       }
     },
@@ -112,6 +128,7 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "it87": "it87",
         "nixpkgs": "nixpkgs",
         "preservation": "preservation"
       }
