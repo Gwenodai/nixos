@@ -24,6 +24,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # it87 driver with support for newer IT86xx/IT87xx chips
+    it87 = {
+      url = "github:frankcrawford/it87";
+      flake = false;
+    };
     # # Theming
     # stylix = {
     #   url = "github:nix-community/stylix";
