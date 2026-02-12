@@ -9,6 +9,7 @@
       systemd-boot
       system-desktop
       preservation
+      it87 # Custom it87 driver for MB sensors
     ];
   };
 }

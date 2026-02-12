@@ -9,20 +9,24 @@
     imports =[
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
-
-    boot.initrd.availableKernelModules = [
-      "nvme"
-      "ahci"
-      "sd_mod"
-      "usbhid"
-      "xhci_pci"
-      "usb_storage"
-      "thunderbolt"
-    ];
-    boot.initrd.systemd.enable = true;
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-amd" ];
-    boot.extraModulePackages = [ ];
+    
+    boot = {
+      initrd = {
+        availableKernelModules = [
+          "nvme"
+          "ahci"
+          "sd_mod"
+          "usbhid"
+          "xhci_pci"
+          "usb_storage"
+          "thunderbolt"
+        ];
+        systemd.enable = true;
+        kernelModules = [ ];
+      };
+      kernelModules = [ "kvm-amd" ];
+      extraModulePackages = [ ];
+    };
 
     networking.useDHCP = true;
 
