@@ -3,7 +3,6 @@
   # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
     modulesPath,
-    config,
     pkgs,
     ...
   }: {
@@ -27,14 +26,15 @@
         "kvm-amd" # Kernel-based Virtual Machine support
       ];
       extraModulePackages = [ ];
+
+      kernelParams = [
+        "preempt=full"
+        "split_lock_detect=off"
+      ];
       
       # Latest CachyOS kernel with Zen4/5 specific optimizations
       kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
     };
-
-    networking.useDHCP = true;
-
-    hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
     nixpkgs.hostPlatform = "x86_64-linux";
   };
