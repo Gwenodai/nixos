@@ -1,10 +1,11 @@
-# Imports Home-Manager as standalone for non-NixOS configurations
+# Declarative home management
 {
-  inputs,
   ...
 }: {
-  imports = [
-    # https://github.com/nix-community/home-manager
-    inputs.home-manager.flakeModules.home-manager
-  ];
+  flake-file.inputs = {
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }
