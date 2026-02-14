@@ -30,9 +30,9 @@ in {
         imports = with self.modules.homeManager; [
           system-desktop
         ];
-        home.packages = with pkgs; [
+        # home.packages = with pkgs; [
           # Define Home Manager pkgs to load here
-        ];
+        # ];
       };
     }
   ];
