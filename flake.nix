@@ -1,49 +1,23 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  description = "NixOS configuration";
 
-  # Inputs: Sources for packages and modules
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+
   inputs = {
-    # Core
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # import-tree
-    import-tree.url = "github:vic/import-tree";
-    # Ephemeral state management
-    preservation.url = "github:nix-community/preservation";
-    # Flake splitting
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-    # Home Manager
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Declarative disk partitioning
     disko = {
-      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko";
     };
-    # it87 driver with support for newer IT86xx/IT87xx chips
-    it87 = {
-      url = "github:frankcrawford/it87";
-      flake = false;
+    flake-file.url = "github:vic/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
     };
-    # # Theming
-    # stylix = {
-    #   url = "github:nix-community/stylix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # # Niri window manager
-    # niri = {
-    #   url = "github:sodiboo/niri-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    import-tree.url = "github:vic/import-tree";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    preservation.url = "github:nix-community/preservation";
   };
 
-  outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; }
-      # Imports all of the top-level modules (the files under `./modules`)
-      (inputs.import-tree ./modules);
 }
