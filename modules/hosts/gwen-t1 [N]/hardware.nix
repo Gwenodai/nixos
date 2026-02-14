@@ -4,6 +4,7 @@
   flake.modules.nixos.gwen-t1 = {
     modulesPath,
     config,
+    pkgs,
     ...
   }: {
     imports =[
@@ -15,17 +16,20 @@
         availableKernelModules = [
           "nvme"
           "ahci"
-          "sd_mod"
           "usbhid"
           "xhci_pci"
           "usb_storage"
           "thunderbolt"
         ];
-        systemd.enable = true;
         kernelModules = [ ];
       };
-      kernelModules = [ "kvm-amd" ];
+      kernelModules = [
+        "kvm-amd" # Kernel-based Virtual Machine support
+      ];
       extraModulePackages = [ ];
+      
+      # Latest CachyOS kernel with Zen4/5 specific optimizations
+      kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
     };
 
     networking.useDHCP = true;

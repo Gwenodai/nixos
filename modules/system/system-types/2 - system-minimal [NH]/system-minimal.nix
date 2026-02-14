@@ -7,7 +7,8 @@
   flake.modules.nixos.system-minimal = {
     imports = with inputs.self.modules.nixos; [
       system-config
-
+      
+      kernel-default
       disko
       home-manager
       garbage-collection
