@@ -15,6 +15,8 @@
               useTrueInlineView = true;
               showMoves = false;
             };
+            hideUnchangedRegions.enabled = false;
+            ignoreTrimWhitespace = false;
           };
 
           git.untrackedChanges = "separate";
