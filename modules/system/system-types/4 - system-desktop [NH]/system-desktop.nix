@@ -8,6 +8,7 @@
     imports = with inputs.self.modules.nixos; [
       system-cli
 
+      graphics
       audio
       fonts
       files

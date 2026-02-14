@@ -9,6 +9,8 @@
       systemd-boot
       system-desktop
       preservation
+      amdcpu
+      amdgpu
       it87 # Custom it87 driver for MB sensors
     ];
   };
