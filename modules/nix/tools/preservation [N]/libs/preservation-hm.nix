@@ -7,10 +7,10 @@
     ...
   }: {
     # Construct real `preserveAt` output from HM preservation declarations
-    preservation.preserveAt = lib.mkMerge (
-      lib.flatten (
-        lib.mapAttrsToList (username: userConfig:
-          lib.mapAttrsToList (persistTarget: persistConfig:
+    preservation.preserveAt = with lib; mkMerge (
+      flatten (
+        mapAttrsToList (username: userConfig:
+          mapAttrsToList (persistTarget: persistConfig:
             {
               "${persistTarget}" = {
                 users."${username}" = {
@@ -33,23 +33,23 @@
   }: {
     # Define custom Preservation options for use within Home Manager
     options = {
-      home.preservation.preserveAt = lib.mkOption {
+      home.preservation.preserveAt = with lib; mkOption {
         default = {};
-        type = lib.types.attrsOf (lib.types.submodule {
+        type = with types; attrsOf (submodule {
           options = {
 
-            directories = lib.mkOption {
-              type = lib.types.listOf lib.types.anything;
+            directories = mkOption {
+              type = listOf anything;
               default = [];
             };
 
-            files = lib.mkOption {
-              type = lib.types.listOf lib.types.anything;
+            files = mkOption {
+              type = listOf anything;
               default = [];
             };
 
-            commonMountOptions = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
+            commonMountOptions = mkOption {
+              type = listOf str;
               default = [];
             };
           };
