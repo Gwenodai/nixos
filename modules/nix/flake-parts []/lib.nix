@@ -1,4 +1,4 @@
-# Helper functions for creating system / home-manager configurations
+# Helper functions for creating system configurations
 {
   inputs,
   lib,
@@ -16,16 +16,6 @@
         modules = [
           inputs.self.modules.nixos.${name}
           { nixpkgs.hostPlatform = lib.mkDefault system; }
-        ];
-      };
-    };
-
-    # For creating standalone Home-Manager configurations for non-NixOS
-    mkHomeManager = system: name: {
-      "${name}" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-        modules = [
-          inputs.self.modules.homeManager.${name}
         ];
       };
     };

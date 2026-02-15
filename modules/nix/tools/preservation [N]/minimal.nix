@@ -27,6 +27,17 @@
           }
         ];
       };
+      ignore = {
+        directories = [
+          "/boot"
+          "/nix"
+          "/proc"
+          "/run"
+          "/sys"
+          "/tmp"
+          "/var/log"
+        ];
+      };
     };
 
     # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
@@ -46,7 +57,7 @@
 
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.preservation = { ... }: {
-    home.preservation = {
+    preservation = {
       preserveAt."/persist" = {
         directories = [
           { # Nix flake directory

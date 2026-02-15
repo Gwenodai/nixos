@@ -8,7 +8,7 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      home.preservation = {
+      preservation = {
         preserveAt."/persist" = {
           directories = [
             {

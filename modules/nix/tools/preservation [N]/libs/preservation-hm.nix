@@ -20,7 +20,7 @@
                 };
               };
             }
-          ) userConfig.home.preservation.preserveAt # = `persistTarget`.`persistConfig`
+          ) userConfig.preservation.preserveAt # = `persistTarget`.`persistConfig`
         ) config.home-manager.users # = `username`.`userConfig`
       )
     );
@@ -33,7 +33,11 @@
   }: {
     # Define custom Preservation options for use within Home Manager
     options = {
+<<<<<<< HEAD
       home.preservation.preserveAt = with lib; mkOption {
+=======
+      preservation.preserveAt = with lib; mkOption {
+>>>>>>> dms
         default = {};
         type = with types; attrsOf (submodule {
           options = {
