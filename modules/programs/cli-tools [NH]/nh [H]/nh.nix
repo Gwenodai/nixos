@@ -1,9 +1,8 @@
-# Imports Home-Manager for NixOS
 {
   ...
 }: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.nh = {
+  flake.modules.homeManager.cli-tools = {
     config,
     ...
   }: {

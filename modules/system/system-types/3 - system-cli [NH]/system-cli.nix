@@ -27,7 +27,6 @@
       sys-tools
       shell
       git
-      nh
     ];
   };
 }
