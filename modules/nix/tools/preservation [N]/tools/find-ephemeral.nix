@@ -1,5 +1,7 @@
 # A simple tool to list all files not preserved via preservation in any given directory
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     pkgs,
@@ -7,70 +9,54 @@
     config,
     ...
   }: let
-    # Retrieve declared preservation paths from raw `preservationConfig` input
-    getPreservationTargets = preservationConfig:
-      let
-        # Store the raw values contained in `preservationConfig.preserveAt`
-        rawEntries = builtins.attrValues (preservationConfig.preserveAt or {});
-        # Filter input and only return attributes containing directory or file objects
-        filterEntries = x: (x.directories or []) ++ (x.files or []);
-        # Returns a mixed list of objects and strings
-        filteredList = builtins.concatMap filterEntries rawEntries;
-        # Takes filtered input and returns only the preservation target
-        getTarget = x: 
-          if builtins.isString x then # A plain string can only be a preservation target
-            x                         # └─Return the untouched variable
-          else if x ? directory then  # Check if input has the directory attribute
-            x.directory               # └─Return the variable of the directory attribute
-          else                        # Input must have file attribute
-            x.file;                   # └─Return the variable of the file attribute
-      in
-      builtins.map (x: getTarget x) filteredList; # Pass everything in `filteredList` to `getTarget`
+    # --- Helpers ---
+    # Extract list of paths from a config set that contains { directories = []; files = []; }
+    getPathsFromSet = attrs: let
+      rawList = (attrs.directories or []) ++ (attrs.files or []);
+      resolve = x: # resolve the actual path string from the object or raw string
+        if lib.isString x then
+          x
+        else
+          x.directory or x.file;
+    in map resolve rawList; # Run the raw list through the resolve function
+    
+    # Extract all relevant paths (storage, targets, ignores) from a specific config object
+    # 'cfg': The nixos or home-manager user config
+    # 'root': The base path to prepend if paths are relative (e.g. /home/user)
+    collectPathsFromConfig = cfg: root: let
+      # Store the storage locations (keys of preserveAt)
+      storage = lib.attrNames (cfg.preservation.preserveAt or {});
+      # Store the preservation argets (paths inside preserveAt)
+      targets = lib.concatMap 
+        (wrapper: getPathsFromSet wrapper) 
+        (lib.attrValues (cfg.preservation.preserveAt or {}));
+      # Store the explicit ignored paths
+      ignores = getPathsFromSet (cfg.preservation.ignore or {});
+      # Combine and resolve absolute paths
+      allRaw = storage ++ targets ++ ignores;
+    in
+    map ( # Return all raw paths as absolute paths
+      path: # ◁──────────────────────────╮
+        if lib.hasPrefix "/" path then # │
+          path                         # │
+        else                           # │
+        "${root}/${path}"              # │
+    ) allRaw; # ─────────────────────────╯
 
-    # System `preservationConfig.preserveAt` path
-    sysEternalPerstistDir = builtins.attrNames (config.preservation.preserveAt or {});
-    # Home Manager `preservationConfig.preserveAt` path
-    hmEternalPerstistDir =
-      let
-        hmUsers = config.home-manager.users or {};
-        getUserStorage = _: userConfig:
-          builtins.attrNames (userConfig.home.preservation.preserveAt or {});
-      in
-      lib.lists.flatten (lib.mapAttrsToList getUserStorage hmUsers);
+    # --- Path Collection ---
+    sysPaths = collectPathsFromConfig config "/"; # System Paths (Root is /)
+    hmPaths = lib.concatMap                       # Home Manager Paths (Root is user home)
+/*╭─▷*/(userCfg: collectPathsFromConfig userCfg userCfg.home.homeDirectory) 
+/*╰──*/(lib.attrValues config.home-manager.users);
+    # Combined list of all paths to ignore
+    allIgnorePaths = lib.lists.unique (sysPaths ++ hmPaths); # Filter out duplicate entries
+    # Sanitise inputs before passing them onto bash
+    # Result: -path '/excluded/path' -prune -o ...
+    ignoreArgs = lib.strings.concatMapStrings (
+      p: "-path ${lib.strings.escapeShellArg p} -prune -o "
+    ) allIgnorePaths; # -> p ────────────────╯
 
-    # System preservation target paths
-    sysPersistTarget = getPreservationTargets config.preservation;
-    # System preservation target paths
-    hmPersistTarget =
-      let
-        hmUsers = config.home-manager.users or {};
-        userPaths =
-          username: userConfig:
-          let
-            userHome = config.users.users.${username}.home;
-            relativePaths = getPreservationTargets userConfig.home.preservation;
-          in
-          builtins.map (x: "${userHome}/${x}") relativePaths;
-      in
-      lib.lists.flatten (lib.mapAttrsToList userPaths hmUsers);
-
-    # Static list of paths not worth scanning
-    ignore-paths = [
-      "/boot"
-      "/nix"
-      "/proc"
-      "/run"
-      "/sys"
-      "/tmp"
-      "/var/log"
-    ]
-    # Append paths gathered from preservation configuration 
-    ++ sysEternalPerstistDir
-    ++ hmEternalPerstistDir
-    ++ sysPersistTarget
-    ++ hmPersistTarget;
-
-    # Create a shell application to find all files that aren't declared on the `ignore-paths` list
+    # --- Application Construction ---
     find-ephemeral = pkgs.writeShellApplication {
       name = "find-ephemeral";
       runtimeInputs = [
@@ -79,6 +65,7 @@
       ];
       text = ''
         # syntax: bash
+        
         show_tree=0
         input_dir="$HOME"
 
@@ -95,13 +82,14 @@
           esac
         done
 
+        # Resolve input_dir to absolute path to ensure matching works
         abs_dir="$(realpath "$input_dir")"
 
         run_search() {
           find "$abs_dir" \
             -xdev \
-            ${lib.strings.concatMapStrings (x: "-path '${x}' -prune -o ") ignore-paths} \
-            -type f -printf "%p\\n"
+            ${ignoreArgs} \
+            -type f -printf "%p\n"
         }
 
         if [ "$show_tree" -eq 1 ]; then

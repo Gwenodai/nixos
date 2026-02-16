@@ -5,18 +5,31 @@
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.shell = {
     options,
+    config,
+    lib,
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = {
+      preservation = let
+        relativeToHome = path: lib.removePrefix (config.home.homeDirectory + "/") path;
+      in {
         preserveAt."/persist" = {
           files = [
-            { file = ".config/zsh/.zsh_history"; mode = "0600"; }
+            {
+              file = "${relativeToHome config.xdg.configHome}/zsh/.zsh_history";
+              mode = "0600";
+            }
           ];
         };
         setupDirectories = {
-          ".config" = { };
-          ".config/zsh" = { };
+          "${config.xdg.configHome}" = { };
+          "${config.xdg.configHome}/zsh" = { };
+        };
+        
+        ignore = {
+          files = [
+            "${config.xdg.configHome}/zsh/.zcompdump"
+          ];
         };
       };
     };

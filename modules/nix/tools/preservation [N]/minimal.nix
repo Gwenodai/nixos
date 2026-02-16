@@ -56,7 +56,10 @@
   };
 
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.preservation = { ... }: {
+  flake.modules.homeManager.preservation = {
+    config,
+    ...
+  }: {
     preservation = {
       preserveAt."/persist" = {
         directories = [
@@ -64,9 +67,22 @@
             directory = "dots";
             how = "bindmount";
           }
+          { # Nix flake directory
+            directory = ".pki";
+            how = "bindmount";
+            mode = "0700";
+          }
         ];
         commonMountOptions = [
           "x-gvfs-hide" # Prevent Preservation mounts from appearing as such in graphical file managers
+        ];
+      };
+
+      ignore = {
+        directories = [
+          "${config.xdg.cacheHome}/nix"
+          "${config.xdg.stateHome}/nix"
+          "${config.xdg.stateHome}/nix-output-monitor"
         ];
       };
     };

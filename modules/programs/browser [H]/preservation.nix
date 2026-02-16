@@ -5,20 +5,24 @@
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.browser = {
     options,
+    config,
+    lib,
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = {
+      preservation = let
+        relativeToHome = path: lib.removePrefix (config.home.homeDirectory + "/") path;
+      in {
         preserveAt."/persist" = {
           directories = [
             {
-              directory = ".config/google-chrome";
+              directory = "${relativeToHome config.xdg.configHome}/google-chrome";
               how = "symlink";
               mode = "0700";
               createLinkTarget = true;
             }
             { # TODO: Move keyrings persistence to a separate module
-              directory = ".local/share/keyrings";
+              directory = "${relativeToHome config.xdg.dataHome}/keyrings";
               how = "symlink";
               mode = "0700";
               createLinkTarget = true;
@@ -27,9 +31,15 @@
         };
         
         setupDirectories = {
-          ".config" = { };
+          "${config.xdg.configHome}" = { }; # "~/.config"
           ".local" = { };
-          ".local/share" = { };
+          "${config.xdg.dataHome}" = { }; # "~/.local/share"
+        };
+
+        ignore = {
+          directories = [
+            "${config.xdg.cacheHome}/google-chrome"
+          ];
         };
       };
     };

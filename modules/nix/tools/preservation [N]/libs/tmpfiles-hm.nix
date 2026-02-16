@@ -49,11 +49,7 @@
   }: {
     # Define options available for use within Home Manager
     options = {
-<<<<<<< HEAD
-      home.preservation.setupDirectories = with lib; mkOption {
-=======
       preservation.setupDirectories = with lib; mkOption {
->>>>>>> dms
         description = "Create directories with specific permissions via systemd-tmpfiles";
         default = {};
         type = with types; attrsOf (

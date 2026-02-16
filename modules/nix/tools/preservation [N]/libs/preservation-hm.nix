@@ -33,11 +33,7 @@
   }: {
     # Define custom Preservation options for use within Home Manager
     options = {
-<<<<<<< HEAD
-      home.preservation.preserveAt = with lib; mkOption {
-=======
       preservation.preserveAt = with lib; mkOption {
->>>>>>> dms
         default = {};
         type = with types; attrsOf (submodule {
           options = {
