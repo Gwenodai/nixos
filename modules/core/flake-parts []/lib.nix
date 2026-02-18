@@ -4,8 +4,8 @@
   lib,
   ...
 }: {
-  options.flake.lib = with lib; mkOption {
-    type = with types; attrsOf unspecified;
+  options.flake.lib = lib.mkOption {
+    type = with lib.types; attrsOf unspecified;
     default = { };
   };
 

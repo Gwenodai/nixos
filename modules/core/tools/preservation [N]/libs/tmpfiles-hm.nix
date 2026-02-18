@@ -9,15 +9,15 @@
   }: {
     # Construct proper NixOS level `systemd.tmpfiles.settings.preservation`
     # config from HM `setupDirectories` declarations
-    systemd.tmpfiles.settings.preservation = with lib; mkMerge (
-      flatten (
-        mapAttrsToList (
+    systemd.tmpfiles.settings.preservation = lib.mkMerge (
+      lib.flatten (
+        lib.mapAttrsToList (
           username: userConfig:
-          mapAttrsToList (
+          lib.mapAttrsToList (
             dirPath: dirConfig:
             let
               absPath = # Convert relative path to absolute: ".config" -> "/home/gwen/.config"
-                if hasPrefix "/" dirPath then
+                if lib.hasPrefix "/" dirPath then
                   dirPath 
                 else
                   "${userConfig.home.homeDirectory}/${dirPath}";
@@ -49,24 +49,24 @@
   }: {
     # Define options available for use within Home Manager
     options = {
-      preservation.setupDirectories = with lib; mkOption {
+      preservation.setupDirectories = lib.mkOption {
         description = "Create directories with specific permissions via systemd-tmpfiles";
         default = {};
-        type = with types; attrsOf (
+        type = with lib.types; attrsOf (
           submodule {
             options = {
 
-              mode = mkOption {
+              mode = lib.mkOption {
                 type = str;
                 default = "0755";
               };
 
-              user = mkOption {
+              user = lib.mkOption {
                 type = nullOr str;
                 default = null;
               };
 
-              group = mkOption {
+              group = lib.mkOption {
                 type = nullOr str;
                 default = null;
               };

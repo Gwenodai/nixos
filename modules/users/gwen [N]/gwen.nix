@@ -5,16 +5,16 @@
 }: let
   username = "gwen";
 in {
-  # Merge generated user output from 'user' factory with manual input
-  flake.modules = lib.mkMerge [
-    # Factory generated user output
-    (self.factory.user username true)
-    # Manual input
+  # Merge generated user output from `user` factory with manual input
+  flake.modules = lib.mkMerge [ #        `flake.modules`─►──┬─►───────────────────────────────╮
+    # Factory generated `<class>.gwen`  +`nixos.gwen`─►─────┴─►─╮   +`homeManager.gwen`─►─────┴─►─╮
+    (self.factory.user username true) # =`flake.modules.nixos.gwen` =`flake.modules.homeManager.gwen`
+    # Manual class declaration
     {
       # --- NIXOS MODULE ---
-      nixos."${username}" = { # Equates to `flake.modules.nixos.gwen`
+      nixos."${username}" = { # Equates to `flake.modules`.`nixos.gwen`
         # imports = with self.modules.nixos; [
-          # Define nixos modules to load here
+        #   Define nixos modules to load here
         # ];
         users.users."${username}" = {
           # hashedPasswordFile = "/persist/secrets/passwords/${username}";
@@ -23,7 +23,7 @@ in {
       };
 
       # --- HOME MANAGER MODULE ---
-      homeManager."${username}" = { # Equates to `flake.modules.homeManager.gwen`
+      homeManager."${username}" = { # Equates to `flake.modules`.`homeManager.gwen`
         pkgs,
         ...
       }: {

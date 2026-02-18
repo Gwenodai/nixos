@@ -3,8 +3,8 @@
   lib,
   ...
 }: {
-  options.flake.factory = with lib; mkOption {
-    type = with types; attrsOf unspecified;
+  options.flake.factory = lib.mkOption {
+    type = with lib.types; attrsOf unspecified;
     default = { };
   };
 }
