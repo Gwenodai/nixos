@@ -9,12 +9,10 @@
     ...
   }: {
     # Create an option to store id's for use in CoolerControl configs
-    options = {
-      programs.coolercontrol.id = lib.mkOption {
-        type = with lib.types; attrsOf attrs;
-        default = {};
-        description = "ID list for CoolerControl";
-      };
+    options.host.coolercontrol.id = lib.mkOption {
+      type = with lib.types; attrsOf (attrsOf str);
+      default = {};
+      description = "ID list for CoolerControl";
     };
 
     config = {

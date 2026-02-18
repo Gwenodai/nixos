@@ -9,7 +9,7 @@
   }: {
     config = lib.mkIf config.programs.coolercontrol.enable (
       let
-        id = config.programs.coolercontrol.id;
+        id = config.host.coolercontrol.id;
       in {
         environment.etc = {
           "coolercontrol/config.toml" = {

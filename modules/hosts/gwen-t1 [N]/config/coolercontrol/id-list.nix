@@ -10,7 +10,7 @@
   }: {
     config = lib.mkIf config.programs.coolercontrol.enable {
       # --- Hardware Device IDs ---
-      programs.coolercontrol.id.devices = {
+      host.coolercontrol.id.devices = {
         cpu =
         "3145e1a42801faf9cf948df8c705afb4859f084c10a7e7c5e4efecb1e0167127";
         gpu =
@@ -38,23 +38,23 @@
       };
 
       # --- Profile IDs ---
-      programs.coolercontrol.id.profiles = {
+      host.coolercontrol.id.profiles = {
         aio_fans = "37d94b73-b524-40a3-936a-56e73277722c";
       };
 
       # --- Function IDs ---
-      programs.coolercontrol.id.functions = {
+      host.coolercontrol.id.functions = {
         exp_mov_avg = "02ba5ea0-89cc-4085-808f-c3b1cc97963b";
       };
 
       # --- Custom Sensor IDs ---
-      programs.coolercontrol.id.sensors = {
+      host.coolercontrol.id.sensors = {
         system = "sensor1";
         nvme   = "sensor2";
       };
 
       # --- Dashboard IDs ---
-      programs.coolercontrol.id.dash = {
+      host.coolercontrol.id.dash = {
         system = "1ac5dda5-9814-4c37-8566-38d24ddabe3f";
         temps  = "8295db91-15d9-48dd-8295-439948b14511";
         cpu    = "a2ec2663-1755-4cd1-8552-4c906d98b21d";
@@ -62,7 +62,7 @@
       };
       
       # --- Alert IDs ---
-      programs.coolercontrol.id.alerts = {
+      host.coolercontrol.id.alerts = {
         cpu = "2030ba2e-d583-4f5c-9118-00df549af2e7";
         gpu = "feac0f69-7051-4dba-aa01-5e7d2adff608";
       };
