@@ -4,11 +4,12 @@
 }: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
+    options,
     config,
     lib,
     ...
   }: {
-    config = lib.mkIf config.programs.coolercontrol.enable {
+    config = lib.optionalAttrs (options.host ? coolercontrol) {
       # --- Hardware Device IDs ---
       host.coolercontrol.id.devices = {
         cpu =
