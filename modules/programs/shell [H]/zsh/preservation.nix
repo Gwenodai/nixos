@@ -10,13 +10,11 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = let
-        relativeToHome = path: lib.removePrefix (config.home.homeDirectory + "/") path;
-      in {
+      host.preservation = {
         preserveAt."/persist" = {
           files = [
             {
-              file = "${relativeToHome config.xdg.configHome}/zsh/.zsh_history";
+              file = "${config.xdg.configHome}/zsh/.zsh_history";
               mode = "0600";
             }
           ];
@@ -26,11 +24,9 @@
           "${config.xdg.configHome}/zsh" = { };
         };
         
-        ignore = {
-          files = [
-            "${config.xdg.configHome}/zsh/.zcompdump"
-          ];
-        };
+        ignore.files = [
+          "${config.xdg.configHome}/zsh/.zcompdump"
+        ];
       };
     };
   };

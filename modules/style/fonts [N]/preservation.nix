@@ -22,12 +22,10 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = {
-        ignore = {
-          directories = [
-            "${config.xdg.cacheHome}/fontconfig"
-          ];
-        };
+      host.preservation = {
+        ignore.directories = [
+          "${config.xdg.cacheHome}/fontconfig"
+        ];
       };
     };
   };

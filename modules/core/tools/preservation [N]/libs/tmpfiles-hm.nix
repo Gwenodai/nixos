@@ -36,7 +36,7 @@
                     "users";
               };
             }
-          ) userConfig.preservation.setupDirectories # = `dirPath`.`dirConfig`
+          ) userConfig.host.preservation.setupDirectories # = `dirPath`.`dirConfig`
         ) config.home-manager.users # = `username`.`userConfig`
       )
     );
@@ -49,7 +49,7 @@
   }: {
     # Define options available for use within Home Manager
     options = {
-      preservation.setupDirectories = lib.mkOption {
+      host.preservation.setupDirectories = lib.mkOption {
         description = "Create directories with specific permissions via systemd-tmpfiles";
         default = {};
         type = with lib.types; attrsOf (

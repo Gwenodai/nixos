@@ -27,18 +27,17 @@
           }
         ];
       };
-      ignore = {
-        directories = [
-          "/boot"
-          "/nix"
-          "/proc"
-          "/run"
-          "/sys"
-          "/tmp"
-          "/var/log"
-        ];
-      };
     };
+
+    host.preservation.ignore.directories = [
+      "/boot"
+      "/nix"
+      "/proc"
+      "/run"
+      "/sys"
+      "/tmp"
+      "/var/log"
+    ];
 
     # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
     systemd.services.systemd-machine-id-commit = {
@@ -60,7 +59,7 @@
     config,
     ...
   }: {
-    preservation = {
+    host.preservation = {
       preserveAt."/persist" = {
         directories = [
           { # Nix flake directory
@@ -78,13 +77,11 @@
         ];
       };
 
-      ignore = {
-        directories = [
-          "${config.xdg.cacheHome}/nix"
-          "${config.xdg.stateHome}/nix"
-          "${config.xdg.stateHome}/nix-output-monitor"
-        ];
-      };
+      ignore.directories = [
+        "${config.xdg.cacheHome}/nix"
+        "${config.xdg.stateHome}/nix"
+        "${config.xdg.stateHome}/nix-output-monitor"
+      ];
     };
   };
 }

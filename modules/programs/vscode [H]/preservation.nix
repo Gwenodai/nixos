@@ -10,20 +10,18 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = let
-        relativeToHome = path: lib.removePrefix (config.home.homeDirectory + "/") path;
-      in {
+      host.preservation = {
         preserveAt."/persist" = {
           directories = [
-            "${relativeToHome config.xdg.configHome}/Code/User"
+            "${config.xdg.configHome}/Code/User"
           ];
           files = [
             {
-              file = "${relativeToHome config.xdg.configHome}/Code/Trust Tokens";
+              file = "${config.xdg.configHome}/Code/Trust Tokens";
               mode = "0600";
             }
             {
-              file = "${relativeToHome config.xdg.configHome}/Code/Trust Tokens-journal";
+              file = "${config.xdg.configHome}/Code/Trust Tokens-journal";
               mode = "0600";
             }
           ];

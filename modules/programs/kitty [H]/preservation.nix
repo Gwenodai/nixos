@@ -10,11 +10,9 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation.ignore = {
-        directories = [
-          "${config.xdg.cacheHome}/kitty"
-        ];
-      };
+      host.preservation.ignore.directories = [
+        "${config.xdg.cacheHome}/kitty"
+      ];
     };
   };
 }

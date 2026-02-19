@@ -12,7 +12,7 @@
     }: input:
       # If the preservation option is present, the input is valid,
       # else we replace it with nothing
-      if (options ? preservation || (options ? home && options.home ? preservation)) then
+      if (options ? preservation || (options ? home && options ? host && options.host ? preservation)) then
         input
       else
         { };

@@ -8,11 +8,9 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation.ignore = {
-        directories = [
-          "/etc/lact"
-        ];
-      };
+      host.preservation.ignore.directories = [
+        "/etc/lact"
+      ];
     };
   };
 }

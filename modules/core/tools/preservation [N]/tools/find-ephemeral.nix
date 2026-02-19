@@ -9,52 +9,45 @@
     config,
     ...
   }: let
-    # --- Helpers ---
-    # Extract list of paths from a config set that contains { directories = []; files = []; }
-    getPathsFromSet = attrs: let
-      rawList = (attrs.directories or []) ++ (attrs.files or []);
-      resolve = x: # resolve the actual path string from the object or raw string
-        if lib.isString x then
-          x
-        else
-          x.directory or x.file;
-    in map resolve rawList; # Run the raw list through the resolve function
-    
-    # Extract all relevant paths (storage, targets, ignores) from a specific config object
-    # 'cfg': The nixos or home-manager user config
-    # 'root': The base path to prepend if paths are relative (e.g. /home/user)
-    collectPathsFromConfig = cfg: root: let
-      # Store the storage locations (keys of preserveAt)
-      storage = lib.attrNames (cfg.preservation.preserveAt or {});
-      # Store the preservation argets (paths inside preserveAt)
-      targets = lib.concatMap 
-        (wrapper: getPathsFromSet wrapper) 
-        (lib.attrValues (cfg.preservation.preserveAt or {}));
-      # Store the explicit ignored paths
-      ignores = getPathsFromSet (cfg.preservation.ignore or {});
-      # Combine and resolve absolute paths
-      allRaw = storage ++ targets ++ ignores;
-    in
-    map ( # Return all raw paths as absolute paths
-      path: # ◁──────────────────────────╮
-        if lib.hasPrefix "/" path then # │
-          path                         # │
-        else                           # │
-        "${root}/${path}"              # │
-    ) allRaw; # ─────────────────────────╯
-
     # --- Path Collection ---
-    sysPaths = collectPathsFromConfig config "/"; # System Paths (Root is /)
-    hmPaths = lib.concatMap                       # Home Manager Paths (Root is user home)
-/*╭─▷*/(userCfg: collectPathsFromConfig userCfg userCfg.home.homeDirectory) 
-/*╰──*/(lib.attrValues config.home-manager.users);
-    # Combined list of all paths to ignore
-    allIgnorePaths = lib.lists.unique (sysPaths ++ hmPaths); # Filter out duplicate entries
-    # Sanitise inputs before passing them onto bash
+    # Filters out intermediate paths injected by the preservation module
+    getRealPaths = key: list: 
+      let
+        # Keep only items where 'how' is NOT "_intermediate"
+        validItems = builtins.filter (x: (x.how or "") != "_intermediate") list;
+      in
+        # Extract the string path from the remaining valid attribute sets
+        lib.catAttrs key validItems;
+
+    # Storage locations (e.g., "/persist")
+    storageLocations = lib.attrNames (config.preservation.preserveAt or {});
+
+    # All preserved targets (System + Users)
+    targets = lib.concatLists (lib.mapAttrsToList (storageLocations: persistConfig: 
+      let
+        # Pluck the "directory" and "file" strings out of the attribute sets
+        sysDirs  = getRealPaths "directory" (persistConfig.directories or []);
+        sysFiles = getRealPaths "file"      (persistConfig.files or []);
+        
+        # Do the same for user paths
+        userPaths = lib.concatLists (lib.mapAttrsToList (uname: ucfg: 
+          (getRealPaths "directory" (ucfg.directories or [])) ++
+          (getRealPaths "file"      (ucfg.files or []))
+        ) (persistConfig.users or {}));
+      in
+        sysDirs ++ sysFiles ++ userPaths
+    ) (config.preservation.preserveAt or {}));
+
+    # All ignored paths
+    ignores = (config.host.preservation.ignore.directories or []) 
+           ++ (config.host.preservation.ignore.files or []);
+
+    # Combine, deduplicate, and format for bash
+    allIgnorePaths = lib.lists.unique (storageLocations ++ targets ++ ignores);
     # Result: -path '/excluded/path' -prune -o ...
     ignoreArgs = lib.strings.concatMapStrings (
-      p: "-path ${lib.strings.escapeShellArg p} -prune -o "
-    ) allIgnorePaths; # -> p ────────────────╯
+      ignorePath: "-path ${lib.strings.escapeShellArg ignorePath} -prune -o "
+    ) allIgnorePaths;
 
     # --- Application Construction ---
     find-ephemeral = pkgs.writeShellApplication {

@@ -36,7 +36,7 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation = {
+      host.preservation = {
         preserveAt."/persist" = {
           directories = [
             {

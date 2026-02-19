@@ -22,12 +22,10 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation.ignore = {
-        directories = [
-          "${config.xdg.cacheHome}/mesa_shader_cache"
-          "${config.xdg.cacheHome}/radv_builtin_shaders"
-        ];
-      };
+      host.preservation.ignore.directories = [
+        "${config.xdg.cacheHome}/mesa_shader_cache"
+        "${config.xdg.cacheHome}/radv_builtin_shaders"
+      ];
     };
   };
 }

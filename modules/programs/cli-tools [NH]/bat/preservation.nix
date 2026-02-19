@@ -10,7 +10,7 @@
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
-      preservation.ignore = {
+      host.preservation.ignore = {
         directories = [
           "${config.xdg.cacheHome}/bat"
         ];

@@ -8,20 +8,26 @@
   }: {
     # Construct real `preserveAt` output from HM preservation declarations
     preservation.preserveAt = lib.mkMerge (
-      lib.flatten (
+      lib.concatLists (
         lib.mapAttrsToList (username: userConfig:
-          lib.mapAttrsToList (persistTarget: persistConfig:
-            {
-              "${persistTarget}" = {
-                users."${username}" = {
-                  directories = persistConfig.directories;
-                  files = persistConfig.files;
-                  commonMountOptions = persistConfig.commonMountOptions;
-                };
-              };
-            }
-          ) userConfig.preservation.preserveAt # = `persistTarget`.`persistConfig`
-        ) config.home-manager.users # = `username`.`userConfig`
+          let
+            homePrefix = "${userConfig.home.homeDirectory}/";
+            # Convert any absolute paths back to relative paths
+            stripHomePrefix = keyName: list: 
+              map (item: item // { 
+                "${keyName}" = lib.removePrefix homePrefix item."${keyName}"; 
+              }) list;
+
+            preserveConfigs = userConfig.host.preservation.preserveAt or {};
+          in
+          lib.mapAttrsToList (preserveAtPath: persistConfig: {
+            "${preserveAtPath}".users."${username}" = {
+              directories        = stripHomePrefix "directory" persistConfig.directories;
+              files              = stripHomePrefix "file"      persistConfig.files;
+              commonMountOptions = persistConfig.commonMountOptions;
+            };
+          }) preserveConfigs
+        ) (config.home-manager.users or {})
       )
     );
   };
@@ -30,26 +36,52 @@
   flake.modules.homeManager.preservation = {
     lib,
     ...
-  }: {
-    # Define custom Preservation options for use within Home Manager
+  }: let
+    mountOptionType = with lib.types; coercedTo str (n: { name = n; }) (submodule {
+      options = {
+        name = lib.mkOption {
+          type = str;
+        };
+        value = lib.mkOption {
+          type = nullOr str;
+          default = null;
+        };
+      };
+    });
+    mkPreserveList = dirOrFile: lib.mkOption {
+      default = [];
+      type = with lib.types; listOf (coercedTo str (path: { "${dirOrFile}" = path; }) (submodule {
+        freeformType = attrsOf anything; 
+      
+        options = {
+          "${dirOrFile}" = lib.mkOption { # Dynamically sets the key to "directory" or "file"
+            type = str;
+          };
+          how = lib.mkOption {
+            type = str;
+            default = "bindmount";
+          };
+          mode = lib.mkOption {
+            type = nullOr str;
+            default = "0755"; 
+          };
+          mountOptions = lib.mkOption {
+            type = listOf mountOptionType;
+            default = [];
+          };
+        };
+      }));
+    };
+  in {
     options = {
-      preservation.preserveAt = lib.mkOption {
+      host.preservation.preserveAt = lib.mkOption {
         default = {};
         type = with lib.types; attrsOf (submodule {
           options = {
-
-            directories = lib.mkOption {
-              type = listOf anything;
-              default = [];
-            };
-
-            files = lib.mkOption {
-              type = listOf anything;
-              default = [];
-            };
-
+            directories = mkPreserveList "directory";
+            files       = mkPreserveList "file";
             commonMountOptions = lib.mkOption {
-              type = listOf str;
+              type = listOf mountOptionType;
               default = [];
             };
           };
