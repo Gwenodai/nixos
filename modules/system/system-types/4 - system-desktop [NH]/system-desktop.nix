@@ -11,7 +11,7 @@
       graphics
       audio
       fonts
-      files
+      theme-vimix
     ];
   };
 
@@ -21,6 +21,7 @@
       system-cli
 
       xdg
+      files
       browser
       kitty
       vscode
