@@ -1,11 +1,13 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.icons = {
     pkgs,
     ...
   }: {
-    # environment.systemPackages = with pkgs; [
-    #   
-    # ];
+    environment.systemPackages = with pkgs; [
+      vimix-icon-theme
+    ];
   };
 }

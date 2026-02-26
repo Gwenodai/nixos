@@ -1,5 +1,7 @@
 # Create a preservation bridge module for use within Home Manager
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     config,

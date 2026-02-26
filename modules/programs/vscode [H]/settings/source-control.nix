@@ -1,11 +1,14 @@
-{ ... }: {
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
     ...
   }: {
     programs.vscode = {
       profiles.default = {
-        userSettings = {
+        userSettings = inputs.self.lib.applyDefaultsToData {
           # Set source control to tree view for easier parsability
           scm.defaultViewMode = "tree";
           

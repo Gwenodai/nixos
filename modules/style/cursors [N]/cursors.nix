@@ -1,11 +1,13 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.cursors = {
     pkgs,
     ...
   }: {
-    # environment.systemPackages = with pkgs; [
-    #   vimix-cursors
-    # ];
+    environment.systemPackages = with pkgs; [
+      vimix-cursors
+    ];
   };
 }

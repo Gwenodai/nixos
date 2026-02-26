@@ -15,8 +15,8 @@
       
       preservation = {
         preserveAt."/persist" = {
-          files = map (x: {
-            file = x;
+          files = map (path: {
+            file = path;
             how = "symlink";
             configureParent = true;
           }) [

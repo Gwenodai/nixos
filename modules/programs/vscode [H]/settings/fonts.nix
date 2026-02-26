@@ -1,4 +1,7 @@
-{ ... }: {
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
     ...
@@ -6,7 +9,7 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          editor = {
+          editor = inputs.self.lib.applyDefaultsToData {
             # Single quotes are required for font names with spaces
             fontFamily = builtins.concatStringsSep ", " [
               "'JetBrainsMono Nerd Font'"

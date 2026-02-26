@@ -1,6 +1,8 @@
 # Passthrough of defined tmpfiles options within Home Manager
 # for use at a system level as needed for Preservation
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     config,

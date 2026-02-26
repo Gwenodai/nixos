@@ -1,10 +1,15 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.git = { ... }: {
+  flake.modules.homeManager.git = {
+    lib,
+    ...
+  }: {
     programs.git = {
       enable = true;
       settings = {
-        init.defaultBranch = "main";
+        init.defaultBranch = lib.mkDefault  "main";
       };
     };
   };

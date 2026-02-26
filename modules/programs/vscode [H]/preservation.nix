@@ -6,7 +6,6 @@
   flake.modules.homeManager.vscode = {
     options,
     config,
-    lib,
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {

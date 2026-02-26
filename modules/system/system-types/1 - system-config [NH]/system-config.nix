@@ -1,5 +1,7 @@
 # Core system config needed for all systems
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.system-config = {
     ...

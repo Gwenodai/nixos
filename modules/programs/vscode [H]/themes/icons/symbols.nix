@@ -1,24 +1,22 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    pkgs,
+    vscode-marketplace,
+    lib,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
         userSettings = {
           workbench = {
-            iconTheme = "symbols";
+            iconTheme = lib.mkDefault "symbols";
           };
         };
 
-        extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "symbols";
-            publisher = "miguelsolorio";
-            version = "0.0.25";
-            sha256 = "sha256-nhymeLPfgGKyg3krHqRYs2iWNINF6IFBtTAp5HcwMs8=";
-          }
+        extensions = with vscode-marketplace; [
+          miguelsolorio.symbols
         ];
       };
     };

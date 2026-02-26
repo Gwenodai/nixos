@@ -1,7 +1,11 @@
 # Resource monitor
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.sys-tools = { ... }: {
+  flake.modules.homeManager.sys-tools = {
+    ...
+  }: {
     programs.btop = {
       enable = true;
       # TODO: Configure btop

@@ -10,12 +10,14 @@
       options,
       ...
     }: input:
-      # If the preservation option is present, the input is valid,
-      # else we replace it with nothing
-      if (options ? preservation || (options ? home && options.host ? preservation)) then
-        input
+      let
+        nix = options ? preservation;
+        home = ( options ? home && options ? host && options.host ? preservation );
+      in
+      if ( home || nix ) then
+        input # If the preservation option is present, the input is valid
       else
-        { };
+        { };  # else we replace it with nothing
   };
 
   # --- NIXOS MODULE ---

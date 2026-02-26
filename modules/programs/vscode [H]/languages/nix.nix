@@ -1,28 +1,51 @@
-{ ... }: {
+# https://github.com/oxalica/nil/blob/main/docs/configuration.md
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
+    vscode-marketplace,
     pkgs,
+    lib,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          nix ={
+          nix = inputs.self.lib.applyDefaultsToData {
             enableLanguageServer = true;
-            serverPath = "${pkgs.nil}/bin/nil";
+            serverPath = "${(lib.getExe pkgs.nil)}";
+            serverSettings = {
+              nil = {
+                formatting.command = null;
+                # diagnostics.ignored = [ "unused_with" ];
+                nix = {
+                  binary = "/run/current-system/sw/bin/nix";
+                  maxMemoryMB = 16384;
+                  flake = {
+                    autoArchive = null;
+                    autoEvalInputs = true;
+                    nixpkgsInputName = "nixpkgs";
+                  };
+                };
+              };
+            };
+            # Hide annoying popups triggered during typing code
+            hiddenLanguageServerErrors = [
+              "textDocument/formatting"
+              "textDocument/documentSymbol"
+            ];
           };
         };
 
-        extensions = with pkgs.vscode-extensions; [
-          jnoortheen.nix-ide           # Syntax highlighting, formatting, etc
-          jeff-hykin.better-nix-syntax # Syntax highlighting inside shellhooks
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          { # Syntax highlighting for embedded languages inside Nix multi-line strings
-            name = "nix-embedded-languages";
-            publisher = "coopermaruyama";
-            version = "1.1.1";
-            sha256 = "sha256-2VLX030Zc3kl6vozLr2cbcCREoDH6gywUHQqhNVb1G4=";
-          }
+        extensions = with vscode-marketplace; [
+          # Syntax highlighting, formatting, etc
+          jnoortheen.nix-ide
+          # Syntax highlighting inside shellhooks
+          jeff-hykin.better-nix-syntax
+          # Syntax highlighting for embedded languages inside Nix multi-line strings
+          coopermaruyama.nix-embedded-languages
         ];
       };
     };

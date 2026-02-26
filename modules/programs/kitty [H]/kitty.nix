@@ -9,27 +9,27 @@
     ...
   }: {
     programs.kitty = {
-      enable = true;
+      enable = lib.mkDefault true;
 
       shellIntegration = {
-        enableZshIntegration = true;
-        enableBashIntegration = true;
+        enableZshIntegration = lib.mkDefault true;
+        enableBashIntegration = lib.mkDefault true;
       };
-      enableGitIntegration = true;
+      enableGitIntegration = lib.mkDefault true;
       font = {
-        name = "JetBrainsMono Nerd Font Mono";
-        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = lib.mkDefault "JetBrainsMono Nerd Font Mono";
+        package = lib.mkDefault pkgs.nerd-fonts.jetbrains-mono;
         # size = "8";
       };
       settings = {
-        background_opacity = 0.4;
-        background = "#000000";
+        background_opacity = lib.mkDefault 0.4;
+        background = lib.mkDefault "#000000";
       };
     };
 
     # Custom aliases
     home.shellAliases = {
-      ssh = "kitty +kitten ssh";
+      ssh = lib.mkDefault "kitty +kitten ssh";
     };
 
     xdg = {

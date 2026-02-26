@@ -1,15 +1,18 @@
 # Fully-featured TOML support
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    pkgs,
+    vscode-marketplace,
+    lib,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
         userSettings = {
           evenBetterToml = {
-            schema.links = true; # Show clickable links in editor
+            schema.links = lib.mkDefault true; # Show clickable links in editor
           };
           
           nix-embedded-languages.include = {
@@ -17,7 +20,7 @@
           };
         };
 
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with vscode-marketplace; [
           tamasfe.even-better-toml
         ];
       };

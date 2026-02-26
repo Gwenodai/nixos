@@ -1,8 +1,10 @@
 # Highlights TODOs, FIXMEs, etc.
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    pkgs,
+    vscode-marketplace,
     ...
   }: {
     programs.vscode = {
@@ -20,7 +22,7 @@
           };
         };
 
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with vscode-marketplace; [
           jgclark.vscode-todo-highlight
         ];
       };

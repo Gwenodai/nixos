@@ -1,15 +1,18 @@
 # Better cat with syntax highlighting
-{ ... }: {
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.cli-tools = {
     pkgs,
+    lib,
     ...
   }: {
     programs.bat = {
       enable = true;
-      config = {
-        theme = "Monokai Extended";
-      };
+      config.theme = lib.mkDefault "Monokai Extended";
+
       extraPackages = with pkgs.bat-extras; [
         batman # Read system manual pages (man) using bat as the manual page formatter
         batgrep # Quickly search through and highlight files using ripgrep
@@ -21,7 +24,7 @@
     };
 
     # Custom aliases
-    home.shellAliases = {
+    home.shellAliases = inputs.self.lib.applyDefaultsToData {
       cat = "bat";
       man = "batman";
       grep = "batgrep";

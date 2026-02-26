@@ -1,4 +1,6 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.systemd-boot = {
     pkgs,
@@ -7,12 +9,12 @@
   }: {
     boot = {
       initrd = {
-        systemd.enable = true;
+        systemd.enable = lib.mkDefault true;
       };
 
       loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
+        systemd-boot.enable = lib.mkDefault true;
+        efi.canTouchEfiVariables = lib.mkDefault true;
       };
     };
   };

@@ -20,8 +20,20 @@
       flake = false;
       url = "github:frankcrawford/it87";
     };
+    niri = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:cmm/niri-flake/add-extraConfig";
+    };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nix-vscode-extensions = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-vscode-extensions";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    noctalia = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:noctalia-dev/noctalia-shell";
+    };
     preservation.url = "github:nix-community/preservation";
   };
 

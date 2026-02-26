@@ -1,21 +1,20 @@
 # https://mynixos.com/home-manager/options/programs.vscode
 # https://mynixos.com/nixpkgs/packages/vscode-extensions
-{ ... }: {
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    # pkgs,
+    pkgs,
     lib,
     ...
   }: {
+    # Create a short way of declaring extensions within home manager modules
+    _module.args.vscode-marketplace = inputs.nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system}.vscode-marketplace-release;
+
     programs.vscode = {
       enable = true;
-      profiles.default = {
-        # extensions = with pkgs.vscode-extensions; [
-        #   # Nixpkgs extenstions
-        # ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        #   # Marketplace extenstions
-        # ];
-      };
     };
 
     xdg = {

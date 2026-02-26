@@ -1,14 +1,18 @@
-{ ... }: {
+{
+  inputs,
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
     pkgs,
+    lib,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          terminal = {
-            external.linuxExec = "${pkgs.kitty}/bin/kitty";
+          terminal = inputs.self.lib.applyDefaultsToData {
+            external.linuxExec = "${(lib.getExe pkgs.kitty)}";
 
             integrated = {
               defaultProfile.linux = "zsh";

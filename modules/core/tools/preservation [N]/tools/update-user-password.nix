@@ -1,5 +1,7 @@
 # Takes user input and writes a hashed password to `/persist/secrets/passwords/<USER>`
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
   flake.modules.nixos.preservation = {
     pkgs,
@@ -14,7 +16,7 @@
         pkgs.coreutils # Provides mkdir, chmod, tee
         pkgs.mkpasswd  # Provides mkpasswd
       ];
-      text = ''
+      text = builtins.replaceStrings ["# syntax: bash\n"] [""] ''
         # syntax: bash
         TARGET_USER="$USER"
 

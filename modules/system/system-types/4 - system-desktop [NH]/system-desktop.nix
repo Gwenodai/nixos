@@ -10,8 +10,10 @@
 
       graphics
       audio
+      cursors
       fonts
-      theme-vimix
+      icons
+      themes
     ];
   };
 

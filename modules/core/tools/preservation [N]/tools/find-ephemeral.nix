@@ -14,7 +14,7 @@
     getRealPaths = key: list: 
       let
         # Keep only items where 'how' is NOT "_intermediate"
-        validItems = builtins.filter (x: (x.how or "") != "_intermediate") list;
+        validItems = builtins.filter (item: (item.how or "") != "_intermediate") list;
       in
         # Extract the string path from the remaining valid attribute sets
         lib.catAttrs key validItems;
@@ -56,7 +56,7 @@
         pkgs.findutils # Provides find
         pkgs.tree      # Provides tree
       ];
-      text = ''
+      text = builtins.replaceStrings ["# syntax: bash\n"] [""] ''
         # syntax: bash
         
         show_tree=0

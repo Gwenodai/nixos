@@ -9,6 +9,7 @@
       preserveAt."/persist" = {
         directories = [
           "/var/lib/systemd/coredump"
+          "/var/lib/systemd/timers"
           "/etc/NetworkManager/system-connections"
           { directory = "/var/lib/nixos"; inInitrd = true; }
         ];
@@ -62,11 +63,9 @@
     host.preservation = {
       preserveAt."/persist" = {
         directories = [
-          { # Nix flake directory
-            directory = "dots";
-            how = "bindmount";
-          }
-          { # Nix flake directory
+          "${config.xdg.dataHome}/systemd/timers"
+          "dots" # Nix flake directory
+          {
             directory = ".pki";
             how = "bindmount";
             mode = "0700";

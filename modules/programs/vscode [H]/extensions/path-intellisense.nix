@@ -1,13 +1,15 @@
 # Plugin that autocompletes filenames
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    pkgs,
+    vscode-marketplace,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with vscode-marketplace; [
           christian-kohler.path-intellisense
         ];
       };

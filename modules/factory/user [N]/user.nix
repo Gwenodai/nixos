@@ -22,7 +22,8 @@
         shell = pkgs.zsh;
       };
       programs.zsh.enable = true;
-
+      
+      # Import the Home Manager module automatically
       home-manager.users."${username}" = {
         imports = [
           self.modules.homeManager."${username}"

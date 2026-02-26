@@ -1,18 +1,21 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.vscode = {
-    pkgs,
+    vscode-marketplace,
     ...
   }: {
     programs.vscode = {
       profiles.default = {
-        extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "kdl";
-            publisher = "kdl-org";
-            version = "2.1.3";
-            sha256 = "sha256-Jssmb5owrgNWlmLFSKCgqMJKp3sPpOrlEUBwzZSSpbM=";
-          }
+        userSettings = {
+          nix-embedded-languages.include = {
+            kdl = "source.kdl";
+          };
+        };
+
+        extensions = with vscode-marketplace; [
+          kdl-org.kdl
         ];
       };
     };

@@ -1,12 +1,17 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- NIXOS MODULE ---
-  flake.modules.nixos.ssh = { ... }: {
+  flake.modules.nixos.ssh = {
+    lib,
+    ...
+  }: {
     services.openssh = {
-      enable = true;
-      openFirewall = true;
+      enable = lib.mkDefault true;
+      openFirewall = lib.mkDefault true;
       settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = true;
+        PermitRootLogin = lib.mkDefault "no";
+        PasswordAuthentication = lib.mkDefault true;
       };
     };
   };

@@ -1,4 +1,4 @@
-# Helper functions for creating system configurations
+# Helper function for creating system configurations
 {
   inputs,
   lib,
@@ -19,5 +19,9 @@
         ];
       };
     };
+
+    # Function to wrap every final value in `lib.mkDefault`
+    # ONLY USE THIS FOR PURE DATA FILES (i.e., `programs.niri.settings` from niri-flake)
+    applyDefaultsToData = lib.mapAttrsRecursive (option: value: lib.mkDefault value);
   };
 }

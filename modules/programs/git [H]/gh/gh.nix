@@ -1,10 +1,15 @@
-{ ... }: {
+{
+  ...
+}: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.git = { ... }: {
+  flake.modules.homeManager.git = {
+    lib,
+    ...
+  }: {
     programs.gh = {
       enable = true;
       gitCredentialHelper = {
-        enable = true;
+        enable = lib.mkDefault true;
       };
     };
   };
