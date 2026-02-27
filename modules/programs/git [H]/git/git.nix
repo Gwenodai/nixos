@@ -7,7 +7,7 @@
     ...
   }: {
     programs.git = {
-      enable = true;
+      enable = lib.mkDefault true;
       settings = {
         init.defaultBranch = lib.mkDefault  "main";
       };

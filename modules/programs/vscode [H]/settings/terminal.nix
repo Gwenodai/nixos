@@ -11,10 +11,10 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          terminal = inputs.self.lib.applyDefaultsToData {
-            external.linuxExec = "${(lib.getExe pkgs.kitty)}";
+          terminal = {
+            external.linuxExec = lib.mkDefault "${(lib.getExe pkgs.kitty)}";
 
-            integrated = {
+            integrated = inputs.self.lib.applyDefaults {
               defaultProfile.linux = "zsh";
               cursorBlinking = true;
               cursorStyle = "line";

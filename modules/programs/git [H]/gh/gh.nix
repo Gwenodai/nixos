@@ -7,7 +7,7 @@
     ...
   }: {
     programs.gh = {
-      enable = true;
+      enable = lib.mkDefault true;
       gitCredentialHelper = {
         enable = lib.mkDefault true;
       };

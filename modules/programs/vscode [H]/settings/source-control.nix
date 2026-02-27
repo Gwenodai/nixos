@@ -8,7 +8,7 @@
   }: {
     programs.vscode = {
       profiles.default = {
-        userSettings = inputs.self.lib.applyDefaultsToData {
+        userSettings = inputs.self.lib.applyDefaultsRecursive {
           # Set source control to tree view for easier parsability
           scm.defaultViewMode = "tree";
           

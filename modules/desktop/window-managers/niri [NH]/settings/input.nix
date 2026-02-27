@@ -6,7 +6,7 @@
   flake.modules.homeManager.niri = {
     ...
   }: {
-    programs.niri.settings.input = inputs.self.lib.applyDefaultsToData {
+    programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
       keyboard = {
         xkb.layout = "us";
         numlock = true;

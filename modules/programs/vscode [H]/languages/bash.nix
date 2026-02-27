@@ -12,7 +12,7 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          bashIde = inputs.self.lib.applyDefaultsToData {
+          bashIde = inputs.self.lib.applyDefaults {
             shellcheckPath = "${(lib.getExe pkgs.shellcheck)}";
             # TODO: To get documentation for flags on hover, setup and configure explainshell
             explainshellEndpoint = ""; # Disable explainshell

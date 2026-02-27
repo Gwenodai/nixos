@@ -9,7 +9,7 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          editor = inputs.self.lib.applyDefaultsToData {
+          editor = inputs.self.lib.applyDefaults {
             # Single quotes are required for font names with spaces
             fontFamily = builtins.concatStringsSep ", " [
               "'JetBrainsMono Nerd Font'"

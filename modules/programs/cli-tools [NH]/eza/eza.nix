@@ -1,18 +1,18 @@
 # A modern replacement for 'ls'
 {
+  inputs,
   ...
 }: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.cli-tools = {
-    lib,
     ...
   }: {
-    programs.eza = {
+    programs.eza = inputs.self.lib.applyDefaults {
       enable = true;
-      enableBashIntegration = lib.mkDefault true;
-      enableZshIntegration = lib.mkDefault true;
-      icons = lib.mkDefault "always";
-      git = lib.mkDefault true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      icons = "always";
+      git = true;
       extraOptions = [
         "--group-directories-first"
         "--header"

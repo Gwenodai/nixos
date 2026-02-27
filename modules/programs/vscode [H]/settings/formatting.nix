@@ -9,7 +9,7 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          editor = inputs.self.lib.applyDefaultsToData {
+          editor = inputs.self.lib.applyDefaultsRecursive {
             # -BRACKETS-
             guides.bracketPairs = "active";
             bracketPairColorization = {

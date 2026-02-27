@@ -10,7 +10,7 @@
     ...
   }: {
     programs.bat = {
-      enable = true;
+      enable = lib.mkDefault true;
       config.theme = lib.mkDefault "Monokai Extended";
 
       extraPackages = with pkgs.bat-extras; [
@@ -24,7 +24,7 @@
     };
 
     # Custom aliases
-    home.shellAliases = inputs.self.lib.applyDefaultsToData {
+    home.shellAliases = inputs.self.lib.applyDefaults {
       cat = "bat";
       man = "batman";
       grep = "batgrep";

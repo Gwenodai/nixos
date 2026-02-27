@@ -13,7 +13,7 @@
     programs.vscode = {
       profiles.default = {
         userSettings = {
-          nix = inputs.self.lib.applyDefaultsToData {
+          nix = inputs.self.lib.applyDefaultsRecursive {
             enableLanguageServer = true;
             serverPath = "${(lib.getExe pkgs.nil)}";
             serverSettings = {

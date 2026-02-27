@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }: {
   # --- NIXOS MODULE ---
@@ -14,18 +15,18 @@
 
       userDirs = let
         docs = config.xdg.userDirs.documents;
-      in {
-        enable = lib.mkDefault true;
-        createDirectories = lib.mkDefault false;
+      in inputs.self.lib.applyDefaults {
+        enable = true;
+        createDirectories = false;
 
-        documents   = lib.mkDefault "${config.home.homeDirectory}/Documents";
-        desktop     = lib.mkDefault "${docs}/Desktop";
-        download    = lib.mkDefault "${docs}/Downloads";
-        pictures    = lib.mkDefault "${docs}/Pictures";
-        videos      = lib.mkDefault "${docs}/Videos";
-        music       = lib.mkDefault "${docs}/Music";
-        templates   = lib.mkDefault "${docs}/Templates";
-        publicShare = lib.mkDefault null;
+        documents   = "${config.home.homeDirectory}/Documents";
+        desktop     = "${docs}/Desktop";
+        download    = "${docs}/Downloads";
+        pictures    = "${docs}/Pictures";
+        videos      = "${docs}/Videos";
+        music       = "${docs}/Music";
+        templates   = "${docs}/Templates";
+        publicShare = null;
       };
 
       dataFile."mimeapps.list" = lib.mkDefault {

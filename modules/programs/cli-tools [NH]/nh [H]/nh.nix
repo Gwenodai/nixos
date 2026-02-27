@@ -9,7 +9,7 @@
   }: {
 
     programs.nh = {
-      enable = true;
+      enable = lib.mkDefault true;
       clean = lib.mkDefault {
         enable = true;
         extraArgs = "--keep-since 30d --keep 3";

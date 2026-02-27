@@ -7,7 +7,7 @@
     ...
   }: {
     # Import the huge config as defaults
-    programs.niri.settings = inputs.self.lib.applyDefaultsToData {
+    programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
 
@@ -31,6 +31,7 @@
 
       layout = {
         gaps = 3;
+        struts.top = 1;
         center-focused-column = "never";
         always-center-single-column = true;
         empty-workspace-above-first = true;

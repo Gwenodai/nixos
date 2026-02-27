@@ -8,7 +8,7 @@
   }: {
     programs.vscode = {
       profiles.default = {
-        userSettings = inputs.self.lib.applyDefaultsToData {
+        userSettings = inputs.self.lib.applyDefaultsRecursive {
           explorer = {
             fileNesting = {
               enabled = true;

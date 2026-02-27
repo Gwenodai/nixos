@@ -8,7 +8,7 @@
   }: {
     programs.vscode = {
       profiles.default = {
-        userSettings = inputs.self.lib.applyDefaultsToData {
+        userSettings = inputs.self.lib.applyDefaultsRecursive {
           workbench = {
             settings.alwaysShowAdvancedSettings = true;
             startupEditor = "none"; # Disable the welcome page
