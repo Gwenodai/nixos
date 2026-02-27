@@ -4,10 +4,11 @@
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.noctalia = {
     config,
+    lib,
     ...
   }: {
-    # configure options
     programs.noctalia-shell = {
+      settings.plugins.autoUpdate = lib.mkDefault false;
       # plugins = {
       #   sources = [
       #     {
@@ -33,7 +34,7 @@
       #     audioCodec = "opus";
       #     audioSource = "default_output";
       #     colorRange = "limited";
-      #     directory = config.xdg.userDirs.videos;
+      #     directory = "${config.xdg.userDirs.videos}";
       #     frameRate = 60;
       #     quality = "very_high";
       #     showCursor = true;

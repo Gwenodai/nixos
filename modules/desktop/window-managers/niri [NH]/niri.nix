@@ -4,6 +4,19 @@
   inputs,
   ...
 }: {
+  # Convenience function to set Niri settings
+  # only if the Niri module was imported
+  flake.lib = {
+    mkIfNiri= {
+      options,
+      ...
+    }: input:
+      if ( options ? home && options.programs ? niri ) then
+        input # If the `niri` option is present, the input is valid
+      else
+        { };  # else we replace it with nothing
+  };
+
   # --- NIXOS MODULE ---
   flake.modules.nixos.niri = {
     pkgs,

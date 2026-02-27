@@ -12,14 +12,21 @@
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
       host.preservation = {
         preserveAt."/persist" = {
-          directories = [];
+          directories = [
+            "${config.xdg.cacheHome}/noctalia"
+            "${config.xdg.cacheHome}/noctalia-qs"
+            {
+              directory = "${config.xdg.cacheHome}/cliphist";
+              mode = "0700";
+            }
+          ];
         };
         
-        setupDirectories = {};
+        setupDirectories = {
+          "${config.xdg.cacheHome}" = { }; # "~/.cache"
+        };
 
-        ignore.directories = [
-          "${config.xdg.cacheHome}/noctalia/images/contributors"
-        ];
+        ignore.directories = [];
       };
     };
   };

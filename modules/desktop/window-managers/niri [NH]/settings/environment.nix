@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }: {
   # --- HOME MANAGER MODULE ---
@@ -7,9 +8,9 @@
   }: {
     programs.niri = {
       settings = {
-        environment = {
+        environment = inputs.self.lib.applyDefaults {
           QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-          QT_QPA_PLATFORM = "wayland;xcb";
+          QT_QPA_PLATFORM = "wayland";
           GDK_BACKEND = "wayland,x11,*";
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_TYPE = "wayland";

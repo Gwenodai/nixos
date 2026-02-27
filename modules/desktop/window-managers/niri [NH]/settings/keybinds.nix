@@ -18,14 +18,13 @@
       { # Shortcuts
         "Mod+Escape".action        = show-hotkey-overlay;
         "Mod+Tab".action           = toggle-overview;
-        # "Mod+R".action             = RUNNER;
         "Mod+Q" = { action         = close-window; repeat = false; };
       }
       { # Fullscreen
         "Mod+F".action            = maximize-column;
-        "Mod+Shift+F".action      = maximize-window-to-edges;
+        "Mod+Shift+F".action      = fullscreen-window;
         "Mod+Ctrl+F".action       = toggle-windowed-fullscreen;
-        "Mod+Ctrl+Shift+F".action = fullscreen-window;
+        "Mod+Ctrl+Shift+F".action = maximize-window-to-edges;
       }
       { # Screenshots
         "Print".action.           screenshot-window = [];
