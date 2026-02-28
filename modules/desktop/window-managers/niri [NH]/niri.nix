@@ -36,12 +36,11 @@
       xwayland-satellite
     ];
 
-    # systemd.user.services.niri-flake-polkit.enable = false;
+    systemd.user.services.niri-flake-polkit.enable = false;
   };
 
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.niri = {
-    config,
     pkgs,
     lib,
     ...
@@ -55,6 +54,16 @@
           path = lib.mkDefault "${(lib.getExe pkgs.xwayland-satellite)}";
         };
       };
+    };
+
+    xdg.portal.config.niri = {
+      default = lib.mkDefault [
+        "gnome"
+        "gtk"
+      ];
+      "org.freedesktop.impl.portal.ScreenCast" = lib.mkDefault [ "gnome" ];
+      "org.freedesktop.impl.portal.Screenshot" = lib.mkDefault [ "gnome" ];
+      "org.freedesktop.impl.portal.FileChooser" = lib.mkDefault [ "gtk" ];
     };
   };
 }
