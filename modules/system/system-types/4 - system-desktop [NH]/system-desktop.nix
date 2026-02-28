@@ -8,6 +8,8 @@
     imports = with inputs.self.modules.nixos; [
       system-cli
 
+      xdg
+      polkit
       graphics
       audio
       cursors
@@ -23,6 +25,8 @@
       system-cli
 
       xdg
+      keyring
+      polkit
       files
       browser
       kitty
