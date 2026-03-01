@@ -3,7 +3,7 @@
   ...
 }: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.browser = {
+  flake.modules.homeManager.keyring = {
     options,
     config,
     ...
@@ -13,17 +13,13 @@
         preserveAt."/persist" = {
           directories = [
             {
-              directory = "${config.xdg.configHome}/google-chrome";
+              directory = "${config.xdg.dataHome}/keyrings";
               how = "symlink";
               mode = "0700";
               createLinkTarget = true;
             }
           ];
         };
-
-        ignore.directories = [
-          "${config.xdg.cacheHome}/google-chrome"
-        ];
       };
     };
   };

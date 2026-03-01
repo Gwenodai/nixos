@@ -8,9 +8,6 @@
     imports = with inputs.self.modules.nixos; [
       system-minimal
 
-      ssh
-      locale
-      firmware
       cli-tools
       sys-tools
       archive-tools
@@ -26,7 +23,6 @@
       cli-tools
       sys-tools
       shell
-      git
     ];
   };
 }

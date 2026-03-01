@@ -8,7 +8,6 @@
     imports = with inputs.self.modules.nixos; [
       system-cli
 
-      xdg
       polkit
       graphics
       audio
@@ -24,7 +23,6 @@
     imports = with inputs.self.modules.homeManager; [
       system-cli
 
-      xdg
       keyring
       polkit
       files

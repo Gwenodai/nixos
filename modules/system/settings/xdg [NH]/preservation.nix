@@ -25,6 +25,21 @@
             "${config.xdg.userDirs.music}"
             "${config.xdg.userDirs.templates}"
           ];
+
+          files = [
+            {
+              file = "${config.xdg.dataHome}/recently-used.xbel";
+              mode = "0600";
+            }
+          ];
+        };
+        
+        setupDirectories = {
+          ".local" = { };                   # "~/.local"
+          "${config.xdg.dataHome}" = { };   # "~/.local/share"
+          "${config.xdg.stateHome}" = { };  # "~/.local/state"
+          "${config.xdg.cacheHome}" = { };  # "~/.cache"
+          "${config.xdg.configHome}" = { }; # "~/.config"
         };
       };
     };

@@ -27,7 +27,6 @@
         };
         
         setupDirectories = {
-          "${config.xdg.configHome}" = { };
           "${config.xdg.configHome}/Code" = { };
         };
 

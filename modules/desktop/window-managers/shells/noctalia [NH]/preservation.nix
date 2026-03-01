@@ -21,12 +21,6 @@
             }
           ];
         };
-        
-        setupDirectories = {
-          "${config.xdg.cacheHome}" = { }; # "~/.cache"
-        };
-
-        ignore.directories = [];
       };
     };
   };

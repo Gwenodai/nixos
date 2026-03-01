@@ -12,6 +12,10 @@
       disko
       home-manager
       garbage-collection
+      locale
+      firmware
+      ssh
+      xdg
       # TODO: Implement:
       # secrets
     ];
@@ -22,6 +26,8 @@
     imports = with inputs.self.modules.homeManager; [
       system-config
       
+      git
+      xdg
       # TODO: Implement:
       # secrets
     ];

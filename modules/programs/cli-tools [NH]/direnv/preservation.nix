@@ -3,29 +3,26 @@
   ...
 }: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.shell = {
+  flake.modules.homeManager.cli-tools = {
     options,
     config,
-    lib,
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {
       host.preservation = {
         preserveAt."/persist" = {
-          files = [
+          directories = [
             {
-              file = "${config.xdg.configHome}/zsh/.zsh_history";
-              mode = "0600";
+              directory = "${config.xdg.dataHome}/direnv/allow";
+              how = "symlink";
+              createLinkTarget = true;
             }
           ];
         };
-        setupDirectories = {
-          "${config.xdg.configHome}/zsh" = { };
-        };
         
-        ignore.files = [
-          "${config.xdg.configHome}/zsh/.zcompdump"
-        ];
+        setupDirectories = {
+          "${config.xdg.dataHome}/direnv" = { };
+        };
       };
     };
   };
