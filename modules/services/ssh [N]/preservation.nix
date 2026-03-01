@@ -18,6 +18,7 @@
           files = map (path: {
             file = path;
             how = "symlink";
+            inInitrd = true; # Needed for `sops-nix` user password
             configureParent = true;
           }) [
             "/etc/ssh/ssh_host_ed25519_key"

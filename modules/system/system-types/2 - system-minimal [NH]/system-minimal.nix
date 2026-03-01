@@ -16,8 +16,7 @@
       firmware
       ssh
       xdg
-      # TODO: Implement:
-      # secrets
+      sops-nix
     ];
   };
 
@@ -28,8 +27,7 @@
       
       git
       xdg
-      # TODO: Implement:
-      # secrets
+      sops-nix
     ];
   };
 }

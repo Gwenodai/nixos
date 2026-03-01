@@ -11,9 +11,14 @@ in {
     {
       # --- NIXOS MODULE ---
       nixos."${username}" = { # Equates to `flake.modules.nixos.gwen`
+        config,
+        ...
+      }: {
+        sops.secrets.user-password.neededForUsers = true;
+
         users.users."${username}" = {
-          # hashedPasswordFile = "/persist/secrets/passwords/${username}";
-          initialPassword = "changeme";
+          # initialPassword = "changeme";
+          hashedPasswordFile = config.sops.secrets.user-password.path;
         };
       };
     }

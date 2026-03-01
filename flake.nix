@@ -35,6 +35,10 @@
       url = "github:noctalia-dev/noctalia-shell";
     };
     preservation.url = "github:nix-community/preservation";
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+    };
   };
 
 }
