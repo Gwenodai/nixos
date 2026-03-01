@@ -1,2 +1,7 @@
-/TODO
+# My to do list
+TODO
+# vscode stuff
 .vscode/
+# direnv
+.direnv/
+.envrc
