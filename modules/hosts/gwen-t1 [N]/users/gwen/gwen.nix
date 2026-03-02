@@ -16,6 +16,7 @@
       desktop-niri
     ];
     
+    # TODO: Secret
     nix.extraOptions = ''
       !include /persist/secrets/access-tokens.secret
     '';

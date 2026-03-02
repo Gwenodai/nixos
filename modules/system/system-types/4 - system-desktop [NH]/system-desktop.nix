@@ -30,6 +30,7 @@
       kitty
       vscode
       spotify
+      discord
     ];
   };
 }

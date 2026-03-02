@@ -4,6 +4,7 @@
   # --- NIXOS MODULE ---
   flake.modules.nixos.gwen-t1 = {
     config,
+    pkgs,
     lib,
     ...
   }: {
@@ -13,7 +14,7 @@
         ...
       }: {
         programs.niri.settings.spawn-at-startup = [
-          # { sh = "sudo /run/current-system/sw/bin/wakeup-secondary-display"; }
+          { sh = "${(lib.getExe pkgs.vesktop)} --start-minimized"; }
         ];
       };
     };
