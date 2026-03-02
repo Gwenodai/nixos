@@ -8,19 +8,24 @@
     ...
   }: {
     programs.noctalia-shell.settings = {
+
+      # ---Noctalia UI settings---
       ui = inputs.self.lib.applyDefaults {
+        # UI
+        tooltipsEnabled = true;
+        boxBorderEnabled = false;
+        panelBackgroundOpacity = 0.9;
+        panelsAttachedToBar = true;
+        settingsPanelMode = "attached";
+        settingsPanelSideBarCardStyle = false;
+        # Fonts
         fontDefault = "Adwaita Sans";
         fontFixed = "JetBrainsMono NF";
         fontDefaultScale = 1;
         fontFixedScale = 1;
-        tooltipsEnabled = true;
-        boxBorderEnabled = false;
-        panelBackgroundOpacity = 0.93;
-        panelsAttachedToBar = true;
-        settingsPanelMode = "attached";
-        settingsPanelSideBarCardStyle = false;
       };
 
+      # ---Noctalia calendar settings---
       calendar = {
         cards = lib.mkDefault [
           {
@@ -38,8 +43,10 @@
         ];
       };
 
+      # ---Noctalia control center settings---
       controlCenter = inputs.self.lib.applyDefaults {
         position = "close_to_bar_button";
+        openAtMouseOnBarRightClick = true;
         diskPath = "/";
         shortcuts = {
           left = [
@@ -99,31 +106,39 @@
         ];
       };
 
+      # ---Noctalia on-screen display settings---
       osd = inputs.self.lib.applyDefaults {
-        enabled = true;
+        enabled = true; # UI popups when changing volume/brightness etc
         location = "top_right";
         autoHideMs = 2000;
         overlayLayer = true;
         backgroundOpacity = 1;
         enabledTypes = [
-          0
-          1
-          2
+          0 # Output volume
+          1 # Input volume
+          2 # Brightness
+          # 3  # Lock keys (caps/num lock etc)
         ];
+        # Only show on specific monitors?
         monitors = [];
       };
 
+      # ---Noctalia colour scheme settings---
       colorSchemes = inputs.self.lib.applyDefaults {
-        useWallpaperColors = false;
-        predefinedScheme = "Rose Pine";
+        # Dark mode
         darkMode = true;
         schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "18:30";
+        # Wallpaper colour settings
+        useWallpaperColors = false;
         generationMethod = "tonal-spot";
-        monitorForColors = "";
+        monitorForColors = ""; # Use a specific monitor for colour detection
+        # Manual colour scheme
+        predefinedScheme = "Rose Pine";
       };
 
+      # ---Noctalia night light settings---
       nightLight = inputs.self.lib.applyDefaults {
         enabled = false;
         forced = false;
@@ -134,13 +149,15 @@
         manualSunset = "18:30";
       };
 
+      # ---Noctalia desktop widget settings---
       desktopWidgets = inputs.self.lib.applyDefaults {
         enabled = false;
-        overviewEnabled = true;
         gridSnap = false;
+        overviewEnabled = true; # Show in overview
         monitorWidgets = [];
       };
 
+      # ---Noctalia template settings---
       templates = inputs.self.lib.applyDefaults {
         enableUserTheming = false;
         activeTemplates = [];

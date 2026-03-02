@@ -3,6 +3,10 @@
   self,
   ...
 }: {
+  flake.lib = {
+    commonSopsFile = (self + "/secrets/common/secrets.yaml");
+  };
+
   # --- NIXOS MODULE ---
   flake.modules.nixos.sops-nix = {
     config,
@@ -26,7 +30,7 @@
 
     sops = {
       age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
-      defaultSopsFile = lib.mkDefault (self + "/secrets/common/secrets.yaml");
+      defaultSopsFile = lib.mkDefault inputs.self.lib.commonSopsFile;
     };
   };
 

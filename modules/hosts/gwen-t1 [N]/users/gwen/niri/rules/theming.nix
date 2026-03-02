@@ -17,15 +17,6 @@
       }: {
         programs.niri.settings = {
           window-rules = [
-            { # Shadow behind windows
-              matches = [
-                { app-id = "^kitty$"; }
-              ];
-              shadow = {
-                draw-behind-window = true;
-                color = "#000000B3";
-              };
-            }
             { # 90% Transparent windows + Shadow behind
               matches = [
                 { is-floating = true; }

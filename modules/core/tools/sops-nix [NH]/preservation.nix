@@ -15,9 +15,6 @@
             "${config.xdg.configHome}/sops"
           ];
         };
-        setupDirectories = {
-          "${config.xdg.configHome}" = { };
-        };
       };
     };
   };

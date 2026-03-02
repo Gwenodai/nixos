@@ -19,7 +19,16 @@
               directory = "${config.xdg.cacheHome}/cliphist";
               mode = "0700";
             }
+            {
+              directory = "${config.xdg.configHome}/noctalia/colorschemes";
+              how = "symlink";
+              createLinkTarget = true;
+            }
           ];
+        };
+
+        setupDirectories = {
+          "${config.xdg.configHome}/noctalia" = { };
         };
       };
     };

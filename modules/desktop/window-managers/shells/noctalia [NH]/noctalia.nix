@@ -40,7 +40,7 @@
     programs.noctalia-shell = {
       enable = lib.mkDefault true;
       systemd.enable = lib.mkDefault true;
-      settings.settingsVersion = lib.mkDefault 53;
+      settings.settingsVersion = lib.mkDefault 54;
       # settings = builtins.readFile ./_settings.json;
     };
 

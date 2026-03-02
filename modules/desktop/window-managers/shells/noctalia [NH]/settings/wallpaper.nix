@@ -8,43 +8,52 @@
     lib,
     ...
   }: {
-    programs.noctalia-shell.settings.wallpaper = inputs.self.lib.applyDefaults {
-      enabled = true;
-      overviewEnabled = false;
-      directory = "${config.xdg.userDirs.pictures}/Wallpapers";
-      monitorDirectories = [];
-      enableMultiMonitorDirectories = false;
-      showHiddenFiles = false;
-      viewMode = "single";
-      setWallpaperOnAllMonitors = true;
-      fillMode = "crop";
-      fillColor = "#000000";
-      useSolidColor = false;
-      solidColor = "#1a1a2e";
-      automationEnabled = false;
-      wallpaperChangeMode = "random";
-      randomIntervalSec = 300;
-      transitionDuration = 1500;
-      transitionType = "random";
-      skipStartupTransition = false;
-      transitionEdgeSmoothness = 0.05;
-      panelPosition = "follow_bar";
-      hideWallpaperFilenames = false;
-      overviewBlur = 0.4;
-      overviewTint = 0.6;
-      useWallhaven = false;
-      wallhavenQuery = "";
-      wallhavenSorting = "relevance";
-      wallhavenOrder = "desc";
-      wallhavenCategories = "111";
-      wallhavenPurity = "100";
-      wallhavenRatios = "";
-      wallhavenApiKey = "";
-      wallhavenResolutionMode = "atleast";
-      wallhavenResolutionWidth = "";
-      wallhavenResolutionHeight = "";
-      sortOrder = "name";
-      favorites = [];
+    programs.noctalia-shell.settings = {
+        
+      # ---Noctalia wallpaper settings---
+      wallpaper = inputs.self.lib.applyDefaults {
+        # Genereal
+        enabled = true;
+        setWallpaperOnAllMonitors = true;
+        skipStartupTransition = false; # Wallpaper transition on login
+        directory = "${config.xdg.userDirs.pictures}/Wallpapers";
+        showHiddenFiles = false;
+        viewMode = "single";
+        fillMode = "crop";
+        fillColor = "#000000";
+        useSolidColor = false;
+        solidColor = "#1a1a2e";
+        panelPosition = "follow_bar";
+        hideWallpaperFilenames = false;
+        # Automation
+        automationEnabled = true;
+        wallpaperChangeMode = "random";
+        randomIntervalSec = 180;
+        transitionDuration = 1500;
+        transitionType = "random";
+        transitionEdgeSmoothness = 0.05;
+        # Per monitor wallpaper settings
+        enableMultiMonitorDirectories = false;
+        monitorDirectories = [];
+        # Overview settings
+        overviewEnabled = true;
+        overviewBlur = 0.4;
+        overviewTint = 0.6;
+        # Wallhaven settings
+        useWallhaven = false;
+        wallhavenQuery = "";
+        wallhavenSorting = "relevance";
+        wallhavenOrder = "desc";
+        wallhavenCategories = "110";
+        wallhavenPurity = "100";
+        wallhavenRatios = "";
+        wallhavenApiKey = "";
+        wallhavenResolutionMode = "atleast";
+        wallhavenResolutionWidth = "";
+        wallhavenResolutionHeight = "";
+        sortOrder = "name";
+        favorites = [];
+      };
     };
   };
 }

@@ -7,84 +7,113 @@
     ...
   }: {
     programs.noctalia-shell.settings = {
+
+      # ---Noctalia network settings---
       network = inputs.self.lib.applyDefaults {
-        wifiEnabled = true;
-        airplaneModeEnabled = false;
-        bluetoothRssiPollingEnabled = false;
-        bluetoothRssiPollIntervalMs = 60000;
+        # --Settings--
+          # Wi-Fi
+          wifiEnabled = true;
+          airplaneModeEnabled = false;
+          # Bluetooth
+          disableDiscoverability = false;
+          bluetoothRssiPollingEnabled = false;
+          bluetoothRssiPollIntervalMs = 60000;
+          bluetoothHideUnnamedDevices = false;
+        
+        # --UI--
         networkPanelView = "wifi";
-        wifiDetailsViewMode = "grid";
-        bluetoothDetailsViewMode = "grid";
-        bluetoothHideUnnamedDevices = false;
-        disableDiscoverability = false;
+          # Wi-Fi
+          wifiDetailsViewMode = "grid";
+          # Bluetooth
+          bluetoothDetailsViewMode = "grid";
       };
       
+      # ---Noctalia audio settings---
       audio = inputs.self.lib.applyDefaults {
+        # Volume
         volumeStep = 5;
         volumeOverdrive = true;
-        cavaFrameRate = 30;
-        visualizerType = "linear";
-        mprisBlacklist = [];
-        preferredPlayer = "";
         volumeFeedback = false;
         volumeFeedbackSoundFile = "";
+        # Media
+        preferredPlayer = "";
+        mprisBlacklist = [];
+        #Visualiser
+        cavaFrameRate = 30;
+        visualizerType = "linear";
       };
       
+      # ---Noctalia brightness settings---
       brightness = inputs.self.lib.applyDefaults {
         brightnessStep = 5;
         enforceMinimum = true;
-        enableDdcSupport = false;
+        enableDdcSupport = false; # External display brightness control
         backlightDeviceMappings = [];
       };
 
+      # ---Noctalia location settings---
       location = inputs.self.lib.applyDefaults {
+        # Weather
         name = "yagoona";
         weatherEnabled = true;
         weatherShowEffects = true;
         useFahrenheit = false;
-        use12hourFormat = false;
+        # Calendar
         showWeekNumberInCalendar = true;
         showCalendarEvents = true;
         showCalendarWeather = true;
         analogClockInCalendar = false;
         firstDayOfWeek = 1;
-        hideWeatherTimezone = false;
-        hideWeatherCityName = false;
+        # Location UI
+        use12hourFormat = false;
+        hideWeatherTimezone = false; # Hide details in UI?
+        hideWeatherCityName = false; # Hide details in UI?
       };
 
+      # ---Noctalia hooks settings---
       hooks = inputs.self.lib.applyDefaults {
         enabled = false;
+        startup = ""; # Niri startup completed
+        session = ""; # Shutdown/Reboot
         wallpaperChange = "";
         darkModeChange = "";
         screenLock = "";
         screenUnlock = "";
         performanceModeEnabled = "";
         performanceModeDisabled = "";
-        startup = "";
-        session = "";
       };
 
+      # ---Noctalia system monitor settings---
       systemMonitor = inputs.self.lib.applyDefaults {
+        # Colour config
+        useCustomColors = false;
+        warningColor = "";
+        criticalColor = "";
+        # CPU
         cpuWarningThreshold = 80;
         cpuCriticalThreshold = 90;
+        # Temp
         tempWarningThreshold = 80;
         tempCriticalThreshold = 90;
+        # GPU
+        enableDgpuMonitoring = false;
         gpuWarningThreshold = 80;
         gpuCriticalThreshold = 90;
+        # RAM
         memWarningThreshold = 80;
         memCriticalThreshold = 90;
+        # Swap
         swapWarningThreshold = 80;
         swapCriticalThreshold = 90;
+        # Disk
         diskWarningThreshold = 80;
         diskCriticalThreshold = 90;
         diskAvailWarningThreshold = 20;
         diskAvailCriticalThreshold = 10;
+        # Battery
         batteryWarningThreshold = 20;
         batteryCriticalThreshold = 5;
-        enableDgpuMonitoring = false;
-        useCustomColors = false;
-        warningColor = "";
-        criticalColor = "";
+        # External system monitor program
         externalMonitor = "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor";
       };
     };

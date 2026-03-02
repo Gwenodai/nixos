@@ -20,6 +20,15 @@
             };
           clip-to-geometry = true;
         }
+        { # Shadow behind windows
+          matches = [
+            { app-id = "^kitty$"; }
+          ];
+          shadow = {
+            draw-behind-window = true;
+            color = "#000000B3";
+          };
+        }
       ];
     };
   };
