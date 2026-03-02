@@ -29,6 +29,7 @@
       browser
       kitty
       vscode
+      spotify
     ];
   };
 }
