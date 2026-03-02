@@ -12,20 +12,30 @@
     config = inputs.self.lib.mkIfNiri { inherit options; } {
       programs.niri.settings.binds = with config.lib.niri.actions;
         let
-          sh = spawn "sh" "-c";
+          sh = spawn "sh" "-c"; # Makeshift `spawn-sh` functionality
+          # Noctalia IPC command runner
+          noctalia = command: {
+            action = sh "noctalia-shell ipc call ${command}";
+          };
+          # Noctalia IPC command runner available on lock screen
+          noctaliaWhileLocked = command: (noctalia command) // {
+            allow-when-locked = true;
+          };
         in
-      lib.attrsets.mergeAttrsList [
-        { # Launcher
-          "Mod+R".action       = sh "noctalia-shell ipc call launcher toggle";
-          "Mod+Shift+R".action = sh "noctalia-shell ipc call launcher command";
-          "MoD+Ctrl+C".action  = sh "noctalia-shell ipc call launcher clipboard";
-        }
-        { # Audio keys
-          "XF86AudioMute".action        = sh "noctalia-shell ipc call volume muteOutput";
-          "XF86AudioRaiseVolume".action = sh "noctalia-shell ipc call volume increase";
-          "XF86AudioLowerVolume".action = sh "noctalia-shell ipc call volume decrease";
-        }
-      ];
+      lib.mapAttrs (key: value: lib.mkOverride 900 value) (
+        lib.attrsets.mergeAttrsList [
+          { # Launcher
+            "Mod+R"       = noctalia "launcher toggle";
+            "Mod+Shift+R" = noctalia "launcher command";
+            "MoD+Ctrl+C"  = noctalia "launcher clipboard";
+          }
+          { # Audio keys
+            "XF86AudioMute"        = noctaliaWhileLocked "volume muteOutput";
+            "XF86AudioRaiseVolume" = noctaliaWhileLocked "volume increase";
+            "XF86AudioLowerVolume" = noctaliaWhileLocked "volume decrease";
+          }
+        ]
+      );
     };
   };
 }

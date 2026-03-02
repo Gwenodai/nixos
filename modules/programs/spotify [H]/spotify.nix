@@ -11,6 +11,8 @@
       spotify
       spotify-tray
     ];
+    
+    services.playerctld.enable = true;
 
     xdg = {
       mimeApps = {
