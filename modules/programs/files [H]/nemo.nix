@@ -16,13 +16,20 @@
         defaultApplications = lib.mkBefore (
           let
             application = "nemo.desktop";
-
             mimeTypes = [
               "inode/directory"
+              "application/x-gnome-saved-search"
             ];
           in
           lib.genAttrs mimeTypes (mimetype: application)
         );
+        associations.added = let
+          application = "nemo-autorun-software.desktop";
+          mimeTypes = [
+            "x-content/unix-software"
+          ];
+        in
+        lib.genAttrs mimeTypes (mimetype: application);
       };
     };
   };

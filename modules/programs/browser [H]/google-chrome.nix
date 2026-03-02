@@ -16,29 +16,36 @@
         defaultApplications = lib.mkBefore (
           let
             application = "google-chrome.desktop";
-
             mimeTypes = [
-              "text/html"
-              "application/pdf"
+              "application/rdf+xml"
+              "application/rss+xml"
+              "application/xhtml+xml"
+              "application/xhtml_xml"
               "x-scheme-handler/http"
               "x-scheme-handler/https"
               "x-scheme-handler/about"
               "x-scheme-handler/mailto"
               "x-scheme-handler/unknown"
+              "x-scheme-handler/google-chrome"
             ];
           in
           lib.genAttrs mimeTypes (mimetype: application)
         );
-        associations.added =
-          let
-            application = "google-chrome.desktop";
-
-            mimeTypes = [
-              "text/markdown"
-              "application/pdf"
-            ];
-          in
-          lib.genAttrs mimeTypes (mimetype: application);
+        associations.added = let
+          application = "google-chrome.desktop";
+          mimeTypes = [
+            "application/xml"
+            "application/pdf"
+            "text/markdown"
+            "image/jpeg"
+            "image/webp"
+            "image/gif"
+            "image/png"
+            "text/html"
+            "text/xml"
+          ];
+        in
+        lib.genAttrs mimeTypes (mimetype: application);
       };
     };
   };

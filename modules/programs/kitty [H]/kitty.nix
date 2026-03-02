@@ -42,15 +42,27 @@
         };
       };
       mimeApps = {
-        associations.added =
+        defaultApplications = lib.mkBefore (
           let
             application = "kitty-open.desktop";
-
             mimeTypes = [
-              "application/x-shellscript"
+              "x-scheme-handler/kitty"
+              "x-scheme-handler/ssh"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application);
+          lib.genAttrs mimeTypes (mimetype: application)
+        );
+        associations.added = let
+          application = "kitty-open.desktop";
+          mimeTypes = [
+            "application/x-sh"
+            "application/x-shellscript"
+            "inode/directory"
+            "image/*"
+            "text/*"
+          ];
+        in
+        lib.genAttrs mimeTypes (mimetype: application);
       };
     };
   };

@@ -27,7 +27,8 @@
     home.shellAliases = inputs.self.lib.applyDefaults {
       cat = "bat";
       man = "batman";
-      grep = "batgrep";
+      # Make batgrep properly scale to terminal width
+      grep = "batgrep --terminal-width=$(( $(echo $COLUMNS) - 8 ))";
       diff = "batdiff";
       less = "batpipe";
       watch = "batwatch";

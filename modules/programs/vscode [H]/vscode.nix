@@ -22,7 +22,6 @@
         defaultApplications = lib.mkBefore (
           let
             application = "code.desktop";
-
             mimeTypes = [
               "application/octet-stream"
               "application/x-executable"
