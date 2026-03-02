@@ -25,7 +25,7 @@
                   "${userConfig.home.homeDirectory}/${dirPath}";
             in {
               "${absPath}".d = {
-                mode = dirConfig.mode;
+                mode = lib.mkForce dirConfig.mode;
                 user =
                   if dirConfig.user != null then
                     dirConfig.user
