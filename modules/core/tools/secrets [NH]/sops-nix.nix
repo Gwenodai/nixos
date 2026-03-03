@@ -8,7 +8,7 @@
   };
 
   # --- NIXOS MODULE ---
-  flake.modules.nixos.sops-nix = {
+  flake.modules.nixos.secrets = {
     config,
     pkgs,
     lib,
@@ -35,7 +35,7 @@
   };
 
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.sops-nix = {
+  flake.modules.homeManager.secrets = {
     config,
     lib,
     ...

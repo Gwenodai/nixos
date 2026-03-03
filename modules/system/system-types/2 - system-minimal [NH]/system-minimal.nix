@@ -16,7 +16,7 @@
       firmware
       ssh
       xdg
-      sops-nix
+      secrets
     ];
   };
 
@@ -27,7 +27,7 @@
       
       git
       xdg
-      sops-nix
+      secrets
     ];
   };
 }

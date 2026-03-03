@@ -3,7 +3,7 @@
   ...
 }: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.sops-nix = {
+  flake.modules.homeManager.secrets = {
     options,
     config,
     ...

@@ -25,7 +25,7 @@
 
       keyring
       polkit
-      files
+      nemo
       browser
       kitty
       vscode

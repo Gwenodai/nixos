@@ -2,7 +2,7 @@
   ...
 }: {
   # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.files = {
+  flake.modules.homeManager.nemo = {
     pkgs,
     lib,
     ...
