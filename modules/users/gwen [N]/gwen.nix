@@ -14,12 +14,19 @@ in {
         config,
         ...
       }: {
-        sops.secrets.user-password.neededForUsers = true;
+        sops.secrets = {
+          user-password.neededForUsers = true;
+          "git/access-tokens/nixos-flake-updates" = {};
+        };
 
         users.users."${username}" = {
           # initialPassword = "changeme";
           hashedPasswordFile = config.sops.secrets.user-password.path;
         };
+
+        nix.extraOptions = ''
+          !include ${config.sops.secrets."git/access-tokens/nixos-flake-updates".path}
+        '';
       };
     }
   ];
