@@ -23,5 +23,17 @@
         }
       )
     ];
+
+    # --- HOME MANAGER MODULE ---
+    home-manager.users.gwen = {
+      config,
+      ...
+    }: {
+      home.file = {
+        "${config.xdg.userDirs.documents}/Server" = {
+          source = config.lib.file.mkOutOfStoreSymlink "/mnt/x370/root";
+        };
+      };
+    };
   };
 }
