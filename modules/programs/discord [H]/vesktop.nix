@@ -127,6 +127,7 @@
       Unit = {
         Description = "Vesktop Discord Client";
         After = [ "graphical-session.target" ];
+        X-SwitchMethod = "keep-old";
       };
     };
   };
