@@ -15,7 +15,7 @@
         userSettings = {
           nix = inputs.self.lib.applyDefaultsRecursive {
             enableLanguageServer = true;
-            serverPath = "${(lib.getExe pkgs.nil)}";
+            serverPath = "${lib.getExe pkgs.nil}";
             serverSettings = {
               nil = {
                 formatting.command = null;

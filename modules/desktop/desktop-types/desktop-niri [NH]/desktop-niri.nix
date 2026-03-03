@@ -10,7 +10,6 @@
 
       ly
       niri
-      noctalia
     ];
   };
 

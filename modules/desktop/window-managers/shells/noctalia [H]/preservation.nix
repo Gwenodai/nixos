@@ -28,6 +28,8 @@
         };
 
         setupDirectories = {
+          "${config.xdg.cacheHome}" = { };  # "~/.cache"
+          "${config.xdg.configHome}" = { }; # "~/.config"
           "${config.xdg.configHome}/noctalia" = { };
         };
       };

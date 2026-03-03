@@ -35,11 +35,8 @@
         };
         
         setupDirectories = {
-          ".local" = { };                   # "~/.local"
-          "${config.xdg.dataHome}" = { };   # "~/.local/share"
-          "${config.xdg.stateHome}" = { };  # "~/.local/state"
-          "${config.xdg.cacheHome}" = { };  # "~/.cache"
-          "${config.xdg.configHome}" = { }; # "~/.config"
+          ".local" = { };                 # "~/.local"
+          "${config.xdg.dataHome}" = { }; # "~/.local/share"
         };
       };
     };

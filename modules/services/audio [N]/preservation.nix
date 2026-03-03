@@ -31,6 +31,11 @@
             }
           ];
         };
+
+        setupDirectories = {
+          ".local" = { };                  # "~/.local"
+          "${config.xdg.stateHome}" = { }; # "~/.local/state"
+        };
       };
     };
   };

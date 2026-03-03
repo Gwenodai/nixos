@@ -13,7 +13,7 @@
       profiles.default = {
         userSettings = {
           bashIde = inputs.self.lib.applyDefaults {
-            shellcheckPath = "${(lib.getExe pkgs.shellcheck)}";
+            shellcheckPath = "${lib.getExe pkgs.shellcheck}";
             # TODO: To get documentation for flags on hover, setup and configure explainshell
             explainshellEndpoint = ""; # Disable explainshell
             shfmt.path = "";           # Disable shfmt

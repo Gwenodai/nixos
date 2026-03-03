@@ -31,8 +31,15 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     noctalia = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        noctalia-qs.follows = "noctalia-qs";
+      };
       url = "github:noctalia-dev/noctalia-shell";
+    };
+    noctalia-qs = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:noctalia-dev/noctalia-qs";
     };
     preservation.url = "github:nix-community/preservation";
     sops-nix = {

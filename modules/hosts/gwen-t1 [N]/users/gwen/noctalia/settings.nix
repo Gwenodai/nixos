@@ -16,7 +16,7 @@
         programs.noctalia-shell = {
           settings = {
             general = {
-              lockScreenMonitors = [ "HDMI-A-1" ]; # Only show lockscreen on bottom screen
+              # lockScreenMonitors = [ "HDMI-A-1" ]; # Only show lockscreen on bottom screen
             };
             colorSchemes = {
               predefinedScheme = "Rosey AMOLED";

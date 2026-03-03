@@ -14,7 +14,7 @@
         ...
       }: {
         programs.niri.settings.spawn-at-startup = [
-          { sh = "${(lib.getExe pkgs.vesktop)} --start-minimized"; }
+          # { sh = "${lib.getExe pkgs.vesktop} --start-minimized"; }
         ];
       };
     };

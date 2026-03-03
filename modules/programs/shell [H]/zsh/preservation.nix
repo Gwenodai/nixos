@@ -20,6 +20,7 @@
           ];
         };
         setupDirectories = {
+          "${config.xdg.configHome}" = { }; # "~/.config"
           "${config.xdg.configHome}/zsh" = { };
         };
         

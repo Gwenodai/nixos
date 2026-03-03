@@ -21,6 +21,8 @@
         };
         
         setupDirectories = {
+          ".local" = { };                 # "~/.local"
+          "${config.xdg.dataHome}" = { }; # "~/.local/share"
           "${config.xdg.dataHome}/direnv" = { };
         };
       };

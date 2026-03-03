@@ -23,6 +23,7 @@
     xdg = {
       enable = lib.mkDefault true;
       mimeApps.enable = lib.mkDefault true;
+      autostart.enable = lib.mkDefault true;
 
       userDirs = let
         docs = config.xdg.userDirs.documents;

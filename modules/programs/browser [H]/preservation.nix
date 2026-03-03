@@ -21,6 +21,10 @@
           ];
         };
 
+        setupDirectories = {
+          "${config.xdg.configHome}" = { }; # "~/.config"
+        };
+
         ignore.directories = [
           "${config.xdg.cacheHome}/google-chrome"
         ];

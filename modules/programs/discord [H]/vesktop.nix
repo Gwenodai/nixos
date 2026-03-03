@@ -112,5 +112,22 @@
       package = pkgs.arrpc;
       systemdTarget = "graphical-session.target";
     };
+
+    # Autostart after login
+    systemd.user.services.vesktop = {
+      Install.WantedBy = [ "graphical-session.target" ];
+      
+      Service = {
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 5"; # Delay for system tray
+        ExecStart = "${lib.getExe pkgs.vesktop} --start-minimized";
+        Restart = "on-failure";
+        RestartSec = 3;
+      };
+
+      Unit = {
+        Description = "Vesktop Discord Client";
+        After = [ "graphical-session.target" ];
+      };
+    };
   };
 }

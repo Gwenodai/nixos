@@ -12,7 +12,7 @@
       profiles.default = {
         userSettings = {
           terminal = {
-            external.linuxExec = lib.mkDefault "${(lib.getExe pkgs.kitty)}";
+            external.linuxExec = lib.mkDefault "${lib.getExe pkgs.kitty}";
 
             integrated = inputs.self.lib.applyDefaults {
               defaultProfile.linux = "zsh";

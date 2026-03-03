@@ -27,6 +27,7 @@
         };
 
         setupDirectories = {
+          "${config.xdg.configHome}" = { }; # "~/.config"
           "${config.xdg.configHome}/vesktop" = { };
           "${config.xdg.configHome}/vesktop/Crashpad" = { mode = "0700"; };
           "${config.xdg.configHome}/vesktop/sessionData" = { mode = "0700"; };

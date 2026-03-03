@@ -51,7 +51,7 @@
       settings = {
         xwayland-satellite = {
           enable = lib.mkDefault true;
-          path = lib.mkDefault "${(lib.getExe pkgs.xwayland-satellite)}";
+          path = lib.mkDefault "${lib.getExe pkgs.xwayland-satellite}";
         };
       };
     };

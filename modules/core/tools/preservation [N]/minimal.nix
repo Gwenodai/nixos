@@ -76,6 +76,11 @@
         ];
       };
 
+      setupDirectories = {
+        ".local" = { };                 # "~/.local"
+        "${config.xdg.dataHome}" = { }; # "~/.local/share"
+      };
+
       ignore.directories = [
         "${config.xdg.cacheHome}/nix"
         "${config.xdg.stateHome}/nix"

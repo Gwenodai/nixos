@@ -4,9 +4,13 @@
 }: {
   # --- HOME MANAGER MODULE ---
   flake.modules.homeManager.noctalia = {
+    lib,
     ...
   }: {
     programs.noctalia-shell.settings = {
+
+      # ---Noctalia settings version---
+      settingsVersion = lib.mkDefault 54;
       
       # ---Noctalia general settings---
       general = inputs.self.lib.applyDefaults {
