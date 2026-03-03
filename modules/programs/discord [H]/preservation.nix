@@ -6,7 +6,6 @@
   flake.modules.homeManager.discord = {
     options,
     config,
-    lib,
     ...
   }: {
     config = inputs.self.lib.mkIfPreservation { inherit options; } {

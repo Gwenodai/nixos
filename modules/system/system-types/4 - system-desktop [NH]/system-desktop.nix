@@ -31,6 +31,7 @@
       vscode
       spotify
       discord
+      messenger
     ];
   };
 }

@@ -114,7 +114,7 @@
     };
 
     # Autostart after login
-    systemd.user.services.vesktop = {
+    systemd.user.services.vesktop = lib.mkDefault {
       Install.WantedBy = [ "graphical-session.target" ];
       
       Service = {
