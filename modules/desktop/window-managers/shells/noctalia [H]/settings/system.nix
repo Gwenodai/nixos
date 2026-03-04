@@ -15,6 +15,7 @@
           wifiEnabled = true;
           airplaneModeEnabled = false;
           # Bluetooth
+          bluetoothAutoConnect = false;
           disableDiscoverability = false;
           bluetoothRssiPollingEnabled = false;
           bluetoothRssiPollIntervalMs = 60000;

@@ -34,7 +34,7 @@
       ];
       text = builtins.replaceStrings ["# syntax: bash\n"] [""] ''
         # syntax: bash
-        batdiff -C 0 <(jq -S . "${config.xdg.configHome}/noctalia/settings.json") <(noctalia-shell ipc call state all | jq -S .settings)
+        batdiff <(jq -S . "${config.xdg.configHome}/noctalia/settings.json") <(noctalia-shell ipc call state all | jq -S .settings)
       '';
     };
   in {

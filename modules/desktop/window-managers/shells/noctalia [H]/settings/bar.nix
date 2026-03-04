@@ -103,9 +103,10 @@
               diskPath = "/";
               iconColor = "none";
               id = "SystemMonitor";
+              showCpuUsage = true;
+              showCpuCores = false;
               showCpuFreq = false;
               showCpuTemp = false;
-              showCpuUsage = true;
               showDiskAvailable = false;
               showDiskUsage = false;
               showDiskUsageAsPercent = false;

@@ -12,9 +12,12 @@
       # --- HOME MANAGER MODULE ---
       home-manager.users.gwen = {
         ...
-      }: {
+      }: let
+        delay = cmd: "${pkgs.coreutils}/bin/sleep 5 && ${cmd}";
+      in {
         programs.niri.settings.spawn-at-startup = [
-          # { sh = "${lib.getExe pkgs.vesktop} --start-minimized"; }
+          { sh = delay "${lib.getExe pkgs.vesktop} --start-minimized"; }
+          { sh = delay "${pkgs.caprine}/bin/caprine"; }
         ];
       };
     };

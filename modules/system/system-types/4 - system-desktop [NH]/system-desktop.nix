@@ -11,10 +11,8 @@
       polkit
       graphics
       audio
-      cursors
       fonts
-      icons
-      themes
+      theme
     ];
   };
 
@@ -32,6 +30,7 @@
       spotify
       discord
       messenger
+      theme
     ];
   };
 }
