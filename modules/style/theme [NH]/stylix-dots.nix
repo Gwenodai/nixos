@@ -21,7 +21,7 @@
     (
       inputs.self.lib.mkIfNiri { inherit options; } {
         programs.niri.settings.spawn-at-startup = [
-          { sh = "${pkgs.xorg.xrdb}/bin/xrdb -merge ${config.xresources.path}"; }
+          { sh = "${pkgs.xrdb}/bin/xrdb -merge ${config.xresources.path}"; }
         ];
       }
     )
