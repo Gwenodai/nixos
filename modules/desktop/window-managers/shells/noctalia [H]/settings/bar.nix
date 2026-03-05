@@ -41,9 +41,9 @@
         widgets = {
           left = [
             {
+              id = "ActiveWindow";
               colorizeIcons = false;
               hideMode = "hidden";
-              id = "ActiveWindow";
               maxWidth = 300;
               scrollingMode = "hover";
               showIcon = true;
@@ -53,6 +53,7 @@
           ];
           center = [
             {
+              id = "Workspace";
               characterCount = 2;
               colorizeIcons = false;
               emptyColor = "secondary";
@@ -62,7 +63,6 @@
               groupedBorderOpacity = 1;
               hideUnoccupied = true;
               iconScale = 0.8;
-              id = "Workspace";
               labelMode = "index";
               occupiedColor = "secondary";
               pillSize = 0.6;
@@ -74,10 +74,10 @@
           ];
           right = [
             {
+              id = "MediaMini";
               compactMode = false;
               hideMode = "idle";
               hideWhenIdle = false;
-              id = "MediaMini";
               maxWidth = 500;
               panelShowAlbumArt = true;
               scrollingMode = "hover";
@@ -90,19 +90,22 @@
               visualizerType = "wave";
             }
             {
+              id = "Tray";
               blacklist = [];
               chevronColor = "none";
               colorizeIcons = false;
               drawerEnabled = true;
               hidePassive = false;
-              id = "Tray";
-              pinned = [];
+              pinned = [
+                "Vesktop"
+                "Caprine"
+              ];
             }
             {
+              id = "SystemMonitor";
               compactMode = true;
               diskPath = "/";
               iconColor = "none";
-              id = "SystemMonitor";
               showCpuUsage = true;
               showCpuCores = false;
               showCpuFreq = false;
@@ -121,19 +124,26 @@
               usePadding = false;
             }
             {
+              id = "Clock";
               clockColor = "none";
               customFont = "";
               formatHorizontal = "h:mm AP";
               formatVertical = "HH mm";
-              id = "Clock";
               tooltipFormat = "HH:mm ddd, MMM dd";
               useCustomFont = false;
             }
             {
+              id = "Volume";
+              displayMode = "onhover";
+              iconColor = "none";
+              middleClickCommand = "pwvucontrol || pavucontrol";
+              textColor = "none";
+            }
+            {
+              id = "NotificationHistory";
               hideWhenZero = false;
               hideWhenZeroUnread = false;
               iconColor = "none";
-              id = "NotificationHistory";
               showUnreadBadge = true;
               unreadBadgeColor = "primary";
             }
