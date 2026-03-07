@@ -40,7 +40,7 @@
         preferredPlayer = "";
         mprisBlacklist = [];
         #Visualiser
-        cavaFrameRate = 30;
+        spectrumFrameRate = 30;
         visualizerType = "linear";
       };
       
@@ -69,6 +69,12 @@
         use12hourFormat = false;
         hideWeatherTimezone = false; # Hide details in UI?
         hideWeatherCityName = false; # Hide details in UI?
+      };
+
+      # ---Noctalia performance settings---
+      noctaliaPerformance = inputs.self.lib.applyDefaults {
+        disableWallpaper = true;
+        disableDesktopWidgets = true;
       };
 
       # ---Noctalia hooks settings---

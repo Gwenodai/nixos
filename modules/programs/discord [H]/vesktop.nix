@@ -19,12 +19,10 @@
         SKIP_HOST_UPDATE = true;
         customTitleBar = false;
         disableMinSize = true;
-        minimizeToTray = true;
         tray = true;
-        splashBackground = "#000000";
-        splashColor = "#ffffff";
+        minimizeToTray = true;
         splashTheming = true;
-        staticTitle = true;
+        staticTitle = false;
         hardwareAcceleration = true;
         hardwareVideoAcceleration = true;
         discordBranch = "stable";
@@ -38,15 +36,13 @@
       vencord = {
         settings = {
           # Update settings
-          autoUpdate = false;
+          autoUpdate = true;
           autoUpdateNotification = false;
           notifyAboutUpdates = false;
           # Window Settings
           disableMinSize = true;
           frameless = true;
-          winNativeTitleBar = false;
           # Theming
-          useQuickCss = true;
           themeLinks = [
             "https://luckfire.github.io/amoled-cord/src/amoled-cord.css"
           ];
@@ -112,5 +108,20 @@
       package = pkgs.arrpc;
       systemdTarget = "graphical-session.target";
     };
+
+    # Autostart
+    xdg.configFile."autostart/vesktop.desktop".text = ''
+      [Desktop Entry]
+      NotShowIn=niri
+      Categories=Network;InstantMessaging;Chat
+      Exec=${pkgs.vesktop}/bin/vesktop --start-minimized
+      GenericName=Internet Messenger
+      Icon=vesktop
+      Keywords=discord;vencord;electron;chat
+      Name=Vesktop
+      StartupWMClass=Vesktop
+      Type=Application
+      Version=1.5
+    '';
   };
 }

@@ -46,7 +46,6 @@
       # ---Noctalia control center settings---
       controlCenter = inputs.self.lib.applyDefaults {
         position = "close_to_bar_button";
-        openAtMouseOnBarRightClick = true;
         diskPath = "/";
         shortcuts = {
           left = [
