@@ -9,11 +9,13 @@
   ];
   
   flake-file.inputs = {
-    den.url = "github:vic/den";
+    den.url = "github:vic/den/refs/tags/v0.11.0";
     flake-file.url = "github:vic/flake-file";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
+
+  # Define avialable systems
+  systems = [
+    # "aarch64-linux"
+    "x86_64-linux"
+  ];
 }

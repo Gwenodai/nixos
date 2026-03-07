@@ -1,9 +1,15 @@
 # Defines all hosts + users + homes
 {
   # Gwen PC
-  den.hosts.x86_64-linux.gwen-t1.users.gwen.classes = [ "homeManager" ];
+  den.hosts.x86_64-linux.gwen-t1.users = {
+    gwen.classes = [ "homeManager" ];
+  };
   # Server
-  den.hosts.x86_64-linux.ymir.users.gwen = {};
+  den.hosts.x86_64-linux.ymir.users = {
+    gwen.classes = [ "homeManager" ];
+  };
   # Stacy PC
-  den.hosts.x86_64-linux.stacy-pc.users.stacy.classes = [ "homeManager" ];
+  den.hosts.x86_64-linux.stacy-pc.users = {
+    stacy.classes = [ "homeManager" ];
+  };
 }

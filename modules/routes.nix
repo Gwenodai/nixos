@@ -11,7 +11,7 @@
   den.aspects.routes = let
     inherit (den.lib) parametric;
     # eg, `<user>._.<host>` and `<host>._.<user>`
-    mutual = from: to: den.aspects.${from.aspect}._.${to.aspect} or { };
+    mutual = from: to: den.aspects.${from.aspect}.provides.${to.aspect} or { };
     routes = { host, user, ... }@ctx:
       parametric.fixedTo ctx {
         includes = [
