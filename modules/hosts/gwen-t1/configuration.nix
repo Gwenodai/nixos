@@ -6,5 +6,13 @@
     includes = [
       # gwen.hostname
     ];
+
+    # Host provides config to the user
+    # provides.gwen = {
+    #   user,
+    #   ...
+    # }: {
+    #   nixos.programs.nh.enable = true;
+    # };
   };
 }

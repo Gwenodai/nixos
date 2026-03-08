@@ -9,7 +9,7 @@
   ];
   
   flake-file.inputs = {
-    den.url = "github:vic/den/refs/tags/v0.11.0";
+    den.url = "github:vic/den";
     flake-file.url = "github:vic/flake-file";
   };
 

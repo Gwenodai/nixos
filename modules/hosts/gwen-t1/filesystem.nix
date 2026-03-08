@@ -1,6 +1,5 @@
 # Host disko config
 {
-  den,
   ...
 }: {
   den.aspects.gwen-t1 = let

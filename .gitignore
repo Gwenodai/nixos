@@ -5,3 +5,5 @@ TODO
 # direnv
 .direnv/
 .envrc
+# vm storage
+.qcow2
