@@ -10,7 +10,7 @@
     programs.noctalia-shell.settings = {
 
       # ---Noctalia settings version---
-      settingsVersion = lib.mkDefault 54;
+      settingsVersion = lib.mkDefault 57;
       
       # ---Noctalia general settings---
       general = inputs.self.lib.applyDefaults {
@@ -43,6 +43,7 @@
         lockScreenCountdownDuration = 10000;
         autoStartAuth = false;
         allowPasswordWithFprintd = false;
+        enableBlurBehind = true;
         clockStyle = "digital";
         clockFormat = "hh\\nmm";
         passwordChars = false;

@@ -69,6 +69,13 @@
             enabled = true;
             keybind = "7";
           }
+          {
+            action = "userspaceReboot";
+            command = "";
+            countdownEnabled = true;
+            enabled = true;
+            keybind = "";
+          }
         ];
       };
     };

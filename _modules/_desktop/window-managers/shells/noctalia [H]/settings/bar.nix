@@ -35,6 +35,13 @@
         autoHideDelay = 500;
         autoShowDelay = 150;
         showOnWorkspaceSwitch = true;
+        # Actions
+        rightClickAction = "controlCenter";
+        rightClickCommand = "";
+        rightClickFollowMouse = true;
+        middleClickAction = "none";
+        middleClickCommand = "";
+        middleClickFollowMouse = true;
         mouseWheelAction = "none";
         mouseWheelWrap = true;
         reverseScroll = false;
@@ -63,6 +70,7 @@
               groupedBorderOpacity = 1;
               hideUnoccupied = true;
               iconScale = 0.8;
+              fontWeight = "bold";
               labelMode = "index";
               occupiedColor = "secondary";
               pillSize = 0.6;
