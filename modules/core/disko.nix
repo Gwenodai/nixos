@@ -1,47 +1,35 @@
-# TODO: Rewrite this
-# Imports Disko for NixOS
+# Declarative disk partitioning and formatting using nix
 {
   inputs,
   den,
+  lib,
   ...
 }: {
-  den.ctx.host.includes = [ den.aspects.disko ];
+  # Flake inputs
   flake-file.inputs.disko = {
     url = "github:nix-community/disko";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.disko = den.lib.take.exactly (
-    { host }: let
-      diskoClass = "disko";
-      diskoModule = let
-        aspect = den.ctx.host { inherit host; };
-      in
-      aspect.resolve { class = diskoClass; };
-    in {
-      description = ''
-        integrates disko into nixos OS classes.
+  den.aspects.disko.provides = {
+    # Create a `disko` class to house disko config
+    diskoClass = { host }:
+      den.provides.forward {
+        each = lib.singleton true;
+        fromClass = _: "disko";
+        intoClass = _: host.class;
+        intoPath = _: []; # top-level
+        fromAspect = _: den.aspects.${host.aspect};
+      };
+    # Import the disko module for NixOS
+    diskoImport = { host }: {
+      nixos.imports = [ inputs.disko.nixosModules.disko ];
+    };
+  };
 
-        usage:
-
-          for aspects accessing disko in just a particular host:
-
-          den.aspects.my-host.includes = [ den.aspects.disko ];
-
-          for aspects enabling disko by default on all hosts:
-
-          den.ctx.host.includes = [ den.aspects.disko ];
-
-        Does nothing for hosts that have no aspects with `{diskoClass}` class.
-        Expects `inputs.disko` to exist.
-
-        For each host resolves den.aspects.{host.aspect} and imports its disko class module.
-      '';
-
-      nixos.imports = [
-        inputs.disko."${host.class}Modules".disko
-        diskoModule
-      ];
-    }
-  );
+  # Include disko by default in all hosts
+  den.ctx.host.includes = with den.aspects.disko.provides; [
+    diskoClass
+    diskoImport
+  ];
 }
