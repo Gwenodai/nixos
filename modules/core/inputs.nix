@@ -8,9 +8,11 @@
     (inputs.den.flakeModules.dendritic or { })
   ];
   
+  # Flake inputs
   flake-file.inputs = {
-    den.url = "github:vic/den";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-file.url = "github:vic/flake-file";
+    den.url = "github:vic/den";
   };
 
   # Define avialable systems

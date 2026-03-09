@@ -1,3 +1,4 @@
+# TODO: Rewrite this
 # Imports Disko for NixOS
 {
   inputs,

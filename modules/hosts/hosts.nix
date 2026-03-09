@@ -27,24 +27,6 @@
     ];
 
     nixos = {
-      nix.settings = {    
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-
-        trusted-users = [
-          "@wheel"
-        ];
-      };
-
-      system.stateVersion = "25.11";
-      nixpkgs.config.allowUnfree = true;
-
-      security.sudo.extraConfig = ''
-        Defaults lecture = "never"
-      '';
-
       # Temp stubs
       boot.loader.grub.enable = false;
       fileSystems."/".device = lib.mkDefault "/dev/fake";
