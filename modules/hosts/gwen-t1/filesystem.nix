@@ -2,11 +2,8 @@
 {
   ...
 }: {
-  den.aspects.gwen-t1 = let
-    # Import raw disko config
-    diskoConfig = import ./_disko.nix;
-  in {
-    disko = diskoConfig; # Add it to the disko class
+  den.aspects.gwen-t1 = {
+    disko = (import ./_disko.nix).disko; # Import raw disko config
     nixos.fileSystems = {
       "/persist".neededForBoot = true;
       "/var/log".neededForBoot = true;

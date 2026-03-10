@@ -13,13 +13,13 @@
 
   den.aspects.disko.provides = {
     # Create a `disko` class to house disko config
-    diskoClass = { host }:
-      den.provides.forward {
+    diskoClass = { host }: den.provides.forward {
         each = lib.singleton true;
         fromClass = _: "disko";
-        intoClass = _: host.class;
-        intoPath = _: []; # top-level
+        intoClass = _: "nixos";
+        intoPath = _: [ "disko" ]; # top-level
         fromAspect = _: den.aspects.${host.aspect};
+        guard = { options, ... }: options ? disko;
       };
     # Import the disko module for NixOS
     diskoImport = { host }: {
@@ -29,7 +29,7 @@
 
   # Include disko by default in all hosts
   den.ctx.host.includes = with den.aspects.disko.provides; [
-    diskoClass
     diskoImport
+    diskoClass
   ];
 }
