@@ -80,27 +80,8 @@ in {
 
   # All aspects below are temporary persist testing aspects
   den.aspects.foo = {
-    homeManager = { config, ... }: {
-      xdg = {
-        enable = lib.mkDefault true;
-        userDirs = let
-          docs = config.xdg.userDirs.documents;
-        in {
-          enable = config.xdg.enable;
-          createDirectories = false;
-          # Directories
-          documents   = "${config.home.homeDirectory}/Documents";
-          desktop     = "${docs}/Desktop";
-          download    = "${docs}/Downloads";
-          pictures    = "${docs}/Pictures";
-          videos      = "${docs}/Videos";
-          music       = "${docs}/Music";
-          templates   = "${docs}/Templates";
-          publicShare = null;
-        };
-      };
-    };
-
+    homeManager.xdg.enable = lib.mkDefault true;
+    
     persist = {
       directories = [
         { directory = "/var/lib/nixos"; inInitrd = true; }
@@ -125,6 +106,6 @@ in {
       ];
     };
   };
-  den.aspects.gwen-t1.includes = [ den.aspects.persist ];
-  den.aspects.gwen.includes = [ den.aspects.foo ];
+  den.aspects.gwen-t1.includes = [ den.aspects.persist ]; # Host
+  den.aspects.gwen.includes = [ den.aspects.foo ]; # User
 }
