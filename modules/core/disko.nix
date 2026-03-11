@@ -17,9 +17,9 @@
         each = lib.singleton true;
         fromClass = _: "disko";
         intoClass = _: "nixos";
-        intoPath = _: [ "disko" ]; # top-level
+        intoPath = _: [ "disko" ];
         fromAspect = _: den.aspects.${host.aspect};
-        guard = { options, ... }: options ? disko;
+        guard = { options, ... }@osArgs: options ? disko;
       };
     # Import the disko module for NixOS
     diskoImport = { host }: {
