@@ -16,7 +16,7 @@
     diskoClass = { host }: den.provides.forward {
         each = lib.singleton true;
         fromClass = _: "disko";
-        intoClass = _: "nixos";
+        intoClass = _: "nixos"; # Disko only supports NixOS
         intoPath = _: [ "disko" ];
         fromAspect = _: den.aspects.${host.aspect};
         guard = { options, ... }@osArgs: options ? disko;
