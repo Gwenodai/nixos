@@ -1,13 +1,14 @@
 # Host system config
 { self, den, ... }: {
   den.aspects.gwen-t1 = {
-    includes = [
-      den.aspects.persist
-      den.aspects.boot.provides.systemd
-      den.aspects.kernel.provides.cachyos
-      den.aspects.kernel.provides.modules.provides.it87
-      den.aspects.hardware.provides.amdcpu
-      den.aspects.hardware.provides.graphics.provides.amdgpu
+    includes = with den.aspects; [
+      persist
+      boot.provides.systemd
+      kernel.provides.cachyos
+      kernel.provides.modules.provides.it87
+      hardware.provides.amdcpu
+      hardware.provides.graphics.provides.amdgpu
+      system-type.provides.desktop
     ];
     
     nixos = { lib, ... }: {
