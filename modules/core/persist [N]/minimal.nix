@@ -65,8 +65,8 @@
 
     # Create intermediate directories via `systemd.tmpfiles`
     persistUserTmp = { hmConfig, ... }: {
-      ".local" = { };                   # "~/.local"
-      "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+      ".local" = {};                   # "~/.local"
+      "${hmConfig.xdg.dataHome}" = {}; # "~/.local/share"
     };
 
     # Common user directories we don't want to parse with `find-ephemeral`

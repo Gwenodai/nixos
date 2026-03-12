@@ -52,7 +52,7 @@
         ];
       };
       persistUserTmp = { hmConfig, ... }: {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        "${hmConfig.xdg.configHome}" = {}; # "~/.config"
       };
     };
   };
