@@ -1,6 +1,6 @@
 {
   den.aspects.boot = {
-    provides.grub-boot = {
+    provides.grub = {
       nixos = { lib, ... }: {
         boot.loader.grub = {
           enable = lib.mkDefault true;
@@ -9,7 +9,7 @@
       };
     };
     
-    provides.systemd-boot = {
+    provides.systemd = {
       nixos = { lib, ... }: {
         boot = {
           initrd = {

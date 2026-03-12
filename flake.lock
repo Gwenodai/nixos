@@ -186,6 +186,22 @@
         "type": "github"
       }
     },
+    "it87": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766723136,
+        "narHash": "sha256-iWyOctK+TFhVCOw2LiV4NiNFEAqNXOpSdGY//VwO8Ko=",
+        "owner": "frankcrawford",
+        "repo": "it87",
+        "rev": "a9eb2495220cba861ef3df63fa15265e878293b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "frankcrawford",
+        "repo": "it87",
+        "type": "github"
+      }
+    },
     "nix-cachyos-kernel": {
       "inputs": {
         "cachyos-kernel": "cachyos-kernel",
@@ -280,6 +296,7 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "it87": "it87",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-lib": [
