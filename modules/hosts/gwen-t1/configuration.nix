@@ -8,6 +8,7 @@
       kernel.provides.modules.provides.it87
       hardware.provides.amdcpu
       hardware.provides.graphics.provides.amdgpu
+      hardware.provides.graphics.provides.amdgpu.provides.powercap
       system-type.provides.desktop
     ];
     

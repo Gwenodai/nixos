@@ -35,6 +35,13 @@
             ];
           };
         };
+
+        # Allows going below the minimum power cap on AMD GPUs
+        provides.powercap = {
+          nixos = {
+            boot.kernelParams = [ "amdgpu.ignore_min_pcap=1" ];
+          };
+        };
       };
     };
 
