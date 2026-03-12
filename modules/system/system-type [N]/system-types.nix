@@ -11,6 +11,7 @@
         audio
         keyring
         polkit
+        display-manager
       ];
     };
   };

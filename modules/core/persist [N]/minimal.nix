@@ -1,9 +1,9 @@
 # Minimal necessary preservation configuration
 {
   den.aspects.persist = {
-    provides.minimalNix = {
+    provides.minimalNix = { host, ... }: { 
       # ---System--- #
-      persist = { home, ... }: {
+      persist = {
         directories = [
           "/var/lib/systemd/coredump"
           "/var/lib/systemd/timers"
