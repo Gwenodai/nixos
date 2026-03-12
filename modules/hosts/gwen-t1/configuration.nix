@@ -6,6 +6,8 @@
       den.aspects.boot.provides.systemd
       den.aspects.kernel.provides.cachyos
       den.aspects.kernel.provides.modules.provides.it87
+      den.aspects.hardware.provides.amdcpu
+      den.aspects.hardware.provides.graphics.provides.amdgpu
     ];
     
     nixos = { lib, ... }: {
