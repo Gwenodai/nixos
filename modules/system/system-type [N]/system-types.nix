@@ -10,6 +10,7 @@
         system-type.provides.cli
         audio
         keyring
+        polkit
       ];
     };
   };
