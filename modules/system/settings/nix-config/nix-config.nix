@@ -1,12 +1,13 @@
 { den, ... }: {
   # These configs are used by all hosts by default
-  den.ctx.host.includes = with den.aspects.nix-config.provides; [
-    core-config
-    garbage-collection
-    locale
-  ];
+  den.ctx.host.includes = [ den.aspects.nix-config.provides.core-config ];
 
   den.aspects.nix-config = {
+    includes = with den.aspects.nix-config.provides; [
+      garbage-collection
+      locale
+    ];
+
     # Required core config for all hosts
     provides.core-config = { host, ... }: {
       nixos = { lib, ... }: {

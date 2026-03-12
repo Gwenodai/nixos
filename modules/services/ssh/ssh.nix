@@ -1,13 +1,11 @@
 { den, ... }: {
-  den.ctx.host.includes = [ den.aspects.ssh ];
-
   den.aspects.ssh = {
     includes = with den.aspects.ssh.provides; [
       openssh
       persist
     ];
 
-    provides.openssh = { host }: {
+    provides.openssh = { host, ... }: {
       nixos = { lib, ... }: {
         services.openssh = {
           enable = lib.mkDefault true;

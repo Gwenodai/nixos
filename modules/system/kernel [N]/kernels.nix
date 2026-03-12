@@ -4,10 +4,8 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
-  # All hosts use the regular NixOS kernel by default
-  den.ctx.host.includes = [ den.aspects.kernel.provides.default ];
-
   den.aspects.kernel = {
+    includes = [ den.aspects.kernel.provides.default ];
     # Regular NixOS kernel
     provides.default = {
       nixos = { pkgs, lib, ... }: {

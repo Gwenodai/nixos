@@ -1,6 +1,4 @@
-{ den, ... }: {
-  den.ctx.host.includes = [ den.aspects.firmware ];
-
+{
   den.aspects.firmware.nixos = { lib, ... }: {
     services.fwupd.enable = lib.mkDefault true;
     hardware = {
