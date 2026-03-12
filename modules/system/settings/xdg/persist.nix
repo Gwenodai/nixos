@@ -2,7 +2,7 @@
   den.aspects.xdg = {
     includes = [ den.aspects.xdg.provides.persist ];
 
-    provides.persist = {
+    provides.persist = { host, user, ... }: {
       persistUser = { hmConfig, ... }: {
         directories = map (path: {
           directory = path;

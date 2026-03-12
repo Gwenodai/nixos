@@ -13,9 +13,9 @@
     };
   };
 
-  den.aspects.secrets.provides = {
+  den.aspects.secrets = {
     # ---NixOS module--- #
-    secretsNix = { host }: {
+    provides.secretsNix = { host }: {
       nixos = { config, pkgs, lib, ... }: {
         # Import the secrets module
         imports = [ inputs.sops-nix.nixosModules.sops ];
@@ -34,7 +34,7 @@
     };
 
     # ---Home module--- #
-    secretsHome = {
+    provides.secretsHome = {
       homeManager = { config, lib, ... }: {
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
 

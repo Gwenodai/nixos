@@ -9,6 +9,7 @@
       includes = with den.aspects; [
         system-type.provides.cli
         audio
+        keyring
       ];
     };
   };

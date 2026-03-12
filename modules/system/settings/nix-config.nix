@@ -8,7 +8,7 @@
 
   den.aspects.nix-config = {
     # Required core config for all hosts
-    provides.core-config = {
+    provides.core-config = { host, ... }: {
       nixos = { lib, ... }: {
         nix.settings = {
           # Enable flakes
@@ -30,7 +30,7 @@
       };
     };
 
-    provides.garbage-collection = {
+    provides.garbage-collection = { host, ... }: {
       nixos = { lib, ... }: {
         nix.gc = {
           automatic = lib.mkDefault true;
@@ -42,7 +42,7 @@
       };
     };
 
-    provides.locale = {
+    provides.locale = { host, ... }: {
       nixos = { lib, ... }: {
         time.timeZone = lib.mkDefault "Australia/Sydney";
         i18n.defaultLocale = lib.mkDefault "en_AU.UTF-8";

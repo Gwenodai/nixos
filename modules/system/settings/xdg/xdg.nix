@@ -2,7 +2,7 @@
   # Include XDG config by default in all hm users
   den.ctx.hm-user.includes = [ den.aspects.xdg ];
 
-  den.aspects.xdg = {
+  den.aspects.xdg = { user, ... }: {
     nixos = {
       # Ensure portal definitions and DE provided configurations get linked
       environment.pathsToLink = [

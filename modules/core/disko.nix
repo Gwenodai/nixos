@@ -6,9 +6,9 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.disko.provides = {
+  den.aspects.disko = {
     # Create a `disko` class to house disko config
-    diskoClass = { host }: den.provides.forward {
+    provides.diskoClass = { host }: den.provides.forward {
         each = lib.singleton true;
         fromClass = _: "disko";
         intoClass = _: "nixos"; # Disko only supports NixOS
@@ -17,7 +17,7 @@
         guard = { options, ... }@osArgs: options ? disko;
       };
     # Import the disko module for NixOS
-    diskoImport = { host }: {
+    provides.diskoImport = { host }: {
       nixos.imports = [ inputs.disko.nixosModules.disko ];
     };
   };

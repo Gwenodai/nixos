@@ -12,7 +12,8 @@
 
   den.aspects.persist = {
     includes = with den.aspects.persist.provides; [
-      minimal        # Minimal necessary preservation configuration
+      minimalNix     # Minimal necessary system level preservation configuration
+      minimalHome    # Minimal necessary user level preservation configuration
       find-ephemeral # Simple tool to list unpreserved files
     ];
 

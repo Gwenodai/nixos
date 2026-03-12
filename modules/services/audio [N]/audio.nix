@@ -5,7 +5,7 @@
       persist
     ];
 
-    provides.audio = {
+    provides.audio = { host, ... }: {
       nixos = { lib, ... }: {
         services = {
           pulseaudio.enable = lib.mkDefault false;
@@ -21,7 +21,7 @@
       };
     };
     
-    provides.persist = {
+    provides.persist = { host, user, ... }: {
       persistUser = { hmConfig, ... }: {
         directories = [
           {

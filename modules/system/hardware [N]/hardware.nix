@@ -10,7 +10,10 @@
       
       # The amdgpu module automatically enables the graphics module
       provides.amdgpu = {
-        includes = [ den.aspects.hardware.provides.graphics ];
+        includes = with den.aspects.hardware.provides; [
+          graphics
+          graphics.provides.amdgpu.provides.persist
+        ];
         nixos = { lib, ... }: {
           hardware.amdgpu = {
             initrd.enable = lib.mkDefault true; # Load driver early
@@ -24,11 +27,13 @@
           boot.kernelParams = [ "gpu_sched.sched_policy=0" ];
         };
         # ---Persist config--- #
-        persistUser = { hmConfig, ... }: {
-          directories = [
-            "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
-            "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
-          ];
+        provides.persist = {
+          persistUser = { hmConfig, ... }: {
+            directories = [
+              "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
+              "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
+            ];
+          };
         };
       };
     };

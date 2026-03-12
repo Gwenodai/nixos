@@ -7,7 +7,7 @@
   };
 
   den.aspects.kernel.provides.modules = {
-    provides.it87 = {
+    provides.it87 = { host, ... }: {
       nixos = { config, pkgs, ... }: {
         boot.extraModulePackages = let
           it87-driver = config.boot.kernelPackages.callPackage (

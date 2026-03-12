@@ -7,7 +7,7 @@
       persist
     ];
 
-    provides.openssh = {
+    provides.openssh = { host }: {
       nixos = { lib, ... }: {
         services.openssh = {
           enable = lib.mkDefault true;
