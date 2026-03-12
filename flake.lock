@@ -2,11 +2,11 @@
   "nodes": {
     "den": {
       "locked": {
-        "lastModified": 1773275236,
-        "narHash": "sha256-tOD6YB7dIQwGqhn+2A2uoAgm+Ul6HGYVpyiuHq7l6jQ=",
+        "lastModified": 1773285272,
+        "narHash": "sha256-OG/9BWHYtKwzKBXikNlZDyRBKPvwNnZ7hUj85ZWEmqY=",
         "owner": "vic",
         "repo": "den",
-        "rev": "7c858826a21ecbe753e94daa446123772d9d196b",
+        "rev": "2f1cfa0167e7c11785f08b7110e5a9a9c9d61efc",
         "type": "github"
       },
       "original": {
@@ -92,11 +92,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773264496,
-        "narHash": "sha256-uwFY0+UfaGEo6205ixeBjplZxHWr56UQef+MtmJ0PW0=",
+        "lastModified": 1773286336,
+        "narHash": "sha256-+yFtmhOHterllxWmV6YbdevTXpJdGS0mS0UmJ0k9fh0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "32f78141a98098efed490842923b25ecb93b9b9f",
+        "rev": "7d06e0cefe6e4a1e85b2b3274dcb0b3da242a557",
         "type": "github"
       },
       "original": {
@@ -164,7 +164,28 @@
         "nixpkgs-lib": [
           "nixpkgs"
         ],
-        "preservation": "preservation"
+        "preservation": "preservation",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773096132,
+        "narHash": "sha256-M3zEnq9OElB7zqc+mjgPlByPm1O5t2fbUrH3t/Hm5Ag=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "d1ff3b1034d5bab5d7d8086a7803c5a5968cd784",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     }
   },

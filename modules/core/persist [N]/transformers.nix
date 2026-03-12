@@ -24,14 +24,14 @@
   It takes:
     persistUser = { hmConfig, ... }: {
       directories = [
-        "${hmConfig.xdg.configHome}/sops"
+        "${hmConfig.xdg.configHome}/dir"
         { directory = "userdir/subdir"; mode = "0600"; }
       ];
     };
   And transforms it to:
     preservation.preserveAt."/persist".users.<user> = {
       directories = [
-        ".config/sops"
+        ".config/dir"
         { directory = "userdir/subdir"; mode = "0600"; }
       ];
     };

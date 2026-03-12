@@ -16,15 +16,13 @@
   # Default host settings
   den.ctx.host = {
     includes = [
-      # Automatically set hostname based on host
-      den.provides.hostname
-      # Automatically create the user on host
-      den.provides.define-user
+      den.provides.hostname # Automatically set hostname based on host
+      den.provides.define-user # Automatically create users declared on host
     ];
 
     nixos = { lib, ... }: {
-      # Temp stubs
-      boot.loader.grub.enable = false;
+      # FIXME: Temp stubs
+      boot.loader.grub.enable = lib.mkDefault false;
       fileSystems."/".device = lib.mkDefault "/dev/fake";
     };
   };
