@@ -1,10 +1,5 @@
 # Declarative disk partitioning and formatting using nix
-{
-  inputs,
-  den,
-  lib,
-  ...
-}: {
+{ inputs, den, lib, ... }: {
   # Flake inputs
   flake-file.inputs.disko = {
     url = "github:nix-community/disko";

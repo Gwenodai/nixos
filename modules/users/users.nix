@@ -1,8 +1,4 @@
-{
-  den,
-  lib,
-  ...
-}: {
+{ den, lib, ... }: {
   # Default user settings
   den.ctx.user.includes = [
     # Automatically create the user on host

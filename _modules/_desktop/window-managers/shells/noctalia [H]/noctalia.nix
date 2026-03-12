@@ -32,7 +32,7 @@
         pkgs.bat-extras.batdiff # Provides batdiff
         pkgs.jq                 # Provides jq
       ];
-      text = builtins.replaceStrings ["# syntax: bash\n"] [""] ''
+      text = lib.replaceStrings ["# syntax: bash\n"] [""] ''
         # syntax: bash
         batdiff <(jq -S . "${config.xdg.configHome}/noctalia/settings.json") <(noctalia-shell ipc call state all | jq -S .settings)
       '';

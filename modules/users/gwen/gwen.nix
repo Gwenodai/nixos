@@ -1,7 +1,4 @@
-{
-  den,
-  ...
-}: {
+{ den, ... }: {
   # user aspect
   den.aspects.gwen = {
     includes = [

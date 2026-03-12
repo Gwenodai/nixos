@@ -1,12 +1,8 @@
-{
-  den,
-  lib,
-  ...
-}: {
+{ den, ... }: {
   den.aspects.system-config = {
     # Required core config for all hosts
     provides.core-config = {
-      nixos = {
+      nixos = { lib, ... }: {
         nix.settings = {
           # Enable flakes
           experimental-features = [

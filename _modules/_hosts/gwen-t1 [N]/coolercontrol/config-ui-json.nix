@@ -15,7 +15,7 @@
         environment.etc = {
           "coolercontrol/config-ui.json" = {
             mode = "0644";
-            text = builtins.replaceStrings ["# syntax: json\n"] [""] ''
+            text = lib.replaceStrings ["# syntax: json\n"] [""] ''
               # syntax: json
               {
                 "devices": [

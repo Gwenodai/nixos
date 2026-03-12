@@ -16,7 +16,7 @@
           "coolercontrol/config.toml" = {
             mode = "0644";
             # Stupid extension... Nix highlighting is close enough to make toml readable
-            text = builtins.replaceStrings ["# syntax: nix\n"] [""] ''
+            text = lib.replaceStrings ["# syntax: nix\n"] [""] ''
               # syntax: nix
               # ---------------------------------------------------------
               # COOLERCONTROL CONFIGURATION

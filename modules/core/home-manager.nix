@@ -1,8 +1,5 @@
 # Declarative home management
-{
-  lib,
-  ...
-}: {
+{ lib, ... }: {
   # Flake inputs
   flake-file.inputs.home-manager = {
     url = "github:nix-community/home-manager";
@@ -18,7 +15,7 @@
       overwriteBackup = lib.mkDefault true;
     };
   };
-  den.ctx.user = {
+  den.ctx.hm-user = {
     homeManager.home.stateVersion = lib.mkDefault "25.11";
   };
 }

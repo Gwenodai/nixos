@@ -91,7 +91,7 @@
 
         ( # Mod+[1-9] = Focus workspace | Mod+Shift+[1-9] = Move column to workspace
           lib.attrsets.mergeAttrsList (
-            builtins.map (number: {
+            lib.map (number: {
               "Mod+${toString number}".action = focus-workspace number;
               "Mod+Shift+${toString number}".action.move-column-to-workspace = [ { focus = false; } number ];
             }) [ 1 2 3 4 5 6 7 8 9 ]

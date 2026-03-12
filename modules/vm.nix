@@ -1,12 +1,6 @@
 # Enables `nix run .#vm`
-{
-  inputs,
-  ...
-}: {
-  perSystem = {
-    pkgs,
-    ...
-  }: {
+{ inputs, ... }: {
+  perSystem = { pkgs, ... }: {
     packages.vm = pkgs.writeShellApplication {
       name = "vm";
       text = let

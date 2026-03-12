@@ -1,16 +1,15 @@
 # Host system config
-{
-  den,
-  lib,
-  ...
-}: {
+{ den, ... }: {
   den.aspects.gwen-t1 = {
     includes = [
-      # den.aspects.persist
+      den.aspects.persist
     ];
 
-    nixos = {
-      # FIXME: Boot config is temporary
+    # TODO: Below config is temporary
+    homeManager = { lib, ... }: {
+      xdg.enable = lib.mkDefault true;
+    };
+    nixos = { lib, ... }: {
       boot = {
         initrd = {
           systemd.enable = lib.mkDefault true;

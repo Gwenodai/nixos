@@ -13,7 +13,7 @@
       environment.etc = {
         "lact/config.yaml" = {
           mode = "0644";
-          text = builtins.replaceStrings ["# syntax: yaml\n"] [""] ''
+          text = lib.replaceStrings ["# syntax: yaml\n"] [""] ''
             # syntax: yaml
             version: 5
             daemon:

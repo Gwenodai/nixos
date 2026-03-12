@@ -20,7 +20,7 @@
           };
           
           # Stupid extension... Rust highlighting is close enough to make kdl readable
-          extraConfig = builtins.replaceStrings ["// syntax: rust\n"] [""] ''
+          extraConfig = lib.replaceStrings ["// syntax: rust\n"] [""] ''
             // syntax: rust
             recent-windows {
               highlight {
