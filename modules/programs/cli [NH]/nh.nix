@@ -1,7 +1,5 @@
-{ den, ... }: {
+{
   den.aspects.cli = {
-    includes = with den.aspects.cli.provides; [ nh ];
-
     provides.nh = {
       homeManager = { config, lib, ... }: {
         programs.nh = {

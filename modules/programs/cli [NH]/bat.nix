@@ -1,7 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, ... }: {
   den.aspects.cli = {
-    includes = with den.aspects.cli.provides; [ bat ];
-    
     provides.bat = {
       homeManager = { pkgs, lib, ... }: {
         programs.bat = {

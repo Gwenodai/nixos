@@ -1,7 +1,5 @@
-{ den, ... }: {
+{
   den.aspects.cli = {
-    includes = with den.aspects.cli.provides; [ nixos-pkgs ];
-
     provides.nixos-pkgs = {
       nixos = { pkgs, ... }: {
         environment.systemPackages = with pkgs; [

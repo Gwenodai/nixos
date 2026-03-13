@@ -1,7 +1,5 @@
-{ den, ... }: {
+{
   den.aspects.cli = {
-    includes = with den.aspects.cli.provides; [ direnv ];
-    
     provides.direnv = {
       homeManager = { lib, ... }: {
         programs.direnv = {

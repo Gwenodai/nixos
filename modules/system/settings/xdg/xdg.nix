@@ -1,7 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, ... }: {
   den.aspects.xdg = {
-    includes = with den.aspects.xdg.provides; [ xdgConfig ];
-    
     provides.xdgConfig = {
       nixos = {
         # Ensure portal definitions and DE provided configurations get linked

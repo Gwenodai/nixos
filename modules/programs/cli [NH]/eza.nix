@@ -1,7 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs,... }: {
   den.aspects.cli = {
-    includes = with den.aspects.cli.provides; [ eza ];
-    
     provides.eza = {
       homeManager = { lib, ... }: {
         # TODO: Configure eza
