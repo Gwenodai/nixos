@@ -1,11 +1,8 @@
 { den, ... }: {
   den.aspects.audio = {
-    includes = with den.aspects.audio.provides; [
-      audio
-      persist
-    ];
+    includes = with den.aspects.audio.provides; [ audio ];
 
-    provides.audio = { host, ... }: {
+    provides.audio = {
       nixos = { lib, ... }: {
         services = {
           pulseaudio.enable = lib.mkDefault false;
@@ -19,9 +16,7 @@
         };
         security.rtkit.enable = lib.mkDefault true;
       };
-    };
-    
-    provides.persist = { host, user, ... }: {
+
       persistUser = { hmConfig, ... }: {
         directories = [
           {

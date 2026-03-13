@@ -4,7 +4,7 @@
       gnome-keyring
     ];
 
-    provides.gnome-keyring = { host, user, ... }: {
+    provides.gnome-keyring = {
       homeManager = { config, lib, ... }: {
         services.gnome-keyring.enable = lib.mkDefault true;
 

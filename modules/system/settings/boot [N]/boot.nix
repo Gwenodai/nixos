@@ -1,15 +1,15 @@
-{
+{ den, ... }: {
   den.aspects.boot = {
-    provides.grub = { host, ... }: {
+    provides.grub = den.lib.take.exactly ({ host }: {
       nixos = { lib, ... }: {
         boot.loader.grub = {
           enable = lib.mkDefault true;
           useOSProber = lib.mkDefault true;
         };
       };
-    };
+    });
     
-    provides.systemd = { host, ... }: {
+    provides.systemd = den.lib.take.exactly ({ host }: {
       nixos = { lib, ... }: {
         boot = {
           initrd = {
@@ -21,6 +21,6 @@
           };
         };
       };
-    };
+    });
   };
 }

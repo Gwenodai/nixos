@@ -10,10 +10,7 @@
       
       # The amdgpu module automatically enables the graphics module
       provides.amdgpu = {
-        includes = with den.aspects.hardware.provides; [
-          graphics
-          graphics.provides.amdgpu.provides.persist
-        ];
+        includes = with den.aspects.hardware.provides; [ graphics ];
         nixos = { lib, ... }: {
           hardware.amdgpu = {
             initrd.enable = lib.mkDefault true; # Load driver early
@@ -26,14 +23,12 @@
           # Disables the FIFO GPU scheduling policy
           boot.kernelParams = [ "gpu_sched.sched_policy=0" ];
         };
-        # ---Persist config--- #
-        provides.persist = {
-          persistUser = { hmConfig, ... }: {
-            directories = [
-              "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
-              "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
-            ];
-          };
+
+        persistUser = { hmConfig, ... }: {
+          directories = [
+            "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
+            "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
+          ];
         };
 
         # Allows going below the minimum power cap on AMD GPUs
@@ -42,16 +37,6 @@
             boot.kernelParams = [ "amdgpu.ignore_min_pcap=1" ];
           };
         };
-      };
-    };
-
-    provides.amdcpu = {
-      nixos = { config, lib, ... }: {
-        hardware.cpu.amd.updateMicrocode =
-          lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-        boot.kernelParams = [ "amd_pstate=active" ];
-        powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
       };
     };
   };

@@ -15,7 +15,7 @@
 
   den.aspects.secrets = {
     # ---NixOS module--- #
-    provides.secretsNix = { host }: {
+    provides.secretsNix = den.lib.take.exactly ({ host }: {
       nixos = { config, pkgs, lib, ... }: {
         # Import the secrets module
         imports = [ inputs.sops-nix.nixosModules.sops ];
@@ -31,7 +31,7 @@
           defaultSopsFile = lib.mkDefault host.sops.commonSopsFile ;
         };
       };
-    };
+    });
 
     # ---Home module--- #
     provides.secretsHome = {

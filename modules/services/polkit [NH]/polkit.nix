@@ -4,7 +4,7 @@
       polkit-gnome
     ];
 
-    provides.polkit-gnome = { host, user, ... }: {
+    provides.polkit-gnome = {
       nixos = { lib, ... }: {
         security.polkit.enable = lib.mkDefault true;
       };

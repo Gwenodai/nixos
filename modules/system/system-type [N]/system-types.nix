@@ -1,10 +1,12 @@
+# Preset system types. These should only be imported into hosts
+# Like so: `den.aspects.<host>.includes = [ den.aspects.system-type.provides.<type> ];`
 { den, ... }: {
   den.aspects.system-type = {
 
     provides.basic = {
       includes = with den.aspects; [
         nix-config
-        firmware
+        hardware.provides.firmware
         kernel
         ssh
         cli

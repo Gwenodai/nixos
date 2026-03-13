@@ -7,14 +7,14 @@
   den.aspects.kernel = {
     includes = [ den.aspects.kernel.provides.default ];
     # Regular NixOS kernel
-    provides.default = {
+    provides.default = den.lib.take.exactly ({ host }: {
       nixos = { pkgs, lib, ... }: {
-        boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest; # Use latest kernel
-      };
-    };
+        boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+      };   
+    });
 
     # CachyOS kernel for NixOS
-    provides.cachyos = {
+    provides.cachyos = den.lib.take.exactly ({ host }: {
       nixos = { pkgs, lib, ... }: {
         nixpkgs.overlays = [
           inputs.nix-cachyos-kernel.overlays.pinned
@@ -28,6 +28,6 @@
         boot.kernelPackages =
           lib.mkOverride 900 pkgs.cachyosKernels.linuxPackages-cachyos-latest;
       };
-    };
+    });
   };
 }

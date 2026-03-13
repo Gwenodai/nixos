@@ -13,9 +13,8 @@
   den.aspects.persist = {
     includes = with den.aspects.persist.provides; [
       preservation   # Import and enable the preservation module
-      classes
-      minimalNix     # Minimal necessary system level preservation configuration
-      minimalHome    # Minimal necessary user level preservation configuration
+      classes        # Custom classes to define preservation only configuration
+      minimal        # Minimal necessary system level preservation configuration
       find-ephemeral # Simple tool to list unpreserved files
     ];
 

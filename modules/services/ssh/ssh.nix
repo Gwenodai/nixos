@@ -1,11 +1,8 @@
 { den, ... }: {
   den.aspects.ssh = {
-    includes = with den.aspects.ssh.provides; [
-      openssh
-      persist
-    ];
+    includes = with den.aspects.ssh.provides; [ openssh ];
 
-    provides.openssh = { host, ... }: {
+    provides.openssh = {
       nixos = { lib, ... }: {
         services.openssh = {
           enable = lib.mkDefault true;
@@ -16,9 +13,7 @@
           };
         };
       };
-    };
-    
-    provides.persist = {
+
       persist.files = map (path: {
         file = path;
         how = "symlink";

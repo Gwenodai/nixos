@@ -1,7 +1,7 @@
 # Minimal necessary preservation configuration
 { den, ... }: {
   den.aspects.persist = {
-    provides.minimalNix = den.lib.take.exactly ({ host }: {
+    provides.minimal = den.lib.take.exactly ({ host }: {
       # ---System--- #
       persist = {
         directories = [
@@ -51,9 +51,7 @@
           ];
         };
       };
-    });
-    
-    provides.minimalHome = {
+
       # ---User--- #
       persistUser = { hmConfig, lib, ... }: {
         # Prevent preservation mounts from appearing as such in graphical file managers
@@ -80,6 +78,6 @@
           "${hmConfig.xdg.stateHome}/nix-output-monitor" # "~/.local/state/nix-output-monitor"
         ];
       };
-    };
+    });
   };
 }

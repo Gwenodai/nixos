@@ -9,7 +9,7 @@
     ];
 
     # Required core config for all hosts
-    provides.core-config = { host, ... }: {
+    provides.core-config = den.lib.take.exactly ({ host }: {
       nixos = { lib, ... }: {
         nix.settings = {
           # Enable flakes
@@ -29,9 +29,9 @@
         '';
         # users.mutableUsers = lib.mkDefault false;
       };
-    };
+    });
 
-    provides.garbage-collection = { host, ... }: {
+    provides.garbage-collection = den.lib.take.exactly ({ host }: {
       nixos = { lib, ... }: {
         nix.gc = {
           automatic = lib.mkDefault true;
@@ -41,14 +41,14 @@
         # Hard link identical files to save space
         nix.settings.auto-optimise-store = lib.mkDefault true;
       };
-    };
+    });
 
-    provides.locale = { host, ... }: {
+    provides.locale = den.lib.take.exactly ({ host }: {
       nixos = { lib, ... }: {
         time.timeZone = lib.mkDefault "Australia/Sydney";
         i18n.defaultLocale = lib.mkDefault "en_AU.UTF-8";
         console.keyMap = lib.mkDefault "us";
       };
-    };
+    });
   };
 }

@@ -1,5 +1,5 @@
 # it87 driver with support for newer IT86xx/IT87xx chips
-{ inputs, ... }: {
+{ inputs, den, ... }: {
   # Flake inputs
   flake-file.inputs.it87 = {
     url = "github:frankcrawford/it87";
@@ -7,7 +7,7 @@
   };
 
   den.aspects.kernel.provides.modules = {
-    provides.it87 = { host, ... }: {
+    provides.it87 = den.lib.take.exactly ({ host }: {
       nixos = { config, pkgs, ... }: {
         boot.extraModulePackages = let
           it87-driver = config.boot.kernelPackages.callPackage (
@@ -43,6 +43,6 @@
 
         boot.kernelModules = [ "it87" ];
       };
-    };
+    });
   };
 }
