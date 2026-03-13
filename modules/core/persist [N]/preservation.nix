@@ -12,16 +12,20 @@
 
   den.aspects.persist = {
     includes = with den.aspects.persist.provides; [
+      preservation   # Import and enable the preservation module
+      classes
       minimalNix     # Minimal necessary system level preservation configuration
       minimalHome    # Minimal necessary user level preservation configuration
       find-ephemeral # Simple tool to list unpreserved files
     ];
 
-    nixos = { config, lib, ... }: {
-      # Import the preservation module
-      imports = [ inputs.preservation.nixosModules.preservation ];
-      # Enable the preservation module by default
-      preservation.enable = lib.mkDefault true;
-    };
+    provides.preservation = den.lib.take.exactly ({ host }: {
+      nixos = { config, lib, ... }: {
+        # Import the preservation module
+        imports = [ inputs.preservation.nixosModules.preservation ];
+        # Enable the preservation module by default
+        preservation.enable = lib.mkDefault true;
+      };
+    });
   };
 }

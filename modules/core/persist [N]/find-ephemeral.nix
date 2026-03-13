@@ -1,6 +1,6 @@
 # A simple tool to list all files not preserved via preservation in any given directory
-{
-  den.aspects.persist.provides.find-ephemeral = {
+{ den, ... }: {
+  den.aspects.persist.provides.find-ephemeral = den.lib.take.exactly ({ host }: {
     nixos = { pkgs, lib, config, ... }: let
       # ---Path collection--- #
       # Filters out intermediate paths injected by the preservation module
@@ -88,5 +88,5 @@
     in {
       environment.systemPackages = [ find-ephemeral ];
     };
-  };
+  });
 }

@@ -1,7 +1,7 @@
 # Minimal necessary preservation configuration
-{
+{ den, ... }: {
   den.aspects.persist = {
-    provides.minimalNix = { host, ... }: { 
+    provides.minimalNix = den.lib.take.exactly ({ host }: {
       # ---System--- #
       persist = {
         directories = [
@@ -51,9 +51,9 @@
           ];
         };
       };
-    };
+    });
     
-    provides.minimalHome = { user, ... }: {
+    provides.minimalHome = {
       # ---User--- #
       persistUser = { hmConfig, lib, ... }: {
         # Prevent preservation mounts from appearing as such in graphical file managers

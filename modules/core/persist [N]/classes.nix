@@ -20,7 +20,9 @@
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = u: [ "my" "preservation" intoSubPath u.userName ];
       fromAspect = _: lib.head aspect-chain;
-      guard = { options, ... }@osArgs: options ? preservation;
+      guard = { options, ... }@osArgs: # Filter to only home-manager users
+        (options ? preservation) &&
+        (lib.elem "homeManager" (user.classes or []));
       adaptArgs = { config, ... }@args: args // {
         hmConfig = config.home-manager.users.${user.userName};
       };
@@ -35,7 +37,7 @@
   # User level `persist` class for declaring preservation config
   persistUserClass = mkUserClass {
     fromClass = "persistUser";
-    intoSubPath = "persistUser";
+    intoSubPath = "userPersist";
   };
   # System level `tmpfiles` class for declaring `systemd.tmpfiles` cleanly
   persistTmpClass = mkSystemClass {
@@ -59,15 +61,26 @@
   };
 
 in {
-  den.aspects.persist = {
-    # Register the persist classes
-    includes = [
-      persistClass
-      persistUserClass
-      persistTmpClass
-      persistUserTmpClass
-      persistIgnoreClass
-      persistUserIgnoreClass
+  den.aspects.persist.provides.classes = {
+    includes = with den.aspects.persist.provides; [
+      transformers
+      classes.provides.nixos
+      classes.provides.home
     ];
+    # Register the persist classes
+    provides.nixos = den.lib.take.exactly ({ host }: {
+      includes = [
+        persistClass
+        persistTmpClass
+        persistIgnoreClass
+      ];
+    });
+    provides.home = {
+      includes = [
+        persistUserClass
+        persistUserTmpClass
+        persistUserIgnoreClass
+      ];
+    };
   };
 }
