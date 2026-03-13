@@ -15,10 +15,10 @@
     provides.desktop = {
       includes = with den.aspects; [
         system-type.provides.basic
-        audio
+        display-manager
         keyring
         polkit
-        display-manager
+        audio
       ];
     };
   };
