@@ -21,6 +21,7 @@
         keyring
         polkit
         audio
+        fonts
       ];
     };
   };
