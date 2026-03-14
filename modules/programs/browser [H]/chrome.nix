@@ -2,6 +2,7 @@
   
   den.aspects.browser = {
     includes = with den.aspects.browser.provides; [ chrome ];
+    
     provides.chrome = {
       homeManager = { pkgs, lib, ... }: {
         home.packages = with pkgs; [
@@ -25,8 +26,7 @@
                   "x-scheme-handler/unknown"
                   "x-scheme-handler/google-chrome"
                 ];
-              in
-              lib.genAttrs mimeTypes (mimetype: application)
+              in lib.genAttrs mimeTypes (mimetype: application)
             );
             associations.added = let
               application = "google-chrome.desktop";
@@ -41,30 +41,29 @@
                 "text/html"
                 "text/xml"
               ];
-            in
-            lib.genAttrs mimeTypes (mimetype: application);
+            in lib.genAttrs mimeTypes (mimetype: application);
           };
         };
       };
-    };
 
-    persistUser = { hmConfig, ... }: {
-      directories = [
-        {
-          directory = "${hmConfig.xdg.configHome}/google-chrome";
-          how = "symlink";
-          mode = "0700";
-          createLinkTarget = true;
-        }
-      ];
-    };
+      persistUser = { hmConfig, ... }: {
+        directories = [
+          {
+            directory = "${hmConfig.xdg.configHome}/google-chrome";
+            how = "symlink";
+            mode = "0700";
+            createLinkTarget = true;
+          }
+        ];
+      };
 
-    persistUserTmp = { hmConfig, ... }: {
-      "${hmConfig.xdg.configHome}" = {}; # "~/.config"
-    };
+      persistUserTmp = { hmConfig, ... }: {
+        "${hmConfig.xdg.configHome}" = {}; # "~/.config"
+      };
 
-    persistUserIgnore = { hmConfig, ... }: {
-      directories = [ "${hmConfig.xdg.cacheHome}/google-chrome" ];
+      persistUserIgnore = { hmConfig, ... }: {
+        directories = [ "${hmConfig.xdg.cacheHome}/google-chrome" ];
+      };
     };
   };
 }

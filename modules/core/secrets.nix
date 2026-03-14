@@ -28,7 +28,7 @@
         
         sops = {
           age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
-          defaultSopsFile = lib.mkDefault host.sops.commonSopsFile ;
+          defaultSopsFile = lib.mkDefault host.sops.commonSopsFile;
         };
       };
     });

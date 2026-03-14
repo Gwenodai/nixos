@@ -26,8 +26,8 @@
         ];
       };
       persistUserTmp = { hmConfig, ... }: {
-        ".local" = { };                   # "~/.local"
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+        ".local" = {};                   # "~/.local"
+        "${hmConfig.xdg.dataHome}" = {}; # "~/.local/share"
       };
     };
   };

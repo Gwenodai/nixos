@@ -57,8 +57,8 @@
   /*  Intercept and transform the output of `persistTmp` and `persistUserTmp`
     before it reaches `systemd.tmpfiles.settings.preservation`
     It takes:
-      "/dir/subdir" = { };
-      "relative/user/dir" = { };
+      "/dir/subdir" = {};
+      "relative/user/dir" = {};
       "${hmConfig.xdg.configHome}/foo" = { mode = "0600"; };
     And transforms it to:
       "/dir/subdir".d = { user = "root"; group = "root"; mode = "0755"; };

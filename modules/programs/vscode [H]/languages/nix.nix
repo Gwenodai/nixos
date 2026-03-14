@@ -1,19 +1,20 @@
 # https://github.com/oxalica/nil/blob/main/docs/configuration.md
-{
-  inputs,
-  ...
-}: {
-  # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.vscode = {
-    vscode-marketplace,
-    pkgs,
-    lib,
-    ...
-  }: {
-    programs.vscode = {
-      profiles.default = {
-        userSettings = {
-          nix = inputs.self.lib.applyDefaultsRecursive {
+{ inputs, den, ... }: {
+  den.aspects.vscode._.languages = {
+    _.nix = {
+      includes = [ den.aspects.vscode._.extensions ];
+      homeManager = { pkgs, lib, ... }: {
+        home.packages = with pkgs; [ nil ]; # Nix language server (Needed for nix-ide)
+        programs.vscode.profiles.default = {
+          extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
+            # Syntax highlighting, formatting, etc
+            jnoortheen.nix-ide
+            # Syntax highlighting inside shellhooks
+            jeff-hykin.better-nix-syntax
+            # Syntax highlighting for embedded languages inside Nix multi-line strings
+            coopermaruyama.nix-embedded-languages
+          ];
+          userSettings.nix = inputs.self.lib.applyDefaultsRecursive {
             enableLanguageServer = true;
             serverPath = "${lib.getExe pkgs.nil}";
             serverSettings = {
@@ -38,20 +39,7 @@
             ];
           };
         };
-
-        extensions = with vscode-marketplace; [
-          # Syntax highlighting, formatting, etc
-          jnoortheen.nix-ide
-          # Syntax highlighting inside shellhooks
-          jeff-hykin.better-nix-syntax
-          # Syntax highlighting for embedded languages inside Nix multi-line strings
-          coopermaruyama.nix-embedded-languages
-        ];
       };
     };
-
-    home.packages = with pkgs; [
-      nil # Nix language server - Needed for nix-ide
-    ];
   };
 }

@@ -4,6 +4,7 @@
     includes = [
       # Adds `wheel` and `networkmanager` groups
       den.provides.primary-user
+      den.aspects.vscode
     ];
 
     nixos = { config, ... }: {

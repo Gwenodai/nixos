@@ -27,8 +27,8 @@
       };
 
       persistUserTmp = { hmConfig, ... }: {
-        ".local" = { };                    # "~/.local"
-        "${hmConfig.xdg.stateHome}" = { }; # "~/.local/state"
+        ".local" = {};                    # "~/.local"
+        "${hmConfig.xdg.stateHome}" = {}; # "~/.local/state"
       };
     };
   };

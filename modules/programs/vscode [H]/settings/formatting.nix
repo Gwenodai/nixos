@@ -1,28 +1,22 @@
-{
-  inputs,
-  ...
-}: {
-  # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.vscode = {
-    ...
-  }: {
-    programs.vscode = {
-      profiles.default = {
-        userSettings = {
-          editor = inputs.self.lib.applyDefaultsRecursive {
-            # -BRACKETS-
+{ inputs, ... }: {
+  den.aspects.vscode._.settings = {
+    _.formatting = {
+      homeManager = { lib, ... }: {
+        programs.vscode.profiles.default = {
+          userSettings = inputs.self.lib.applyDefaultsRecursive {
+            # ---Brackets--- #
             guides.bracketPairs = "active";
             bracketPairColorization = {
               enabled = true;
               independentColorPoolPerBracketType = false;
             };
 
-            # -INDENTATION-
+            # ---Indentation--- #
             insertSpaces = true;
             indentSize = "tabsize";
             tabSize = 2;
 
-            # -WRAPPING-
+            # ---Wrapping--- #
             wordWrap = "on";
             # wordWrapColumn = 80;
             wrapOnEscapedLineFeeds = false;

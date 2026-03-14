@@ -13,7 +13,7 @@
     ];
     
     nixos = { lib, ... }: {
-      sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+      # sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
     };
   };
 }
