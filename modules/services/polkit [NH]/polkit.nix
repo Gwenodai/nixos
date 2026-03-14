@@ -1,10 +1,10 @@
 { den, ... }: {
   den.aspects.polkit = {
-    includes = with den.aspects.polkit.provides; [
+    includes = with den.aspects.polkit._; [
       polkit-gnome
     ];
 
-    provides.polkit-gnome = {
+    _.polkit-gnome = {
       nixos = { lib, ... }: {
         security.polkit.enable = lib.mkDefault true;
       };

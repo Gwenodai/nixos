@@ -5,9 +5,9 @@
   };
 
   den.aspects.stylix = {
-    includes = with den.aspects.stylix._; [ stylix ];
+    includes = with den.aspects.stylix._; [ enable ];
 
-    _.stylix = {
+    _.enable = {
       nixos = { pkgs, lib, ... }: {
         imports = [ inputs.stylix.nixosModules.stylix ];
         stylix = {

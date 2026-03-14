@@ -1,10 +1,10 @@
 { den, ... }: {
   den.aspects.keyring = {
-    includes = with den.aspects.keyring.provides; [
+    includes = with den.aspects.keyring._; [
       gnome-keyring
     ];
 
-    provides.gnome-keyring = {
+    _.gnome-keyring = {
       homeManager = { config, lib, ... }: {
         services.gnome-keyring.enable = lib.mkDefault true;
 

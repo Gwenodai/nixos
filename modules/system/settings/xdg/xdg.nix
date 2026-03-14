@@ -1,6 +1,6 @@
 { inputs, ... }: {
   den.aspects.xdg = {
-    provides.xdgConfig = {
+    _.enable = {
       nixos = {
         # Ensure portal definitions and DE provided configurations get linked
         environment.pathsToLink = [

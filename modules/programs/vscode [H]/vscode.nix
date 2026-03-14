@@ -1,7 +1,7 @@
 {
   den.aspects.vscode = {
     # https://mynixos.com/home-manager/options/programs.vscode
-    _.vscode = {
+    _.enable = {
       homeManager = { lib, ... }: {
         programs.vscode.enable = true;
 

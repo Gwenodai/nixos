@@ -1,8 +1,8 @@
 { den, ... }: {
   den.aspects.ssh = {
-    includes = with den.aspects.ssh.provides; [ openssh ];
+    includes = with den.aspects.ssh._; [ openssh ];
 
-    provides.openssh = {
+    _.openssh = {
       nixos = { lib, ... }: {
         services.openssh = {
           enable = lib.mkDefault true;

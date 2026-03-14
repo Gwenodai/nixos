@@ -1,7 +1,7 @@
 { den, ... }: {
   den.aspects.vscode = {
     includes = with den.aspects.vscode._; [
-      vscode
+      enable
       settings
       languages
       

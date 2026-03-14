@@ -3,10 +3,10 @@
 { den, ... }: {
   den.aspects.system-type = {
 
-    provides.basic = {
+    _.basic = {
       includes = with den.aspects; [
         nix-config
-        hardware.provides.firmware
+        hardware._.firmware
         kernel
         ssh
         cli
@@ -14,9 +14,9 @@
       ];
     };
 
-    provides.desktop = {
+    _.desktop = {
       includes = with den.aspects; [
-        system-type.provides.basic
+        system-type._.basic
         display-manager
         keyring
         polkit

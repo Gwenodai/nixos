@@ -3,9 +3,9 @@
 # https://github.com/fairyglade/ly/blob/master/res/config.ini
 { den, ... }: {
   den.aspects.display-manager = {
-    includes = with den.aspects.display-manager.provides; [ ly ];
+    includes = with den.aspects.display-manager._; [ ly ];
 
-    provides.ly = {
+    _.ly = {
       nixos = { lib, ... }: {
         services.displayManager = {
           enable = true;

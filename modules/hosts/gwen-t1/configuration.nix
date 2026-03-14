@@ -10,6 +10,7 @@
       hardware.provides.graphics.provides.amdgpu
       hardware.provides.graphics.provides.amdgpu.provides.powercap
       system-type.provides.desktop
+      lact
     ];
     
     nixos = { lib, ... }: {

@@ -9,13 +9,13 @@
   den.aspects.disko = {
     # Create a `disko` class to house disko config
     provides.diskoClass = den.lib.take.exactly ({ host }: den.provides.forward {
-        each = lib.singleton true;
-        fromClass = _: "disko";
-        intoClass = _: "nixos"; # Disko only supports NixOS
-        intoPath = _: [ "disko" ];
-        fromAspect = _: den.aspects.${host.aspect};
-        guard = { options, ... }@osArgs: options ? disko;
-      });
+      each = lib.singleton true;
+      fromClass = _: "disko";
+      intoClass = _: "nixos"; # Disko only supports NixOS
+      intoPath = _: [ "disko" ];
+      fromAspect = _: den.aspects.${host.aspect};
+      guard = { options, ... }@osArgs: options ? disko;
+    });
     # Import the disko module for NixOS
     provides.diskoImport = den.lib.take.exactly ({ host }: {
       nixos.imports = [ inputs.disko.nixosModules.disko ];

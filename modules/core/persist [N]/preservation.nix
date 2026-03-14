@@ -11,7 +11,7 @@
   };
 
   den.aspects.persist = {
-    provides.preservation = den.lib.take.exactly ({ host }: {
+    provides.enable = den.lib.take.exactly ({ host }: {
       nixos = { config, lib, ... }: {
         # Import the preservation module
         imports = [ inputs.preservation.nixosModules.preservation ];
