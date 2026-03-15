@@ -1,6 +1,6 @@
 {
   den.aspects.hardware = {
-    provides.firmware = {
+    _.firmware = {
       nixos = { lib, ... }: {
         services.fwupd.enable = lib.mkDefault true;
         hardware = {

@@ -4,7 +4,7 @@
     includes = with den.aspects.messaging._.discord._; [ vesktop ];
     
     # https://mynixos.com/home-manager/options/programs.vesktop
-    provides.vesktop = {
+    _.vesktop = {
       homeManager = { pkgs, lib, ... }: {
         programs.vesktop = lib.mkDefault {
           enable = true;

@@ -23,6 +23,12 @@
         audio
         fonts
       ];
+
+      _.gaming = {
+        includes = with den.aspects; [
+          system-type._.desktop
+        ];
+      };
     };
   };
 }

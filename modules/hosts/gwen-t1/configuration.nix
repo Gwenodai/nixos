@@ -3,13 +3,12 @@
   den.aspects.gwen-t1 = {
     includes = with den.aspects; [
       persist
-      boot.provides.systemd
-      kernel.provides.cachyos
-      kernel.provides.modules.provides.it87
-      hardware.provides.amdcpu
-      hardware.provides.graphics.provides.amdgpu
-      hardware.provides.graphics.provides.amdgpu.provides.powercap
-      system-type.provides.desktop
+      boot._.systemd
+      kernel._.cachyos
+      kernel._.modules._.it87
+      hardware._.amdcpu._.performance
+      hardware._.graphics._.amdgpu._.overclock
+      system-type._.desktop._.gaming
       lact
     ];
     

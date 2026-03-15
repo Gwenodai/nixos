@@ -3,7 +3,7 @@
   den.aspects.messaging._.messenger = {
     includes = with den.aspects.messaging._.messenger._; [ caprine ];
     
-    provides.caprine = {
+    _.caprine = {
       homeManager = { pkgs, lib, ... }: {
         home.packages = [ pkgs.caprine ];
 
