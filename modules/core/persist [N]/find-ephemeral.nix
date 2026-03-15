@@ -32,8 +32,8 @@
       ) (config.preservation.preserveAt or {}));
 
       # All ignored paths
-      ignores = (config.my.preservation.ignore.directories or []) 
-             ++ (config.my.preservation.ignore.files or []);
+      ignores = (config.hostConfig.preservation.ignore.directories or []) 
+             ++ (config.hostConfig.preservation.ignore.files or []);
 
       # Combine, deduplicate, and format for bash
       allIgnorePaths = lib.lists.unique (storageLocations ++ targets ++ ignores);

@@ -18,6 +18,7 @@
       includes = with den.aspects; [
         system-type._.basic
         display-manager
+        coolercontrol
         keyring
         polkit
         audio
@@ -27,6 +28,7 @@
       _.gaming = {
         includes = with den.aspects; [
           system-type._.desktop
+          lact
         ];
       };
     };

@@ -9,7 +9,6 @@
       hardware._.amdcpu._.performance
       hardware._.graphics._.amdgpu._.overclock
       system-type._.desktop._.gaming
-      lact
     ];
     
     nixos = { lib, ... }: {

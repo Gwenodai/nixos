@@ -18,7 +18,7 @@
       each = lib.singleton user;
       fromClass = _: fromClass;
       intoClass = _: "nixos"; # Preservation only supports NixOS
-      intoPath = u: [ "my" "preservation" intoSubPath u.userName ];
+      intoPath = u: [ "hostConfig" "preservation" intoSubPath u.userName ];
       fromAspect = _: lib.head aspect-chain;
       guard = { options, ... }@osArgs: # Filter to only home-manager users
         (options ? preservation) &&
@@ -42,7 +42,7 @@
   # System level `tmpfiles` class for declaring `systemd.tmpfiles` cleanly
   persistTmpClass = mkSystemClass {
     fromClass = "persistTmp";
-    intoPath = [ "my" "preservation" "tmpfiles" ];
+    intoPath = [ "hostConfig" "preservation" "tmpfiles" ];
   };
   # User level `tmpfiles` class for declaring `systemd.tmpfiles` cleanly
   persistUserTmpClass = mkUserClass {
@@ -52,7 +52,7 @@
   # System level `ignore` class for declaring files for `find-ephemeral` to ignore
   persistIgnoreClass = mkSystemClass {
     fromClass = "persistIgnore";
-    intoPath = [ "my" "preservation" "ignore" ];
+    intoPath = [ "hostConfig" "preservation" "ignore" ];
   };
   # User level `ignore` class for declaring files for `find-ephemeral` to ignore
   persistUserIgnoreClass = mkUserClass {

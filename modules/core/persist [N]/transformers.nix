@@ -52,7 +52,7 @@
               else
                 mkRelative userName val;
           in transform rawConfig
-        ) config.my.preservation.userPersist;
+        ) config.hostConfig.preservation.userPersist;
         
   /*  Intercept and transform the output of `persistTmp` and `persistUserTmp`
     before it reaches `systemd.tmpfiles.settings.preservation`
@@ -68,7 +68,7 @@
           # System
           (lib.mapAttrs (path: opts: {
             d = { user = "root"; group = "root"; mode = "0755"; } // opts;
-          }) config.my.preservation.tmpfiles)
+          }) config.hostConfig.preservation.tmpfiles)
           
           # User
           (lib.mkMerge (lib.mapAttrsToList (userName: rawConfig:
@@ -80,7 +80,7 @@
                 d = { user = userName; inherit group; mode = "0755"; } // opts;
               }
             ) rawConfig
-          ) config.my.preservation.userTmpfiles))
+          ) config.hostConfig.preservation.userTmpfiles))
         ];
 
   /*  Transform the output of `persistUserIgnore` and merge it with `persistIgnore`
@@ -93,18 +93,18 @@
     And transforms it to:
       directories = [ "/home/<user>/user/dir" ];
       files = [ "/home/<user>/.config/file.ext" ]; */
-        my.preservation.ignore = let
+        hostConfig.preservation.ignore = let
           getTransformedUserPaths = pathType:
             lib.concatLists (lib.mapAttrsToList (userName: userConfig:
               map (mkAbsolute userName) (userConfig.${pathType} or [])
-            ) config.my.preservation.userIgnore);
+            ) config.hostConfig.preservation.userIgnore);
         in {
           directories = getTransformedUserPaths "directories";
           files       = getTransformedUserPaths "files";
         };
       };
       # Options for intermediate config storage
-      options.my.preservation = with lib.types; {
+      options.hostConfig.preservation = with lib.types; {
         userPersist = lib.mkOption {
           type = attrsOf (attrsOf anything);
           default = {};
