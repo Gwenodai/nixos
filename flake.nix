@@ -24,6 +24,10 @@
       url = "github:frankcrawford/it87";
       flake = false;
     };
+    niri = {
+      url = "github:cmm/niri-flake/add-extraConfig";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";

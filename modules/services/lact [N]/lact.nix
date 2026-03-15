@@ -1,14 +1,25 @@
 { den, lib, ... }: {
   den.aspects.lact = {
-    includes = with den.aspects.lact._; [ enable ];
+    includes = with den.aspects.lact._; [
+      enable
+      class
+    ];
 
     _.enable = {
-      nixos.services.lact.enable = true;
+      nixos = { config, lib, ... }: {
+        services.lact.enable = true;
+        
+        environment.etc."lact/config.yaml" = {
+          enable = lib.mkDefault (config.environment.etc."lact/config.yaml".text != null);
+          mode = lib.mkDefault "0644";
+          text = lib.mkDefault null;
+        };
+      };
+
       persistIgnore.directories = [ "/etc/lact" ];
     };
 
-    # Include in a host to enable configuring lact with nix
-    _.manualConfig = den.lib.take.exactly ({ host }: den._.forward {
+    _.class = den.lib.take.exactly ({ host }: den._.forward {
       each = lib.singleton true;
       fromClass = _: "lact";
       intoClass = _: host.class;

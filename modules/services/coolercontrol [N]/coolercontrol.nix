@@ -1,12 +1,25 @@
 { den, lib, ... }: {
   den.aspects.coolercontrol = {
-    includes = with den.aspects.coolercontrol._; [ enable ];
+    includes = with den.aspects.coolercontrol._; [
+      enable
+      classes
+    ];
 
     _.enable = {
-      nixos = { pkgs, lib, ... }: {
+      nixos = { config, pkgs, lib, ... }: {
         programs.coolercontrol = {
           enable = lib.mkDefault true;
         };
+
+        environment.etc = lib.genAttrs [
+          "coolercontrol/config.toml"
+          "coolercontrol/alerts.json"
+          "coolercontrol/config-ui.json"
+        ] (file: {
+          enable = lib.mkDefault (config.environment.etc.${file}.text != null);
+          mode = lib.mkDefault "0644";
+          text = lib.mkDefault null;
+        });
           
         environment.systemPackages = with pkgs; [
           lm_sensors # Tools for reading hardware sensors
@@ -17,9 +30,8 @@
       persistIgnore.directories = [ "/etc/coolercontrol" ];
     };
     
-    # Include in a host to enable configuring coolercontrol with nix
-    _.manualConfig = {
-      includes = with den.aspects.coolercontrol._.manualConfig._; [
+    _.classes = {
+      includes = with den.aspects.coolercontrol._.classes._; [
         config
         alerts
         ui

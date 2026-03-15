@@ -2,7 +2,7 @@
   # ---Class factories--- #
   # Factory to generate system-level custom classes
   mkSystemClass = { fromClass, intoPath }:
-    { class, aspect-chain }: den.provides.forward {
+    { class, aspect-chain }: den._.forward {
       each = lib.singleton true;
       fromClass = _: fromClass;
       intoClass = _: "nixos"; # Preservation only supports NixOS
@@ -14,7 +14,7 @@
 
   # Factory to generate user-level custom classes
   mkUserClass = { fromClass, intoSubPath }:
-    { host, user }: { class, aspect-chain }: den.provides.forward {
+    { host, user }: { class, aspect-chain }: den._.forward {
       each = lib.singleton user;
       fromClass = _: fromClass;
       intoClass = _: "nixos"; # Preservation only supports NixOS
@@ -61,21 +61,21 @@
   };
 
 in {
-  den.aspects.persist.provides.classes = {
-    includes = with den.aspects.persist.provides; [
+  den.aspects.persist._.classes = {
+    includes = with den.aspects.persist._; [
       transformers
-      classes.provides.nixos
-      classes.provides.home
+      classes._.nixos
+      classes._.home
     ];
     # Register the persist classes
-    provides.nixos = den.lib.take.exactly ({ host }: {
+    _.nixos = den.lib.take.exactly ({ host }: {
       includes = [
         persistClass
         persistTmpClass
         persistIgnoreClass
       ];
     });
-    provides.home = {
+    _.home = {
       includes = [
         persistUserClass
         persistUserTmpClass
