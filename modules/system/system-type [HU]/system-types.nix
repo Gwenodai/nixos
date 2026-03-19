@@ -7,7 +7,6 @@
       includes = with den.aspects; [
         nix-config
         hardware._.firmware
-        kernel
         cli
       ];
     };
