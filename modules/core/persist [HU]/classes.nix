@@ -40,9 +40,9 @@
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = u: [ "hostConfig" "preservation" intoSubPath u.userName ];
       fromAspect = _: lib.head aspect-chain;
-      guard = { options, ... }@osArgs: # Filter to only home-manager users
+      guard = { options, ... }@osArgs:
         (options ? preservation) &&
-        (lib.elem "homeManager" (user.classes or []));
+        (lib.elem "homeManager" (user.classes or [])); # Filter to only home-manager users
       adaptArgs = { config, ... }@args: args // {
         hmConfig = config.home-manager.users.${user.userName};
       };

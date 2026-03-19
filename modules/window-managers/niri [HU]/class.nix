@@ -6,5 +6,6 @@
     intoPath = _: [ "programs" "niri" ];
     fromAspect = _: lib.head aspect-chain;
     adaptArgs = lib.id;
+    guard = { options, ... }@hmArgs: options.programs ? niri;
   };
 }

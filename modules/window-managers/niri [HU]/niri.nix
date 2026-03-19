@@ -12,12 +12,10 @@
       imports = [ inputs.niri.nixosModules.niri ];
       
       programs.niri = {
-        package = lib.mkDefault pkgs.niri;
         enable = lib.mkDefault true;
+        package = lib.mkDefault pkgs.niri;
       };
-      
       environment.systemPackages = with pkgs; [ xwayland-satellite ];
-
       systemd.user.services.niri-flake-polkit.enable = lib.mkDefault false;
     };
   };

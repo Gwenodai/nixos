@@ -4,9 +4,7 @@
 
     _.enable = den.lib.perHost {
       nixos = { config, pkgs, lib, ... }: {
-        programs.coolercontrol = {
-          enable = lib.mkDefault true;
-        };
+        programs.coolercontrol.enable = lib.mkDefault true;
 
         environment.etc = lib.genAttrs [
           "coolercontrol/config.toml"
@@ -41,6 +39,7 @@
         intoClass = _: host.class;
         intoPath = _: [ "environment" "etc" "coolercontrol/config.toml" ];
         fromAspect = _: den.aspects.${host.aspect};
+        guard = { config, ... }: _item: lib.mkIf (config.programs.coolercontrol.enable);
       });
 
       _.alerts = den.lib.perHost ({ host }: den._.forward {
@@ -49,6 +48,7 @@
         intoClass = _: host.class;
         intoPath = _: [ "environment" "etc" "coolercontrol/alerts.json" ];
         fromAspect = _: den.aspects.${host.aspect};
+        guard = { config, ... }: _item: lib.mkIf (config.programs.coolercontrol.enable);
       });
       
       _.ui = den.lib.perHost ({ host }: den._.forward {
@@ -57,6 +57,7 @@
         intoClass = _: host.class;
         intoPath = _: [ "environment" "etc" "coolercontrol/config-ui.json" ];
         fromAspect = _: den.aspects.${host.aspect};
+        guard = { config, ... }: _item: lib.mkIf (config.programs.coolercontrol.enable);
       });
     };
   };

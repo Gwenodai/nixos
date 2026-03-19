@@ -22,6 +22,7 @@
       intoClass = _: host.class;
       intoPath = _: [ "environment" "etc" "lact/config.yaml" ];
       fromAspect = _: den.aspects.${host.aspect};
+      guard = { config, ... }: _item: lib.mkIf (config.services.lact.enable);
     });
   };
 }
