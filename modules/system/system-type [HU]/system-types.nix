@@ -8,7 +8,6 @@
         nix-config
         hardware._.firmware
         kernel
-        ssh
         cli
       ];
     };

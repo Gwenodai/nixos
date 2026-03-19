@@ -1,4 +1,7 @@
 { den, ... }: {
+  # Include ssh by default in all hosts
+  den.ctx.host.includes = [ den.aspects.ssh ];
+
   den.aspects.ssh = {
     includes = with den.aspects.ssh._; [ openssh ];
 
