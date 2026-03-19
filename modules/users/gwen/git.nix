@@ -1,9 +1,5 @@
 { den, ... }: {
   den.aspects.gwen = {
-    includes = with den.aspects; [
-      git
-    ];
-
     homeManager = { config, ... }: {
       sops = {
         # Initialise secrets

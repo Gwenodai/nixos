@@ -1,5 +1,4 @@
 { inputs, den, ... }: {
-  
   den.aspects.messaging._.discord = {
     includes = with den.aspects.messaging._.discord._; [ vesktop ];
     

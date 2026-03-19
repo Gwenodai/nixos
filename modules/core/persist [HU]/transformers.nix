@@ -67,7 +67,8 @@
         systemd.tmpfiles.settings.preservation = lib.mkMerge [
           # System
           (lib.mapAttrs (path: opts: {
-            d = { user = "root"; group = "root"; mode = "0755"; } // opts;
+            d = { user = "root"; group = "root"; mode = "0755"; }
+              // (lib.mapAttrs (_: v: lib.mkDefault v) opts);
           }) config.hostConfig.preservation.tmpfiles)
           
           # User
@@ -77,7 +78,8 @@
             in
             lib.mapAttrs' (path: opts:
               lib.nameValuePair (mkAbsolute userName path) {
-                d = { user = userName; inherit group; mode = "0755"; } // opts;
+                d = { user = userName; inherit group; mode = "0755"; }
+                  // (lib.mapAttrs (_: v: lib.mkDefault v) opts);
               }
             ) rawConfig
           ) config.hostConfig.preservation.userTmpfiles))

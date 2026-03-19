@@ -3,6 +3,7 @@
     includes = with den.aspects; [
       # Adds `wheel` and `networkmanager` groups
       den._.primary-user
+      ( den._.user-shell lib.mkDefault "zsh" )
     ];
 
     nixos = { config, ... }: {

@@ -1,5 +1,4 @@
 { den, ... }: {
-  
   den.aspects.messaging._.messenger = {
     includes = with den.aspects.messaging._.messenger._; [ caprine ];
     

@@ -5,9 +5,9 @@
   };
 
   den.aspects.stylix = {
-    includes = with den.aspects.stylix._; [ enable ];
+    includes = with den.aspects.stylix._; [ sys user ];
 
-    _.enable = den.lib.perHost {
+    _.sys = den.lib.perHost {
       nixos = { pkgs, lib, ... }: {
         imports = [ inputs.stylix.nixosModules.stylix ];
         stylix = {
@@ -66,7 +66,9 @@
           };
         };
       };
+    };
 
+    _.user = den.lib.perUser {
       homeManager = { config, lib, ... }: {
         stylix.targets = {
           gtk = lib.mkDefault {
@@ -94,11 +96,12 @@
         home.sessionVariables = {
           XCOMPOSECACHE = lib.mkDefault "${config.xdg.cacheHome}/X11/xcompose";
         };
-
-        # TODO: Niri settings
-        # programs.niri.settings.spawn-at-startup = [
-        #   { sh = "${pkgs.xrdb}/bin/xrdb -merge ${config.xresources.path}"; }
-        # ];
+      };
+      
+      niri = { config, pkgs, ... }: {
+        settings.spawn-at-startup = [
+          { sh = "${pkgs.xrdb}/bin/xrdb -merge ${config.xresources.path}"; }
+        ];
       };
     };
   };

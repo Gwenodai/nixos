@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.terminal.includes = with den.aspects.shells._; [
+  den.aspects.shell.includes = with den.aspects.shell._; [
     zsh
     bash
     starship

@@ -16,19 +16,27 @@
       hardware._.amdgpu._.overclock
 
       # ---System Config--- #
-      system-type._.desktop._.gaming # Use the gaming system preset
-      # niri
+      system-type._.desktop._.gaming       # Use the gaming desktop system preset
+      desktop-type._.window-manager._.niri # Use the Niri desktop preset
     ];
 
     _.to-users = {
       includes = with den.aspects; [
+        # ---Core Config--- #
         persist # Enable persistence for all users
-        # niri
-        # noctalia
+        system-type._.desktop._.gaming
+        desktop-type._.window-manager._.niri
+
+        # ---Applications--- #
+        spotify
+        messaging._.messenger
       ];
     };
     
     nixos = { lib, ... }: {
+      # FIXME: Temporarily declare this here while other hosts aren't defined
+      users.mutableUsers = true;
+
       # Set the default secrets file for this host
       sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
     };
