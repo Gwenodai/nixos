@@ -1,6 +1,10 @@
-{ den, ... }: {
+{ den, lib, ... }: {
   den.aspects.git = {
-    includes = with den.aspects.git._; [ git gh ];
+    includes = with den.aspects.git._; [
+      git
+      gh
+      class
+    ];
     
     _.git = den.lib.perUser {
       homeManager = { lib, ... }: {
@@ -23,5 +27,17 @@
         };
       };
     };
+
+    _.class = den.lib.perUser (
+      { class, aspect-chain }: den._.forward {
+        each = lib.singleton true;
+        fromClass = _: "git";
+        intoClass = _: "homeManager";
+        intoPath = _: [ "programs" "git" ];
+        fromAspect = _: lib.head aspect-chain;
+        adaptArgs = lib.id;
+        guard = { config, ... }@hmArgs: _: lib.mkIf config.programs.git.enable;
+      }
+    );
   };
 }

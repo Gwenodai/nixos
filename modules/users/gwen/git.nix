@@ -1,20 +1,16 @@
-{
-  ...
-}: {
-  # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.gwen = {
-    lib,
-    config,
-    ...
-  }: {
-    config = lib.mkIf ( config.programs.git.enable or false ) {
+{ den, ... }: {
+  den.aspects.gwen = {
+    includes = with den.aspects; [
+      git
+    ];
+
+    homeManager = { config, ... }: {
       sops = {
         # Initialise secrets
         secrets = {
           "git/name" = {};
           "git/email" = {};
         };
-        
         # Construct git `user` config from secrets
         templates."git-credentials" = {
           content = ''
@@ -24,12 +20,12 @@
           '';
         };
       };
+    };
 
-      programs.git = {
-        includes = [
-          { path = config.sops.templates."git-credentials".path; }
-        ];
-      };
+    git = { config, ... }: {
+      includes = [
+        { path = config.sops.templates."git-credentials".path; }
+      ];
     };
   };
 }

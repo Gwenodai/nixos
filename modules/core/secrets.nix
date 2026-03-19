@@ -8,7 +8,7 @@
 
   # Include sops-nix by default in all hosts and hm-users
   den.ctx.host.includes = [ den.aspects.secrets._.secretsNix ];
-  den.ctx.hm-host.includes = [ den.aspects.secrets._.secretsHome ];
+  den.ctx.hm-user.includes = [ den.aspects.secrets._.secretsHome ];
 
   # Declare a common sops file using meta-data which can be accessed by all aspects
   den.schema.conf = { lib, ... }: {
@@ -38,7 +38,7 @@
     });
 
     # ---Home module--- #
-    _.secretsHome = den.lib.perHost {
+    _.secretsHome = den.lib.perUser {
       homeManager = { config, lib, ... }: {
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
