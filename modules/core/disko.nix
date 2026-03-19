@@ -6,25 +6,26 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.disko = {
-    # Create a `disko` class to house disko config
-    provides.diskoClass = den.lib.take.exactly ({ host }: den.provides.forward {
-      each = lib.singleton true;
-      fromClass = _: "disko";
-      intoClass = _: "nixos"; # Disko only supports NixOS
-      intoPath = _: [ "disko" ];
-      fromAspect = _: den.aspects.${host.aspect};
-      guard = { options, ... }@osArgs: options ? disko;
-    });
-    # Import the disko module for NixOS
-    provides.diskoImport = den.lib.take.exactly ({ host }: {
-      nixos.imports = [ inputs.disko.nixosModules.disko ];
-    });
-  };
-
   # Include disko by default in all hosts
-  den.ctx.host.includes = with den.aspects.disko.provides; [
+  den.ctx.host.includes = with den.aspects.disko._; [
     diskoImport
     diskoClass
   ];
+
+  den.aspects.disko = {
+    # Create a `disko` class to house disko config
+    _.diskoClass = den.lib.perHost (
+      { host }: den._.forward {
+        each = lib.singleton true;
+        fromClass = _: "disko";
+        intoClass = _: "nixos"; # Disko only supports NixOS
+        intoPath = _: [ "disko" ];
+        fromAspect = _: den.aspects.${host.aspect};
+        guard = { options, ... }@osArgs: options ? disko;
+      });
+    # Import the disko module for NixOS
+    _.diskoImport = den.lib.perHost {
+      nixos.imports = [ inputs.disko.nixosModules.disko ];
+    };
+  };
 }

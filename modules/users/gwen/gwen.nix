@@ -1,10 +1,8 @@
 { den, ... }: {
-  # user aspect
   den.aspects.gwen = {
-    includes = [
+    includes = with den.aspects; [
       # Adds `wheel` and `networkmanager` groups
-      den.provides.primary-user
-      den.aspects.niri
+      den._.primary-user
     ];
 
     nixos = { config, ... }: {

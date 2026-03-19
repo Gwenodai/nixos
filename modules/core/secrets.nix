@@ -6,6 +6,10 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  # Include sops-nix by default in all hosts and hm-users
+  den.ctx.host.includes = [ den.aspects.secrets._.secretsNix ];
+  den.ctx.hm-host.includes = [ den.aspects.secrets._.secretsHome ];
+
   # Declare a common sops file using meta-data which can be accessed by all aspects
   den.schema.conf = { lib, ... }: {
     options.sops.commonSopsFile = lib.mkOption {
@@ -15,7 +19,7 @@
 
   den.aspects.secrets = {
     # ---NixOS module--- #
-    provides.secretsNix = den.lib.take.exactly ({ host }: {
+    _.secretsNix = den.lib.perHost ({ host }: {
       nixos = { config, pkgs, lib, ... }: {
         # Import the secrets module
         imports = [ inputs.sops-nix.nixosModules.sops ];
@@ -34,7 +38,7 @@
     });
 
     # ---Home module--- #
-    provides.secretsHome = {
+    _.secretsHome = den.lib.perHost {
       homeManager = { config, lib, ... }: {
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
@@ -56,8 +60,4 @@
       };
     };
   };
-
-  # Include sops-nix by default in all hosts and hm-users
-  den.ctx.host.includes = [ den.aspects.secrets.provides.secretsNix ];
-  den.ctx.hm-user.includes = [ den.aspects.secrets.provides.secretsHome ];
 }

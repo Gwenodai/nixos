@@ -18,8 +18,8 @@
   # Default host settings
   den.ctx.host = {
     includes = [
-      den.provides.hostname # Automatically set hostname based on host
-      den.provides.define-user # Automatically create users declared on host
+      den._.hostname # Automatically set hostname based on host
+      den._.define-user # Automatically create users declared on host
     ];
 
     nixos = { lib, ... }: {

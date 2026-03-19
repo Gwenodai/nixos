@@ -6,26 +6,22 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  # Default home manager settings
+  den.ctx.hm-host.includes = [ den.aspects.home-manager._.nixConfig ];
+  den.ctx.hm-user.includes = [ den.aspects.home-manager._.hmConfig ];
+
   den.aspects.home-manager = {
-    provides.nixConfig = den.lib.take.exactly ({ host }: {
+    _.nixConfig = den.lib.perHost {
       nixos.home-manager = {
         useUserPackages = lib.mkDefault true;
         useGlobalPkgs = lib.mkDefault true;
         backupFileExtension = lib.mkDefault "backup";
         overwriteBackup = lib.mkDefault true;
       };
-    });
+    };
 
-    provides.hmConfig = { user, ... }: {
+    _.hmConfig = {
       homeManager.home.stateVersion = lib.mkDefault "25.11";
     };
-  };
-
-  # Default home manager settings
-  den.ctx.hm-host = {
-    includes = [ den.aspects.home-manager.provides.nixConfig ];
-  };
-  den.ctx.hm-user = {
-    includes = [ den.aspects.home-manager.provides.hmConfig ];
   };
 }

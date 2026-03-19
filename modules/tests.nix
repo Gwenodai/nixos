@@ -7,6 +7,6 @@
   in {
     # checks."gwen-t1 builds" = checkCond "gwen-t1-builds" gwen-t1Builds;
     # checks."vm builds" = checkCond "vm-builds" vmBuilds;
-    # checks."gwen enabled gwen-t1 nh" = checkCond "gwen.provides.gwen-t1" gwen-t1.programs.nh.enable;
+    # checks."gwen enabled gwen-t1 nh" = checkCond "gwen._.gwen-t1" gwen-t1.programs.nh.enable;
   };
 }
