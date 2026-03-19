@@ -24,6 +24,7 @@
       includes = with den.aspects; [
         persist # Enable persistence for all users
         # niri
+        # noctalia
       ];
     };
     

@@ -1,5 +1,5 @@
 { den, lib, ... }: {
-  den.aspects.niri._.keybinds = den.lib.perUser {
+  den.aspects.niri._.settings._.keybinds = den.lib.perUser {
     homeManager = { config, pkgs, ... }: {
       programs.niri.settings.binds = with config.lib.niri.actions; let
         # Makeshift `spawn-sh` functionality

@@ -1,16 +1,7 @@
-{
-  inputs,
-  ...
-}: {
-  # --- HOME MANAGER MODULE ---
-  flake.modules.homeManager.noctalia = {
-    options,
-    config,
-    lib,
-    ...
-  }: {
-    config = inputs.self.lib.mkIfNiri { inherit options; } {
-      programs.niri.settings.binds = with config.lib.niri.actions;
+{ den, ... }: {
+  den.aspects.noctalia._.niri._.keybinds = den.lib.perUser {
+    niri = { config, lib, ... }: {
+      settings.binds = with config.lib.niri.actions;
         let
           sh = spawn "sh" "-c"; # Makeshift `spawn-sh` functionality
           # Noctalia IPC command runner

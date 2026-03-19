@@ -1,5 +1,5 @@
 { inputs, den, ... }: {
-  den.aspects.niri._.environment = den.lib.perUser {
+  den.aspects.niri._.settings._.environment = den.lib.perUser {
     homeManager = {
       programs.niri.settings.environment = inputs.self.lib.applyDefaults {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";

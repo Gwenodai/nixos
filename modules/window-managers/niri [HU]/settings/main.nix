@@ -1,5 +1,5 @@
 { inputs, den, lib, ... }: {
-  den.aspects.niri._.settings = den.lib.perUser {
+  den.aspects.niri._.settings._.main = den.lib.perUser {
     homeManager = { config, ... }: {
       programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
         prefer-no-csd = true;
