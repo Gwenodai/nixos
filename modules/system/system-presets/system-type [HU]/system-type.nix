@@ -42,7 +42,8 @@
           system-type._.desktop # Inherit `desktop` system-type
           # ---Core Aspects--- #
           hardware._.graphics
-          lact # GPU control
+          lact    # GPU control
+          ananicy # Auto-nice daemon
 
           # ---Gaming Related Applications--- #
           messaging._.discord
