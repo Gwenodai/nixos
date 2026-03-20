@@ -68,7 +68,7 @@
           # System
           (lib.mapAttrs (path: opts: {
             d = { user = "root"; group = "root"; mode = "0755"; }
-              // (lib.mapAttrs (_: v: lib.mkDefault v) opts);
+              // (lib.mapAttrs (_: v: lib.mkOverride 99 v) opts);
           }) config.hostConfig.preservation.tmpfiles)
           
           # User
@@ -79,7 +79,7 @@
             lib.mapAttrs' (path: opts:
               lib.nameValuePair (mkAbsolute userName path) {
                 d = { user = userName; inherit group; mode = "0755"; }
-                  // (lib.mapAttrs (_: v: lib.mkDefault v) opts);
+                  // (lib.mapAttrs (_: v: lib.mkOverride 99 v) opts);
               }
             ) rawConfig
           ) config.hostConfig.preservation.userTmpfiles))
