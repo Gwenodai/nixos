@@ -46,6 +46,7 @@
           ananicy # Auto-nice daemon
 
           # ---Gaming Related Applications--- #
+          steam
           messaging._.discord
         ];
       };

@@ -103,6 +103,7 @@
                 pinned = [
                   "Vesktop"
                   "Caprine"
+                  "steam"
                 ];
               }
               {
