@@ -4,6 +4,8 @@
       enable
       class
       settings
+      plugins
+      colour-schemes
       niri
     ];
   };

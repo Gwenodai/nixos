@@ -25,6 +25,9 @@
             "XF86AudioRaiseVolume" = noctaliaWhileLocked "volume increase";
             "XF86AudioLowerVolume" = noctaliaWhileLocked "volume decrease";
           }
+          { # Plugins
+            "Mod+Escape" = noctalia "plugin:keybind-cheatsheet toggle";
+          }
         ]
       );
     };

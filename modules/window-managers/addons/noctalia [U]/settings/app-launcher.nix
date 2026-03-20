@@ -7,12 +7,13 @@
           enableClipboardHistory = true;
           autoPasteClipboard = false;
           enableClipPreview = true;
+          enableClipboardChips = true;
+          enableClipboardSmartIcons = true;
           clipboardWrapText = true;
           clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
           clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
           position = "center";
           pinnedApps = [];
-          useApp2Unit = false;
           sortByMostUsed = true;
           terminalCommand = "kitty -e";
           customLaunchPrefixEnabled = false;

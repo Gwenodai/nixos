@@ -3,6 +3,7 @@
     includes = with den.aspects.noctalia._.niri._; [
       keybinds
       rules
+      startup
     ];
   };
 }

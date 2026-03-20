@@ -23,6 +23,7 @@
           marginHorizontal = 4;
           frameThickness = 8;
           frameRadius = 12;
+          enableExclusionZoneInset = false;
           outerCorners = true;
           hideOnOverview = true;
           displayMode = "always_visible";
@@ -69,6 +70,7 @@
                 occupiedColor = "secondary";
                 pillSize = 0.6;
                 showApplications = true;
+                showApplicationsHover = false;
                 showBadge = true;
                 showLabelsOnlyWhenOccupied = true;
                 unfocusedIconsOpacity = 0.8;

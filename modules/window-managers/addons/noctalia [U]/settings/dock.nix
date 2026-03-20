@@ -6,6 +6,8 @@
         dock = inputs.self.lib.applyDefaults {
           enabled = false;
           showDockIndicator = true;
+          launcherIcon = "";
+          launcherUseDistroLogo = false;
           position = "bottom";
           displayMode = "auto_hide";
           dockType = "floating";

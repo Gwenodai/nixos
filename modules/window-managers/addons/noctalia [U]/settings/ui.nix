@@ -7,7 +7,9 @@
           # UI
           tooltipsEnabled = true;
           boxBorderEnabled = false;
+          translucentWidgets = true;
           panelBackgroundOpacity = 0.9;
+          scrollbarAlwaysVisible = true;
           panelsAttachedToBar = true;
           settingsPanelMode = "attached";
           settingsPanelSideBarCardStyle = false;
@@ -127,7 +129,7 @@
           generationMethod = "tonal-spot";
           monitorForColors = ""; # Use a specific monitor for colour detection
           # Manual colour scheme
-          predefinedScheme = "Rose Pine";
+          predefinedScheme = "Rosey AMOLED";
         };
 
         # ---Noctalia night light settings---
@@ -145,6 +147,7 @@
         desktopWidgets = inputs.self.lib.applyDefaults {
           enabled = false;
           gridSnap = false;
+          gridSnapScale = false;
           overviewEnabled = true; # Show in overview
           monitorWidgets = [];
         };

@@ -22,7 +22,12 @@
           wallpaperChangeMode = "random";
           randomIntervalSec = 180;
           transitionDuration = 1500;
-          transitionType = "random";
+          transitionType = [
+            "honeycomb"
+            "wipe"
+            "stripes"
+            "disc"
+          ];
           transitionEdgeSmoothness = 0.05;
           # Per monitor wallpaper settings
           enableMultiMonitorDirectories = false;

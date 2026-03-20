@@ -1,7 +1,7 @@
 { den, lib, ... }: {
   den.aspects.noctalia._.class = den.lib.perUser (
-    { class, aspect-chain }: den._.forward {
-      each = lib.singleton true;
+    { host, user }: { class, aspect-chain }: den._.forward {
+      each = lib.singleton user;
       fromClass = _: "noctalia";
       intoClass = _: "homeManager";
       intoPath = _: [ "programs" "noctalia-shell" ];

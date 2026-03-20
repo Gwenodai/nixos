@@ -3,7 +3,7 @@
     homeManager = { config, lib, ... }: {
       programs.noctalia-shell.settings = {
         # ---Noctalia settings version---
-        settingsVersion = lib.mkDefault 57;
+        settingsVersion = lib.mkDefault 59;
         
         # ---Noctalia general settings---
         general = inputs.self.lib.applyDefaults {

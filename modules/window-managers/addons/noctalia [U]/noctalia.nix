@@ -36,7 +36,7 @@
       programs.noctalia-shell = {
         enable = lib.mkDefault true;
         # Run noctalia via systemd instead of manually within niri/hyprland
-        systemd.enable = lib.mkDefault true;
+        systemd.enable = lib.mkDefault false;
       };
       home.packages = [ noctalia-diff ];
     };

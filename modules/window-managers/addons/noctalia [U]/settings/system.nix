@@ -78,6 +78,7 @@
           session = ""; # Shutdown/Reboot
           wallpaperChange = "";
           darkModeChange = "";
+          colorGeneration = "";
           screenLock = "";
           screenUnlock = "";
           performanceModeEnabled = "";

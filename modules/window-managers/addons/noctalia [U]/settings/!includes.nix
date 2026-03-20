@@ -7,7 +7,6 @@
       general
       idle
       notifications
-      plugins
       session-menu
       system
       ui
