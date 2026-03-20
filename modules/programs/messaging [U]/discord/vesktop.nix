@@ -110,7 +110,7 @@
           [Desktop Entry]
           NotShowIn=niri
           Categories=Network;InstantMessaging;Chat
-          Exec=${pkgs.vesktop}/bin/vesktop --start-minimized
+          Exec=vesktop --start-minimized
           GenericName=Internet Messenger
           Icon=vesktop
           Keywords=discord;vencord;electron;chat

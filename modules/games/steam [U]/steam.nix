@@ -33,7 +33,7 @@
           [Desktop Entry]
           NotShowIn=niri
           Categories=Network;FileTransfer;Game;
-          Exec=${pkgs.steam}/bin/steam -silent
+          Exec=steam -silent
           GenericName=Internet Messenger
           Icon=steam
           Keywords=discord;vencord;electron;chat
@@ -44,18 +44,9 @@
 
       persistUser = { hmConfig, ... }: {
         directories = [
-          { directory = ".steam"; how = "symlink"; createLinkTarget = true; }
-          {
-            directory = "${hmConfig.xdg.dataHome}/Steam";
-            how = "symlink";
-            mode = "0700";
-            createLinkTarget = true;
-          }
-          {
-            directory = "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d";
-            how = "symlink";
-            createLinkTarget = true;
-          }
+          ".steam"
+          { directory = "${hmConfig.xdg.dataHome}/Steam"; mode = "0700"; }
+          "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d"
         ];
       };
 
