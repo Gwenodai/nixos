@@ -6,18 +6,16 @@
     };
     
     homeManager = { lib, ... }: {
-      programs.vscode.profiles.default = {
-        userSettings = inputs.self.lib.applyDefaultsRecursive {
-          editor = {
-            # Single quotes are required for font names with spaces
-            fontFamily = lib.concatStringsSep ", " [
-              "'JetBrainsMono Nerd Font'"
-              "'Droid Sans Mono'"
-              "monospace"
-            ];
-            # Combines multiple characters '!'+'='becomes '≠'
-            fontLigatures = true;
-          };
+      programs.vscode.profiles.default.userSettings = {
+        editor = inputs.self.lib.applyDefaultsRecursive {
+          # Single quotes are required for font names with spaces
+          fontFamily = lib.concatStringsSep ", " [
+            "'JetBrainsMono Nerd Font'"
+            "'Droid Sans Mono'"
+            "monospace"
+          ];
+          # Combines multiple characters '!'+'='becomes '≠'
+          fontLigatures = true;
         };
       };
     };
