@@ -18,14 +18,22 @@
 
   # ---Class factories--- #
   # Factory to generate system-level custom classes
-  mkSystemClass = { fromClass, intoPath, dedup ? false }: den.lib.perHost (
+  mkSystemClass = {
+    fromClass, intoPath, dedup ? false, requiresFindEphemeral ? false
+  }: den.lib.perHost (
     { class, aspect-chain }: den._.forward ({
       each = lib.singleton true;
       fromClass = _: fromClass;
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = _: intoPath;
       fromAspect = _: lib.head aspect-chain;
-      guard = { options, ... }@osArgs: options ? preservation;
+      guard = { config, options, lib, ... }@osArgs: _: let
+        hasPreservation = options ? preservation;
+        hasFindEphemeral = lib.any (pkg:
+        (pkg.name or "") == "find-ephemeral") config.environment.systemPackages;
+      in
+        lib.mkIf (hasPreservation &&
+        (!requiresFindEphemeral || hasFindEphemeral));
       adaptArgs = args: args // { osConfig = args.config; };
     } // lib.optionalAttrs dedup {
       adapterModule = dedupModule;
@@ -33,16 +41,23 @@
   );
 
   # Factory to generate user-level custom classes
-  mkUserClass = { fromClass, intoSubPath, dedup ? false }: den.lib.perUser ({ host, user }:
+  mkUserClass = {
+    fromClass, intoSubPath, dedup ? false, requiresFindEphemeral ? false
+  }: den.lib.perUser ({ host, user }:
     { class, aspect-chain }: den._.forward ({
       each = lib.singleton user;
       fromClass = _: fromClass;
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = u: [ "hostConfig" "preservation" intoSubPath u.userName ];
       fromAspect = _: lib.head aspect-chain;
-      guard = { options, ... }@osArgs:
-        (options ? preservation) &&
-        (lib.elem "homeManager" (user.classes or [])); # Filter to only home-manager users
+      guard = { config, options, lib, ... }@osArgs: _: let
+        hasPreservation = options ? preservation;
+        hasHomeManager = lib.elem "homeManager" (user.classes or []);
+        hasFindEphemeral = lib.any (pkg:
+          (pkg.name or "") == "find-ephemeral") config.environment.systemPackages;
+      in
+        lib.mkIf (hasPreservation && hasHomeManager &&
+        (!requiresFindEphemeral || hasFindEphemeral));
       adaptArgs = { config, ... }@args: args // {
         hmConfig = config.home-manager.users.${user.userName};
       };
@@ -70,6 +85,7 @@ in {
           fromClass = "persistIgnore";
           intoPath = [ "hostConfig" "preservation" "ignore" ];
           dedup = true;
+          requiresFindEphemeral = true;
         })
       ];
     };
@@ -89,6 +105,7 @@ in {
           fromClass = "persistUserIgnore";
           intoSubPath = "userIgnore";
           dedup = true;
+          requiresFindEphemeral = true;
         })
       ];
     };
