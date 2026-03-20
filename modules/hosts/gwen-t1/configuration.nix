@@ -35,7 +35,7 @@
     
     nixos = { lib, ... }: {
       # FIXME: Temporarily declare this here while other hosts aren't defined
-      users.mutableUsers = true;
+      users.mutableUsers = false;
 
       # Set the default secrets file for this host
       sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";

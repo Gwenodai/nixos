@@ -3,8 +3,8 @@
   # Gwen PC
   den.hosts.x86_64-linux.gwen-t1.users = {
     gwen.classes = [ "homeManager" ];
-    # stacy.classes = [ "homeManager" ];
-    # tempUser = {};
+    stacy.classes = [ "homeManager" ];
+    tempUser = {};
   };
   # Server
   den.hosts.x86_64-linux.ymir.users = {
