@@ -29,6 +29,10 @@
             smoothScrolling = true;
             linkedEditing = true;
           };
+
+          search = {
+            collapseResults = "auto";
+          };
         };
       };
     };

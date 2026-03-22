@@ -9,7 +9,7 @@
           showHeader = true;
           showKeybinds = true;
           largeButtonsStyle = true;
-          largeButtonsLayout = "single-row";
+          largeButtonsLayout = "grid";
           enableCountdown = true;
           countdownDuration = 10000;
           # Options
@@ -36,14 +36,14 @@
               keybind = "3";
             }
             {
-              action = "reboot";
+              action = "logout";
               command = "";
               countdownEnabled = true;
               enabled = true;
               keybind = "4";
             }
             {
-              action = "logout";
+              action = "reboot";
               command = "";
               countdownEnabled = true;
               enabled = true;
@@ -60,14 +60,14 @@
               action = "rebootToUefi";
               command = "";
               countdownEnabled = true;
-              enabled = true;
+              enabled = false;
               keybind = "7";
             }
             {
               action = "userspaceReboot";
               command = "";
               countdownEnabled = true;
-              enabled = true;
+              enabled = false;
               keybind = "";
             }
           ];

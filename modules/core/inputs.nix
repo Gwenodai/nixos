@@ -9,9 +9,9 @@
   flake-file.inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-file.url = "github:vic/flake-file";
-    # flake-aspects.url = "github:vic/flake-aspects/latest";
-    # den.url = "github:vic/den/latest";
-    den.url = "github:vic/den";
+    # Den inputs
+    den.url = "github:vic/den/latest";
+    flake-aspects.url = "github:vic/flake-aspects/latest";
   };
 
   # Define avialable systems

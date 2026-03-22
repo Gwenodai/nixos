@@ -3,7 +3,7 @@
 { inputs, den, ... }: {
   flake-file.inputs = {
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia-shell/v4.7.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         noctalia-qs.follows = "noctalia-qs";
@@ -32,13 +32,8 @@
       };
     in {
       imports = [ inputs.noctalia.homeModules.default ];
-
-      programs.noctalia-shell = {
-        enable = lib.mkDefault true;
-        # Run noctalia via systemd instead of manually within niri/hyprland
-        systemd.enable = lib.mkDefault false;
-      };
       home.packages = [ noctalia-diff ];
+      programs.noctalia-shell.enable = lib.mkDefault true;
     };
 
     persistUser = { hmConfig, ... }: {

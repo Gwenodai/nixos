@@ -29,7 +29,7 @@
       persist.files = [
         { file = "/etc/ly/save.txt"; mode = "0644"; }
       ];
-      persistUserIgnore.directories = [ "ly-session.log" ];
+      persistUserIgnore.files = [ "ly-session.log" ];
     };
   };
 }
