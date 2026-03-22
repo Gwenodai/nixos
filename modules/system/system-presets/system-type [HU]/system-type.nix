@@ -47,6 +47,7 @@
 
           # ---Gaming Related Applications--- #
           steam
+          mangohud
           messaging._.discord
         ];
       };
