@@ -27,7 +27,7 @@
         security.sudo.extraConfig = ''
           Defaults lecture = "never"
         '';
-        # users.mutableUsers = lib.mkDefault false;
+        users.mutableUsers = lib.mkDefault false;
       };
     };
 
