@@ -18,6 +18,9 @@
       # ---System Config--- #
       system-type._.desktop._.gaming       # Use the gaming desktop system preset
       desktop-type._.window-manager._.niri # Use the Niri desktop preset
+
+      # ---Services--- #
+      kde-connect
     ];
 
     _.to-users = {

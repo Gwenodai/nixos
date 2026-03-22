@@ -22,7 +22,7 @@
           showCategories = true;
           iconMode = "tabler";
           showIconBackground = false;
-          enableSettingsSearch = true;
+          enableSettingsSearch = false;
           enableWindowsSearch = false;
           enableSessionSearch = false;
           ignoreMouseInput = false;
