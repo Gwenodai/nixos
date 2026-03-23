@@ -106,19 +106,21 @@
         };
 
         # Autostart
-        xdg.configFile."autostart/vesktop.desktop".text = ''
-          [Desktop Entry]
-          NotShowIn=niri
-          Categories=Network;InstantMessaging;Chat
-          Exec=vesktop --start-minimized
-          GenericName=Internet Messenger
-          Icon=vesktop
-          Keywords=discord;vencord;electron;chat
-          Name=Vesktop
-          StartupWMClass=Vesktop
-          Type=Application
-          Version=1.5
-        '';
+        xdg.configFile."autostart/vesktop.desktop" = lib.mkDefault {
+          text = ''
+            [Desktop Entry]
+            NotShowIn=niri
+            Categories=Network;InstantMessaging;Chat
+            Exec=vesktop --start-minimized
+            GenericName=Internet Messenger
+            Icon=vesktop
+            Keywords=discord;vencord;electron;chat
+            Name=Vesktop
+            StartupWMClass=Vesktop
+            Type=Application
+            Version=1.5
+          '';
+        };
       };
 
       persistUser = { hmConfig, ... }: {

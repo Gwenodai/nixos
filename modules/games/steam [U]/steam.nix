@@ -26,17 +26,19 @@
       );
 
       # Autostart
-      xdg.configFile."autostart/steam.desktop".text = ''
-        [Desktop Entry]
-        NotShowIn=niri
-        Categories=Network;FileTransfer;Game;
-        Exec=steam -silent
-        GenericName=Internet Messenger
-        Icon=steam
-        Keywords=discord;vencord;electron;chat
-        Name=Steam
-        Type=Application
-      '';
+      xdg.configFile."autostart/steam.desktop" = lib.mkDefault {
+        text = ''
+          [Desktop Entry]
+          NotShowIn=niri
+          Categories=Network;FileTransfer;Game;
+          Exec=steam -silent
+          GenericName=Internet Messenger
+          Icon=steam
+          Keywords=discord;vencord;electron;chat
+          Name=Steam
+          Type=Application
+        '';
+      };
     };
 
     persistUser = { hmConfig, ... }: {
@@ -54,7 +56,7 @@
     };
 
     persistUserIgnore = { hmConfig, ... }: {
-      files = [ "${hmConfig.xdg.cacheHome}/umu-protonfixes/protonfixes_test.log" ];
+      directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
     };
   };
 }
