@@ -47,6 +47,8 @@
 
           # ---Gaming Related Applications--- #
           steam
+          heroic
+          umu-launcher
           mangohud
           messaging._.discord
         ];
