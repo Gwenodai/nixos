@@ -84,10 +84,12 @@
         directories = [
           "dots" # Nix flake directory
           { directory = ".pki"; mode = "0700"; }
-          "${hmConfig.xdg.configHome}/dconf"
           "${hmConfig.xdg.dataHome}/systemd/timers"
           "${hmConfig.xdg.cacheHome}/gtk-4.0/vulkan-pipeline-cache"
           "${hmConfig.xdg.cacheHome}/qtshadercache-x86_64-little_endian-lp64"
+        ];
+        files = [
+          { file = "${hmConfig.xdg.configHome}/dconf/user"; mode = "0644"; }
         ];
       };
 

@@ -37,8 +37,9 @@
     };
 
     _.gwen = {
-      includes = [
+      includes = with den.aspects; [
         den._.primary-user
+        dconf-editor
       ];
     };
     
