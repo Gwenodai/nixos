@@ -21,7 +21,7 @@
           { # Applications etc.
             # "Mod+R".action             = RUNNER;
             "Mod+T".action             = spawnPkg     pkgs.kitty;
-            "Mod+E".action             = spawnPkg     pkgs.nemo;
+            "Mod+E".action             = spawn        "nemo"; # Use predefined nemo override pkg
             "Mod+G".action             = spawnPkg     pkgs.google-chrome;
             "Ctrl+Shift+Escape".action = spawnTermPkg pkgs.btop;
             "MoD+Shift+P".action       = power-off-monitors;
