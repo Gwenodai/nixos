@@ -10,31 +10,6 @@
         "/share/xdg-desktop-portal"
         "/share/applications"
       ];
-
-      persistUser = { hmConfig, ... }: {
-        directories = map (path: {
-          directory = path;
-          how = "symlink";
-          createLinkTarget = true;
-        }) [
-          "${hmConfig.xdg.userDirs.documents}"
-          "${hmConfig.xdg.userDirs.desktop}"
-          "${hmConfig.xdg.userDirs.download}"
-          "${hmConfig.xdg.userDirs.pictures}"
-          "${hmConfig.xdg.userDirs.videos}"
-          "${hmConfig.xdg.userDirs.music}"
-          "${hmConfig.xdg.userDirs.templates}"
-        ];
-
-        files = [
-          { file = "${hmConfig.xdg.dataHome}/recently-used.xbel"; mode = "0600"; }
-        ];
-      };
-
-      persistUserTmp = { hmConfig, ... }: {
-        ".local" = {};                   # "~/.local"
-        "${hmConfig.xdg.dataHome}" = {}; # "~/.local/share"
-      };
     };
 
     _.user = den.lib.perUser {
@@ -49,7 +24,8 @@
           in
           inputs.self.lib.applyDefaults {
             enable = config.xdg.enable;
-            createDirectories = false;
+            createDirectories = true;
+            setSessionVariables = true;
             # Directories
             documents   = "${config.home.homeDirectory}/Documents";
             desktop     = "${docs}/Desktop";
@@ -82,6 +58,31 @@
           # Checks $HOME for unwanted files and directories.
           packages = with pkgs; [ xdg-ninja ];
         };
+      };
+
+      persistUser = { hmConfig, ... }: {
+        directories = map (path: {
+          directory = path;
+          how = "symlink";
+          createLinkTarget = true;
+        }) [
+          "${hmConfig.xdg.userDirs.documents}"
+          "${hmConfig.xdg.userDirs.desktop}"
+          "${hmConfig.xdg.userDirs.download}"
+          "${hmConfig.xdg.userDirs.pictures}"
+          "${hmConfig.xdg.userDirs.videos}"
+          "${hmConfig.xdg.userDirs.music}"
+          "${hmConfig.xdg.userDirs.templates}"
+        ];
+
+        files = [
+          { file = "${hmConfig.xdg.dataHome}/recently-used.xbel"; mode = "0600"; }
+        ];
+      };
+
+      persistUserTmp = { hmConfig, ... }: {
+        ".local" = {};                   # "~/.local"
+        "${hmConfig.xdg.dataHome}" = {}; # "~/.local/share"
       };
     };
   };

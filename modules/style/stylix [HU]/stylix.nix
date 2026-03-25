@@ -97,6 +97,8 @@
           color-scheme = lib.mkDefault "prefer-dark";
         };
 
+        gtk.gtk4.theme = config.gtk.theme; # Changed to `null` in home-manager version `26.05`
+
         # Clean up dots
         xresources.path = lib.mkDefault "${config.xdg.configHome}/X11/xresources";
         home.sessionVariables = {
