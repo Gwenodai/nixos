@@ -8,10 +8,12 @@
     includes = with den.aspects.stylix._; [ sys user ];
 
     _.sys = den.lib.perHost {
-      nixos = { pkgs, lib, ... }: {
+      nixos = {  config, pkgs, lib, ... }: {
         imports = [ inputs.stylix.nixosModules.stylix ];
         stylix = {
           enable = lib.mkDefault true;
+          homeManagerIntegration.autoImport = lib.mkDefault true;
+          homeManagerIntegration.followSystem = lib.mkDefault true;
           autoEnable = lib.mkDefault false;
           polarity = "dark";
           base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/pinky.yaml";
@@ -63,6 +65,8 @@
           targets = {
             gtk.enable = lib.mkDefault true;
             qt.enable = lib.mkDefault true;
+            gnome.enable = lib.mkDefault config.services.displayManager.gdm.enable;
+            regreet.enable = lib.mkDefault config.programs.regreet.enable;
           };
         };
       };
@@ -70,21 +74,23 @@
 
     _.user = den.lib.perUser {
       homeManager = { config, lib, ... }: {
-        stylix.targets = {
-          gtk = lib.mkDefault {
-            enable = true;
-            flatpakSupport.enable = true;
-            # Force dialog buttons to use white text
-            extraCss = ''
-              dialog button, .dialog-action-area > .text-button {
-                color: @theme_text_color; 
-              }
-            '';
-          };
+        stylix = {
+          targets = {
+            gtk = lib.mkDefault {
+              enable = true;
+              flatpakSupport.enable = true;
+              # Force dialog buttons to use white text
+              extraCss = ''
+                dialog button, .dialog-action-area > .text-button {
+                  color: @theme_text_color; 
+                }
+              '';
+            };
 
-          kitty.enable = lib.mkDefault true;
-          btop.enable = lib.mkDefault true;
-          qt.enable = lib.mkDefault true;
+            kitty.enable = lib.mkDefault config.programs.kitty.enable;
+            btop.enable = lib.mkDefault config.programs.btop.enable;
+            qt.enable = lib.mkDefault true;
+          };
         };
         
         dconf.settings."org/gnome/desktop/interface" = {

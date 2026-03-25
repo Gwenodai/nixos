@@ -6,4 +6,4 @@ TODO
 .direnv/
 .envrc
 # vm storage
-.qcow2
+*.qcow2
