@@ -3,6 +3,7 @@
   den.ctx.host.includes = [ den.aspects.nix-config._.core-config ];
 
   den.aspects.nix-config = {
+    # Bundles all non-default components when the complete 'nix-config' aspect is used
     includes = with den.aspects.nix-config._; [
       garbage-collection
       locale

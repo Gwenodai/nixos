@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.persist._.transformers = den.lib.perHost {
+  den.aspects.persist._.class._.transformers = den.lib.perHost {
     nixos = { config, lib, ... }: {
       config = let
         # ---Path sanitising helpers--- #

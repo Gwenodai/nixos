@@ -3,7 +3,7 @@
     includes = with den.aspects.git._; [
       git
       gh
-      class
+      gitClass
     ];
     
     _.git = den.lib.perUser {
@@ -28,7 +28,7 @@
       };
     };
 
-    _.class = den.lib.perUser (
+    _.gitClass = den.lib.perUser (
       { class, aspect-chain }: den._.forward {
         each = lib.singleton true;
         fromClass = _: "git";

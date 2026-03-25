@@ -1,12 +1,13 @@
 { den, ... }: {
-  den.aspects.cli.includes = with den.aspects.cli._; [
-    archive-tools
-    cli-tools
-    sys-tools
-    bat
-    btop
-    direnv
-    eza
-    nh
-  ];
+  den.aspects.cli = {
+    # All sub-aspects are included when the generic 'cli' aspect is used
+    includes = with den.aspects.cli._; [
+      tools
+      bat
+      btop
+      direnv
+      eza
+      nh
+    ];
+  };
 }

@@ -67,8 +67,8 @@
   );
 
 in {
-  den.aspects.persist._.classes = {
-    includes = with den.aspects.persist._.classes._; [ sys user ];
+  den.aspects.persist._.class._.classes = {
+    includes = with den.aspects.persist._.class._.classes._; [ sys user ];
 
     _.sys = {
       includes = [
