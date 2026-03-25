@@ -24,6 +24,10 @@
           ];
         };
 
+        "org.gtk.Settings.FileChooser" = {
+          show-hidden = lib.mkDefault true;
+        };
+
         "org/cinnamon/desktop/applications/terminal" = {
           # Default terminal is set to kitty (change this if using another terminal)
           exec = lib.mkDefault "${lib.getExe pkgs.kitty}";
