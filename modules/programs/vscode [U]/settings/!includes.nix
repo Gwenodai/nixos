@@ -1,12 +1,6 @@
-{ den, ... }: {
+{ den, lib, ... }: {
   den.aspects.vscode._.settings = {
-    includes = with den.aspects.vscode._.settings._; [
-      fonts
-      formatting
-      general
-      source-control
-      terminal
-      ui
-    ];
+    # Bundles all settings components when the complete 'settings' sub-aspect is used
+    includes = lib.attrValues den.aspects.vscode._.settings._;
   };
 }

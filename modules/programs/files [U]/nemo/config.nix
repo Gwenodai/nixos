@@ -24,7 +24,7 @@
           ];
         };
 
-        "org.gtk.Settings.FileChooser" = {
+        "org/gtk/settings/file-chooser" = {
           show-hidden = lib.mkDefault true;
         };
 

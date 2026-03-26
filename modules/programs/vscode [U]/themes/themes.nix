@@ -3,7 +3,7 @@
     _.colours = {
   # ---Colours--- #
       _.monokai-vibrant = den.lib.perUser {
-        includes = [ den.aspects.vscode._.extensions ];
+        includes = [ den.aspects.vscode._.extensions._.enable ];
         homeManager = { pkgs, lib, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
@@ -17,7 +17,7 @@
     _.icons = {
   # ---Icons--- #
       _.catppuccin-vsc-icons = den.lib.perUser {
-        includes = [ den.aspects.vscode._.extensions ];
+        includes = [ den.aspects.vscode._.extensions._.enable ];
         homeManager = { pkgs, lib, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
@@ -30,7 +30,7 @@
       };
 
       _.symbols = den.lib.perUser {
-        includes = [ den.aspects.vscode._.extensions ];
+        includes = [ den.aspects.vscode._.extensions._.enable ];
         homeManager = { pkgs, lib, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [

@@ -1,6 +1,6 @@
 { den, ... }: {
   den.aspects.vscode._.languages._.toml = den.lib.perUser {
-    includes = [ den.aspects.vscode._.extensions ];
+    includes = [ den.aspects.vscode._.extensions._.enable ];
     homeManager = { pkgs, lib, ... }: {
       programs.vscode.profiles.default = {
         extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [

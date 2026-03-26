@@ -1,7 +1,7 @@
 # https://github.com/oxalica/nil/blob/main/docs/configuration.md
 { inputs, den, ... }: {
   den.aspects.vscode._.languages._.nix = den.lib.perUser {
-    includes = [ den.aspects.vscode._.extensions ];
+    includes = [ den.aspects.vscode._.extensions._.enable ];
     homeManager = { pkgs, lib, ... }: {
       home.packages = with pkgs; [ nil ]; # Nix language server (Needed for nix-ide)
       programs.vscode.profiles.default = {

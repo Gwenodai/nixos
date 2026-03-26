@@ -1,9 +1,9 @@
 { den, ... }: {
   
   den.aspects.spotify = {
-    includes = with den.aspects.spotify._; [ spotify ];
+    includes = with den.aspects.spotify._; [ enable ];
     
-    _.spotify = den.lib.perUser {
+    _.enable = den.lib.perUser {
       homeManager = { pkgs, lib, ... }: {
         home.packages = with pkgs; [
           spotify

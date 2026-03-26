@@ -19,6 +19,11 @@
           Version=1.5
         '';
       };
+      
+      services.arrpc = lib.mkDefault {
+        enable = true;
+        systemdTarget = "graphical-session.target";
+      };
     };
 
     persistUser = { hmConfig, ... }: {

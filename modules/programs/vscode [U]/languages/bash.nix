@@ -1,6 +1,6 @@
 { den, ... }: {
   den.aspects.vscode._.languages._.bash = den.lib.perUser {
-    includes = [ den.aspects.vscode._.extensions ];
+    includes = [ den.aspects.vscode._.extensions._.enable ];
     homeManager = { pkgs, lib, ... }: {
       home.packages = with pkgs; [ shellcheck ]; # Shell script analysis tool
       programs.vscode.profiles.default = {

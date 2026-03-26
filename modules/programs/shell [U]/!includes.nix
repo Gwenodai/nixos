@@ -1,7 +1,6 @@
-{ den, ... }: {
-  den.aspects.shell.includes = with den.aspects.shell._; [
-    zsh
-    bash
-    starship
-  ];
+{ den, lib, ... }: {
+  den.aspects.shell = {
+    # All sub-aspects are included when the generic 'shell' aspect is used
+    includes = lib.attrValues den.aspects.shell._;
+  };
 }
