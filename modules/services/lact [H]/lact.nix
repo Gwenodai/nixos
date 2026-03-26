@@ -1,10 +1,7 @@
 { den, lib, ... }: {
   den.aspects.lact = {
     # All sub-aspects are included when the generic 'lact' aspect is used
-    includes = with den.aspects.lact._; [
-      enable
-      class
-    ];
+    includes = lib.attrValues den.aspects.lact._;
 
     _.enable = den.lib.perHost {
       nixos = { lib, ... }: {
