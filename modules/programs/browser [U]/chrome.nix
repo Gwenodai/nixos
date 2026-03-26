@@ -3,7 +3,7 @@
     # The default sub-aspect included when the generic 'browser' aspect is used
     includes = with den.aspects.browser._; [ chrome ];
     
-    _.chrome = den.lib.perHost {
+    _.chrome = den.lib.perUser {
       homeManager = { pkgs, lib, ... }: {
         home.packages = with pkgs; [
           google-chrome

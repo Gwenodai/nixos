@@ -4,7 +4,7 @@
   # ---Colours--- #
       _.monokai-vibrant = den.lib.perUser {
         includes = [ den.aspects.vscode._.extensions._.enable ];
-        homeManager = { pkgs, lib, ... }: {
+        homeManager = { pkgs, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
               s3gf4ult.monokai-vibrant
@@ -18,7 +18,7 @@
   # ---Icons--- #
       _.catppuccin-vsc-icons = den.lib.perUser {
         includes = [ den.aspects.vscode._.extensions._.enable ];
-        homeManager = { pkgs, lib, ... }: {
+        homeManager = { pkgs, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
               catppuccin.catppuccin-vsc-icons
@@ -31,7 +31,7 @@
 
       _.symbols = den.lib.perUser {
         includes = [ den.aspects.vscode._.extensions._.enable ];
-        homeManager = { pkgs, lib, ... }: {
+        homeManager = { pkgs, ... }: {
           programs.vscode.profiles.default = {
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
               miguelsolorio.symbols

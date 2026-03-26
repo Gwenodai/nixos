@@ -7,7 +7,7 @@
       # Bundles all git components when the complete 'git' sub-aspect is used
       includes = lib.attrValues den.aspects.git._.git._;
 
-      enable = den.lib.perUser {
+      _.enable = den.lib.perUser {
         homeManager = { lib, ... }: {
           programs.git = {
             enable = lib.mkDefault true;
