@@ -6,7 +6,8 @@
           sh = spawn "sh" "-c"; # Makeshift `spawn-sh` functionality
           # Noctalia IPC command runner
           noctalia = command: {
-            action = sh "noctalia-shell ipc call ${command}";
+            action = sh
+              "${lib.getExe config.programs.noctalia-shell.package} ipc call ${command}";
           };
           # Noctalia IPC command runner available on lock screen
           noctaliaWhileLocked = command: (noctalia command) // {

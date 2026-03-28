@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.niri._.extraConfig = den.lib.perUser {
+  den.aspects.niri._.config = den.lib.perUser {
     homeManager = { config, pkgs, lib, ... }: let
       # Custom script to startup certain apps after a delay
       # to allow for the system tray to load first

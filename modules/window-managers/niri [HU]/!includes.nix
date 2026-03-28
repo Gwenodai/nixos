@@ -5,7 +5,7 @@
       class
       settings
       rules
-      extraConfig
+      config
     ];
   };
 }
