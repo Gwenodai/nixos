@@ -3,7 +3,7 @@
     # Bundles all nh components when the complete 'nh' sub-aspect is used
     includes = with den.aspects.cli._.nh._; [
       enable
-      defaultFlakeDir
+      config
     ];
 
     _.enable = den.lib.perUser {
@@ -18,7 +18,7 @@
       };
     };
 
-    _.defaultFlakeDir = den.lib.perUser {
+    _.config = den.lib.perUser {
       homeManager = { config, lib, ... }: {
         programs.nh = {
           flake = lib.mkDefault "${config.home.homeDirectory}/dots";

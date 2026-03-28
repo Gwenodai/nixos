@@ -10,6 +10,8 @@
           bierner.markdown-checkbox
           # Adds :emoji: syntax support to VS Code's built-in Markdown preview
           bierner.markdown-emoji
+          # Adds Mermaid diagram and flowchart support to VS Code's builtin markdown preview
+          bierner.markdown-mermaid
         ];
       };
     };

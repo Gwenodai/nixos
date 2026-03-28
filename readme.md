@@ -1,1 +1,1 @@
-[WIP wiki to document my flake](../../wiki/programs)
+[WIP wiki to document my flake](../../wiki/programs-index)
