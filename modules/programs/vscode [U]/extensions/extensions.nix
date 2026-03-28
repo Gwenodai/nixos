@@ -21,7 +21,8 @@
     # Bundles all extensions components when the complete 'extensions' sub-aspect is used
     includes = lib.attrValues den.aspects.vscode._.extensions._;
 
-    _.enable = den.lib.perUser {
+    # This doesn't use `perUser` as it will be included within other `perUser` aspects
+    _.enable = {
       nixos.hostConfig.vscode.extensions.enable = true;
     };
     
