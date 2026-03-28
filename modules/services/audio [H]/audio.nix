@@ -1,8 +1,8 @@
 { den, ... }: {
   den.aspects.audio = {
-    includes = with den.aspects.audio._; [ enable ];
+    includes = with den.aspects.audio._; [ pipewire ];
 
-    _.enable = den.lib.perHost {
+    _.pipewire = den.lib.perHost {
       nixos = { lib, ... }: {
         services = {
           pulseaudio.enable = lib.mkDefault false;
