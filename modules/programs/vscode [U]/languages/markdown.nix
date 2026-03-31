@@ -27,5 +27,9 @@
         };
       };
     };
+
+    persistUserIgnore = { hmConfig, ... }: {
+      directories = [ "${hmConfig.xdg.configHome}/crossnote" ];
+    };
   };
 }
