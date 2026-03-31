@@ -12,8 +12,18 @@
 
       persistUser = { hmConfig, ... }: {
         directories = [
-          { directory = "${hmConfig.xdg.configHome}/valent"; mode = "0700"; }
-          { directory = "${hmConfig.xdg.cacheHome}/valent"; mode = "0700"; }
+          {
+            directory = "${hmConfig.xdg.configHome}/valent";
+            mode = "0700";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+          {
+            directory = "${hmConfig.xdg.cacheHome}/valent";
+            mode = "0700";
+            how = "symlink";
+            createLinkTarget = true;
+          }
         ];
       };
       persistUserTmp = { hmConfig, ... }: {

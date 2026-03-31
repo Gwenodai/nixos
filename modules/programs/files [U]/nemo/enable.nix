@@ -48,11 +48,22 @@
       };
     };
 
-    persistUser = { hmConfig, ... }: {
+    persistUser = { hmConfig, lib, ... }: {
       directories = [
-        { directory = "${hmConfig.xdg.dataHome}/gvfs-metadata"; mode = "0700"; }
+        {
+          directory = "${hmConfig.xdg.dataHome}/gvfs-metadata";
+          mode = "0700";
+          how = "symlink";
+          createLinkTarget = true;
+        }
+      ] ++ lib.map (path: {
+        directory = path;
+        how = "symlink";
+        createLinkTarget = true;
+      }) [
         "${hmConfig.xdg.configHome}/gtk-3.0"
         "${hmConfig.xdg.configHome}/nemo"
+        "${hmConfig.xdg.dataHome}/nemo"
       ];
     };
 

@@ -60,8 +60,8 @@
         };
       };
 
-      persistUser = { hmConfig, ... }: {
-        directories = map (path: {
+      persistUser = { hmConfig, lib, ... }: {
+        directories = lib.map (path: {
           directory = path;
           how = "symlink";
           createLinkTarget = true;

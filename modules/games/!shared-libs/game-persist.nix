@@ -2,18 +2,14 @@
   # Generic persistence configs for native linux game save directories
   # intended to be shared by game launchers like Steam. (intended for users)
   den.aspects.game-libs._.game-persist = {
-    persistUser = { hmConfig, ... }: {
-      directories = [
-        { # Unity savegames
-          directory = "${hmConfig.xdg.configHome}/unity3d";
-          how = "symlink";
-          createLinkTarget = true;
-        }
-        { # Godot savegames
-          directory = "${hmConfig.xdg.dataHome}/godot/app_userdata";
-          how = "symlink";
-          createLinkTarget = true;
-        }
+    persistUser = { hmConfig, lib, ... }: {
+    directories = lib.map (path: {
+        directory = path;
+        how = "symlink";
+        createLinkTarget = true;
+      }) [
+        "${hmConfig.xdg.configHome}/unity3d"          # Unity savegames
+        "${hmConfig.xdg.dataHome}/godot/app_userdata" # Godot savegames
       ];
     };
 

@@ -40,7 +40,12 @@
       directories = [
         "${hmConfig.xdg.cacheHome}/noctalia"
         "${hmConfig.xdg.cacheHome}/noctalia-qs"
-        { directory = "${hmConfig.xdg.cacheHome}/cliphist"; mode = "0700"; }
+        {
+          directory = "${hmConfig.xdg.cacheHome}/cliphist";
+          mode = "0700";
+          how = "symlink";
+          createLinkTarget = true;
+        }
         {
           directory = "${hmConfig.xdg.configHome}/noctalia/colorschemes";
           how = "symlink";

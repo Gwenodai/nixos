@@ -9,6 +9,20 @@
       ];
     };
 
-    persistIgnore.directories = [ "/etc/coolercontrol" ];
+    persist.directories = [
+      {
+        directory = "/etc/coolercontrol";
+        how = "symlink";
+        createLinkTarget = true;
+      }
+    ];
+
+    persistUserIgnore = { hmConfig, ... }: {
+      directories = [
+        "${hmConfig.xdg.dataHome}/org.coolercontrol.CoolerControl"
+        "${hmConfig.xdg.cacheHome}/org.coolercontrol.CoolerControl"
+        "${hmConfig.xdg.configHome}/org.coolercontrol.CoolerControl"
+      ];
+    };
   };
 }

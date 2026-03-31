@@ -52,7 +52,11 @@
       # ---Persist config--- #
       persistUser = { hmConfig, ... }: {
         directories = [
-          "${hmConfig.xdg.configHome}/sops"
+          {
+            directory = "${hmConfig.xdg.configHome}/sops";
+            how = "symlink";
+            createLinkTarget = true;
+          }
         ];
       };
       persistUserTmp = { hmConfig, ... }: {

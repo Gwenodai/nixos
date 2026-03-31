@@ -8,7 +8,35 @@
         services.lact.enable = lib.mkDefault true;
       };
 
-      persistIgnore.directories = [ "/etc/lact" ];
+      persist = { config, lib, ... }: {
+        directories = lib.mkIf (!config.environment.etc."lact/config.yaml".enable) [
+          {
+            directory = "/etc/lact";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ];
+      };
+
+      persistIgnore = { config, lib, ... }: {
+        directories = lib.mkIf config.environment.etc."lact/config.yaml".enable [
+          "/etc/lact"
+        ];
+      };
+
+      persistUser = { hmConfig, ... }: {
+        directories = [
+          {
+            directory = "${hmConfig.xdg.configHome}/lact";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ];
+      };
+
+      persistUserTmp = { hmConfig, ... }: {
+        "${hmConfig.xdg.configHome}" = {}; # "~/.config
+      };
     };
 
     _.class = { 
