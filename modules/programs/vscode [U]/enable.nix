@@ -42,12 +42,17 @@
           file = "${hmConfig.xdg.configHome}/Code/Trust Tokens-journal";
           mode = "0600";
         }
+        {
+          file = "${hmConfig.home.homeDirectory}/.vscode/argv.json";
+          mode = "0644";
+        }
       ];
     };
 
     persistUserTmp = { hmConfig, ... }: {
       "${hmConfig.xdg.configHome}" = {}; # "~/.config"
       "${hmConfig.xdg.configHome}/Code" = {};
+      "${hmConfig.home.homeDirectory}/.vscode" = {};
     };
 
     persistUserIgnore = { hmConfig, ... }: {
@@ -57,7 +62,6 @@
       files = [
         "${hmConfig.xdg.cacheHome}/Microsoft/DeveloperTools/deviceid"
         ".vscode/extensions/extensions.json"
-        ".vscode/argv.json"
       ];
     };
   };

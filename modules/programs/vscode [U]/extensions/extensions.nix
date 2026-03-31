@@ -61,5 +61,17 @@
         };
       };
     };
+
+    # GitHub Actions workflows and runs for github hosted repositories
+    _.github-actions = den.lib.perUser {
+      includes = [ den.aspects.vscode._.extensions._.enable ];
+      homeManager = { pkgs, ... }: {
+        programs.vscode.profiles.default = {
+          extensions = with pkgs.nix-vscode-extensions.vscode-marketplace-release; [
+            github.vscode-github-actions
+          ];
+        };
+      };
+    };
   };
 }
