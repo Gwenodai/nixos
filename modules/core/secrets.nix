@@ -43,7 +43,7 @@
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
         sops = {
-          age.keyFile = lib.mkDefault "${config.xdg.configHome}/sops/age/keys.txt";
+          age.sshKeyPaths = lib.mkDefault [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
           defaultSopsFile =
             lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
         };

@@ -1,36 +1,39 @@
 keys:
   # User keys
-  - &gwen age1t2e8aefltys974lclglwkg97vzxtv6xyjfqvuwf5kz56wh3l338qdrqj24
-  # - &stacy age1...
+  - &gwen_gwen-t1 age1elhax2j7l8u8ww3j3gcpuqm7vfv883ct9k3rtz0r9e7au5nwu9uqjg4p7f
+  - &gwen_ymir age134npz65rup8fghfuht20hauuxn6y2ysds9ru6zzgf8s8kjzdqsrqaa40g0
+  - &stacy_stacy-pc age10u7r8hu6grmpasqcjcga2zlq6du0maypzd85wyq8x9z7d6qwv9fskzuwjq
 
   # Host keys
-  - &gwen-t1 age1y5cwzacuw59ph2tgn56sffhxf7lt76u3r79vw5jy8ds9vv4tq9dqyv25hl
-  # - &gwen-server age1...
-  # - &stacy-pc age1...
+  - &gwen-t1 age1q8d8fvahe4h23ta8smxasjnzreh79jjm7d78s4wqnm95rjz5fsjs4uvhl4
+  - &ymir age16x5mw02yt83tlnnuc3ag2ua6u3wkc8pgspkxf7kjlq0e6za46g6sr9654t
+  - &stacy-pc age1t9k93h7cz5cka4vaq8ecu26ajjd5p3qchyx42uvvkpvkwl08jccqhlhjw9
 
 creation_rules:
   # Gwen secrets
   - path_regex: secrets/gwen/[^/]+\.(yaml|json|env|ini|sops)$
     key_groups:
     - age:
-      - *gwen
+      - *gwen_gwen-t1
+      - *gwen_ymir
       - *gwen-t1
-      # - *gwen-server
+      - *ymir
 
   
   # Stacy secrets
-  # - path_regex: secrets/stacy/[^/]+\.(yaml|json|env|ini|sops)$
-  #   key_groups:
-  #   - age:
-  #     - *stacy
-  #     - *stacy-pc
+  - path_regex: secrets/stacy/[^/]+\.(yaml|json|env|ini|sops)$
+    key_groups:
+    - age:
+      - *stacy_stacy-pc
+      - *stacy-pc
   
   # Shared secrets
   - path_regex: secrets/common/[^/]+\.(yaml|json|env|ini|sops)$
     key_groups:
     - age:
-      - *gwen
+      - *gwen_gwen-t1
+      - *gwen_ymir
+      - *stacy_stacy-pc
       - *gwen-t1
-      # - *gwen-server
-      # - *stacy
-      # - *stacy-pc
+      - *ymir
+      - *stacy-pc
