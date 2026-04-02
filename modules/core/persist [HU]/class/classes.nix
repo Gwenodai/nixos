@@ -1,7 +1,8 @@
 { den, lib, ... }: let
   # --- Shared Deduplication Module --- #
-  dedupModule = { lib, ... }: {
-    freeformType = with lib.types; attrsOf anything;
+  # Without this `adapterModule` the `persist`, `persistIgnore`, and user
+  # relative classes will duplicate values within their respective lists
+  dedupModule = {
     options = {
       directories = lib.mkOption {
         type = with lib.types; listOf anything; 
@@ -27,7 +28,7 @@
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = _: intoPath;
       fromAspect = _: lib.head aspect-chain;
-      guard = { config, options, lib, ... }@osArgs: _: let
+      guard = { config, options, ... }@osArgs: _: let
         hasPreservation = options ? preservation;
         hasFindEphemeral = lib.any (pkg:
         (pkg.name or "") == "find-ephemeral") config.environment.systemPackages;
@@ -50,7 +51,7 @@
       intoClass = _: "nixos"; # Preservation only supports NixOS
       intoPath = u: [ "hostConfig" "preservation" intoSubPath u.userName ];
       fromAspect = _: lib.head aspect-chain;
-      guard = { config, options, lib, ... }@osArgs: _: let
+      guard = { config, options, ... }@osArgs: _: let
         hasPreservation = options ? preservation;
         hasHomeManager = lib.elem "homeManager" (user.classes or []);
         hasFindEphemeral = lib.any (pkg:
