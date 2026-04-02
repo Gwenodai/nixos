@@ -10,9 +10,11 @@
         services.openssh = {
           enable = lib.mkDefault true;
           openFirewall = lib.mkDefault true;
+          generateHostKeys = lib.mkDefault false;
           settings = {
             PermitRootLogin = lib.mkDefault "no";
-            PasswordAuthentication = lib.mkDefault true;
+            PasswordAuthentication = lib.mkDefault false;
+            KbdInteractiveAuthentication = lib.mkDefault false;
           };
         };
       };
@@ -21,7 +23,7 @@
         files = lib.map (path: {
           file = path;
           how = "symlink";
-          inInitrd = true; # Needed for `sops-nix` user password
+          inInitrd = true; # Needed for `sops-nix`
           configureParent = true;
         }) [
           "/etc/ssh/ssh_host_ed25519_key"
