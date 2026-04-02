@@ -48,20 +48,6 @@
             lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
         };
       };
-
-      # ---Persist config--- #
-      persistUser = { hmConfig, ... }: {
-        directories = [
-          {
-            directory = "${hmConfig.xdg.configHome}/sops";
-            how = "symlink";
-            createLinkTarget = true;
-          }
-        ];
-      };
-      persistUserTmp = { hmConfig, ... }: {
-        "${hmConfig.xdg.configHome}" = {}; # "~/.config"
-      };
     };
   };
 }
