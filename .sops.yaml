@@ -2,6 +2,7 @@ keys:
   # User keys
   - &gwen_gwen-t1 age1elhax2j7l8u8ww3j3gcpuqm7vfv883ct9k3rtz0r9e7au5nwu9uqjg4p7f
   - &gwen_ymir age134npz65rup8fghfuht20hauuxn6y2ysds9ru6zzgf8s8kjzdqsrqaa40g0
+  - &gwen_gwen-s23plus age18v6g4khqca6e0gcq57mryrttqghecpgdq4ex8s7sx4ssmfgkjf0sdcwdem
   - &stacy_stacy-pc age10u7r8hu6grmpasqcjcga2zlq6du0maypzd85wyq8x9z7d6qwv9fskzuwjq
 
   # Host keys
@@ -16,6 +17,7 @@ creation_rules:
     - age:
       - *gwen_gwen-t1
       - *gwen_ymir
+      - *gwen_gwen-s23plus
       - *gwen-t1
       - *ymir
 
@@ -33,6 +35,7 @@ creation_rules:
     - age:
       - *gwen_gwen-t1
       - *gwen_ymir
+      - *gwen_gwen-s23plus
       - *stacy_stacy-pc
       - *gwen-t1
       - *ymir

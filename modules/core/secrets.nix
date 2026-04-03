@@ -7,19 +7,15 @@
   };
 
   # Include sops-nix by default in all hosts and hm-users
-  den.ctx.host.includes = [ den.aspects.secrets._.secretsNix ];
-  den.ctx.hm-user.includes = [ den.aspects.secrets._.secretsHome ];
+  den.ctx.host.includes = [ den.aspects.secrets._.sys ];
+  den.ctx.hm-user.includes = [ den.aspects.secrets._.hmUser ];
 
   # Declare a common sops file using meta-data which can be accessed by all aspects
-  den.schema.conf = { lib, ... }: {
-    options.sops.commonSopsFile = lib.mkOption {
-      default = (self + "/secrets/common/secrets.yaml");
-    };
-  };
+  flake.lib.secrets.commonSopsFile = "${self + "/secrets/common/secrets.yaml"}";
 
   den.aspects.secrets = {
     # ---NixOS module--- #
-    _.secretsNix = den.lib.perHost ({ host }: {
+    _.sys = den.lib.perHost {
       nixos = { config, pkgs, lib, ... }: {
         # Import the secrets module
         imports = [ inputs.sops-nix.nixosModules.sops ];
@@ -32,13 +28,13 @@
         
         sops = {
           age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
-          defaultSopsFile = lib.mkDefault host.sops.commonSopsFile;
+          defaultSopsFile = lib.mkDefault inputs.self.lib.secrets.commonSopsFile;
         };
       };
-    });
+    };
 
     # ---Home module--- #
-    _.secretsHome = den.lib.perUser {
+    _.hmUser = den.lib.perUser {
       homeManager = { config, lib, ... }: {
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
 

@@ -1,4 +1,4 @@
-# Helper function for creating system configurations
+# Helper functions made using flake-parts
 { lib, ... }: {
   options.flake.lib = lib.mkOption {
     type = with lib.types; attrsOf unspecified;

@@ -1,5 +1,5 @@
 # Host system config
-{ den, ... }: {
+{ self, den, ... }: {
   den.aspects.ymir = {
     includes = with den.aspects; [
       # ---Core Config--- #
@@ -29,7 +29,7 @@
 
     nixos = { lib, ... }: {
       # Set the default secrets file for this host
-      # sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+      sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
       fileSystems."/".device = lib.mkDefault "/dev/fake"; # FIXME: Temp stub
     };
   };
