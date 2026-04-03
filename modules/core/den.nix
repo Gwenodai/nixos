@@ -1,5 +1,5 @@
 # Declare tools for use in implementing the dendritic pattern
-{ inputs, ... }: {
+{ den, inputs, ... }: {
   imports = [
     ( inputs.flake-file.flakeModules.dendritic or {} )
     ( inputs.den.flakeModules.dendritic or {} )
@@ -11,6 +11,10 @@
     flake-file.url = "github:vic/flake-file";
     den.url = "github:vic/den";
   };
+
+  # Enable the use of den's angle brackets syntax
+  # https://den.oeiuwq.com/guides/angle-brackets
+  _module.args.__findFile = den.lib.__findFile;
 
   # Define avialable systems
   systems = [
