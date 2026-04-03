@@ -1,8 +1,8 @@
-{ den, ... }: {
+{ inputs, den, ... }: {
   den.aspects.gwen-t1 = {
     includes = [
       (den.aspects.mount-cifs {
-        host = "192.168.1.64"; # TODO: Use predefined server cifs config
+        host = inputs.self.lib.hosts.ymir.ip;
         resource = "Network-Storage";
         destination = "/mnt/ymir/root";
         UID = 1000;
