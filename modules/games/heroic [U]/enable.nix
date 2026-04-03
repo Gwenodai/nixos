@@ -1,7 +1,7 @@
-{ den, ... }: {
+{ den, __findFile, ... }: {
   den.aspects.heroic._.enable = den.lib.perUser {
     # Generic linux game directories that should be persisted by users
-    includes = with den.aspects.game-libs._; [ game-persist ];
+    includes = [ <lib/games/savegame-persist> ];
 
     homeManager = { pkgs, lib, ... }: {
       home.packages = with pkgs; [ heroic ];

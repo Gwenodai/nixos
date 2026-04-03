@@ -1,4 +1,4 @@
-{ den, ... }: {
+{ den, __findFile, ... }: {
   # https://mynixos.com/nixpkgs/options/programs.steam
   den.aspects.steam = {
     # The `enable` sub-aspect is included when the generic 'steam' aspect is used
@@ -6,7 +6,7 @@
 
     _.enable = den.lib.perUser {
       # Generic linux game directories that should be persisted by users
-      includes = with den.aspects.game-libs._; [ game-persist ];
+      includes = [ <lib/games/savegame-persist> ];
 
       nixos = { pkgs, lib, ... }: {
         programs.steam = {
