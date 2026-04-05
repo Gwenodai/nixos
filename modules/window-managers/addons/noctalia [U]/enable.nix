@@ -16,13 +16,13 @@
   };
 
   den.aspects.noctalia._.enable = den.lib.perUser {
-    homeManager = { config, pkgs, lib, ... }: let
+    homeManager = { inputs', config, pkgs, lib, ... }: let
       # Small application to easily show changed values from live noctalia settings
       noctalia-diff = pkgs.writeShellApplication {
         name = "noctalia-diff";
         runtimeInputs = [
-          pkgs.bat-extras.batdiff # Provides batdiff
-          pkgs.jq                 # Provides jq
+          pkgs.bat-extras.batdiff
+          pkgs.jq
         ];
         text = lib.replaceStrings ["# syntax: bash\n"] [""] ''
           # syntax: bash
@@ -33,7 +33,12 @@
     in {
       imports = [ inputs.noctalia.homeModules.default ];
       home.packages = [ noctalia-diff ];
-      programs.noctalia-shell.enable = lib.mkDefault true;
+      programs.noctalia-shell = {
+        enable = lib.mkDefault true;
+        package = inputs'.noctalia.packages.default.override {
+          calendarSupport = true;
+        };
+      };
     };
 
     persistUser = { hmConfig, ... }: {

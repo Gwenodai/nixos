@@ -16,6 +16,9 @@
           niri
           noctalia # Minimal desktop shell
           stylix   # Theming
+
+          # ---Basic Desktop Applications--- #
+          calendar
         ];
       };
     };

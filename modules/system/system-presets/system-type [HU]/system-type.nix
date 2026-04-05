@@ -25,7 +25,7 @@
         display-manager
         audio
         fonts
-        # Security
+        # Security aspects
         keyring
         polkit
         

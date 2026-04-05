@@ -2,11 +2,12 @@
   den.aspects.keyring = {
     includes = with den.aspects.keyring._; [ gnome-keyring ];
 
-    _.gnome-keyring = den.lib.perUser {
-      homeManager = { config, lib, ... }: {
-        services.gnome-keyring.enable = lib.mkDefault true;
+    _.gnome-keyring = den.lib.perHost {
+      nixos = { config, lib, ... }: {
+        services.gnome.gnome-keyring.enable = lib.mkDefault true;
+        programs.seahorse.enable = lib.mkDefault true;
 
-        xdg.portal.config.common = lib.mkIf config.services.gnome-keyring.enable {
+        xdg.portal.config.common = lib.mkIf config.services.gnome.gnome-keyring.enable {
           "org.freedesktop.impl.portal.Secret" = lib.mkDefault [ "gnome-keyring" ];
         };
       };
@@ -15,6 +16,12 @@
         directories = [
           {
             directory = "${hmConfig.xdg.dataHome}/keyrings";
+            how = "symlink";
+            mode = "0700";
+            createLinkTarget = true;
+          }
+          {
+            directory = "${hmConfig.home.homeDirectory}/.gnupg";
             how = "symlink";
             mode = "0700";
             createLinkTarget = true;

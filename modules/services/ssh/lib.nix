@@ -9,6 +9,8 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEscSg7Yo3cXMbfYQ6WcQi2XR5zFggK/pFLtsgpHT7L gwen@gwen-s23plus"
         ];
       };
+
+      persistIgnore.directories = [ "/etc/ssh/authorized_keys.d" ];
     };
   };
 }

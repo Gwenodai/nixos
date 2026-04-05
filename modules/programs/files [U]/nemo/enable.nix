@@ -24,6 +24,7 @@
             nemo-emblems    # Enables folder/file emblem change tab
             nemo-preview    # Quick previewer for Nemo
             nemo-fileroller # Archive management within Nemo
+            nemo-seahorse   # GNOME encryption keys management
           ];
         })
       ];
