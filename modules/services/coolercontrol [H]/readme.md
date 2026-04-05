@@ -3,6 +3,6 @@
 **Detailed documentation for this aspect is available on the wiki.**
 <br>
 
-[![Static Badge](https://img.shields.io/badge/view_wiki-coolercontrol_documentation-blue?style=for-the-badge&logo=github)](/Gwenodai/nixos/wiki/coolercontrol)
+[![Static Badge](https://img.shields.io/badge/view_wiki-coolercontrol_documentation-blue?style=for-the-badge&logo=github)](https://github.com/Gwenodai/nixos/wiki/coolercontrol)
 
 </div>

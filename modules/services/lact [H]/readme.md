@@ -3,6 +3,6 @@
 **Detailed documentation for this aspect is available on the wiki.**
 <br>
 
-[![Static Badge](https://img.shields.io/badge/view_wiki-lact_documentation-blue?style=for-the-badge&logo=github)](/Gwenodai/nixos/wiki/lact)
+[![Static Badge](https://img.shields.io/badge/view_wiki-lact_documentation-blue?style=for-the-badge&logo=github)](https://github.com/Gwenodai/nixos/wiki/lact)
 
 </div>

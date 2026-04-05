@@ -3,6 +3,6 @@
 **Detailed documentation for this aspect is available on the wiki.**
 <br>
 
-[![Static Badge](https://img.shields.io/badge/view_wiki-git_documentation-blue?style=for-the-badge&logo=github)](/Gwenodai/nixos/wiki/git)
+[![Static Badge](https://img.shields.io/badge/view_wiki-git_documentation-blue?style=for-the-badge&logo=github)](https://github.com/Gwenodai/nixos/wiki/git)
 
 </div>
