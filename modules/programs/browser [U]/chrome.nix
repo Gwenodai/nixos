@@ -15,6 +15,7 @@
               let
                 application = "google-chrome.desktop";
                 mimeTypes = [
+                  "text/html"
                   "application/rdf+xml"
                   "application/rss+xml"
                   "application/xhtml+xml"
@@ -34,12 +35,11 @@
                 "application/xml"
                 "application/pdf"
                 "text/markdown"
+                "text/xml"
                 "image/jpeg"
                 "image/webp"
                 "image/gif"
                 "image/png"
-                "text/html"
-                "text/xml"
               ];
             in lib.genAttrs mimeTypes (mimetype: application);
           };
