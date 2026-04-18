@@ -45,7 +45,7 @@
             "Mod+Shift+Print".action = clear-dynamic-cast-target;
           }
           { # Audio keys
-            # "XF86AudioMute".action = spawn MUTE AUDIO;
+            # "XF86AudioMute".action        = spawn MUTE AUDIO;
             # "XF86AudioRaiseVolume".action = spawn RAISE VOLUME;
             # "XF86AudioLowerVolume".action = spawn LOWER VOLUME;
           }

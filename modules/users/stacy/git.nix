@@ -1,6 +1,6 @@
 { den, ... }: {
-  den.aspects.gwen = {
-    includes = with den.aspects.gwen._; [ git-config ];
+  den.aspects.stacy = {
+    includes = with den.aspects.stacy._; [ git-config ];
 
     _.git-config = {
       homeManager = { config, ... }: {
@@ -10,18 +10,18 @@
             "git/email" = {};
             "git/ssh-key/private" = {
               mode = "0600";
-              path = "${config.home.homeDirectory}/.ssh/gwenodai@github";
+              path = "${config.home.homeDirectory}/.ssh/skyora92@github";
             };
             "git/ssh-key/public" = {
               mode = "0644";
-              path = "${config.home.homeDirectory}/.ssh/gwenodai@github.pub";
+              path = "${config.home.homeDirectory}/.ssh/skyora92@github.pub";
             };
           };
           # Construct git `user` config from secrets
           templates."git-credentials" = {
             content = ''
               [user]
-                name = Gwen
+                name = Stacy
                 email = ${config.sops.placeholder."git/email"}
             '';
           };

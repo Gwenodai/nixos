@@ -12,6 +12,13 @@
         programs.steam = {
           enable = lib.mkDefault true;
 
+          package = pkgs.steam.override {
+            extraEnv = {
+              NIXOS_OZONE_WL = "0";
+              MANGOHUD = "1";
+            };
+          };
+
           extest.enable = lib.mkDefault true;
           localNetworkGameTransfers.openFirewall = lib.mkDefault true;
 

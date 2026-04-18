@@ -16,6 +16,9 @@
       # ---System Config--- #
       system-type._.desktop._.gaming       # Use the gaming desktop system preset
       desktop-type._.window-manager._.niri # Use the Niri desktop preset
+
+      # ---Services--- #
+      kde-connect
     ];
 
     _.to-users = {
@@ -23,6 +26,10 @@
         # ---Core Config--- #
         system-type._.desktop._.gaming
         desktop-type._.window-manager._.niri
+
+        # ---Applications--- #
+        spotify
+        messaging._.messenger
       ];
     };
 
@@ -34,8 +41,7 @@
 
     nixos = { lib, ... }: {
       # Set the default secrets file for this host
-      # sops.defaultSopsFile = self + "/secrets/stacy/secrets.yaml";
-      fileSystems."/".device = lib.mkDefault "/dev/fake"; # FIXME: Temp stub
+      sops.defaultSopsFile = self + "/secrets/stacy/secrets.yaml";
     };
   };
 }

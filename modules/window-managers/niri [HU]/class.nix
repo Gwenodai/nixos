@@ -15,11 +15,16 @@
           type = lib.types.listOf lib.types.anything;
           default = [];
         };
+        attrOption = lib.mkOption {
+          type = lib.types.attrsOf lib.types.anything;
+          default = {};
+        };
       in {
         options.settings = {
           spawn-at-startup = listOption;
           window-rules = listOption;
           layer-rules = listOption;
+          binds = attrOption;
         };
       };
     }

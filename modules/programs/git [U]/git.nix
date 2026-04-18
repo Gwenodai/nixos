@@ -1,7 +1,8 @@
 { den, lib, ... }: {
   den.aspects.git = {
     # All sub-aspects are included when the generic 'git' aspect is used
-    includes = lib.attrValues den.aspects.git._;
+    # includes = lib.attrValues den.aspects.git._;
+    includes = [ den.aspects.git._.git ];
     
     _.git = {
       # Bundles all git components when the complete 'git' sub-aspect is used
