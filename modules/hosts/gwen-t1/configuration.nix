@@ -29,6 +29,7 @@
         persist # Enable persistence for all users
         system-type._.desktop._.gaming
         desktop-type._.window-manager._.niri
+        noctalia._.settings # Use pre-configured settings
 
         # ---Applications--- #
         spotify

@@ -19,6 +19,9 @@
 
       # ---Services--- #
       kde-connect
+
+      # ---Scripts--- #
+      fix-camera
     ];
 
     _.to-users = {

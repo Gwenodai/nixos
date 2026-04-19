@@ -3,7 +3,7 @@
     includes = with den.aspects.noctalia._; [
       enable
       class
-      settings
+      # settings
       plugins
       colour-schemes
       niri
