@@ -10,6 +10,7 @@
           ( den.lib.perHost {
             nixos = { lib, ... }: { # Set the default login session to Niri
               services.displayManager.defaultSession = lib.mkDefault "niri";
+              hardware.xone.enable = true;
             };
           })
           # ---Core Aspects--- #
