@@ -45,6 +45,9 @@
           lact    # GPU control
           ananicy # Auto-nice daemon
 
+          # ---Hardware--- #
+          (den.lib.perHost { nixos.hardware.xone.enable = true; }) # Xbox One controllers
+
           # ---Gaming Related Applications--- #
           steam
           heroic

@@ -14,6 +14,7 @@
           { # VRR blocklist
             matches = [
               { app-id = "^steam_app.*"; title = "^Unrailed!$"; }
+              { app-id = "^steam_app.*"; title = "^Dome Keeper$"; }
               { app-id = "^steam_app_881100$"; } # Noita
               { app-id = "^steam_app_323190$"; } # Frostpunk
               # { app-id = "^steam_app_2246340$"; } # MH:Wilds
