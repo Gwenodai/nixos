@@ -7,11 +7,8 @@
     _.window-manager = {
       _.niri = {
         includes = with den.aspects; [
-          ( den.lib.perHost {
-            nixos = { lib, ... }: { # Set the default login session to Niri
-              services.displayManager.defaultSession = lib.mkDefault "niri";
-              hardware.xone.enable = true;
-            };
+          ( den.lib.perHost { # Set the default login session to Niri
+            nixos.services.displayManager.defaultSession = "niri";
           })
           # ---Core Aspects--- #
           niri
