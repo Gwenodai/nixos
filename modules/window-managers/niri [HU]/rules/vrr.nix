@@ -7,6 +7,7 @@
             matches = [
               { app-id = "^steam_app.*"; } # Most steam games
               { app-id = "^RSG-Linux-Shipping$"; } # Everspace native linux version
+              { app-id = "^vampire crawlers.exe$"; }
             ];
             variable-refresh-rate = true;
             open-focused = true;
