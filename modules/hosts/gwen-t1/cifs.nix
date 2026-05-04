@@ -1,4 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, den, ... }:
+{
   den.aspects.gwen-t1 = {
     includes = [
       (den.aspects.mount-cifs {

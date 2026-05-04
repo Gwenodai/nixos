@@ -1,5 +1,6 @@
 # Host system config
-{ self, den, ... }: {
+{ self, den, ... }:
+{
   den.aspects.stacy-pc = {
     includes = with den.aspects; [
       # ---Core Config--- #
@@ -14,7 +15,7 @@
       hardware._.amdgpu._.overclock
 
       # ---System Config--- #
-      system-type._.desktop._.gaming       # Use the gaming desktop system preset
+      system-type._.desktop._.gaming # Use the gaming desktop system preset
       desktop-type._.window-manager._.niri # Use the Niri desktop preset
 
       # ---Services--- #
@@ -42,9 +43,11 @@
       ];
     };
 
-    nixos = { lib, ... }: {
-      # Set the default secrets file for this host
-      sops.defaultSopsFile = self + "/secrets/stacy/secrets.yaml";
-    };
+    nixos =
+      { lib, ... }:
+      {
+        # Set the default secrets file for this host
+        sops.defaultSopsFile = self + "/secrets/stacy/secrets.yaml";
+      };
   };
 }

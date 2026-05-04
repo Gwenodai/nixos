@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.cli._.btop = den.lib.perUser {
     homeManager = {
       # TODO: Configure btop

@@ -1,4 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, den, ... }:
+{
   den.aspects.stacy-pc = {
     includes = [
       # Network storage mount

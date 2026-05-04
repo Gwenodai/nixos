@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.niri = {
     includes = with den.aspects.niri._; [
       enable

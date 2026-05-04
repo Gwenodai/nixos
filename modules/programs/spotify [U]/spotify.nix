@@ -1,52 +1,60 @@
-{ den, ... }: {
-  
+{ den, ... }:
+{
+
   den.aspects.spotify = {
     includes = with den.aspects.spotify._; [ enable ];
-    
-    _.enable = den.lib.perUser {
-      homeManager = { pkgs, lib, ... }: {
-        home.packages = with pkgs; [
-          spotify
-          spotify-tray
-        ];
-        
-        services.playerctld.enable = true;
 
-        xdg = {
-          mimeApps = {
-            defaultApplications = lib.mkBefore (
-              let
-                application = "spotify.desktop";
-                mimeTypes = [
-                  "x-scheme-handler/spotify"
-                ];
-              in lib.genAttrs mimeTypes (mimetype: application)
-            );
+    _.enable = den.lib.perUser {
+      homeManager =
+        { pkgs, lib, ... }:
+        {
+          home.packages = with pkgs; [
+            spotify
+            spotify-tray
+          ];
+
+          services.playerctld.enable = true;
+
+          xdg = {
+            mimeApps = {
+              defaultApplications = lib.mkBefore (
+                let
+                  application = "spotify.desktop";
+                  mimeTypes = [
+                    "x-scheme-handler/spotify"
+                  ];
+                in
+                lib.genAttrs mimeTypes (mimetype: application)
+              );
+            };
           };
         };
-      };
 
-      persistUser = { hmConfig, ... }: {
-        directories = [
-          {
-            directory = "${hmConfig.xdg.configHome}/spotify";
-            how = "symlink";
-            mode = "0755";
-            createLinkTarget = true;
-          }
-          {
-            directory = "${hmConfig.xdg.cacheHome}/spotify";
-            how = "symlink";
-            mode = "0700";
-            createLinkTarget = true;
-          }
-        ];
-      };
+      persistUser =
+        { hmConfig, ... }:
+        {
+          directories = [
+            {
+              directory = "${hmConfig.xdg.configHome}/spotify";
+              how = "symlink";
+              mode = "0755";
+              createLinkTarget = true;
+            }
+            {
+              directory = "${hmConfig.xdg.cacheHome}/spotify";
+              how = "symlink";
+              mode = "0700";
+              createLinkTarget = true;
+            }
+          ];
+        };
 
-      persistUserTmp = { hmConfig, ... }: {
-        "${hmConfig.xdg.cacheHome}" = {};  # "~/.cache"
-        "${hmConfig.xdg.configHome}" = {}; # "~/.config"
-      };
+      persistUserTmp =
+        { hmConfig, ... }:
+        {
+          "${hmConfig.xdg.cacheHome}" = { }; # "~/.cache"
+          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        };
     };
   };
 }

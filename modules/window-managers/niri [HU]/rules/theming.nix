@@ -1,9 +1,11 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.niri._.rules._.theming = den.lib.perUser {
     homeManager = {
       programs.niri.settings = {
         window-rules = [
-          { # Rounded corners
+          {
+            # Rounded corners
             geometry-corner-radius =
               let
                 radius = 18.0;
@@ -16,7 +18,8 @@
               };
             clip-to-geometry = true;
           }
-          { # Shadow behind windows
+          {
+            # Shadow behind windows
             matches = [
               { app-id = "^kitty$"; }
             ];
@@ -25,7 +28,8 @@
               color = "#000000B3";
             };
           }
-          { # 90% Transparent windows + Shadow behind
+          {
+            # 90% Transparent windows + Shadow behind
             matches = [
               { is-floating = true; }
               { app-id = "^vesktop$"; }
@@ -37,7 +41,8 @@
               color = "#000000B3";
             };
           }
-          { # 80% Transparent windows + Shadow behind
+          {
+            # 80% Transparent windows + Shadow behind
             matches = [
               { is-floating = true; }
               { app-id = "^nemo$"; }

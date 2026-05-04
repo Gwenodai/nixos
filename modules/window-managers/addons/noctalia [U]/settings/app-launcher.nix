@@ -1,36 +1,39 @@
-{ inputs, den, ... }: {
+{ inputs, den, ... }:
+{
   den.aspects.noctalia._.settings._.app-launcher = den.lib.perUser {
-    homeManager = { config, ... }: {
-      programs.noctalia-shell.settings = {
-        # ---Noctalia app launcher settings---
-        appLauncher = inputs.self.lib.applyDefaults {
-          enableClipboardHistory = true;
-          autoPasteClipboard = false;
-          enableClipPreview = true;
-          enableClipboardChips = true;
-          enableClipboardSmartIcons = true;
-          clipboardWrapText = true;
-          clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
-          clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
-          position = "center";
-          pinnedApps = [];
-          sortByMostUsed = true;
-          terminalCommand = "kitty -e";
-          customLaunchPrefixEnabled = false;
-          customLaunchPrefix = "";
-          viewMode = "list";
-          showCategories = true;
-          iconMode = "tabler";
-          showIconBackground = false;
-          enableSettingsSearch = false;
-          enableWindowsSearch = false;
-          enableSessionSearch = false;
-          ignoreMouseInput = false;
-          screenshotAnnotationTool = "";
-          overviewLayer = false;
-          density = "default";
+    homeManager =
+      { config, ... }:
+      {
+        programs.noctalia-shell.settings = {
+          # ---Noctalia app launcher settings---
+          appLauncher = inputs.self.lib.applyDefaults {
+            enableClipboardHistory = true;
+            autoPasteClipboard = false;
+            enableClipPreview = true;
+            enableClipboardChips = true;
+            enableClipboardSmartIcons = true;
+            clipboardWrapText = true;
+            clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
+            clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
+            position = "center";
+            pinnedApps = [ ];
+            sortByMostUsed = true;
+            terminalCommand = "kitty -e";
+            customLaunchPrefixEnabled = false;
+            customLaunchPrefix = "";
+            viewMode = "list";
+            showCategories = true;
+            iconMode = "tabler";
+            showIconBackground = false;
+            enableSettingsSearch = false;
+            enableWindowsSearch = false;
+            enableSessionSearch = false;
+            ignoreMouseInput = false;
+            screenshotAnnotationTool = "";
+            overviewLayer = false;
+            density = "default";
+          };
         };
       };
-    };
   };
 }

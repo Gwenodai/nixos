@@ -1,5 +1,6 @@
 # This file defines all hosts and their users
-{ den, ... }:{
+{ den, ... }:
+{
   # Host metadata for later reference
   flake.lib.hosts = {
     gwen-t1 = {
@@ -28,7 +29,7 @@
   };
   # Server
   den.hosts.x86_64-linux.ymir.users = {
-    gwen = {};
+    gwen = { };
   };
 
   # Default host settings

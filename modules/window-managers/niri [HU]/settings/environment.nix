@@ -1,4 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, den, ... }:
+{
   den.aspects.niri._.settings._.environment = den.lib.perUser {
     homeManager = {
       programs.niri.settings.environment = inputs.self.lib.applyDefaults {
