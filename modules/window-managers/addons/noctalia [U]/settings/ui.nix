@@ -105,7 +105,7 @@
           enabled = true; # UI popups when changing volume/brightness etc
           location = "top_right";
           autoHideMs = 2000;
-          overlayLayer = true;
+          overlayLayer = false; # Layer is always present, breaks vrr during mouse movements.
           backgroundOpacity = 1;
           enabledTypes = [
             0 # Output volume
