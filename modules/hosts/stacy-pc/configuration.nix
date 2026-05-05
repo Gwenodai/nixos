@@ -1,45 +1,58 @@
 # Host system config
-{ self, den, ... }:
+{
+  __findFile,
+  self,
+  den,
+  ...
+}:
+let
+  # Aspects shared by both the host and its users
+  sharedAspects = with den.aspects; [
+    # ---System Preset--- #
+    <sys-preset-desktop>
+    <sys-preset-desktop/gaming> # Use the gaming desktop system preset
+    wm-preset-niri # Use the Niri desktop preset
+  ];
+in
 {
   den.aspects.stacy-pc = {
-    includes = with den.aspects; [
-      # ---Core Config--- #
-      boot._.systemd # Use systemd boot
-      # Kernel config
-      kernel._.cachyos # Use the CachyOS kernel instead of the NixOS kernel
-      # CPU config
-      hardware._.amdcpu._.enable
-      hardware._.amdcpu._.performance
-      # GPU config
-      hardware._.amdgpu._.enable
-      hardware._.amdgpu._.overclock
+    includes =
+      with den.aspects;
+      sharedAspects
+      ++ [
+        # ---Core Config--- #
+        systemd-boot # Use systemd boot
+        # Kernel config
+        <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
+        # CPU config
+        <amdcpu>
+        <amdcpu/performance>
+        # GPU config
+        <amdgpu>
+        <amdgpu/overclock>
 
-      # ---System Config--- #
-      system-type._.desktop._.gaming # Use the gaming desktop system preset
-      desktop-type._.window-manager._.niri # Use the Niri desktop preset
+        # ---Services--- #
+        valent
 
-      # ---Services--- #
-      kde-connect
-
-      # ---Scripts--- #
-      fix-camera
-    ];
+        # ---Scripts--- #
+        fix-camera
+      ];
 
     _.to-users = {
-      includes = with den.aspects; [
-        # ---Core Config--- #
-        system-type._.desktop._.gaming
-        desktop-type._.window-manager._.niri
-
-        # ---Applications--- #
-        spotify
-        messaging._.messenger
-      ];
+      includes =
+        with den.aspects;
+        sharedAspects
+        ++ [
+          # ---Applications--- #
+          spotify
+          messaging._.messenger
+        ];
     };
 
     _.stacy = {
       includes = [
-        den._.primary-user
+        # ---User Config--- #
+        <den/primary-user>
       ];
     };
 

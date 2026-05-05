@@ -1,6 +1,6 @@
 # Documentation
 
-This documentation is currently WIP. So far all programs and services have finished documentation.
+This documentation is currently a WIP and unfortunately no longer reflects the current state of the repo.
 
 ---
 

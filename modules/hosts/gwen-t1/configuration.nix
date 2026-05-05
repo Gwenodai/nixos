@@ -1,46 +1,65 @@
 # Host system config
-{ self, den, ... }:
+{
+  __findFile,
+  self,
+  den,
+  ...
+}:
+let
+  # Aspects shared by both the host and its users
+  sharedAspects = with den.aspects; [
+    # ---Core Aspects--- #
+    persist # Opt into system wide ephemeral state management
+
+    # ---System Preset--- #
+    <sys-preset-desktop>
+    <sys-preset-desktop/gaming> # Use the gaming desktop system preset
+    wm-preset-niri # Use the Niri desktop preset
+  ];
+in
 {
   den.aspects.gwen-t1 = {
-    includes = with den.aspects; [
-      # ---Core Config--- #
-      persist # Enable persistence
-      boot._.systemd # Use systemd boot
-      # Kernel config
-      kernel._.cachyos # Use the CachyOS kernel instead of the NixOS kernel
-      kernel._.modules._.it87 # Driver for MB fan control (needed for AIO)
-      # CPU config
-      hardware._.amdcpu._.enable
-      hardware._.amdcpu._.performance
-      # GPU config
-      hardware._.amdgpu._.enable
-      hardware._.amdgpu._.overclock
+    includes =
+      with den.aspects;
+      sharedAspects
+      ++ [
+        # ---Persistence--- #
+        <persist/minimal-preset> # Use preconfigured default settings for preservation
+        <persist/find-ephemeral> # Tool to locate files not currently preserved
 
-      # ---System Config--- #
-      system-type._.desktop._.gaming # Use the gaming desktop system preset
-      desktop-type._.window-manager._.niri # Use the Niri desktop preset
+        # ---System Config--- #
+        systemd-boot # Use systemd boot
+        # Kernel config
+        <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
+        <kernel-modules/it87> # Driver for MB fan control (needed for AIO)
+        # CPU config
+        <amdcpu>
+        <amdcpu/performance>
+        # GPU config
+        <amdgpu>
+        <amdgpu/overclock>
 
-      # ---Services--- #
-      kde-connect
-    ];
+        # ---Services--- #
+        valent
+      ];
 
     _.to-users = {
-      includes = with den.aspects; [
-        # ---Core Config--- #
-        persist # Enable persistence for all users
-        system-type._.desktop._.gaming
-        desktop-type._.window-manager._.niri
-        noctalia._.settings # Use pre-configured settings
-
-        # ---Applications--- #
-        spotify
-        messaging._.messenger
-      ];
+      includes =
+        with den.aspects;
+        sharedAspects
+        ++ [
+          # ---Applications--- #
+          spotify
+          caprine
+        ];
     };
 
     _.gwen = {
       includes = with den.aspects; [
-        den._.primary-user
+        # ---User Config--- #
+        <den/primary-user>
+
+        # ---Applications--- #
         dconf-editor
       ];
     };
