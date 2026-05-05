@@ -1,30 +1,40 @@
 # Host system config
-{ self, den, ... }:
+{
+  __findFile,
+  self,
+  den,
+  ...
+}:
+let
+  # Aspects shared by both the host and its users
+  sharedAspects = with den.aspects; [
+    # ---System Preset--- #
+    sys-preset-basic
+  ];
+in
 {
   den.aspects.ymir = {
-    includes = with den.aspects; [
-      # ---Core Config--- #
-      boot._.systemd # Use systemd boot
-      # CPU config
-      hardware._.amdcpu._.enable
-      # GPU config
-      hardware._.amdgpu._.enable
-      hardware._.amdgpu._.overclock
-
-      # ---System Config--- #
-      system-type._.basic
-    ];
+    includes =
+      with den.aspects;
+      sharedAspects
+      ++ [
+        # ---Core Config--- #
+        systemd-boot # Use systemd boot
+        # CPU config
+        amdcpu
+        # GPU config
+        <amdgpu>
+        <amdgpu/overclock>
+      ];
 
     _.to-users = {
-      includes = with den.aspects; [
-        # ---Core Config--- #
-        system-type._.basic
-      ];
+      includes = with den.aspects; sharedAspects ++ [ ];
     };
 
     _.gwen = {
       includes = [
-        den._.primary-user
+        # ---User Config--- #
+        <den/primary-user>
       ];
     };
 
