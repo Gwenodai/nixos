@@ -1,7 +1,6 @@
 {
   inputs,
   den,
-  lib,
   ...
 }:
 let
@@ -73,24 +72,6 @@ let
 
           debug.skip-cursor-only-updates-during-vrr = [ ];
         };
-
-        # Stupid extension... Rust highlighting is close enough to make kdl readable
-        programs.niri.extraConfig = lib.replaceStrings [ "// syntax: rust\n" ] [ "" ] ''
-          // syntax: rust
-          recent-windows {
-            highlight {
-              padding 10
-              corner-radius 20
-            }
-
-            binds {
-              Alt+Tab         { next-window; }
-              Alt+Shift+Tab   { previous-window; }
-              Alt+grave       { next-window     filter="app-id"; }
-              Alt+Shift+grave { previous-window filter="app-id"; }
-            }
-          }
-        '';
       };
   };
 in

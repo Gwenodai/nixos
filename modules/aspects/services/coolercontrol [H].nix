@@ -53,10 +53,30 @@ let
         fromAspect = _: lib.head aspect-chain;
       })
     );
+
+  setup = den.lib.perHost {
+    nixos =
+      { config, lib, ... }:
+      {
+        environment.etc =
+          lib.genAttrs
+            [
+              "coolercontrol/config.toml"
+              "coolercontrol/alerts.json"
+              "coolercontrol/config-ui.json"
+            ]
+            (file: {
+              enable = lib.mkDefault (config.environment.etc.${file}.text != null);
+              mode = lib.mkDefault "0644";
+              text = lib.mkDefault null;
+            });
+      };
+  };
 in
 {
   den.aspects.coolercontrol.includes = [
     coolerControl
+    setup
 
     (mkClass {
       fromClass = "coolercontrol-config";
