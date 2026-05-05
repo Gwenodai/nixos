@@ -1,6 +1,7 @@
 # Preset system types.
 # These should be imported by BOTH hosts and users wanting to use them.
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.system-type = {
 
     _.basic = {
@@ -28,7 +29,7 @@
         # Security aspects
         keyring
         polkit
-        
+
         # ---Basic Desktop Applications--- #
         terminal
         files
@@ -42,7 +43,7 @@
           system-type._.desktop # Inherit `desktop` system-type
           # ---Core Aspects--- #
           hardware._.graphics
-          lact    # GPU control
+          lact # GPU control
           ananicy # Auto-nice daemon
 
           # ---Hardware--- #

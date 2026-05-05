@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.noctalia._.settings = {
     includes = with den.aspects.noctalia._.settings._; [
       app-launcher

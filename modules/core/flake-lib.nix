@@ -1,8 +1,9 @@
 # Helper functions made using flake-parts
-{ lib, ... }: {
+{ lib, ... }:
+{
   options.flake.lib = lib.mkOption {
     type = with lib.types; attrsOf unspecified;
-    default = {};
+    default = { };
   };
 
   config.flake.lib = {

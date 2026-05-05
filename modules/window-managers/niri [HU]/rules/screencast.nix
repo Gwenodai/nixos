@@ -1,19 +1,25 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.niri._.rules._.screencast = den.lib.perUser {
     homeManager = {
       programs.niri.settings = {
         window-rules = [
-          { # Screencast blocklist
+          {
+            # Screencast blocklist
             matches = [
               { app-id = "^vesktop$"; }
               { app-id = "^Caprine$"; }
-              { app-id = "^google-chrome$"; title = "- Gmail"; }
+              {
+                app-id = "^google-chrome$";
+                title = "- Gmail";
+              }
             ];
             block-out-from = "screencast";
           }
-          { # Screencast target outline effect
+          {
+            # Screencast target outline effect
             matches = [
-              { is-window-cast-target = true; } 
+              { is-window-cast-target = true; }
             ];
             border = {
               active.color = "#03fcf4bf";

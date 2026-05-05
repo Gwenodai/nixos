@@ -1,5 +1,11 @@
 # Atomic secret provisioning for NixOS based on sops
-{ inputs, den, self, ... }: {
+{
+  inputs,
+  den,
+  self,
+  ...
+}:
+{
   # Flake inputs
   flake-file.inputs.sops-nix = {
     url = "github:Mic92/sops-nix";
@@ -16,34 +22,42 @@
   den.aspects.secrets = {
     # ---NixOS module--- #
     _.sys = den.lib.perHost {
-      nixos = { config, pkgs, lib, ... }: {
-        # Import the secrets module
-        imports = [ inputs.sops-nix.nixosModules.sops ];
+      nixos =
+        {
+          config,
+          pkgs,
+          lib,
+          ...
+        }:
+        {
+          # Import the secrets module
+          imports = [ inputs.sops-nix.nixosModules.sops ];
 
-        environment.systemPackages = with pkgs; [
-          age
-          sops
-          ssh-to-age
-        ];
-        
-        sops = {
-          age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
-          defaultSopsFile = lib.mkDefault inputs.self.lib.secrets.commonSopsFile;
+          environment.systemPackages = with pkgs; [
+            age
+            sops
+            ssh-to-age
+          ];
+
+          sops = {
+            age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
+            defaultSopsFile = lib.mkDefault inputs.self.lib.secrets.commonSopsFile;
+          };
         };
-      };
     };
 
     # ---Home module--- #
     _.hmUser = den.lib.perUser {
-      homeManager = { config, lib, ... }: {
-        imports = [ inputs.sops-nix.homeManagerModules.sops ];
+      homeManager =
+        { config, lib, ... }:
+        {
+          imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
-        sops = {
-          age.sshKeyPaths = lib.mkDefault [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
-          defaultSopsFile =
-            lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
+          sops = {
+            age.sshKeyPaths = lib.mkDefault [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+            defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
+          };
         };
-      };
     };
   };
 }

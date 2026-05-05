@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   # These are global static settings
   den.default.includes = [
     # ${user}._.${host} and ${host}._.${user}

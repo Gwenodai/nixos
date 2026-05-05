@@ -1,7 +1,8 @@
 # Host GPU config
-{ lib, ... }: {
+{ lib, ... }:
+{
   den.aspects.gwen-t1 = {
-    lact.text = lib.replaceStrings ["# syntax: yaml\n"] [""] ''
+    lact.text = lib.replaceStrings [ "# syntax: yaml\n" ] [ "" ] ''
       # syntax: yaml
       version: 5
       daemon:

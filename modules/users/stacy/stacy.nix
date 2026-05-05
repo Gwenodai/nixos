@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   den.aspects.stacy = {
     nixos = {
       sops.secrets = {
@@ -6,8 +7,10 @@
       };
     };
 
-    user = { config, ... }: {
-      hashedPasswordFile = config.sops.secrets.user-password.path;
-    };
+    user =
+      { config, ... }:
+      {
+        hashedPasswordFile = config.sops.secrets.user-password.path;
+      };
   };
 }

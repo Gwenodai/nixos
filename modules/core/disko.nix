@@ -1,5 +1,11 @@
 # Declarative disk partitioning and formatting using nix
-{ inputs, den, lib, ... }: {
+{
+  inputs,
+  den,
+  lib,
+  ...
+}:
+{
   # Flake inputs
   flake-file.inputs.disko = {
     url = "github:nix-community/disko";
@@ -15,13 +21,15 @@
   den.aspects.disko = {
     # Create a `disko` class to house disko config
     _.diskoClass = den.lib.perHost (
-      { class, aspect-chain }: den._.forward {
+      { class, aspect-chain }:
+      den._.forward {
         each = lib.singleton class;
         fromClass = _: "disko";
         intoClass = _: "nixos"; # Disko only supports NixOS
-        intoPath = _: [];       # Forwards into root
+        intoPath = _: [ ]; # Forwards into root
         fromAspect = _: lib.head aspect-chain;
-      });
+      }
+    );
     # Import the disko module for NixOS
     _.diskoImport = den.lib.perHost {
       nixos.imports = [ inputs.disko.nixosModules.disko ];

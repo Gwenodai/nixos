@@ -1,4 +1,5 @@
-{ inputs, den, ... }: {
+{ inputs, den, ... }:
+{
   den.aspects.niri._.settings._.input = den.lib.perUser {
     homeManager = {
       programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {

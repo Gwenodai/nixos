@@ -1,6 +1,7 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   den.aspects.gwen-t1 = {
-    coolercontrol-ui.text = lib.replaceStrings ["# syntax: json\n"] [""] ''
+    coolercontrol-ui.text = lib.replaceStrings [ "# syntax: json\n" ] [ "" ] ''
       # syntax: json
       {
         "devices": [

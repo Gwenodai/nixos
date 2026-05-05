@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.vscode.includes = with den.aspects.vscode._; [
     enable
     settings

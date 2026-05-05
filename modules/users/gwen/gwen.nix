@@ -1,18 +1,22 @@
-{ den, ... }: {
+{
   den.aspects.gwen = {
-    nixos = { config, ... }: {
-      sops.secrets = {
-        user-password.neededForUsers = true;
-        "git/access-tokens/nixos-flake-updates" = {};
+    nixos =
+      { config, ... }:
+      {
+        sops.secrets = {
+          user-password.neededForUsers = true;
+          "git/access-tokens/nixos-flake-updates" = { };
+        };
+
+        nix.extraOptions = ''
+          !include ${config.sops.secrets."git/access-tokens/nixos-flake-updates".path}
+        '';
       };
 
-      nix.extraOptions = ''
-        !include ${config.sops.secrets."git/access-tokens/nixos-flake-updates".path}
-      '';
-    };
-
-    user = { config, ... }: {
-      hashedPasswordFile = config.sops.secrets.user-password.path;
-    };
+    user =
+      { config, ... }:
+      {
+        hashedPasswordFile = config.sops.secrets.user-password.path;
+      };
   };
 }
