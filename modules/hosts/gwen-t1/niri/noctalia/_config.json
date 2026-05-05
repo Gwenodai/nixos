@@ -14,8 +14,7 @@
     "fontScale": 1,
     "enableExclusionZoneInset": false,
     "backgroundOpacity": 1,
-    "useSeparateOpacity": true,
-    "floating": false,
+    "useSeparateOpacity": false,
     "marginVertical": 4,
     "marginHorizontal": 4,
     "frameThickness": 8,
@@ -32,9 +31,10 @@
           "colorizeIcons": false,
           "hideMode": "hidden",
           "id": "ActiveWindow",
-          "maxWidth": 300,
+          "maxWidth": 600,
           "scrollingMode": "hover",
           "showIcon": true,
+          "showText": true,
           "textColor": "none",
           "useFixedWidth": false
         }
@@ -71,13 +71,13 @@
           "maxWidth": 500,
           "panelShowAlbumArt": true,
           "scrollingMode": "hover",
-          "showAlbumArt": false,
+          "showAlbumArt": true,
           "showArtistFirst": true,
           "showProgressRing": true,
           "showVisualizer": false,
           "textColor": "none",
           "useFixedWidth": false,
-          "visualizerType": "wave"
+          "visualizerType": "linear"
         },
         {
           "blacklist": [],
@@ -112,7 +112,7 @@
           "showSwapUsage": false,
           "textColor": "none",
           "useMonospaceFont": true,
-          "usePadding": false
+          "usePadding": true
         },
         {
           "clockColor": "none",
@@ -212,7 +212,8 @@
         "Del"
       ]
     },
-    "reverseScroll": false
+    "reverseScroll": false,
+    "smoothScrollEnabled": true
   },
   "ui": {
     "fontDefault": "Adwaita Sans",
@@ -222,7 +223,7 @@
     "tooltipsEnabled": true,
     "scrollbarAlwaysVisible": true,
     "boxBorderEnabled": false,
-    "panelBackgroundOpacity": 0.9,
+    "panelBackgroundOpacity": 0.75,
     "translucentWidgets": true,
     "panelsAttachedToBar": true,
     "settingsPanelMode": "attached",
@@ -232,6 +233,7 @@
     "name": "yagoona",
     "weatherEnabled": true,
     "weatherShowEffects": true,
+    "weatherTaliaMascotAlways": false,
     "useFahrenheit": false,
     "use12hourFormat": false,
     "showWeekNumberInCalendar": true,
@@ -240,7 +242,8 @@
     "analogClockInCalendar": false,
     "firstDayOfWeek": 1,
     "hideWeatherTimezone": false,
-    "hideWeatherCityName": false
+    "hideWeatherCityName": true,
+    "autoLocate": false
   },
   "calendar": {
     "cards": [
@@ -267,6 +270,7 @@
     "showHiddenFiles": false,
     "viewMode": "single",
     "setWallpaperOnAllMonitors": true,
+    "linkLightAndDarkWallpapers": true,
     "fillMode": "crop",
     "fillColor": "#000000",
     "useSolidColor": false,
@@ -285,6 +289,7 @@
     "transitionEdgeSmoothness": 0.05,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": false,
+    "useOriginalImages": false,
     "overviewBlur": 0.4,
     "overviewTint": 0.6,
     "useWallhaven": false,
@@ -447,8 +452,6 @@
     "indicatorOpacity": 0.6
   },
   "network": {
-    "wifiEnabled": true,
-    "airplaneModeEnabled": false,
     "bluetoothRssiPollingEnabled": false,
     "bluetoothRssiPollIntervalMs": 60000,
     "networkPanelView": "wifi",
@@ -514,7 +517,7 @@
         "command": "",
         "countdownEnabled": true,
         "enabled": false,
-        "keybind": "7"
+        "keybind": ""
       },
       {
         "action": "userspaceReboot",
@@ -532,7 +535,7 @@
     "monitors": [],
     "location": "top_right",
     "overlayLayer": true,
-    "backgroundOpacity": 0.9,
+    "backgroundOpacity": 0.75,
     "respectExpireTimeout": false,
     "lowUrgencyDuration": 3,
     "normalUrgencyDuration": 8,
@@ -561,7 +564,7 @@
     "location": "top_right",
     "autoHideMs": 2000,
     "overlayLayer": false,
-    "backgroundOpacity": 1,
+    "backgroundOpacity": 0.75,
     "enabledTypes": [
       0,
       1,
@@ -574,6 +577,7 @@
     "volumeOverdrive": true,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
+    "spectrumMirrored": true,
     "mprisBlacklist": [],
     "preferredPlayer": "",
     "volumeFeedback": false,
@@ -593,7 +597,8 @@
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "generationMethod": "tonal-spot",
-    "monitorForColors": ""
+    "monitorForColors": "",
+    "syncGsettings": true
   },
   "templates": {
     "activeTemplates": [],

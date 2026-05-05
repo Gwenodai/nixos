@@ -69,6 +69,8 @@ in
       {
         # Set the default secrets file for this host
         sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+
+        system.nixos.label = "Niri-Blur";
       };
   };
 }

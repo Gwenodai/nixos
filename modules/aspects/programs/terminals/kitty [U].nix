@@ -8,11 +8,17 @@
         programs.kitty = {
           enable = true;
 
+          enableGitIntegration = true;
           shellIntegration = {
             enableZshIntegration = true;
             enableBashIntegration = true;
           };
-          enableGitIntegration = true;
+
+          settings = {
+            background_blur = 1;
+            scrollback_lines = 10000;
+            update_check_interval = 0;
+          };
         };
 
         # Custom aliases
