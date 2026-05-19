@@ -26,9 +26,7 @@ let
                 app-id = "^steam_app.*";
                 title = "^Dome Keeper$";
               }
-              {
-                app-id = "^re5dx9.exe$"; # RE:5
-              }
+              { app-id = "^re5dx9.exe$"; } # RE:5
               { app-id = "^steam_app_881100$"; } # Noita
               { app-id = "^steam_app_323190$"; } # Frostpunk
               # { app-id = "^steam_app_2246340$"; } # MH:Wilds
