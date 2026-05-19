@@ -45,7 +45,7 @@ in
         ++ [
           # ---Applications--- #
           spotify
-          messaging._.messenger
+          caprine
         ];
     };
 

@@ -39,7 +39,6 @@ let
 
         # Assign the ssh key to github
         programs.ssh = {
-          enable = true;
           matchBlocks."github.com" = {
             host = "github.com";
             user = "git";

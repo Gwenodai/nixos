@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  openssh = den.lib.perHost {
+  hostConfig = den.lib.perHost {
     nixos = {
       services.openssh = {
         enable = true;
@@ -32,6 +32,29 @@ let
               "/etc/ssh/ssh_host_rsa_key.pub"
             ];
       };
+  };
+
+  userConfig = den.lib.perUser {
+    homeManager = {
+      programs.ssh = {
+        enable = true;
+        # This option will become deprecated in the future
+        enableDefaultConfig = false;
+        # So we disable it and manually recreate the old defaults
+        matchBlocks."*" = {
+          forwardAgent = false;
+          addKeysToAgent = "no";
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "no";
+          controlPath = "~/.ssh/master-%r@%n:%p";
+          controlPersist = "no";
+        };
+      };
+    };
 
     persistUser.directories = [
       {
@@ -45,6 +68,7 @@ let
 in
 {
   den.aspects.ssh.includes = [
-    openssh
+    hostConfig
+    userConfig
   ];
 }

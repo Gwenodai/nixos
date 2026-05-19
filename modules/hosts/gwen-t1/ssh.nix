@@ -1,6 +1,6 @@
 { inputs, den, ... }:
-{
-  den.aspects.ssh._.openssh = den.lib.perHost {
+let
+  knownHost = den.lib.perHost {
     nixos.services.openssh.knownHosts.gwen-t1 = {
       hostNames = [
         "gwen-t1"
@@ -9,4 +9,9 @@
       publicKey = inputs.self.lib.hosts.gwen-t1.publicKey;
     };
   };
+in
+{
+  den.aspects.ssh.includes = [
+    knownHost
+  ];
 }
