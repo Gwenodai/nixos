@@ -65,10 +65,16 @@ in
     };
 
     nixos =
-      { lib, ... }:
+      { pkgs, lib, ... }:
       {
         # Set the default secrets file for this host
         sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+
+        ### Logitech G703 mouse
+        # hardware.logitech.wireless.enable = true;
+        # hardware.logitech.wireless.enableGraphical = true;
+        # environment.systemPackages = [ pkgs.piper ];
+        # services.ratbagd.enable = true;
       };
   };
 }

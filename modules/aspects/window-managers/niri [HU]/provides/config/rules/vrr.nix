@@ -11,6 +11,7 @@ let
               { app-id = "^RSG-Linux-Shipping$"; } # Everspace native linux version
               { app-id = "^vampire crawlers.exe$"; }
               # { app-id = "^riftbreaker_win_release.exe$"; }
+              { app-id = "^mcc-win64-shipping.exe$"; }
             ];
             variable-refresh-rate = true;
             open-focused = true;
