@@ -20,7 +20,7 @@
   # Gwen PC
   den.hosts.x86_64-linux.gwen-t1 = {
     users.gwen = { };
-    #users.stacy = { };
+    # users.stacy = { };
 
     ### Host Hardware
     cpu = {

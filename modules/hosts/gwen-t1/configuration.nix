@@ -10,7 +10,7 @@ let
   # Aspects shared by both the host and its users
   sharedAspects = with den.aspects; [
     # ---Core Aspects--- #
-    persist # Opt into system wide ephemeral state management
+    # persist # Opt into system wide ephemeral state management
 
     # ---System Preset--- #
     <sys-preset-desktop>
@@ -25,8 +25,8 @@ in
       sharedAspects
       ++ [
         # ---Persistence--- #
-        <persist/minimal-preset> # Use preconfigured default settings for preservation
-        <persist/find-ephemeral> # Tool to locate files not currently preserved
+        # <persist/minimal-preset> # Use preconfigured default settings for preservation
+        # <persist/find-ephemeral> # Tool to locate files not currently preserved
 
         # ---System Config--- #
         systemd-boot # Use systemd boot

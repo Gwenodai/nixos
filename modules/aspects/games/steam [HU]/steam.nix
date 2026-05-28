@@ -1,6 +1,11 @@
-{ den, __findFile, ... }:
-let
-  hostConfig = {
+{ __findFile, ... }:
+{
+  den.aspects.steam = {
+    includes = [
+      # Generic linux game directories that should be persisted by users
+      <lib/games/savegame-persist>
+    ];
+
     nixos =
       { pkgs, ... }:
       {
@@ -21,13 +26,6 @@ let
           ];
         };
       };
-  };
-
-  userConfig = {
-    includes = [
-      # Generic linux game directories that should be persisted by users
-      <lib/games/savegame-persist>
-    ];
 
     homeManager =
       { pkgs, lib, ... }:
@@ -85,11 +83,4 @@ let
         directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
       };
   };
-in
-{
-  # https://mynixos.com/nixpkgs/options/programs.steam
-  den.aspects.steam.includes = [
-    hostConfig
-    userConfig
-  ];
 }
