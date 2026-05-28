@@ -1,18 +1,18 @@
-{ __findFile, ... }:
+{ den, ... }:
 {
   # Default user settings
-  den.ctx.user.includes = [
-    # Automatically create the user on host
-    <den/define-user>
-    # Sets the default shell to zsh
-    (<den/user-shell> "zsh")
-    # Inserts specific authorised ssh keys by default in all users
-    <lib/ssh/authorizedKeys>
-  ];
-
   den.schema.user =
     { user, lib, ... }:
     {
-      config.classes = lib.mkDefault [ "homeManager" ];
+      classes = lib.mkDefault [ "homeManager" ];
+      includes = [
+        # Inserts specific authorised ssh keys by default in all users
+        den.aspects.lib.ssh.authorizedKeys
+      ];
     };
+
+  den.default.includes = [
+    den.batteries.define-user # Automatically create the user on host
+    (den.batteries.user-shell "zsh") # Sets the default shell to zsh
+  ];
 }

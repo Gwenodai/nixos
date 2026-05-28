@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  polkit = den.lib.perUser {
+  polkit = {
     homeManager =
       { lib, ... }:
       {

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  theme = den.lib.perUser {
+  theme = {
     homeManager =
       { pkgs, ... }:
       {

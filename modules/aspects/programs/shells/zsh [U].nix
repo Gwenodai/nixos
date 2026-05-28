@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  zsh = den.lib.perUser {
+  zsh = {
     homeManager =
       { config, ... }:
       {
@@ -35,7 +35,7 @@ let
       };
   };
 
-  config = den.lib.perUser {
+  config = {
     homeManager = {
       programs.zsh = {
         enableCompletion = true;

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     # Ensure portal definitions and DE provided configurations get linked
     nixos.environment.pathsToLink = [
       "/share/xdg-desktop-portal"
@@ -8,7 +8,7 @@ let
     ];
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     homeManager =
       { config, pkgs, ... }:
       {

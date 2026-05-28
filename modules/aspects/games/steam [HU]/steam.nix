@@ -1,6 +1,6 @@
 { den, __findFile, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     nixos =
       { pkgs, ... }:
       {
@@ -23,7 +23,7 @@ let
       };
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     includes = [
       # Generic linux game directories that should be persisted by users
       <lib/games/savegame-persist>

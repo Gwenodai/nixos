@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  transformers = den.lib.perHost {
+  transformers = {
     nixos =
       { config, lib, ... }:
       {

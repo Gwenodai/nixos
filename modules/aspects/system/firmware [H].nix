@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.firmware = den.lib.perHost {
+  den.aspects.firmware = {
     nixos = {
       services.fwupd.enable = true;
       hardware = {

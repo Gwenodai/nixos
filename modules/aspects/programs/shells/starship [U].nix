@@ -2,7 +2,7 @@
 {
   # TODO: Configure starship
   # https://mynixos.com/home-manager/options/programs.starship
-  den.aspects.starship = den.lib.perUser {
+  den.aspects.starship = {
     homeManager = {
       programs.starship = {
         enable = true;

@@ -6,12 +6,10 @@
   _module.args.__findFile = den.lib.__findFile;
 
   den.default.includes = [
-    # ${user}._.${host} and ${host}._.${user}
-    den._.mutual-provider
     # Provides flake-parts inputs' (system-specialized inputs) as a module argument
-    den._.inputs'
+    den.batteries.inputs'
     # Provides flake-parts self' (system-specialized self) as a module argument
-    den._.self'
+    den.batteries.self'
   ];
 
   # Define avialable systems

@@ -1,6 +1,6 @@
 { den, lib, ... }:
 let
-  binds = den.lib.perUser {
+  binds = {
     homeManager =
       { config, pkgs, ... }:
       {

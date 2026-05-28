@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  delay = den.lib.perUser {
+  delay = {
     homeManager =
       { config, pkgs, ... }:
       let

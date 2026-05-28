@@ -1,6 +1,6 @@
 { inputs, den, ... }:
 let
-  knownHost = den.lib.perHost {
+  knownHost = {
     nixos.services.openssh.knownHosts.stacy-pc = {
       hostNames = [
         "stacy-pc"

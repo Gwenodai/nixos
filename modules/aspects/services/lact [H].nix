@@ -1,6 +1,6 @@
 { den, lib, ... }:
 let
-  lact = den.lib.perHost {
+  lact = {
     nixos = {
       services.lact.enable = true;
     };
@@ -44,10 +44,10 @@ let
       };
   };
 
-  class = den.lib.perHost (
+  class =
     { host }:
     { class, aspect-chain }:
-    den._.forward {
+    den.batteries.forward {
       each = lib.singleton true;
       fromClass = _: "lact";
       intoClass = _: host.class;
@@ -58,8 +58,7 @@ let
       ];
       fromAspect = _: lib.head aspect-chain;
       guard = { config, ... }: _item: lib.mkIf (config.services.lact.enable);
-    }
-  );
+    };
 
   # Sets up the environment configs for the class to use
   setup = {

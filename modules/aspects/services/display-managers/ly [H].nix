@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.ly = den.lib.perHost {
+  den.aspects.ly = {
     nixos = {
       services.displayManager = {
         enable = true;

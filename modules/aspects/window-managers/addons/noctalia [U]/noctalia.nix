@@ -7,7 +7,7 @@
   ...
 }:
 let
-  noctalia = den.lib.perUser {
+  noctalia = {
     homeManager =
       { inputs', ... }:
       {
@@ -50,10 +50,10 @@ let
       };
   };
 
-  class = den.lib.perUser (
+  class =
     { host, user }:
     { class, aspect-chain }:
-    den._.forward {
+    den.batteries.forward {
       each = lib.singleton user;
       fromClass = _: "noctalia";
       intoClass = _: "homeManager";
@@ -63,8 +63,7 @@ let
       ];
       fromAspect = _: lib.head aspect-chain;
       adaptArgs = lib.id;
-    }
-  );
+    };
 in
 {
   flake-file.inputs = {

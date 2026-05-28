@@ -18,21 +18,51 @@
   };
 
   # Gwen PC
-  den.hosts.x86_64-linux.gwen-t1.users = {
-    gwen = { };
-    # stacy = { };
+  den.hosts.x86_64-linux.gwen-t1 = {
+    users.gwen = { };
+    #users.stacy = { };
+
+    ### Host Hardware
+    cpu = {
+      brand = "amd";
+      performance = true;
+    };
+    gpu = {
+      brand = "amd";
+      performance = true;
+    };
   };
   # Stacy PC
-  den.hosts.x86_64-linux.stacy-pc.users = {
-    stacy = { };
+  den.hosts.x86_64-linux.stacy-pc = {
+    users.stacy = { };
+
+    ### Host Hardware
+    cpu = {
+      brand = "amd";
+      performance = true;
+    };
+    gpu = {
+      brand = "amd";
+      performance = true;
+    };
   };
   # Server
-  den.hosts.x86_64-linux.ymir.users = {
-    gwen = { };
+  den.hosts.x86_64-linux.ymir = {
+    users.gwen = { };
+
+    ### Host Hardware
+    cpu = {
+      brand = "amd";
+      performance = false;
+    };
+    gpu = {
+      brand = "amd";
+      performance = true;
+    };
   };
 
   # Default host settings
-  den.ctx.host.includes = [
-    den._.hostname # Automatically set hostname based on host
+  den.schema.host.includes = [
+    den.batteries.hostname # Automatically set hostname based on host
   ];
 }

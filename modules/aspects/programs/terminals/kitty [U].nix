@@ -1,7 +1,7 @@
 # https://mynixos.com/home-manager/options/programs.kitty
 { den, ... }:
 {
-  den.aspects.kitty = den.lib.perUser {
+  den.aspects.kitty = {
     homeManager =
       { pkgs, lib, ... }:
       {

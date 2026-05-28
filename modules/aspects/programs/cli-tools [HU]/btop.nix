@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  btop = den.lib.perUser {
+  btop = {
     homeManager = {
       # TODO: Configure btop
       # https://mynixos.com/home-manager/options/programs.btop

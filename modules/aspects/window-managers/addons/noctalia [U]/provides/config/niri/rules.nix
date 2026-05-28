@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  rules = den.lib.perUser {
+  rules = {
     niri.settings = {
       layer-rules = [
         {

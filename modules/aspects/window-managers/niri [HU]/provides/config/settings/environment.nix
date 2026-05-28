@@ -1,6 +1,6 @@
 { inputs, den, ... }:
 let
-  environment = den.lib.perUser {
+  environment = {
     homeManager = {
       programs.niri.settings.environment = inputs.self.lib.applyDefaults {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  tools = den.lib.perHost {
+  tools = {
     nixos =
       { pkgs, ... }:
       {

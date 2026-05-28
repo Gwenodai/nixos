@@ -1,6 +1,5 @@
-{ den, ... }:
 let
-  amdgpu = den.lib.perHost {
+  amdgpu = {
     nixos = {
       hardware.amdgpu = {
         initrd.enable = true; # Load driver early
@@ -17,7 +16,7 @@ let
       };
   };
 
-  overclock = den.lib.perHost {
+  overclock = {
     nixos = {
       hardware.amdgpu.overdrive = {
         enable = true;
@@ -30,8 +29,11 @@ let
       ];
     };
   };
+
 in
 {
-  den.aspects.amdgpu.includes = [ amdgpu ];
-  den.aspects.amdgpu._.overclock.includes = [ overclock ];
+  den.aspects.hardware.amdgpu = {
+    includes = [ amdgpu ];
+    performance.includes = [ overclock ];
+  };
 }

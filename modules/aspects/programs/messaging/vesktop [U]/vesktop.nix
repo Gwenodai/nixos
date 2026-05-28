@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  vesktop = den.lib.perUser {
+  vesktop = {
     homeManager = {
       programs.vesktop.enable = true;
 

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  eza = den.lib.perUser {
+  eza = {
     homeManager = {
       # TODO: Configure eza
       programs.eza = {

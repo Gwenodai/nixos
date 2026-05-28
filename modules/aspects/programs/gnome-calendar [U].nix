@@ -1,7 +1,7 @@
 # REQUIRES GNOME-KEYRING SERVICE
 { den, ... }:
 {
-  den.aspects.gnome-calendar = den.lib.perUser {
+  den.aspects.gnome-calendar = {
     nixos = {
       services.gnome = {
         evolution-data-server.enable = true;

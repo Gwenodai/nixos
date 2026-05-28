@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  nh = den.lib.perUser {
+  nh = {
     homeManager =
       { config, ... }:
       {

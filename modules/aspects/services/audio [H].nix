@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  pipewire = den.lib.perHost {
+  pipewire = {
     nixos = {
       services = {
         pulseaudio.enable = false;

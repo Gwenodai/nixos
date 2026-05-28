@@ -1,6 +1,6 @@
 { den, lib, ... }:
 let
-  coolerControl = den.lib.perHost {
+  coolerControl = {
     nixos =
       {
         config,
@@ -38,23 +38,21 @@ let
   # Factory to generate cooler-control classes
   mkClass =
     { fromClass, intoSubPath }:
-    den.lib.perHost (
-      { host }:
-      { class, aspect-chain }:
-      den._.forward ({
-        each = lib.singleton true;
-        fromClass = _: fromClass;
-        intoClass = _: host.class;
-        intoPath = _: [
-          "environment"
-          "etc"
-          "coolercontrol/${intoSubPath}"
-        ];
-        fromAspect = _: lib.head aspect-chain;
-      })
-    );
+    { host }:
+    { class, aspect-chain }:
+    den.batteries.forward ({
+      each = lib.singleton true;
+      fromClass = _: fromClass;
+      intoClass = _: host.class;
+      intoPath = _: [
+        "environment"
+        "etc"
+        "coolercontrol/${intoSubPath}"
+      ];
+      fromAspect = _: lib.head aspect-chain;
+    });
 
-  setup = den.lib.perHost {
+  setup = {
     nixos =
       { config, lib, ... }:
       {

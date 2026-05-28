@@ -4,7 +4,7 @@
   ...
 }:
 let
-  extensions = den.lib.perUser {
+  extensions = {
     nixos.hostConfig.vscode.extensions.enable = true;
 
     homeManager =

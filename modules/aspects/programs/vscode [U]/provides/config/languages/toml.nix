@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  toml = den.lib.perUser {
+  toml = {
     homeManager =
       { pkgs, lib, ... }:
       {

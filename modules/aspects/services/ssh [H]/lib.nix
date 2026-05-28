@@ -1,8 +1,8 @@
 {
-  den.aspects.lib._.ssh = {
+  den.aspects.lib.ssh = {
     # These SSH keys are authorised for remote access of all of my hosts users.
     # Can be disabled by redeclaring the entry on the user with `lib.mkForce`
-    _.authorizedKeys =
+    authorizedKeys =
       { host, user, ... }:
       {
         nixos.users.users.${user.userName} = {

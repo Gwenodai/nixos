@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  settings = den.lib.perUser {
+  settings = {
     nixos =
       { pkgs, ... }:
       {

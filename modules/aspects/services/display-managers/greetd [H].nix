@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.greetd = den.lib.perHost {
+  den.aspects.greetd = {
     nixos =
       { pkgs, ... }:
       {

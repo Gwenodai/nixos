@@ -1,6 +1,5 @@
-{ den, ... }:
 let
-  amdcpu = den.lib.perHost {
+  amdcpu = {
     nixos =
       { config, ... }:
       {
@@ -11,14 +10,17 @@ let
       };
   };
 
-  performance = den.lib.perHost {
+  performance = {
     nixos.boot.kernelParams = [
       "preempt=full"
       "split_lock_detect=off"
     ];
   };
+
 in
 {
-  den.aspects.amdcpu.includes = [ amdcpu ];
-  den.aspects.amdcpu._.performance.includes = [ performance ];
+  den.aspects.hardware.amdcpu = {
+    includes = [ amdcpu ];
+    performance.includes = [ performance ];
+  };
 }

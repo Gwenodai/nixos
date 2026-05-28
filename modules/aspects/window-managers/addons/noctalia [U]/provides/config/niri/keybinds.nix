@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  binds = den.lib.perUser {
+  binds = {
     niri =
       { config, lib, ... }:
       {

@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.valent = den.lib.perHost {
+  den.aspects.valent = {
     nixos =
       { pkgs, ... }:
       {

@@ -24,13 +24,6 @@ in
         systemd-boot # Use systemd boot
         # Kernel config
         <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
-        # CPU config
-        <amdcpu>
-        <amdcpu/performance>
-        # GPU config
-        <amdgpu>
-        <amdgpu/overclock>
-
         # ---Services--- #
         valent
 
@@ -52,7 +45,7 @@ in
     _.stacy = {
       includes = [
         # ---User Config--- #
-        <den/primary-user>
+        den.batteries.primary-user
       ];
     };
 

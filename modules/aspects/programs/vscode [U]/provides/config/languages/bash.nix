@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  bash = den.lib.perUser {
+  bash = {
     homeManager =
       { pkgs, lib, ... }:
       {

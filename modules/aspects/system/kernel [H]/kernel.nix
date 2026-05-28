@@ -1,7 +1,7 @@
 { inputs, den, ... }:
 let
   # Regular NixOS kernel
-  default = den.lib.perHost {
+  default = {
     nixos =
       { pkgs, lib, ... }:
       {
@@ -10,7 +10,7 @@ let
   };
 
   # CachyOS kernel for NixOS
-  cachyos = den.lib.perHost {
+  cachyos = {
     nixos =
       { pkgs, lib, ... }:
       {

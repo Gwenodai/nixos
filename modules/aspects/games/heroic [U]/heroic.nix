@@ -1,6 +1,6 @@
 { den, __findFile, ... }:
 let
-  heroicLauncher = den.lib.perUser {
+  heroicLauncher = {
     # Generic linux game directories that should be persisted by users
     includes = [ <lib/games/savegame-persist> ];
 

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     persist = {
       directories = [
         "/var/lib/systemd/timers"
@@ -78,7 +78,7 @@ let
       };
   };
 
-  userConfig = den.lib.perHost {
+  userConfig = {
     persistUser =
       { hmConfig, ... }:
       {

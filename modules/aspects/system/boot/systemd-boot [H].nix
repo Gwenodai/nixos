@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.systemd-boot = den.lib.perHost {
+  den.aspects.systemd-boot = {
     nixos = {
       boot = {
         initrd = {

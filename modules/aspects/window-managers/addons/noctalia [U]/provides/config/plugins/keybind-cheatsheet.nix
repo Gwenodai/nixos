@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  keybind-cheatsheet = den.lib.perUser {
+  keybind-cheatsheet = {
     homeManager = {
       programs.noctalia-shell = {
         plugins = {

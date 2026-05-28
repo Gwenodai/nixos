@@ -4,7 +4,7 @@
   ...
 }:
 let
-  main = den.lib.perUser {
+  main = {
     homeManager =
       { config, ... }:
       {

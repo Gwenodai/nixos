@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.ananicy = den.lib.perHost {
+  den.aspects.ananicy = {
     nixos =
       { pkgs, ... }:
       {

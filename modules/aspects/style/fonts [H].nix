@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  config = den.lib.perHost {
+  config = {
     nixos = {
       fonts.fontconfig.enable = true;
     };
@@ -12,7 +12,7 @@ let
       };
   };
 
-  regular = den.lib.perHost {
+  regular = {
     nixos =
       { pkgs, ... }:
       {
@@ -26,7 +26,7 @@ let
       };
   };
 
-  nerd = den.lib.perHost {
+  nerd = {
     nixos =
       { pkgs, ... }:
       {

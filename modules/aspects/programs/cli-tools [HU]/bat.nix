@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  enable = den.lib.perUser {
+  enable = {
     homeManager =
       { pkgs, ... }:
       {
@@ -27,7 +27,7 @@ let
       };
   };
 
-  aliases = den.lib.perUser {
+  aliases = {
     homeManager = {
       # Custom aliases
       home.shellAliases = {

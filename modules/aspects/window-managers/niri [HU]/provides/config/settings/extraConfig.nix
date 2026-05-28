@@ -6,7 +6,7 @@
   ...
 }:
 let
-  extra = den.lib.perUser {
+  extra = {
     homeManager =
       { config, ... }:
       {

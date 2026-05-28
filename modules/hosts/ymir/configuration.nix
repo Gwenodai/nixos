@@ -1,6 +1,5 @@
 # Host system config
 {
-  __findFile,
   self,
   den,
   ...
@@ -20,11 +19,6 @@ in
       ++ [
         # ---Core Config--- #
         systemd-boot # Use systemd boot
-        # CPU config
-        amdcpu
-        # GPU config
-        <amdgpu>
-        <amdgpu/overclock>
       ];
 
     _.to-users = {
@@ -34,7 +28,7 @@ in
     _.gwen = {
       includes = [
         # ---User Config--- #
-        <den/primary-user>
+        den.batteries.primary-user
       ];
     };
 

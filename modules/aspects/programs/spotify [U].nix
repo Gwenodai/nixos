@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.spotify = den.lib.perUser {
+  den.aspects.spotify = {
     homeManager =
       { pkgs, lib, ... }:
       {

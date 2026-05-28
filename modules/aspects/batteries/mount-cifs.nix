@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.mount-cifs = den.lib.parametric {
+  den.aspects.mount-cifs = {
     # This aspect takes mount parameters as context
     includes = [
       (

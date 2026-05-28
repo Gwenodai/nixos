@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  umu = den.lib.perUser {
+  umu = {
     homeManager =
       { pkgs, ... }:
       {

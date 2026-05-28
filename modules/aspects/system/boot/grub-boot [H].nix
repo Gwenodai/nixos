@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.grub-boot = den.lib.perHost {
+  den.aspects.grub-boot = {
     nixos = {
       boot.loader.grub = {
         enable = true;

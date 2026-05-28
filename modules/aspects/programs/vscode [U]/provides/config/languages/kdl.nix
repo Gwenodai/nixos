@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  kdl = den.lib.perUser {
+  kdl = {
     homeManager =
       { pkgs, ... }:
       {

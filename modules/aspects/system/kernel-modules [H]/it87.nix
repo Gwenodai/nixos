@@ -7,7 +7,7 @@
     flake = false;
   };
 
-  den.aspects.kernel-modules._.it87 = den.lib.perHost {
+  den.aspects.kernel-modules._.it87 = {
     nixos =
       { config, pkgs, ... }:
       {

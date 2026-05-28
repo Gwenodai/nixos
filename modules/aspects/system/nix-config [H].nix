@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  core-config = den.lib.perHost {
+  core-config = {
     nixos = {
       nix.settings = {
         # Enable flakes
@@ -22,7 +22,7 @@ let
     };
   };
 
-  garbage-collection = den.lib.perHost {
+  garbage-collection = {
     nixos = {
       nix.gc = {
         automatic = true;
@@ -34,7 +34,7 @@ let
     };
   };
 
-  locale = den.lib.perHost {
+  locale = {
     nixos = {
       time.timeZone = "Australia/Sydney";
       i18n.defaultLocale = "en_AU.UTF-8";

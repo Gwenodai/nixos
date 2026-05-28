@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  git = den.lib.perUser {
+  git = {
     homeManager = {
       programs.git = {
         enable = true;
@@ -11,7 +11,7 @@ let
     };
   };
 
-  gh = den.lib.perUser {
+  gh = {
     homeManager = {
       programs.gh = {
         enable = true;

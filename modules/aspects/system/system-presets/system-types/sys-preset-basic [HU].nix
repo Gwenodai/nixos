@@ -9,7 +9,6 @@ let
       disko
       secrets
       nix-config
-      home-manager
       firmware
       xdg
 

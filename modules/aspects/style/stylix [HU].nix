@@ -1,6 +1,6 @@
 { inputs, den, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     nixos =
       { config, pkgs, ... }:
       {
@@ -67,7 +67,7 @@ let
       };
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     homeManager =
       { config, ... }:
       {

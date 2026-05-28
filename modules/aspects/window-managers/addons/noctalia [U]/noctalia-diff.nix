@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  diff = den.lib.perUser {
+  diff = {
     homeManager =
       {
         config,

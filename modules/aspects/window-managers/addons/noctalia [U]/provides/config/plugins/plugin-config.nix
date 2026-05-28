@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  config = den.lib.perUser {
+  config = {
     homeManager = {
       programs.noctalia-shell = {
         plugins.version = 2;

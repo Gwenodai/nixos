@@ -1,7 +1,6 @@
 # Declarative home management
-{ den, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     nixos.home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
@@ -10,7 +9,7 @@ let
     };
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     homeManager.home.stateVersion = "25.11";
   };
 in
@@ -20,8 +19,7 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.home-manager.includes = [
-    hostConfig
-    userConfig
-  ];
+  # Apply default home-manager settings to hosts and users
+  den.schema.user.includes = [ userConfig ];
+  den.schema.hm-host.includes = [ hostConfig ];
 }

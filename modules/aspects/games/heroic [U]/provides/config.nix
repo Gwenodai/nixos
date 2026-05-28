@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  heroicConfig = den.lib.perUser {
+  heroicConfig = {
     homeManager =
       {
         config,

@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  vrr = den.lib.perUser {
+  vrr = {
     homeManager = {
       programs.niri.settings = {
         window-rules = [

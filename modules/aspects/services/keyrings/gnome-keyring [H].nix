@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.gnome-keyring = den.lib.perHost {
+  den.aspects.gnome-keyring = {
     nixos =
       { config, lib, ... }:
       {

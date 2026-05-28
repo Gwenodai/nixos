@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.google-chrome = den.lib.perUser {
+  den.aspects.google-chrome = {
     homeManager =
       { pkgs, lib, ... }:
       {

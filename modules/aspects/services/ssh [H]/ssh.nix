@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     nixos = {
       services.openssh = {
         enable = true;
@@ -34,7 +34,7 @@ let
       };
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     homeManager = {
       programs.ssh = {
         enable = true;

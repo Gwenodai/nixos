@@ -1,6 +1,6 @@
 { inputs, den, ... }:
 let
-  markdown = den.lib.perUser {
+  markdown = {
     homeManager =
       { pkgs, ... }:
       {

@@ -1,7 +1,7 @@
 # Nemo file browser
 { den, ... }:
 let
-  nemo = den.lib.perUser {
+  nemo = {
     nixos = {
       services = {
         # GNOME Virtual File System is required for a lot of nemo's functionality
@@ -99,7 +99,7 @@ let
       };
   };
 
-  config = den.lib.perUser {
+  config = {
     homeManager =
       { pkgs, lib, ... }:
       {

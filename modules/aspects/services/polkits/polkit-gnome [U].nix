@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.polkit-gnome = den.lib.perUser {
+  den.aspects.polkit-gnome = {
     nixos = {
       security.polkit.enable = true;
     };

@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.dconf-editor = den.lib.perUser {
+  den.aspects.dconf-editor = {
     homeManager =
       { pkgs, lib, ... }:
       {

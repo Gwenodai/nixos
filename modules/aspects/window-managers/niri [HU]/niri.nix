@@ -9,7 +9,7 @@
 let
   getNiri = pkgs: pkgs.niri;
 
-  hostConfig = den.lib.perHost {
+  hostConfig = {
     nixos =
       { pkgs, ... }:
       {
@@ -23,7 +23,7 @@ let
       };
   };
 
-  userConfig = den.lib.perUser {
+  userConfig = {
     homeManager =
       { pkgs, lib, ... }:
       {
@@ -50,10 +50,10 @@ let
       };
   };
 
-  class = den.lib.perUser (
+  class =
     { host, user }:
     { class, aspect-chain }:
-    den._.forward {
+    den.batteries.forward {
       each = lib.singleton user;
       fromClass = _: "niri";
       intoClass = _: "homeManager";
@@ -84,8 +84,7 @@ let
             binds = attrOption;
           };
         };
-    }
-  );
+    };
 in
 {
   flake-file.inputs.niri = {

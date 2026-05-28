@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  screencast = den.lib.perUser {
+  screencast = {
     homeManager = {
       programs.niri.settings = {
         window-rules = [

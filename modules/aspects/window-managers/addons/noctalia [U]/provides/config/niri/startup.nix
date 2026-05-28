@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  startup = den.lib.perUser {
+  startup = {
     niri =
       { lib, config, ... }:
       {

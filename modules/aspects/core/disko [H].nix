@@ -6,7 +6,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.disko = den.lib.perHost {
+  den.aspects.disko = {
     nixos.imports = [ inputs.disko.nixosModules.disko ];
   };
 }

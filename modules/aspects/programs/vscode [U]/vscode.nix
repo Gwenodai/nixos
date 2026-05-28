@@ -1,7 +1,7 @@
 # https://mynixos.com/home-manager/options/programs.vscode
 { den, ... }:
 let
-  vscode = den.lib.perUser {
+  vscode = {
     homeManager =
       { lib, ... }:
       {

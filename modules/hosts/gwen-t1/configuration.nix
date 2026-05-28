@@ -3,6 +3,7 @@
   __findFile,
   self,
   den,
+  lib,
   ...
 }:
 let
@@ -14,7 +15,7 @@ let
     # ---System Preset--- #
     <sys-preset-desktop>
     <sys-preset-desktop/gaming> # Use the gaming desktop system preset
-    wm-preset-niri # Use the Niri desktop preset
+    # wm-preset-niri # Use the Niri desktop preset
   ];
 in
 {
@@ -32,12 +33,6 @@ in
         # Kernel config
         <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
         <kernel-modules/it87> # Driver for MB fan control (needed for AIO)
-        # CPU config
-        <amdcpu>
-        <amdcpu/performance>
-        # GPU config
-        <amdgpu>
-        <amdgpu/overclock>
 
         # ---Services--- #
         valent
@@ -57,7 +52,7 @@ in
     _.gwen = {
       includes = with den.aspects; [
         # ---User Config--- #
-        <den/primary-user>
+        den.batteries.primary-user
 
         # ---Applications--- #
         dconf-editor

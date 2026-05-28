@@ -1,7 +1,7 @@
 # https://mynixos.com/home-manager/options/programs.mangohud
 { den, ... }:
 let
-  mangohud = den.lib.perUser {
+  mangohud = {
     homeManager =
       { config, ... }:
       {
@@ -95,7 +95,7 @@ let
       };
   };
 
-  prependFps-tool = den.lib.perUser {
+  prependFps-tool = {
     homeManager =
       {
         config,

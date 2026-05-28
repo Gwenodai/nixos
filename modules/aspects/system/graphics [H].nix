@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  graphics = den.lib.perHost {
+  graphics = {
     nixos = {
       hardware.graphics = {
         enable = true;

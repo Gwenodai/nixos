@@ -27,30 +27,28 @@ let
       dedup ? false,
       requiresFindEphemeral ? false,
     }:
-    den.lib.perHost (
-      { class, aspect-chain }:
-      den._.forward (
-        {
-          each = lib.singleton true;
-          fromClass = _: fromClass;
-          intoClass = _: "nixos"; # Preservation only supports NixOS
-          intoPath = _: intoPath;
-          fromAspect = _: lib.head aspect-chain;
-          guard =
-            { config, options, ... }@osArgs:
-            _:
-            let
-              hasFindEphemeral = lib.any (
-                pkg: (pkg.name or "") == "find-ephemeral"
-              ) config.environment.systemPackages;
-            in
-            lib.mkIf (!requiresFindEphemeral || hasFindEphemeral);
-          adaptArgs = args: args // { osConfig = args.config; };
-        }
-        // lib.optionalAttrs dedup {
-          adapterModule = dedupModule;
-        }
-      )
+    { class, aspect-chain }:
+    den.batteries.forward (
+      {
+        each = lib.singleton true;
+        fromClass = _: fromClass;
+        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoPath = _: intoPath;
+        fromAspect = _: lib.head aspect-chain;
+        # guard =
+        #   { config, options, ... }@osArgs:
+        #   _:
+        #   let
+        #     hasFindEphemeral = lib.any (
+        #       pkg: (pkg.name or "") == "find-ephemeral"
+        #     ) config.environment.systemPackages;
+        #   in
+        #   lib.mkIf (!requiresFindEphemeral || hasFindEphemeral);
+        adaptArgs = args@{ config, ... }: args // { osConfig = config; };
+      }
+      // lib.optionalAttrs dedup {
+        adapterModule = dedupModule;
+      }
     );
 
   # Factory to generate user-level custom classes
@@ -61,42 +59,40 @@ let
       dedup ? false,
       requiresFindEphemeral ? false,
     }:
-    den.lib.perUser (
-      { host, user }:
-      { class, aspect-chain }:
-      den._.forward (
-        {
-          each = lib.singleton user;
-          fromClass = _: fromClass;
-          intoClass = _: "nixos"; # Preservation only supports NixOS
-          intoPath = u: [
-            "hostConfig"
-            "preservation"
-            intoSubPath
-            u.userName
-          ];
-          fromAspect = _: lib.head aspect-chain;
-          guard =
-            { config, options, ... }@osArgs:
-            _:
-            let
-              hasHomeManager = lib.elem "homeManager" (user.classes or [ ]);
-              hasFindEphemeral = lib.any (
-                pkg: (pkg.name or "") == "find-ephemeral"
-              ) config.environment.systemPackages;
-            in
-            lib.mkIf (hasHomeManager && (!requiresFindEphemeral || hasFindEphemeral));
-          adaptArgs =
-            { config, ... }@args:
-            args
-            // {
-              hmConfig = config.home-manager.users.${user.userName};
-            };
-        }
-        // lib.optionalAttrs dedup {
-          adapterModule = dedupModule;
-        }
-      )
+    { host, user }:
+    { class, aspect-chain }:
+    den.batteries.forward (
+      {
+        each = lib.singleton user;
+        fromClass = _: fromClass;
+        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoPath = u: [
+          "hostConfig"
+          "preservation"
+          intoSubPath
+          u.userName
+        ];
+        fromAspect = _: lib.head aspect-chain;
+        # guard =
+        #   { config, options, ... }@osArgs:
+        #   _:
+        #   let
+        #     hasHomeManager = lib.elem "homeManager" (user.classes or [ ]);
+        #     hasFindEphemeral = lib.any (
+        #       pkg: (pkg.name or "") == "find-ephemeral"
+        #     ) config.environment.systemPackages;
+        #   in
+        #   lib.mkIf (hasHomeManager && (!requiresFindEphemeral || hasFindEphemeral));
+        adaptArgs =
+          args@{ config, ... }:
+          args
+          // {
+            hmConfig = config.home-manager.users.${user.userName};
+          };
+      }
+      // lib.optionalAttrs dedup {
+        adapterModule = dedupModule;
+      }
     );
 
 in

@@ -4,10 +4,8 @@
 {
   den.aspects.wm-preset-niri = {
     includes = with den.aspects; [
-      (den.lib.perHost {
-        # Set the default login session to Niri
-        nixos.services.displayManager.defaultSession = "niri";
-      })
+      # Set the default login session to Niri
+      { nixos.services.displayManager.defaultSession = "niri"; }
       # ---Core Aspects--- #
       <niri>
       <niri/config>

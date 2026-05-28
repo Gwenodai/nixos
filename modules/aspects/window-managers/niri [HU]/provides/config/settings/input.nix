@@ -1,6 +1,6 @@
 { inputs, den, ... }:
 let
-  input = den.lib.perUser {
+  input = {
     homeManager = {
       programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
         keyboard = {

@@ -2,7 +2,7 @@
 # https://nix-community.github.io/preservation/configuration-options.html
 { inputs, den, ... }:
 let
-  preservation = den.lib.perHost {
+  preservation = {
     nixos =
       { config, ... }:
       {

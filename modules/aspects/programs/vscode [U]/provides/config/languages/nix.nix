@@ -1,7 +1,7 @@
 # https://github.com/oxalica/nil/blob/main/docs/configuration.md
 { inputs, den, ... }:
 let
-  nix = den.lib.perUser {
+  nix = {
     homeManager =
       { pkgs, lib, ... }:
       {

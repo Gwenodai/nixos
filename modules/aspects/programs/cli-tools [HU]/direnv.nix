@@ -1,6 +1,6 @@
 { den, ... }:
 let
-  direnv = den.lib.perUser {
+  direnv = {
     homeManager = {
       programs.direnv = {
         enable = true;

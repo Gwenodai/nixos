@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.caprine = den.lib.perUser {
+  den.aspects.caprine = {
     homeManager =
       { pkgs, ... }:
       {
