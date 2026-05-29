@@ -1,5 +1,5 @@
-let
-  git-config = {
+{
+  den.aspects.stacy = {
     homeManager =
       { config, ... }:
       {
@@ -48,7 +48,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.stacy.includes = [ git-config ];
 }
