@@ -1,16 +1,18 @@
 { den, lib, ... }:
 {
-  den.aspects.hardware.amdcpu = {
-    nixos =
-      { config, ... }:
-      {
-        hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+  den.aspects.hardware = {
+    amdcpu = {
+      nixos =
+        { config, ... }:
+        {
+          hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
-        boot.kernelParams = [ "amd_pstate=active" ];
-        powerManagement.cpuFreqGovernor = "performance";
-      };
+          boot.kernelParams = [ "amd_pstate=active" ];
+          powerManagement.cpuFreqGovernor = "performance";
+        };
+    };
 
-    lowLatencyScheduler = {
+    amdcpu.lowLatencyScheduler = {
       nixos.boot.kernelParams = [
         "preempt=full"
         "split_lock_detect=off"

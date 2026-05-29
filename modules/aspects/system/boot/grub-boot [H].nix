@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.grub-boot = {
     nixos = {

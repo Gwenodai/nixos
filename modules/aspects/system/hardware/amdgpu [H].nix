@@ -1,22 +1,24 @@
 { den, lib, ... }:
 {
-  den.aspects.hardware.amdgpu = {
-    nixos = {
-      hardware.amdgpu = {
-        initrd.enable = true; # Load driver early
+  den.aspects.hardware = {
+    amdgpu = {
+      nixos = {
+        hardware.amdgpu = {
+          initrd.enable = true; # Load driver early
+        };
       };
+
+      persistUser =
+        { hmConfig, ... }:
+        {
+          directories = [
+            "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
+            "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
+          ];
+        };
     };
 
-    persistUser =
-      { hmConfig, ... }:
-      {
-        directories = [
-          "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
-          "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
-        ];
-      };
-
-    advancedPowerManagement = {
+    amdgpu.advancedPowerManagement = {
       nixos = {
         hardware.amdgpu.overdrive = {
           enable = true;

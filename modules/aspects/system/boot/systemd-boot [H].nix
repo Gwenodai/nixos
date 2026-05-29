@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.systemd-boot = {
     nixos = {
