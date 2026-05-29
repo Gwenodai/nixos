@@ -30,6 +30,10 @@
     # Automatically configures core hardware functionality based on the provided
     # host hardware profile configuration defined within `./hosts.nix`
     hardware.autoConfig
+    # Use the latest NixOS kernel by default
+    kernel
+    # Declarative disk partitioning and formatting using nix
+    disko
   ];
 
   ### User Aspects

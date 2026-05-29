@@ -5,8 +5,6 @@ let
   basic = {
     includes = with den.aspects; [
       # ---Core Config--- #
-      kernel
-      disko
       secrets
       nix-config
       firmware

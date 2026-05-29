@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.mount-cifs = {
     # This aspect takes mount parameters as context
