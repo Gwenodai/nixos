@@ -8,7 +8,7 @@ let
   # Aspects shared by both the host and its users
   sharedAspects = with den.aspects; [
     # ---System Preset--- #
-    sys-preset-basic
+    system-type.basic
   ];
 in
 {

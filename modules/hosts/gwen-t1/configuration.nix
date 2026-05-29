@@ -18,9 +18,8 @@
       kernel-modules.it87 # Driver for MB fan control (needed for AIO)
 
       ### System Preset
-      <sys-preset-desktop>
-      <sys-preset-desktop/gaming> # Use the gaming desktop system preset
-      # wm-preset-niri # Use the Niri desktop preset
+      system-type.desktop-gaming # Use the gaming desktop system preset
+      # environment.niri # Use the Niri desktop preset
 
       ### Services
       valent
