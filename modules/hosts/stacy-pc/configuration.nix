@@ -23,12 +23,12 @@ in
         # ---Core Config--- #
         systemd-boot # Use systemd boot
         # Kernel config
-        <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
+        kernel.cachyos # Use the CachyOS kernel instead of the NixOS kernel
         # ---Services--- #
         valent
 
         # ---Scripts--- #
-        fix-camera
+        scripts.fix-camera
       ];
 
     _.to-users = {

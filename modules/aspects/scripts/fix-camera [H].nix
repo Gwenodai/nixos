@@ -1,6 +1,6 @@
 # Simple script to disable faulty webcam autofocus functionality
 {
-  den.aspects.fix-camera = {
+  den.aspects.scripts.fix-camera = {
     nixos =
       { pkgs, lib, ... }:
       let
