@@ -1,9 +1,27 @@
-{ den, ... }:
-let
-  config = {
-    nixos = {
-      fonts.fontconfig.enable = true;
-    };
+{
+  den.aspects.fonts = {
+    nixos =
+      { pkgs, ... }:
+      {
+        fonts.fontconfig.enable = true;
+
+        fonts.packages =
+          (with pkgs; [
+            # Regular fonts
+            fira
+            jetbrains-mono
+            adwaita-fonts
+            googlesans-code
+          ])
+          ++ (with pkgs.nerd-fonts; [
+            # Nerd-fonts
+            symbols-only
+            fira-mono
+            fira-code
+            adwaita-mono
+            jetbrains-mono
+          ]);
+      };
 
     persistUserIgnore =
       { hmConfig, ... }:
@@ -11,40 +29,4 @@ let
         directories = [ "${hmConfig.xdg.cacheHome}/fontconfig" ];
       };
   };
-
-  regular = {
-    nixos =
-      { pkgs, ... }:
-      {
-        # Regular fonts
-        fonts.packages = with pkgs; [
-          fira
-          jetbrains-mono
-          adwaita-fonts
-          googlesans-code
-        ];
-      };
-  };
-
-  nerd = {
-    nixos =
-      { pkgs, ... }:
-      {
-        # Nerd-fonts
-        fonts.packages = with pkgs.nerd-fonts; [
-          symbols-only
-          fira-mono
-          fira-code
-          adwaita-mono
-          jetbrains-mono
-        ];
-      };
-  };
-in
-{
-  den.aspects.fonts.includes = [
-    config
-    regular
-    nerd
-  ];
 }
