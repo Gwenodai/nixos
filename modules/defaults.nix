@@ -12,7 +12,7 @@
   _module.args.__findFile = den.lib.__findFile;
 
   ### Global Aspects
-  den.default.includes = [
+  den.default.includes = with den.aspects; [
     # Provides flake-parts inputs' (system-specialized inputs) as a module argument
     den.batteries.inputs'
     # Provides flake-parts self' (system-specialized self) as a module argument
@@ -23,6 +23,8 @@
     den.batteries.define-user
     # Sets the default shell to zsh
     (den.batteries.user-shell "zsh")
+    #
+    home-manager.userConfig
   ];
 
   ### Host Aspects
@@ -34,6 +36,11 @@
     kernel
     # Declarative disk partitioning and formatting using nix
     disko
+  ];
+
+  ### Home-Manager Host Aspects
+  den.schema.hm-host.includes = with den.aspects; [
+    home-manager.hostConfig
   ];
 
   ### User Aspects
