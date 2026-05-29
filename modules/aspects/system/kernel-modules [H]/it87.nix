@@ -1,13 +1,12 @@
 # it87 driver with support for newer IT86xx/IT87xx chips
-{ inputs, den, ... }:
+{ inputs, ... }:
 {
-  # Flake inputs
   flake-file.inputs.it87 = {
     url = "github:frankcrawford/it87";
     flake = false;
   };
 
-  den.aspects.kernel-modules._.it87 = {
+  den.aspects.kernel-modules.it87 = {
     nixos =
       { config, pkgs, ... }:
       {
@@ -36,8 +35,7 @@
                   runHook postBuild
                 '';
 
-                # Manually install the driver because 'make modules_install'
-                # tries to write to /lib/modules and run depmod
+                # Manually install the driver instead of using 'make modules_install'
                 installPhase = ''
                   install -D it87.ko $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/hwmon/it87.ko
                 '';

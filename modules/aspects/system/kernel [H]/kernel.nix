@@ -1,7 +1,7 @@
-{ inputs, den, ... }:
-let
+{ inputs, ... }:
+{
   # Regular NixOS kernel
-  default = {
+  den.aspects.kernel = {
     nixos =
       { pkgs, lib, ... }:
       {
@@ -10,7 +10,8 @@ let
   };
 
   # CachyOS kernel for NixOS
-  cachyos = {
+  flake-file.inputs.nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+  den.aspects.kernel.cachyos = {
     nixos =
       { pkgs, lib, ... }:
       {
@@ -26,13 +27,4 @@ let
         services.ananicy.rulesProvider = pkgs.ananicy-rules-cachyos;
       };
   };
-in
-{
-  # Flake inputs
-  flake-file.inputs = {
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-  };
-
-  den.aspects.kernel.includes = [ default ];
-  den.aspects.kernel._.cachyos.includes = [ cachyos ];
 }

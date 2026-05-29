@@ -23,7 +23,6 @@
       platform = "desktop";
       cpu = {
         vendor = "amd";
-        arch = "zen5";
         lowLatencyScheduler = true;
         cores = 8;
       };
@@ -42,7 +41,6 @@
       platform = "desktop";
       cpu = {
         vendor = "amd";
-        arch = "zen5";
         lowLatencyScheduler = true;
         cores = 8;
       };
@@ -61,7 +59,6 @@
       platform = "server";
       cpu = {
         vendor = "amd";
-        arch = "zen2";
         cores = 12;
       };
       gpu = {

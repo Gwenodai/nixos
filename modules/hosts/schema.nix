@@ -35,17 +35,6 @@
                   ]);
                   default = null;
                 };
-                arch = lib.mkOption {
-                  description = "CPU architecture. Useful for things like targeting specific kernel builds.";
-                  type = nullOr (enum [
-                    "zen1"
-                    "zen2"
-                    "zen3"
-                    "zen4"
-                    "zen5"
-                  ]);
-                  default = null;
-                };
                 lowLatencyScheduler = lib.mkOption {
                   description = "Prioritise latency performance via kernel params.";
                   type = bool;
