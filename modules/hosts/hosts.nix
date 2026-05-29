@@ -1,7 +1,7 @@
 # This file defines all hosts and their users
-{ den, ... }:
 {
   # Host metadata for later reference
+  # TODO: Port public host metadata to den's quirk/pipe system
   flake.lib.hosts = {
     gwen-t1 = {
       ip = "192.168.1.37";
@@ -17,52 +17,56 @@
     };
   };
 
-  # Gwen PC
+  # ---Gwen PC--- #
   den.hosts.x86_64-linux.gwen-t1 = {
-    users.gwen = { };
-    # users.stacy = { };
+    hardware = {
+      platform = "desktop";
+      cpu = {
+        vendor = "amd";
+        arch = "zen5";
+        lowLatencyScheduler = true;
+      };
+      gpu = {
+        vendor = "amd";
+        advancedPowerManagement = true;
+      };
+    };
 
-    ### Host Hardware
-    cpu = {
-      brand = "amd";
-      performance = true;
-    };
-    gpu = {
-      brand = "amd";
-      performance = true;
-    };
+    users.gwen = { };
   };
-  # Stacy PC
+
+  # ---Stacy PC--- #
   den.hosts.x86_64-linux.stacy-pc = {
+    hardware = {
+      platform = "desktop";
+      cpu = {
+        vendor = "amd";
+        arch = "zen5";
+        lowLatencyScheduler = true;
+      };
+      gpu = {
+        vendor = "amd";
+        advancedPowerManagement = true;
+      };
+    };
+
     users.stacy = { };
-
-    ### Host Hardware
-    cpu = {
-      brand = "amd";
-      performance = true;
-    };
-    gpu = {
-      brand = "amd";
-      performance = true;
-    };
   };
-  # Server
+
+  # ---Server--- #
   den.hosts.x86_64-linux.ymir = {
+    hardware = {
+      platform = "server";
+      cpu = {
+        vendor = "amd";
+        arch = "zen2";
+      };
+      gpu = {
+        vendor = "amd";
+        advancedPowerManagement = true;
+      };
+    };
+
     users.gwen = { };
-
-    ### Host Hardware
-    cpu = {
-      brand = "amd";
-      performance = false;
-    };
-    gpu = {
-      brand = "amd";
-      performance = true;
-    };
   };
-
-  # Default host settings
-  den.schema.host.includes = [
-    den.batteries.hostname # Automatically set hostname based on host
-  ];
 }
