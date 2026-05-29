@@ -1,8 +1,10 @@
 # Ephemeral state management
 # https://nix-community.github.io/preservation/configuration-options.html
-{ inputs, den, ... }:
-let
-  preservation = {
+{ inputs, ... }:
+{
+  flake-file.inputs.preservation.url = "github:nix-community/preservation";
+
+  den.aspects.preservation = {
     nixos =
       { config, ... }:
       {
@@ -10,13 +12,4 @@ let
         preservation.enable = true;
       };
   };
-in
-{
-  flake-file.inputs.preservation = {
-    url = "github:nix-community/preservation";
-  };
-
-  den.aspects.persist.includes = [
-    preservation
-  ];
 }

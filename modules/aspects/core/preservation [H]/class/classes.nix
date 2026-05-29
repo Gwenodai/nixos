@@ -97,7 +97,7 @@ let
 
 in
 {
-  den.aspects.persist = {
+  den.aspects.preservation = {
     includes = [
       (mkHostClass {
         fromClass = "persist";

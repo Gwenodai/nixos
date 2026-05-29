@@ -1,6 +1,24 @@
-{ den, ... }:
-let
-  hostConfig = {
+{
+  den.aspects.preservation = {
+    ### Host Preservation Config
+    nixos =
+      { pkgs, ... }:
+      {
+        # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
+        systemd.services.systemd-machine-id-commit = {
+          # Ensure service will only run if the persistent storage is mounted
+          unitConfig.ConditionPathIsMountPoint = [
+            ""
+            "/persist"
+          ];
+          # Ensure service commits the ID to the persistent volume
+          serviceConfig.ExecStart = [
+            ""
+            "${pkgs.systemd}/bin/systemd-machine-id-setup --commit --root /persist"
+          ];
+        };
+      };
+
     persist = {
       directories = [
         "/var/lib/systemd/timers"
@@ -59,26 +77,7 @@ let
       "/var/log"
     ];
 
-    nixos =
-      { pkgs, ... }:
-      {
-        # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
-        systemd.services.systemd-machine-id-commit = {
-          # Ensure service will only run if the persistent storage is mounted
-          unitConfig.ConditionPathIsMountPoint = [
-            ""
-            "/persist"
-          ];
-          # Ensure service commits the ID to the persistent volume
-          serviceConfig.ExecStart = [
-            ""
-            "${pkgs.systemd}/bin/systemd-machine-id-setup --commit --root /persist"
-          ];
-        };
-      };
-  };
-
-  userConfig = {
+    ### User Preservation Config
     persistUser =
       { hmConfig, ... }:
       {
@@ -130,10 +129,4 @@ let
         ];
       };
   };
-in
-{
-  den.aspects.persist._.minimal-preset.includes = [
-    hostConfig
-    userConfig
-  ];
 }

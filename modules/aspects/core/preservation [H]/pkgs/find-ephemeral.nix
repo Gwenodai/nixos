@@ -1,7 +1,6 @@
 # A simple tool to list all files not preserved via preservation in any given directory
-{ den, ... }:
 {
-  den.aspects.persist._.find-ephemeral = {
+  den.aspects.preservation.find-ephemeral = {
     nixos =
       {
         pkgs,

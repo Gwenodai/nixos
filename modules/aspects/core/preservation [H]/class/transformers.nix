@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  transformers = {
+{
+  den.aspects.preservation = {
     nixos =
       { config, lib, ... }:
       {
@@ -153,9 +152,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.persist.includes = [
-    transformers
-  ];
 }

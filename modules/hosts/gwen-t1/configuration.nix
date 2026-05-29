@@ -5,55 +5,37 @@
   den,
   ...
 }:
-let
-  # Aspects shared by both the host and its users
-  sharedAspects = with den.aspects; [
-    # ---Core Aspects--- #
-    # persist # Opt into system wide ephemeral state management
-
-    # ---System Preset--- #
-    <sys-preset-desktop>
-    <sys-preset-desktop/gaming> # Use the gaming desktop system preset
-    # wm-preset-niri # Use the Niri desktop preset
-  ];
-in
 {
   den.aspects.gwen-t1 = {
-    includes =
-      with den.aspects;
-      sharedAspects
-      ++ [
-        # ---Persistence--- #
-        # <persist/minimal-preset> # Use preconfigured default settings for preservation
-        # <persist/find-ephemeral> # Tool to locate files not currently preserved
+    includes = with den.aspects; [
+      ### Persistence
+      preservation # Opt into system wide ephemeral state management
+      preservation.find-ephemeral # Tool to locate files not currently preserved
 
-        # ---System Config--- #
-        systemd-boot # Use systemd boot
-        # Kernel config
-        <kernel/cachyos> # Use the CachyOS kernel instead of the NixOS kernel
-        <kernel-modules/it87> # Driver for MB fan control (needed for AIO)
+      ### System Config
+      systemd-boot # Use systemd boot
+      kernel.cachyos # Use the CachyOS kernel instead of the NixOS kernel
+      kernel-modules.it87 # Driver for MB fan control (needed for AIO)
 
-        # ---Services--- #
-        valent
-      ];
+      ### System Preset
+      <sys-preset-desktop>
+      <sys-preset-desktop/gaming> # Use the gaming desktop system preset
+      # wm-preset-niri # Use the Niri desktop preset
 
-    _.to-users = {
-      includes =
-        with den.aspects;
-        sharedAspects
-        ++ [
-          # ---Applications--- #
-          spotify
-          caprine
-        ];
-    };
+      ### Services
+      valent
 
-    _.gwen = {
+      ### Applications
+      spotify
+      caprine
+    ];
+
+    provides.gwen = {
       includes = with den.aspects; [
-        # ---User Config--- #
+        ### User Config
         den.batteries.primary-user
 
-        # ---Applications--- #
+        ### Applications
         dconf-editor
       ];
     };
