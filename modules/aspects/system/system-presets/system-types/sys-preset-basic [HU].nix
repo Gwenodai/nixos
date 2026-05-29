@@ -5,7 +5,6 @@ let
   basic = {
     includes = with den.aspects; [
       # ---Core Config--- #
-      nix-config
       xdg
 
       # ---Basic Tools--- #

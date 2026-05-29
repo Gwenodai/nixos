@@ -32,6 +32,9 @@
     kernel # Use the latest NixOS kernel by default
     disko
     sops-nix.hostConfig
+    nix
+    garbage-collection
+    locale
   ];
 
   ### Home-Manager Host Aspects
