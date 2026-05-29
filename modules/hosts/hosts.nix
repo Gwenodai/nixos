@@ -25,6 +25,7 @@
         vendor = "amd";
         arch = "zen5";
         lowLatencyScheduler = true;
+        cores = 8;
       };
       gpu = {
         vendor = "amd";
@@ -43,6 +44,7 @@
         vendor = "amd";
         arch = "zen5";
         lowLatencyScheduler = true;
+        cores = 8;
       };
       gpu = {
         vendor = "amd";
@@ -60,6 +62,7 @@
       cpu = {
         vendor = "amd";
         arch = "zen2";
+        cores = 12;
       };
       gpu = {
         vendor = "amd";

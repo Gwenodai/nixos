@@ -36,13 +36,13 @@
                   default = null;
                 };
                 arch = lib.mkOption {
-                  description = "Microarchitecture targeting specific kernel builds (e.g., CachyOS).";
+                  description = "CPU architecture. Useful for things like targeting specific kernel builds.";
                   type = nullOr (enum [
-                    "x86-64-v3"
-                    "x86-64-v4"
+                    "zen1"
+                    "zen2"
                     "zen3"
                     "zen4"
-                    "skylake"
+                    "zen5"
                   ]);
                   default = null;
                 };
@@ -50,6 +50,11 @@
                   description = "Prioritise latency performance via kernel params.";
                   type = bool;
                   default = false;
+                };
+                cores = lib.mkOption {
+                  description = "The total number of physical CPU cores available.";
+                  type = nullOr ints.positive;
+                  default = null;
                 };
               };
 
@@ -79,6 +84,5 @@
           };
         default = { };
       };
-
     };
 }
