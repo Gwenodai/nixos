@@ -3,7 +3,6 @@
   __findFile,
   self,
   den,
-  lib,
   ...
 }:
 let

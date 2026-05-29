@@ -5,7 +5,6 @@ let
   basic = {
     includes = with den.aspects; [
       # ---Core Config--- #
-      secrets
       nix-config
       firmware
       xdg

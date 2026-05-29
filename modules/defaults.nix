@@ -13,17 +13,13 @@
 
   ### Global Aspects
   den.default.includes = with den.aspects; [
-    # Provides flake-parts inputs' (system-specialized inputs) as a module argument
     den.batteries.inputs'
-    # Provides flake-parts self' (system-specialized self) as a module argument
     den.batteries.self'
-    # Automatically set hostname based on host
     den.batteries.hostname
     # Automatically create the user on host
     den.batteries.define-user
     # Sets the default shell to zsh
     (den.batteries.user-shell "zsh")
-    #
     home-manager.userConfig
   ];
 
@@ -36,6 +32,8 @@
     kernel
     # Declarative disk partitioning and formatting using nix
     disko
+    # Secrets management
+    sops-nix.hostConfig
   ];
 
   ### Home-Manager Host Aspects
@@ -45,6 +43,8 @@
 
   ### User Aspects
   den.schema.user.includes = with den.aspects; [
+    # Secrets management
+    sops-nix.userConfig
     # Inserts specific authorised ssh keys by default in all users
     lib.ssh.authorizedKeys
   ];
