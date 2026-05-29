@@ -28,11 +28,9 @@
     # Automatically configures core hardware functionality based on the provided
     # host hardware profile configuration defined within `./hosts.nix`
     hardware.autoConfig
-    # Use the latest NixOS kernel by default
-    kernel
-    # Declarative disk partitioning and formatting using nix
+    firmware
+    kernel # Use the latest NixOS kernel by default
     disko
-    # Secrets management
     sops-nix.hostConfig
   ];
 
@@ -43,7 +41,6 @@
 
   ### User Aspects
   den.schema.user.includes = with den.aspects; [
-    # Secrets management
     sops-nix.userConfig
     # Inserts specific authorised ssh keys by default in all users
     lib.ssh.authorizedKeys

@@ -6,7 +6,6 @@ let
     includes = with den.aspects; [
       # ---Core Config--- #
       nix-config
-      firmware
       xdg
 
       # ---Basic Tools--- #

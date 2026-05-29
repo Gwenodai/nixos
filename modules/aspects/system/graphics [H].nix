@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  graphics = {
+{
+  den.aspects.graphics = {
     nixos = {
       hardware.graphics = {
         enable = true;
@@ -8,7 +7,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.graphics.includes = [ graphics ];
 }
