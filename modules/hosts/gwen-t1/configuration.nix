@@ -27,16 +27,22 @@
       ### Applications
       spotify
       caprine
+      google-chrome
+
+      ### Gaming Related Applications
+      steam
     ];
 
-    provides.gwen = {
-      includes = with den.aspects; [
-        ### User Config
-        den.batteries.primary-user
+    provides = {
+      gwen = {
+        includes = with den.aspects; [
+          ### User Config
+          den.batteries.primary-user
 
-        ### Applications
-        dconf-editor
-      ];
+          ### Applications
+          dconf-editor
+        ];
+      };
     };
 
     nixos =
