@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  heroicConfig = {
+{
+  den.aspects.heroic.config = {
     homeManager =
       {
         config,
@@ -80,8 +79,25 @@ let
           force = true;
         };
       };
+
+    ### Persist config
+    persistUser =
+      { hmConfig, ... }:
+      {
+        directories = [
+          # "~/.local/share/heroic/..."
+          "${hmConfig.xdg.dataHome}/heroic/games"
+          "${hmConfig.xdg.dataHome}/heroic/prefixes"
+        ];
+      };
+
+    persistUserTmp =
+      { hmConfig, ... }:
+      {
+        # "~/.local/share/heroic"
+        ".local" = { };
+        "${hmConfig.xdg.dataHome}" = { };
+        "${hmConfig.xdg.dataHome}/heroic" = { };
+      };
   };
-in
-{
-  den.aspects.heroic._.config.includes = [ heroicConfig ];
 }

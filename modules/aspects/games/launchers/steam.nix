@@ -1,9 +1,9 @@
-{ __findFile, ... }:
+{ den, ... }:
 {
   den.aspects.steam = {
-    includes = [
+    includes = with den.aspects; [
       # Generic linux game directories that should be persisted by users
-      <lib/games/savegame-persist>
+      lib.games.savegame-persist
     ];
 
     nixos =
@@ -16,7 +16,9 @@
 
           package = pkgs.steam.override {
             extraEnv = {
+              # Force Steam to fall back to XWayland (fixes various issues)
               NIXOS_OZONE_WL = "0";
+              # Enable MangoHud for all Vulkan Steam games
               MANGOHUD = "1";
             };
           };
@@ -56,15 +58,19 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.steam"
           ".steam"
+          # "~/.local/share/Steam"
           {
             directory = "${hmConfig.xdg.dataHome}/Steam";
             mode = "0700";
           }
+          # "~/.local/share/vulkan/implicit_layer.d"
           "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d"
         ];
       };
@@ -72,15 +78,19 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/share/vulkan"
         ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+        "${hmConfig.xdg.dataHome}" = { };
         "${hmConfig.xdg.dataHome}/vulkan" = { };
       };
 
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
+        directories = [
+          # "~/.cache/winetricks"
+          "${hmConfig.xdg.cacheHome}/winetricks"
+        ];
       };
   };
 }

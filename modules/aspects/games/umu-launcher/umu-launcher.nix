@@ -1,10 +1,9 @@
-{ den, ... }:
-let
-  umu = {
+{
+  den.aspects.umu-launcher = {
     homeManager =
       { pkgs, ... }:
       {
-        home.packages = with pkgs; [ umu-launcher ];
+        home.packages = [ pkgs.umu-launcher ];
       };
 
     persistUser =
@@ -29,9 +28,4 @@ let
         files = [ "${hmConfig.xdg.cacheHome}/umu-protonfixes/protonfixes_test.log" ];
       };
   };
-in
-{
-  den.aspects.umu-launcher.includes = [
-    umu
-  ];
 }

@@ -1,8 +1,10 @@
-{ den, __findFile, ... }:
-let
-  heroicLauncher = {
-    # Generic linux game directories that should be persisted by users
-    includes = [ <lib/games/savegame-persist> ];
+{ den, ... }:
+{
+  den.aspects.heroic = {
+    includes = with den.aspects; [
+      # Generic linux game directories that should be persisted by users
+      lib.games.savegame-persist
+    ];
 
     homeManager =
       { pkgs, lib, ... }:
@@ -35,36 +37,35 @@ let
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/heroic"
           {
             directory = "${hmConfig.xdg.configHome}/heroic";
             mode = "0700";
           }
-          "${hmConfig.xdg.dataHome}/heroic/games"
-          "${hmConfig.xdg.dataHome}/heroic/prefixes"
         ];
       };
 
     persistUserTmp =
       { hmConfig, ... }:
       {
-        ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
-        "${hmConfig.xdg.dataHome}/heroic" = { };
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
 
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        files = [ "${hmConfig.xdg.stateHome}/Heroic" ];
-        directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
+        directories = [
+          # "~/.local/state/Heroic"
+          "${hmConfig.xdg.stateHome}/Heroic"
+          # "~/.cache/winetricks"
+          "${hmConfig.xdg.cacheHome}/winetricks"
+        ];
       };
   };
-in
-{
-  den.aspects.heroic.includes = [ heroicLauncher ];
 }
