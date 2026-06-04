@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  git = {
+{
+  den.aspects.git = {
     homeManager = {
       programs.git = {
         enable = true;
@@ -10,21 +9,4 @@ let
       };
     };
   };
-
-  gh = {
-    homeManager = {
-      programs.gh = {
-        enable = true;
-        gitCredentialHelper = {
-          enable = true;
-        };
-      };
-    };
-  };
-in
-{
-  den.aspects.git.includes = [
-    git
-    # gh
-  ];
 }
