@@ -24,7 +24,7 @@
               enable = config.xdg.enable;
               createDirectories = true;
               setSessionVariables = true;
-              # Directories
+              ### Directories
               documents = "${config.home.homeDirectory}/Documents";
               desktop = "${docs}/Desktop";
               download = "${docs}/Downloads";
@@ -63,6 +63,7 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, lib, ... }:
       {
@@ -74,16 +75,24 @@
               createLinkTarget = true;
             })
             [
+              # "~/Documents"
               "${hmConfig.xdg.userDirs.documents}"
+              # "~/Documents/Desktop"
               "${hmConfig.xdg.userDirs.desktop}"
+              # "~/Documents/Downloads"
               "${hmConfig.xdg.userDirs.download}"
+              # "~/Documents/Pictures"
               "${hmConfig.xdg.userDirs.pictures}"
+              # "~/Documents/Videos"
               "${hmConfig.xdg.userDirs.videos}"
+              # "~/Documents/Music"
               "${hmConfig.xdg.userDirs.music}"
+              # "~/Documents/Templates"
               "${hmConfig.xdg.userDirs.templates}"
             ];
 
         files = [
+          # "~/.local/share/recently-used.xbel"
           {
             file = "${hmConfig.xdg.dataHome}/recently-used.xbel";
             mode = "0600";
@@ -94,8 +103,9 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/share"
         ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+        "${hmConfig.xdg.dataHome}" = { };
       };
   };
 }

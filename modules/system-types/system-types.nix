@@ -5,18 +5,18 @@
       includes = with den.aspects; [
         ### Core Aspects
         nix
+        home-manager
+        disko
+        # Automatically configures core hardware functionality based on the provided
+        # host hardware profile configuration defined within `./hosts.nix`
+        hardware.autoConfig
         firmware
         garbage-collection
         locale
         # Use the latest NixOS kernel by default
         kernel
-        disko
-        home-manager
         sops-nix
         xdg
-        # Automatically configures core hardware functionality based on the provided
-        # host hardware profile configuration defined within `./hosts.nix`
-        hardware.autoConfig
 
         ### Basic Tools
         coolercontrol
