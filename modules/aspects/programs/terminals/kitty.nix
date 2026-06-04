@@ -1,5 +1,4 @@
 # https://mynixos.com/home-manager/options/programs.kitty
-{ den, ... }:
 {
   den.aspects.kitty = {
     homeManager =
@@ -64,10 +63,14 @@
         };
       };
 
+    ### Persist config
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/kitty" ];
+        directories = [
+          # "~/.cache/kitty"
+          "${hmConfig.xdg.cacheHome}/kitty"
+        ];
       };
   };
 }
