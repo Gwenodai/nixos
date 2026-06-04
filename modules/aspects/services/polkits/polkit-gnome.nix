@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.polkit-gnome = {
     nixos = {
@@ -22,9 +21,11 @@
               Wants = [ "graphical-session.target" ];
               After = [ "graphical-session.target" ];
             };
+
             Install = {
               WantedBy = [ "graphical-session.target" ];
             };
+
             Service = {
               Type = "simple";
               ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
