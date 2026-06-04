@@ -2,7 +2,7 @@
   den.aspects.lib.games = {
     # Generic persistence configs for native linux game save directories
     # intended to be shared by game launchers like Steam. (intended for users)
-    savegame-persist = {
+    persist-savegame = {
       persistUser =
         { hmConfig, lib, ... }:
         {

@@ -49,9 +49,7 @@
         lact # GPU control
         ananicy # Auto-nice daemon
 
-        ### Gaming Related Applications
-        <heroic>
-        <heroic/config>
+        ### Gaming Related Aspects
         umu-launcher
         mangohud
         <vesktop>

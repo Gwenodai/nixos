@@ -31,6 +31,8 @@
 
       ### Gaming Related Applications
       steam
+      heroic
+      heroic.config
     ];
 
     provides = {

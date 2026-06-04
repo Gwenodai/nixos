@@ -3,7 +3,7 @@
   den.aspects.heroic = {
     includes = with den.aspects; [
       # Generic linux game directories that should be persisted by users
-      lib.games.savegame-persist
+      lib.games.persist-savegame
     ];
 
     homeManager =

@@ -3,11 +3,16 @@
   den.aspects.steam = {
     includes = with den.aspects; [
       # Generic linux game directories that should be persisted by users
-      lib.games.savegame-persist
+      lib.games.persist-savegame
     ];
 
     nixos =
-      { pkgs, ... }:
+      {
+        pkgs,
+        host,
+        lib,
+        ...
+      }:
       {
         programs.steam = {
           enable = true;
@@ -18,7 +23,9 @@
             extraEnv = {
               # Force Steam to fall back to XWayland (fixes various issues)
               NIXOS_OZONE_WL = "0";
-              # Enable MangoHud for all Vulkan Steam games
+            }
+            # Enable MangoHud for all Vulkan Steam games if `mangohud` aspect is included
+            // lib.optionalAttrs (host.hasAspect den.aspects.mangohud) {
               MANGOHUD = "1";
             };
           };
