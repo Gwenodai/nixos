@@ -1,7 +1,6 @@
 # https://mynixos.com/home-manager/options/programs.vesktop
-{ den, ... }:
 {
-  den.aspects.vesktop._.config = {
+  den.aspects.vesktop.config = {
     homeManager = {
       programs.vesktop = {
         settings = {

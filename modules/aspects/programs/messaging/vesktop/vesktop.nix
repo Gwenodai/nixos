@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  vesktop = {
+{
+  den.aspects.vesktop = {
     homeManager = {
       programs.vesktop.enable = true;
 
@@ -26,10 +25,12 @@ let
       };
     };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/vesktop/sessionData"
           {
             directory = "${hmConfig.xdg.configHome}/vesktop/sessionData";
             how = "symlink";
@@ -38,10 +39,12 @@ let
           }
         ];
         files = [
+          # "~/.config/vesktop/Crashpad/client_id"
           {
             file = "${hmConfig.xdg.configHome}/vesktop/Crashpad/client_id";
             mode = "0644";
           }
+          # "~/.config/vesktop/state.json"
           {
             file = "${hmConfig.xdg.configHome}/vesktop/state.json";
             mode = "0644";
@@ -52,11 +55,14 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config/vesktop"
+        "${hmConfig.xdg.configHome}" = { };
         "${hmConfig.xdg.configHome}/vesktop" = { };
+        # "~/.config/vesktop/Crashpad"
         "${hmConfig.xdg.configHome}/vesktop/Crashpad" = {
           mode = "0700";
         };
+        # "~/.config/vesktop/sessionData"
         "${hmConfig.xdg.configHome}/vesktop/sessionData" = {
           mode = "0700";
         };
@@ -65,12 +71,10 @@ let
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        files = [ "${hmConfig.xdg.configHome}/vesktop/settings/quickCss.css" ];
+        files = [
+          # "~/.config/vesktop/settings/quickCss.css"
+          "${hmConfig.xdg.configHome}/vesktop/settings/quickCss.css"
+        ];
       };
   };
-in
-{
-  den.aspects.vesktop.includes = [
-    vesktop
-  ];
 }

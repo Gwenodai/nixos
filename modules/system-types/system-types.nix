@@ -52,8 +52,6 @@
         ### Gaming Related Aspects
         umu-launcher
         mangohud
-        <vesktop>
-        <vesktop/config>
       ];
     };
   };

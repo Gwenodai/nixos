@@ -1,6 +1,5 @@
 # Host system config
 {
-  __findFile,
   self,
   den,
   ...
@@ -16,7 +15,7 @@
       kernel.cachyos # Use the CachyOS kernel instead of the NixOS kernel
       kernel-modules.it87 # Driver for MB fan control (needed for AIO)
 
-      ### System Preset
+      ### System-Type
       system-type.desktop-gaming # Use the gaming desktop system preset
       # environment.niri # Use the Niri desktop preset
 
@@ -24,11 +23,14 @@
       valent
 
       ### Applications
-      spotify
-      caprine
       google-chrome
-
-      ### Gaming Related Applications
+      ## Music
+      spotify
+      ## Messaging
+      vesktop
+      vesktop.config
+      caprine
+      ## Gaming
       steam
       heroic
       heroic.config
