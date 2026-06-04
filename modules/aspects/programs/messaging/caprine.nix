@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.caprine = {
     homeManager =
@@ -23,10 +22,12 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/Caprine"
           {
             directory = "${hmConfig.xdg.configHome}/Caprine";
             how = "symlink";
@@ -39,7 +40,8 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
   };
 }
