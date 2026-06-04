@@ -34,6 +34,7 @@ in
           liquidctl # Drivers for AIO liquid coolers and other devices
         ];
 
+        # Set up the environment config defaults
         environment.etc =
           lib.genAttrs
             [

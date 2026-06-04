@@ -13,6 +13,7 @@
         };
       };
 
+    ### Persist config
     persist =
       { config, lib, ... }:
       {
@@ -37,6 +38,7 @@
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/lact"
           {
             directory = "${hmConfig.xdg.configHome}/lact";
             how = "symlink";
@@ -48,7 +50,8 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
   };
 }
