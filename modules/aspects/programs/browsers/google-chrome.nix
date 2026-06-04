@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.google-chrome = {
     homeManager =
@@ -48,11 +47,13 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
           {
+            # "~/.config/google-chrome"
             directory = "${hmConfig.xdg.configHome}/google-chrome";
             how = "symlink";
             mode = "0700";
@@ -64,13 +65,17 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
 
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/google-chrome" ];
+        directories = [
+          # "~/.cache/google-chrome"
+          "${hmConfig.xdg.cacheHome}/google-chrome"
+        ];
       };
   };
 }
