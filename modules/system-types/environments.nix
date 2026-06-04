@@ -1,4 +1,4 @@
-{ __findFile, den, ... }:
+{ den, ... }:
 {
   den.aspects.environment = {
     niri = {
@@ -8,10 +8,7 @@
       includes = with den.aspects; [
         ### Core Aspects
         niri
-        # Minimal desktop shell
-        <noctalia>
-        <noctalia/config>
-        <noctalia/colour-schemes>
+        noctalia
 
         ### Theming
         stylix

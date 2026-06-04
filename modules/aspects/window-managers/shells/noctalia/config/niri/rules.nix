@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  rules = {
+{
+  den.aspects.noctalia = {
     niri.settings = {
       layer-rules = [
         {
@@ -11,9 +10,4 @@ let
       ];
     };
   };
-in
-{
-  den.aspects.noctalia._.config.includes = [
-    rules
-  ];
 }

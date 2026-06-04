@@ -7,7 +7,36 @@
   ...
 }:
 let
-  noctalia = {
+  class =
+    { user }:
+    { class, aspect-chain }:
+    den.batteries.forward {
+      each = lib.singleton true;
+      fromClass = _: "noctalia";
+      intoClass = _: "homeManager";
+      intoPath = _: [
+        "programs"
+        "noctalia-shell"
+      ];
+      fromAspect = _: lib.head aspect-chain;
+      adaptArgs = lib.id;
+    };
+in
+{
+  flake-file.inputs.noctalia = {
+    url = "github:noctalia-dev/noctalia-shell/v4.7.6";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.noctalia-qs.follows = "noctalia-qs";
+  };
+
+  flake-file.inputs.noctalia-qs = {
+    url = "github:noctalia-dev/noctalia-qs";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  den.aspects.noctalia = {
+    includes = [ class ];
+
     homeManager =
       { inputs', ... }:
       {
@@ -21,18 +50,23 @@ let
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.cache/noctalia"
           "${hmConfig.xdg.cacheHome}/noctalia"
+          # "~/.cache/noctalia-qs"
           "${hmConfig.xdg.cacheHome}/noctalia-qs"
+          # "~/.cache/cliphist"
           {
             directory = "${hmConfig.xdg.cacheHome}/cliphist";
             mode = "0700";
             how = "symlink";
             createLinkTarget = true;
           }
+          # "~/.config/noctalia/colorschemes"
           {
             directory = "${hmConfig.xdg.configHome}/noctalia/colorschemes";
             how = "symlink";
@@ -44,45 +78,11 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.cacheHome}" = { }; # "~/.cache"
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
+        # "~/.config/noctalia"
+        "${hmConfig.xdg.configHome}" = { };
         "${hmConfig.xdg.configHome}/noctalia" = { };
       };
   };
-
-  class =
-    { host, user }:
-    { class, aspect-chain }:
-    den.batteries.forward {
-      each = lib.singleton user;
-      fromClass = _: "noctalia";
-      intoClass = _: "homeManager";
-      intoPath = _: [
-        "programs"
-        "noctalia-shell"
-      ];
-      fromAspect = _: lib.head aspect-chain;
-      adaptArgs = lib.id;
-    };
-in
-{
-  flake-file.inputs = {
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/v4.7.6";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        noctalia-qs.follows = "noctalia-qs";
-      };
-    };
-
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  den.aspects.noctalia.includes = [
-    noctalia
-    class
-  ];
 }

@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  keybind-cheatsheet = {
+{
+  den.aspects.noctalia = {
     homeManager = {
       programs.noctalia-shell = {
         plugins = {
@@ -18,10 +17,12 @@ let
       };
     };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/noctalia/plugins/keybind-cheatsheet"
           {
             directory = "${hmConfig.xdg.configHome}/noctalia/plugins/keybind-cheatsheet";
             how = "symlink";
@@ -33,14 +34,10 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config/noctalia/plugins"
+        "${hmConfig.xdg.configHome}" = { };
         "${hmConfig.xdg.configHome}/noctalia" = { };
         "${hmConfig.xdg.configHome}/noctalia/plugins" = { };
       };
   };
-in
-{
-  den.aspects.noctalia._.config.includes = [
-    keybind-cheatsheet
-  ];
 }

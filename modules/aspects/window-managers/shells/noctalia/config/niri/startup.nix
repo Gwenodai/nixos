@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  startup = {
+{
+  den.aspects.noctalia = {
     niri =
       { lib, config, ... }:
       {
@@ -9,9 +8,4 @@ let
         ];
       };
   };
-in
-{
-  den.aspects.noctalia._.config.includes = [
-    startup
-  ];
 }

@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  diff = {
+{
+  den.aspects.noctalia = {
     homeManager =
       {
         config,
@@ -27,9 +26,4 @@ let
         home.packages = [ noctalia-diff ];
       };
   };
-in
-{
-  den.aspects.noctalia.includes = [
-    diff
-  ];
 }

@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  binds = {
+{
+  den.aspects.noctalia = {
     niri =
       { config, lib, ... }:
       {
@@ -42,9 +41,4 @@ let
           );
       };
   };
-in
-{
-  den.aspects.noctalia._.config.includes = [
-    binds
-  ];
 }

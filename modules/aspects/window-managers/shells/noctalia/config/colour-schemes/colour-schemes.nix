@@ -1,6 +1,5 @@
-{ den, ... }:
 {
-  den.aspects.noctalia._.colour-schemes = {
+  den.aspects.noctalia = {
     homeManager =
       { config, ... }:
       {

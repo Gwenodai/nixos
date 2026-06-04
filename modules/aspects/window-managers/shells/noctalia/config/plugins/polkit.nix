@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  polkit = {
+{
+  den.aspects.noctalia = {
     homeManager =
       { lib, ... }:
       {
@@ -16,10 +15,12 @@ let
         services.polkit-gnome.enable = lib.mkForce false;
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/noctalia/plugins/polkit-agent"
           {
             directory = "${hmConfig.xdg.configHome}/noctalia/plugins/polkit-agent";
             how = "symlink";
@@ -31,7 +32,8 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.config/noctalia/plugins"
+        "${hmConfig.xdg.configHome}" = { };
         "${hmConfig.xdg.configHome}/noctalia" = { };
         "${hmConfig.xdg.configHome}/noctalia/plugins" = { };
       };
@@ -40,13 +42,9 @@ let
       { hmConfig, ... }:
       {
         files = [
+          # "~/.config/noctalia/colors.json"
           "${hmConfig.xdg.configHome}/noctalia/colors.json"
         ];
       };
   };
-in
-{
-  den.aspects.noctalia._.config.includes = [
-    polkit
-  ];
 }
