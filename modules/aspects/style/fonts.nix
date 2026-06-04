@@ -23,10 +23,14 @@
           ]);
       };
 
+    ### Persist config
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/fontconfig" ];
+        directories = [
+          # "~/.cache/fontconfig"
+          "${hmConfig.xdg.cacheHome}/fontconfig"
+        ];
       };
   };
 }
