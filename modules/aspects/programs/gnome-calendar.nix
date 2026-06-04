@@ -1,5 +1,4 @@
 # REQUIRES GNOME-KEYRING SERVICE
-{ den, ... }:
 {
   den.aspects.gnome-calendar = {
     nixos = {
@@ -45,30 +44,34 @@
             X-Purism-FormFactor = "Workstation;Mobile";
           };
         };
-
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/goa-1.0"
+          {
+            directory = "${hmConfig.xdg.configHome}/goa-1.0";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+          # "~/.cache/evolution"
           {
             directory = "${hmConfig.xdg.cacheHome}/evolution";
             mode = "0700";
             how = "symlink";
             createLinkTarget = true;
           }
+          # "~/.config/evolution"
           {
             directory = "${hmConfig.xdg.configHome}/evolution";
             mode = "0700";
             how = "symlink";
             createLinkTarget = true;
           }
-          {
-            directory = "${hmConfig.xdg.configHome}/goa-1.0";
-            how = "symlink";
-            createLinkTarget = true;
-          }
+          # "~/.local/share/evolution"
           {
             directory = "${hmConfig.xdg.dataHome}/evolution";
             mode = "0700";
@@ -81,10 +84,13 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/share"
         ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
-        "${hmConfig.xdg.cacheHome}" = { }; # "~/.cache"
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        "${hmConfig.xdg.dataHome}" = { };
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
   };
 }
