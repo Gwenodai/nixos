@@ -69,6 +69,18 @@
                   default = false;
                 };
               };
+
+              displays = lib.mkOption {
+                description = "The display configuration of the host system.";
+                type = nullOr (attrsOf anything);
+                default = null;
+              };
+
+              touchscreen = lib.mkOption {
+                description = "Which display the touchscreen is mapped to.";
+                type = nullOr str;
+                default = null;
+              };
             };
           };
         default = { };

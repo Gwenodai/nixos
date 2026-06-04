@@ -1,32 +1,36 @@
 { inputs, ... }:
 {
   den.aspects.niri = {
-    homeManager = {
-      programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
-        keyboard = {
-          xkb.layout = "us";
-          numlock = true;
-          repeat-delay = 250;
-          repeat-rate = 35;
-        };
+    homeManager =
+      { host, ... }:
+      {
+        programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
+          keyboard = {
+            xkb.layout = "us";
+            numlock = true;
+            repeat-delay = 250;
+            repeat-rate = 35;
+          };
 
-        mouse = {
-          accel-speed = 0.7;
-          accel-profile = "flat";
-          scroll-method = "no-scroll";
-        };
+          mouse = {
+            accel-speed = 0.7;
+            accel-profile = "flat";
+            scroll-method = "no-scroll";
+          };
 
-        warp-mouse-to-focus = {
-          enable = true;
-        };
+          touch.map-to-output = host.hardware.touchscreen;
 
-        focus-follows-mouse = {
-          enable = true;
-          max-scroll-amount = "20%";
-        };
+          warp-mouse-to-focus = {
+            enable = true;
+          };
 
-        power-key-handling.enable = false;
+          focus-follows-mouse = {
+            enable = true;
+            max-scroll-amount = "20%";
+          };
+
+          power-key-handling.enable = false;
+        };
       };
-    };
   };
 }

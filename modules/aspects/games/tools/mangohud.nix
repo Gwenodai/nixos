@@ -5,6 +5,7 @@
       {
         config,
         pkgs,
+        host,
         lib,
         ...
       }:
@@ -87,7 +88,7 @@
             frametime_color = "00FF00"; # Green
 
             ## GPU values and colours
-            gpu_load_change = true;
+            # gpu_load_change = true;
             gpu_load_value = [
               50 # Low GPU load value
               90 # High GPU load value
@@ -117,6 +118,9 @@
             log_duration = 30;
             autostart_log = 0;
             log_interval = 100;
+          }
+          // lib.optionalAttrs (host.hardware.cpu.lowLatencyScheduler) {
+            gpu_load_change = true;
           };
         };
 

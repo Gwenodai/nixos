@@ -2,9 +2,11 @@
 {
   den.aspects.niri = {
     homeManager =
-      { config, ... }:
+      { config, host, ... }:
       {
         programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
+          outputs = host.hardware.displays;
+
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;
 
