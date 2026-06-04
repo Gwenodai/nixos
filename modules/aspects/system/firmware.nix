@@ -8,12 +8,15 @@
       };
     };
 
-    persist.directories = [
-      {
-        directory = "/var/lib/fwupd";
-        user = "fwupd-refresh";
-        group = "fwupd-refresh";
-      }
-    ];
+    ### Persist config
+    persist = {
+      directories = [
+        {
+          directory = "/var/lib/fwupd";
+          user = "fwupd-refresh";
+          group = "fwupd-refresh";
+        }
+      ];
+    };
   };
 }
