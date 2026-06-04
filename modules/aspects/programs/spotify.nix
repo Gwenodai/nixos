@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.spotify = {
     homeManager =
@@ -26,16 +25,19 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/spotify"
           {
             directory = "${hmConfig.xdg.configHome}/spotify";
             how = "symlink";
             mode = "0755";
             createLinkTarget = true;
           }
+          # "~/.cache/spotify"
           {
             directory = "${hmConfig.xdg.cacheHome}/spotify";
             how = "symlink";
@@ -48,8 +50,10 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.cacheHome}" = { }; # "~/.cache"
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
       };
   };
 }
