@@ -30,6 +30,7 @@
         };
       };
 
+    ### Persist config
     persistUserIgnore =
       { hmConfig, ... }:
       {

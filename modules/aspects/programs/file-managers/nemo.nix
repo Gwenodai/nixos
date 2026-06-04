@@ -1,7 +1,7 @@
 # Nemo file browser
-{ den, ... }:
-let
-  nemo = {
+{
+  den.aspects.nemo = {
+    ### Nemo required host services
     nixos = {
       services = {
         # GNOME Virtual File System is required for a lot of nemo's functionality
@@ -17,7 +17,7 @@ let
     homeManager =
       { pkgs, lib, ... }:
       {
-        # File browser for Cinnamon
+        ### Nemo package config
         home.packages = with pkgs; [
           (nemo-with-extensions.override {
             # Disable the default extensions so we can explicity declare them ourself
@@ -32,77 +32,7 @@ let
           })
         ];
 
-        xdg.mimeApps = {
-          defaultApplications = (
-            let
-              application = "nemo.desktop";
-              mimeTypes = [
-                "inode/directory"
-                "application/x-gnome-saved-search"
-              ];
-            in
-            lib.genAttrs mimeTypes (mimetype: application)
-          );
-          associations.added =
-            let
-              application = "nemo-autorun-software.desktop";
-              mimeTypes = [
-                "x-content/unix-software"
-              ];
-            in
-            lib.genAttrs mimeTypes (mimetype: application);
-        };
-      };
-
-    persistUser =
-      { hmConfig, lib, ... }:
-      {
-        directories = [
-          {
-            directory = "${hmConfig.xdg.dataHome}/gvfs-metadata";
-            mode = "0700";
-            how = "symlink";
-            createLinkTarget = true;
-          }
-        ]
-        ++
-          lib.map
-            (path: {
-              directory = path;
-              how = "symlink";
-              createLinkTarget = true;
-            })
-            [
-              "${hmConfig.xdg.configHome}/gtk-3.0"
-              "${hmConfig.xdg.configHome}/nemo"
-              "${hmConfig.xdg.dataHome}/nemo"
-            ];
-      };
-
-    persistUserTmp =
-      { hmConfig, ... }:
-      {
-        ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-      };
-
-    persistUserIgnore =
-      { hmConfig, ... }:
-      {
-        directories = [
-          "${hmConfig.xdg.dataHome}/Trash"
-        ];
-        files = [
-          "${hmConfig.xdg.cacheHome}/dconf/user"
-        ];
-      };
-  };
-
-  config = {
-    homeManager =
-      { pkgs, lib, ... }:
-      {
+        ### Nemo settings
         dconf.settings = {
           "org/nemo/preferences" = {
             show-hidden-files = true;
@@ -134,12 +64,80 @@ let
             exec = "${lib.getExe pkgs.kitty}";
           };
         };
+
+        xdg.mimeApps = {
+          defaultApplications = (
+            let
+              application = "nemo.desktop";
+              mimeTypes = [
+                "inode/directory"
+                "application/x-gnome-saved-search"
+              ];
+            in
+            lib.genAttrs mimeTypes (mimetype: application)
+          );
+          associations.added =
+            let
+              application = "nemo-autorun-software.desktop";
+              mimeTypes = [
+                "x-content/unix-software"
+              ];
+            in
+            lib.genAttrs mimeTypes (mimetype: application);
+        };
+      };
+
+    ### Persist config
+    persistUser =
+      { hmConfig, lib, ... }:
+      {
+        directories = [
+          # "~/.local/share/gvfs-metadata"
+          {
+            directory = "${hmConfig.xdg.dataHome}/gvfs-metadata";
+            mode = "0700";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ]
+        ++
+          lib.map
+            (path: {
+              directory = path;
+              how = "symlink";
+              createLinkTarget = true;
+            })
+            [
+              # "~/.config/gtk-3.0"
+              "${hmConfig.xdg.configHome}/gtk-3.0"
+              # "~/.config/nemo"
+              "${hmConfig.xdg.configHome}/nemo"
+              # "~/.local/share/nemo"
+              "${hmConfig.xdg.dataHome}/nemo"
+            ];
+      };
+
+    persistUserTmp =
+      { hmConfig, ... }:
+      {
+        # "~/.local/share"
+        ".local" = { };
+        "${hmConfig.xdg.dataHome}" = { };
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
+      };
+
+    persistUserIgnore =
+      { hmConfig, ... }:
+      {
+        directories = [
+          # "~/.local/share/Trash"
+          "${hmConfig.xdg.dataHome}/Trash"
+        ];
+        files = [
+          # "~/.cache/dconf/user"
+          "${hmConfig.xdg.cacheHome}/dconf/user"
+        ];
       };
   };
-in
-{
-  den.aspects.nemo.includes = [
-    nemo
-    config
-  ];
 }

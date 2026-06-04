@@ -20,6 +20,7 @@
         ];
       };
 
+    ### Persist config
     persistUserTmp =
       { hmConfig, ... }:
       {
