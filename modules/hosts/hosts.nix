@@ -33,7 +33,7 @@
     };
 
     users.gwen = { };
-    users.stacy = { };
+    # users.stacy = { };
   };
 
   ### Stacy PC

@@ -8,9 +8,6 @@
     # "aarch64-linux"
   ];
 
-  # Enables the use of den's angle brackets syntax
-  _module.args.__findFile = den.lib.__findFile;
-
   ### Global
   den.default.includes = with den.batteries; [
     inputs'
