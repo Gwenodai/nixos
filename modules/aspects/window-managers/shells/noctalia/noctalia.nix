@@ -8,7 +8,6 @@
 }:
 let
   class =
-    { user }:
     { class, aspect-chain }:
     den.batteries.forward {
       each = lib.singleton true;

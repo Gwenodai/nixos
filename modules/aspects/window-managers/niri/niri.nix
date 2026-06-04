@@ -10,10 +10,9 @@ let
   getNiri = pkgs: pkgs.niri;
 
   class =
-    { host, user }:
     { class, aspect-chain }:
     den.batteries.forward {
-      each = lib.singleton user;
+      each = lib.singleton true;
       fromClass = _: "niri";
       intoClass = _: "homeManager";
       intoPath = _: [

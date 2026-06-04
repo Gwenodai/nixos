@@ -1,8 +1,8 @@
 { den, lib, ... }:
 let
   ### Shared Deduplication Module
-  # Without this `adapterModule` the `persist`, `persistIgnore`, and user
-  # relative classes will duplicate values within their respective lists
+  # Without this `adapterModule` the `persist`, `persistIgnore`, and user relative
+  # classes allow for duplicate values to appear within their respective lists
   dedupModule = {
     options = {
       directories = lib.mkOption {
@@ -48,7 +48,7 @@ let
       intoSubPath,
       dedup ? false,
     }:
-    { host, user }:
+    { user }:
     { class, aspect-chain }:
     den.batteries.forward (
       {
