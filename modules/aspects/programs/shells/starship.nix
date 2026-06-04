@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   # TODO: Configure starship
   # https://mynixos.com/home-manager/options/programs.starship
