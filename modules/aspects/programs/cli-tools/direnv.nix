@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  direnv = {
+{
+  den.aspects.cli-tools = {
     homeManager = {
       programs.direnv = {
         enable = true;
@@ -12,6 +11,7 @@ let
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.local/share/direnv/allow"
           {
             directory = "${hmConfig.xdg.dataHome}/direnv/allow";
             how = "symlink";
@@ -23,14 +23,10 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/share/direnv"
         ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+        "${hmConfig.xdg.dataHome}" = { };
         "${hmConfig.xdg.dataHome}/direnv" = { };
       };
   };
-in
-{
-  den.aspects.cli.includes = [
-    direnv
-  ];
 }

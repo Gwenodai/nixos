@@ -1,9 +1,9 @@
-{ den, ... }:
-let
-  enable = {
+{
+  den.aspects.cli-tools = {
     homeManager =
       { pkgs, ... }:
       {
+        ### Bat config
         programs.bat = {
           enable = true;
           config.theme = "Monokai Extended";
@@ -17,34 +17,30 @@ let
             prettybat # Pretty-print source code
           ];
         };
+
+        ### Aliases
+        home.shellAliases = {
+          cat = "bat";
+          man = "batman";
+          # Make batgrep properly scale to terminal width
+          grep = "batgrep --terminal-width=$(( $(echo $COLUMNS) - 8 ))";
+          diff = "batdiff";
+          less = "batpipe";
+          watch = "batwatch";
+        };
       };
 
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/bat" ];
-        files = [ "${hmConfig.xdg.stateHome}/lesshst" ];
+        directories = [
+          # "~/.cache/bat"
+          "${hmConfig.xdg.cacheHome}/bat"
+        ];
+        files = [
+          # "~/.local/state/lesshst"
+          "${hmConfig.xdg.stateHome}/lesshst"
+        ];
       };
   };
-
-  aliases = {
-    homeManager = {
-      # Custom aliases
-      home.shellAliases = {
-        cat = "bat";
-        man = "batman";
-        # Make batgrep properly scale to terminal width
-        grep = "batgrep --terminal-width=$(( $(echo $COLUMNS) - 8 ))";
-        diff = "batdiff";
-        less = "batpipe";
-        watch = "batwatch";
-      };
-    };
-  };
-in
-{
-  den.aspects.cli.includes = [
-    enable
-    aliases
-  ];
 }

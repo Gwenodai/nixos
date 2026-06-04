@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  eza = {
+{
+  den.aspects.cli-tools = {
     homeManager = {
       # TODO: Configure eza
       programs.eza = {
@@ -16,9 +15,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.cli.includes = [
-    eza
-  ];
 }

@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  tools = {
+{
+  den.aspects.cli-tools = {
     nixos =
       { pkgs, ... }:
       {
@@ -32,9 +31,4 @@ let
         ];
       };
   };
-in
-{
-  den.aspects.cli.includes = [
-    tools
-  ];
 }

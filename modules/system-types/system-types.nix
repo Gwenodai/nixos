@@ -9,7 +9,7 @@
         ### Basic Tools
         coolercontrol
         ssh
-        cli
+        cli-tools
         git
 
         ### Shells

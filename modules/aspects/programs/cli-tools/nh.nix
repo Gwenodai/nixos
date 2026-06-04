@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  nh = {
+{
+  den.aspects.cli-tools = {
     homeManager =
       { config, ... }:
       {
@@ -17,9 +16,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.cli.includes = [
-    nh
-  ];
 }
