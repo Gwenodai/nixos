@@ -1,10 +1,16 @@
-{ inputs, den, ... }:
-let
-  hostConfig = {
+{ inputs, ... }:
+{
+  flake-file.inputs.stylix = {
+    url = "github:nix-community/stylix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  den.aspects.stylix = {
     nixos =
       { config, pkgs, ... }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
+
         stylix = {
           enable = true;
           homeManagerIntegration.autoImport = true;
@@ -65,9 +71,7 @@ let
           };
         };
       };
-  };
 
-  userConfig = {
     homeManager =
       { config, ... }:
       {
@@ -112,15 +116,4 @@ let
         ];
       };
   };
-in
-{
-  flake-file.inputs.stylix = {
-    url = "github:nix-community/stylix";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  den.aspects.stylix.includes = [
-    hostConfig
-    userConfig
-  ];
 }
