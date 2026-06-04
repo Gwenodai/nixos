@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  pipewire = {
+{
+  den.aspects.audio = {
     nixos = {
       services = {
         pulseaudio.enable = false;
@@ -15,10 +14,12 @@ let
       security.rtkit.enable = true;
     };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.local/state/wireplumber"
           {
             directory = "${hmConfig.xdg.stateHome}/wireplumber";
             mode = "0700";
@@ -29,13 +30,9 @@ let
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/state"
         ".local" = { };
-        "${hmConfig.xdg.stateHome}" = { }; # "~/.local/state"
+        "${hmConfig.xdg.stateHome}" = { };
       };
   };
-in
-{
-  den.aspects.audio.includes = [
-    pipewire
-  ];
 }
