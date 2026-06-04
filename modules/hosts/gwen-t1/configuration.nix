@@ -24,8 +24,8 @@
 
       ### Applications
       google-chrome
-      ## Music
-      spotify
+      vscode
+      vscode.config
       ## Messaging
       vesktop
       vesktop.config
@@ -34,6 +34,8 @@
       steam
       heroic
       heroic.config
+      ## Music
+      spotify
     ];
 
     provides = {

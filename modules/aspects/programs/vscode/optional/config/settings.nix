@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  settings = {
+{
+  den.aspects.vscode.config = {
     nixos =
       { pkgs, ... }:
       {
@@ -115,15 +114,14 @@ let
         };
       };
 
+    ### Persist config
     persistUserIgnore =
       { hmConfig, ... }:
       {
-        directories = [ "${hmConfig.xdg.cacheHome}/fontconfig" ];
+        directories = [
+          # "~/.cache/fontconfig"
+          "${hmConfig.xdg.cacheHome}/fontconfig"
+        ];
       };
   };
-in
-{
-  den.aspects.vscode._.config.includes = [
-    settings
-  ];
 }

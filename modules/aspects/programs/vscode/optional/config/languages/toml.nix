@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  toml = {
+{
+  den.aspects.vscode.config = {
     homeManager =
       { pkgs, lib, ... }:
       {
@@ -21,9 +20,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.vscode._.config.includes = [
-    toml
-  ];
 }

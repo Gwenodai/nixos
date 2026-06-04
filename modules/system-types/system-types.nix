@@ -34,8 +34,6 @@
         ### Basic Desktop Applications
         kitty
         nemo
-        <vscode> # TODO: Replace with sublime text for regular desktop use
-        <vscode/config>
       ];
     };
 

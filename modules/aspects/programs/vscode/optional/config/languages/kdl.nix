@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  kdl = {
+{
+  den.aspects.vscode.config = {
     homeManager =
       { pkgs, ... }:
       {
@@ -15,9 +14,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.vscode._.config.includes = [
-    kdl
-  ];
 }

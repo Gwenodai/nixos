@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  theme = {
+{
+  den.aspects.vscode.config = {
     homeManager =
       { pkgs, ... }:
       {
@@ -17,9 +16,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.vscode._.config.includes = [
-    theme
-  ];
 }

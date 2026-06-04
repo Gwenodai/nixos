@@ -1,7 +1,6 @@
 # https://github.com/oxalica/nil/blob/main/docs/configuration.md
-{ inputs, den, ... }:
-let
-  nix = {
+{
+  den.aspects.vscode.config = {
     homeManager =
       { pkgs, lib, ... }:
       {
@@ -21,7 +20,7 @@ let
           ];
 
           userSettings = {
-            nix = inputs.self.lib.applyDefaultsRecursive {
+            nix = {
               enableLanguageServer = true;
               serverPath = "${lib.getExe pkgs.nil}";
               serverSettings = {
@@ -38,25 +37,20 @@ let
                   };
                 };
               };
+
+              # Hide annoying popups triggered during typing code
+              hiddenLanguageServerErrors = [
+                "textDocument/formatting"
+                "textDocument/documentSymbol"
+              ];
             };
 
             editor = {
               formatOnSave = true;
               formatOnPaste = true;
             };
-
-            # Hide annoying popups triggered during typing code
-            hiddenLanguageServerErrors = [
-              "textDocument/formatting"
-              "textDocument/documentSymbol"
-            ];
           };
         };
       };
   };
-in
-{
-  den.aspects.vscode._.config.includes = [
-    nix
-  ];
 }
