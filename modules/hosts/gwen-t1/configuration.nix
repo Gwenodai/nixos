@@ -10,7 +10,6 @@
     includes = with den.aspects; [
       ### Persistence
       preservation # Opt into system wide ephemeral state management
-      preservation.find-ephemeral # Tool to locate files not currently preserved
 
       ### System Config
       systemd-boot # Use systemd boot

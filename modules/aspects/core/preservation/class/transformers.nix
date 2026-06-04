@@ -5,7 +5,7 @@
       {
         config =
           let
-            # ---Path sanitising helpers--- #
+            ### Path sanitising helpers
             getHome = userName: config.home-manager.users.${userName}.home.homeDirectory;
 
             # Prepend homeDir to relative paths, return absolute paths untouched
@@ -14,10 +14,10 @@
             # Strip homeDir from absolute paths, return relative paths untouched
             mkRelative =
               userName: path: if lib.isString path then lib.removePrefix "${getHome userName}/" path else path;
-
-            # ---Config transformers--- #
           in
           {
+            ### Config transformers
+
             /*
               Intercept and transform the output of `userPersist` before it reaches `preservation`
               It takes:
@@ -68,7 +68,7 @@
                 "/home/<user>/.config/foo".d = { user = "<user>"; group = "users"; mode = "0600"; };
             */
             systemd.tmpfiles.settings.preservation = lib.mkMerge [
-              # System
+              ## Host
               (lib.mapAttrs (path: opts: {
                 d = {
                   user = "root";
@@ -78,7 +78,7 @@
                 // (lib.mapAttrs (_: v: lib.mkOverride 99 v) opts);
               }) config.hostConfig.preservation.tmpfiles)
 
-              # User
+              ## User
               (lib.mkMerge (
                 lib.mapAttrsToList (
                   userName: rawConfig:
@@ -127,7 +127,8 @@
                 files = getTransformedUserPaths "files";
               };
           };
-        # Options for intermediate config storage
+
+        ### Options for intermediate config storage
         options.hostConfig.preservation = with lib.types; {
           userPersist = lib.mkOption {
             type = attrsOf (attrsOf anything);

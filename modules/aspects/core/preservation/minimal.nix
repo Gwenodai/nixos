@@ -1,6 +1,6 @@
 {
   den.aspects.preservation = {
-    ### Host Preservation Config
+    ### Persist config
     nixos =
       { pkgs, ... }:
       {
@@ -19,6 +19,7 @@
         };
       };
 
+    ## Host Preservation Config
     persist = {
       directories = [
         "/var/lib/systemd/timers"
@@ -67,17 +68,19 @@
     };
 
     # Common NixOS directories we don't want to parse with `find-ephemeral`
-    persistIgnore.directories = [
-      "/boot"
-      "/nix"
-      "/proc"
-      "/run"
-      "/sys"
-      "/tmp"
-      "/var/log"
-    ];
+    persistIgnore = {
+      directories = [
+        "/boot"
+        "/nix"
+        "/proc"
+        "/run"
+        "/sys"
+        "/tmp"
+        "/var/log"
+      ];
+    };
 
-    ### User Preservation Config
+    ## User Preservation Config
     persistUser =
       { hmConfig, ... }:
       {
@@ -85,14 +88,20 @@
         commonMountOptions = [ "x-gvfs-hide" ];
 
         directories = [
+          # "~/dots"
           "dots" # Nix flake directory
+          # "~/.pki"
           {
             directory = ".pki";
             mode = "0700";
           }
+          # "~/.config/dconf"
           "${hmConfig.xdg.configHome}/dconf"
+          # "~/.local/share/systemd/timers"
           "${hmConfig.xdg.dataHome}/systemd/timers"
+          # "~/.cache/gtk-4.0/vulkan-pipeline-cache"
           "${hmConfig.xdg.cacheHome}/gtk-4.0/vulkan-pipeline-cache"
+          # "~/.cache/qtshadercache-x86_64-little_endian-lp64"
           "${hmConfig.xdg.cacheHome}/qtshadercache-x86_64-little_endian-lp64"
         ];
       };
@@ -101,9 +110,14 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.local/share"
         ".local" = { };
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        "${hmConfig.xdg.dataHome}" = { };
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
+        # "~/.cache/gtk-4.0"
         "${hmConfig.xdg.cacheHome}/gtk-4.0" = { };
       };
 
@@ -112,20 +126,32 @@
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.cache/nix"
           "${hmConfig.xdg.cacheHome}/nix"
+          # "~/.cache/typescript"
           "${hmConfig.xdg.cacheHome}/typescript"
+          # "~/.cache/X11/xcompose"
           "${hmConfig.xdg.cacheHome}/X11/xcompose"
+          # "~/.cache/thumbnails"
           "${hmConfig.xdg.cacheHome}/thumbnails"
+          # "~/.local/state/nix"
           "${hmConfig.xdg.stateHome}/nix"
+          # "~/.local/state/nix-output-monitor"
           "${hmConfig.xdg.stateHome}/nix-output-monitor"
         ];
         files = [
+          # "~/.pulse-cookie"
           ".pulse-cookie"
+          # "~/.config/pulse/cookie"
           "${hmConfig.xdg.configHome}/pulse/cookie"
+          # "~/.local/share/nix/repl-history"
           "${hmConfig.xdg.dataHome}/nix/repl-history"
-          "${hmConfig.xdg.configHome}/glow/glow.yml"
-          "${hmConfig.xdg.cacheHome}/glow/glow.log"
+          # "~/.cache/gstreamer-1.0/registry.x86_64.bin"
           "${hmConfig.xdg.cacheHome}/gstreamer-1.0/registry.x86_64.bin"
+          # "~/.config/glow/glow.yml"
+          "${hmConfig.xdg.configHome}/glow/glow.yml"
+          # "~/.cache/glow/glow.log"
+          "${hmConfig.xdg.cacheHome}/glow/glow.log"
         ];
       };
   };

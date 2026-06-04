@@ -1,6 +1,6 @@
 {
   den.aspects.stacy-pc._.to-users.niri.settings = {
-    # ---Monitors--- #
+    ### Monitors
     outputs."ViewSonic Corporation XG2401 SERIES 0x01010101" = {
       mode = {
         width = 1920;

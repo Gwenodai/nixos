@@ -7,7 +7,7 @@
 let
   # Aspects shared by both the host and its users
   sharedAspects = with den.aspects; [
-    # ---System Preset--- #
+    ### System Preset
     system-type.basic
   ];
 in
@@ -17,7 +17,7 @@ in
       with den.aspects;
       sharedAspects
       ++ [
-        # ---Core Config--- #
+        ### Core Config
         systemd-boot # Use systemd boot
       ];
 
@@ -27,7 +27,7 @@ in
 
     _.gwen = {
       includes = [
-        # ---User Config--- #
+        ### User Config
         den.batteries.primary-user
       ];
     };

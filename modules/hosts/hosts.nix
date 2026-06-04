@@ -17,7 +17,7 @@
     };
   };
 
-  # ---Gwen PC--- #
+  ### Gwen PC
   den.hosts.x86_64-linux.gwen-t1 = {
     hardware = {
       platform = "desktop";
@@ -35,7 +35,7 @@
     users.gwen = { };
   };
 
-  # ---Stacy PC--- #
+  ### Stacy PC
   den.hosts.x86_64-linux.stacy-pc = {
     hardware = {
       platform = "desktop";
@@ -53,7 +53,7 @@
     users.stacy = { };
   };
 
-  # ---Server--- #
+  ### Server
   den.hosts.x86_64-linux.ymir = {
     hardware = {
       platform = "server";

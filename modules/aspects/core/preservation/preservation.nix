@@ -9,6 +9,7 @@
       { config, ... }:
       {
         imports = [ inputs.preservation.nixosModules.preservation ];
+        # Globally enable Preservation by default if this aspect is included
         preservation.enable = true;
       };
   };

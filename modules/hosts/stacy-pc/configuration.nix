@@ -8,7 +8,7 @@
 let
   # Aspects shared by both the host and its users
   sharedAspects = with den.aspects; [
-    # ---System Preset--- #
+    ### System Preset
     system-type.desktop-gaming # Use the gaming desktop system preset
     environment.niri # Use the Niri desktop preset
   ];
@@ -19,14 +19,14 @@ in
       with den.aspects;
       sharedAspects
       ++ [
-        # ---Core Config--- #
+        ### Core Config
         systemd-boot # Use systemd boot
         # Kernel config
         kernel.cachyos # Use the CachyOS kernel instead of the NixOS kernel
-        # ---Services--- #
+        ### Services
         valent
 
-        # ---Scripts--- #
+        ### Scripts
         scripts.fix-camera
       ];
 
@@ -35,7 +35,7 @@ in
         with den.aspects;
         sharedAspects
         ++ [
-          # ---Applications--- #
+          ### Applications
           spotify
           caprine
         ];
@@ -43,7 +43,7 @@ in
 
     _.stacy = {
       includes = [
-        # ---User Config--- #
+        ### User Config
         den.batteries.primary-user
       ];
     };

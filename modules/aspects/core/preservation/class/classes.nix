@@ -1,6 +1,6 @@
 { den, lib, ... }:
 let
-  # --- Shared Deduplication Module --- #
+  ### Shared Deduplication Module
   # Without this `adapterModule` the `persist`, `persistIgnore`, and user
   # relative classes will duplicate values within their respective lists
   dedupModule = {
@@ -18,14 +18,13 @@ let
     };
   };
 
-  # ---Class factories--- #
-  # Factory to generate system-level custom classes
+  ### Class factories
+  ## Factory to generate host-level custom classes
   mkHostClass =
     {
       fromClass,
       intoPath,
       dedup ? false,
-      requiresFindEphemeral ? false,
     }:
     { class, aspect-chain }:
     den.batteries.forward (
@@ -35,15 +34,6 @@ let
         intoClass = _: "nixos"; # Preservation only supports NixOS
         intoPath = _: intoPath;
         fromAspect = _: lib.head aspect-chain;
-        # guard =
-        #   { config, options, ... }@osArgs:
-        #   _:
-        #   let
-        #     hasFindEphemeral = lib.any (
-        #       pkg: (pkg.name or "") == "find-ephemeral"
-        #     ) config.environment.systemPackages;
-        #   in
-        #   lib.mkIf (!requiresFindEphemeral || hasFindEphemeral);
         adaptArgs = args@{ config, ... }: args // { osConfig = config; };
       }
       // lib.optionalAttrs dedup {
@@ -51,13 +41,12 @@ let
       }
     );
 
-  # Factory to generate user-level custom classes
+  ## Factory to generate user-level custom classes
   mkUserClass =
     {
       fromClass,
       intoSubPath,
       dedup ? false,
-      requiresFindEphemeral ? false,
     }:
     { host, user }:
     { class, aspect-chain }:
@@ -73,16 +62,6 @@ let
           u.userName
         ];
         fromAspect = _: lib.head aspect-chain;
-        # guard =
-        #   { config, options, ... }@osArgs:
-        #   _:
-        #   let
-        #     hasHomeManager = lib.elem "homeManager" (user.classes or [ ]);
-        #     hasFindEphemeral = lib.any (
-        #       pkg: (pkg.name or "") == "find-ephemeral"
-        #     ) config.environment.systemPackages;
-        #   in
-        #   lib.mkIf (hasHomeManager && (!requiresFindEphemeral || hasFindEphemeral));
         adaptArgs =
           args@{ config, ... }:
           args
@@ -126,7 +105,6 @@ in
           "ignore"
         ];
         dedup = true;
-        requiresFindEphemeral = true;
       })
 
       (mkUserClass {
@@ -144,7 +122,6 @@ in
         fromClass = "persistUserIgnore";
         intoSubPath = "userIgnore";
         dedup = true;
-        requiresFindEphemeral = true;
       })
     ];
   };

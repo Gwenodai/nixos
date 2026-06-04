@@ -1,6 +1,6 @@
 {
   den.aspects.gwen-t1._.to-users.niri.settings = {
-    # ---Monitors--- #
+    ### Monitors
     outputs."Dell Inc. AW3425DW 4ZZD274" = {
       mode = {
         width = 3440;
@@ -31,7 +31,7 @@
 
     input.touch.map-to-output = "Invalid Vendor Codename - RTK 0x1920 0x19201080";
 
-    # ---External Displays--- #
+    ### External Displays
     outputs."Philips Consumer Electronics Company PHILIPS FTV 0x01010101" = {
       mode = {
         width = 1920;

@@ -1,6 +1,6 @@
 # A simple tool to list all files not preserved via preservation in any given directory
 {
-  den.aspects.preservation.find-ephemeral = {
+  den.aspects.preservation = {
     nixos =
       {
         pkgs,
@@ -9,8 +9,8 @@
         ...
       }:
       let
-        # ---Path collection--- #
-        # Filters out intermediate paths injected by the preservation module
+        ### Path collection
+        # Filter out intermediate paths injected by the preservation module
         getRealPaths =
           key: list:
           let
@@ -56,7 +56,7 @@
           ignorePath: "-path ${lib.strings.escapeShellArg ignorePath} -prune -o "
         ) allIgnorePaths;
 
-        # ---Application construction--- #
+        ### Application construction
         find-ephemeral = pkgs.writeShellApplication {
           name = "find-ephemeral";
           runtimeInputs = [

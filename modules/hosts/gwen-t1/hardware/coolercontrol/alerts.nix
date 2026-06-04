@@ -3,7 +3,7 @@
   den.aspects.gwen-t1 = {
     coolercontrol-alerts.text =
       let
-        # ---Hardware device IDs--- #
+        ### Hardware device IDs
         cpu = # 9800X3D
           "3145e1a42801faf9cf948df8c705afb4859f084c10a7e7c5e4efecb1e0167127";
         gpu = # 9070 XT

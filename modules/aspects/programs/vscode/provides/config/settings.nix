@@ -22,19 +22,19 @@ let
             # Combines multiple characters '!'+'='becomes '≠'
             fontLigatures = true;
 
-            # ---Brackets--- #
+            ### Brackets
             guides.bracketPairs = "active";
             bracketPairColorization = {
               enabled = true;
               independentColorPoolPerBracketType = false;
             };
 
-            # ---Indentation--- #
+            ### Indentation
             insertSpaces = true;
             indentSize = "tabsize";
             tabSize = 2;
 
-            # ---Wrapping--- #
+            ### Wrapping
             wordWrap = "on";
             # wordWrapColumn = 80;
             wrapOnEscapedLineFeeds = false;
