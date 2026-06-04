@@ -22,8 +22,7 @@
 
   ### Users
   den.schema.user.includes = with den.aspects; [
-    ## Aspects
     # Inserts specific authorised ssh keys by default in all users
-    lib.ssh.authorizedKeys
+    ssh.authorizedKeys
   ];
 }

@@ -1,0 +1,68 @@
+{
+  den.aspects = {
+    ssh = {
+      nixos = {
+        services.openssh = {
+          enable = true;
+          openFirewall = true;
+          generateHostKeys = false;
+          settings = {
+            PermitRootLogin = "no";
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+          };
+        };
+      };
+
+      homeManager = {
+        programs.ssh = {
+          enable = true;
+          # This option will become deprecated in the future
+          enableDefaultConfig = false;
+          # So we disable it and manually recreate the old defaults
+          matchBlocks."*" = {
+            forwardAgent = false;
+            addKeysToAgent = "no";
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlMaster = "no";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+            controlPersist = "no";
+          };
+        };
+      };
+
+      ### Persist config
+      persistUser = {
+        directories = [
+          # "~/.ssh"
+          {
+            directory = ".ssh";
+            how = "symlink";
+            mode = "0700";
+            createLinkTarget = true;
+          }
+        ];
+      };
+    };
+
+    ssh.authorizedKeys =
+      { user, ... }:
+      {
+        nixos.users.users.${user.userName} = {
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILmAgY1ugFGFSF8b47UM4ilNTT13V7SCbYo/VA9EyVq8 gwen@gwen-t1"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEscSg7Yo3cXMbfYQ6WcQi2XR5zFggK/pFLtsgpHT7L gwen@gwen-s23plus"
+          ];
+        };
+
+        ### Persist config
+        persistIgnore = {
+          directories = [ "/etc/ssh/authorized_keys.d" ];
+        };
+      };
+  };
+}
