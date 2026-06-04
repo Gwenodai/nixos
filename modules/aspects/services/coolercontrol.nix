@@ -1,40 +1,5 @@
 { den, lib, ... }:
 let
-  coolerControl = {
-    nixos =
-      {
-        config,
-        pkgs,
-        ...
-      }:
-      {
-        programs.coolercontrol.enable = true;
-
-        environment.systemPackages = with pkgs; [
-          lm_sensors # Tools for reading hardware sensors
-          liquidctl # Drivers for AIO liquid coolers and other devices
-        ];
-      };
-
-    persist.directories = [
-      {
-        directory = "/etc/coolercontrol";
-        how = "symlink";
-        createLinkTarget = true;
-      }
-    ];
-
-    persistUserIgnore =
-      { hmConfig, ... }:
-      {
-        directories = [
-          "${hmConfig.xdg.dataHome}/org.coolercontrol.CoolerControl"
-          "${hmConfig.xdg.cacheHome}/org.coolercontrol.CoolerControl"
-          "${hmConfig.xdg.configHome}/org.coolercontrol.CoolerControl"
-        ];
-      };
-  };
-
   # Factory to generate cooler-control classes
   mkClass =
     { fromClass, intoSubPath }:
@@ -51,11 +16,24 @@ let
       ];
       fromAspect = _: lib.head aspect-chain;
     });
-
-  setup = {
+in
+{
+  den.aspects.coolercontrol = {
     nixos =
-      { config, lib, ... }:
       {
+        config,
+        pkgs,
+        lib,
+        ...
+      }:
+      {
+        programs.coolercontrol.enable = true;
+
+        environment.systemPackages = with pkgs; [
+          lm_sensors # Tools for reading hardware sensors
+          liquidctl # Drivers for AIO liquid coolers and other devices
+        ];
+
         environment.etc =
           lib.genAttrs
             [
@@ -69,24 +47,44 @@ let
               text = lib.mkDefault null;
             });
       };
-  };
-in
-{
-  den.aspects.coolercontrol.includes = [
-    coolerControl
-    setup
 
-    (mkClass {
-      fromClass = "coolercontrol-config";
-      intoSubPath = "config.toml";
-    })
-    (mkClass {
-      fromClass = "coolercontrol-alerts";
-      intoSubPath = "alerts.json";
-    })
-    (mkClass {
-      fromClass = "coolercontrol-ui";
-      intoSubPath = "config-ui.json";
-    })
-  ];
+    ### Persist config
+    persist = {
+      directories = [
+        {
+          directory = "/etc/coolercontrol";
+          how = "symlink";
+          createLinkTarget = true;
+        }
+      ];
+    };
+
+    persistUserIgnore =
+      { hmConfig, ... }:
+      {
+        directories = [
+          # "~/.local/share/org.coolercontrol.CoolerControl"
+          "${hmConfig.xdg.dataHome}/org.coolercontrol.CoolerControl"
+          # "~/.cache/org.coolercontrol.CoolerControl"
+          "${hmConfig.xdg.cacheHome}/org.coolercontrol.CoolerControl"
+          # "~/.config/org.coolercontrol.CoolerControl"
+          "${hmConfig.xdg.configHome}/org.coolercontrol.CoolerControl"
+        ];
+      };
+
+    includes = [
+      (mkClass {
+        fromClass = "coolercontrol-config";
+        intoSubPath = "config.toml";
+      })
+      (mkClass {
+        fromClass = "coolercontrol-alerts";
+        intoSubPath = "alerts.json";
+      })
+      (mkClass {
+        fromClass = "coolercontrol-ui";
+        intoSubPath = "config-ui.json";
+      })
+    ];
+  };
 }
