@@ -8,12 +8,15 @@
       includes = with den.aspects; [
         ### Core Aspects
         niri
-        <noctalia> # Minimal desktop shell
+        # Minimal desktop shell
+        <noctalia>
         <noctalia/config>
         <noctalia/colour-schemes>
-        stylix # Theming
 
-        ### Basic Desktop Applications
+        ### Theming
+        stylix
+
+        ### Applications
         gnome-calendar
       ];
     };

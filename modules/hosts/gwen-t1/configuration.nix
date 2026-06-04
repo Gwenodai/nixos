@@ -17,7 +17,7 @@
 
       ### System-Type
       system-type.desktop-gaming # Use the gaming desktop system preset
-      # environment.niri # Use the Niri desktop preset
+      environment.niri # Use the Niri desktop preset
 
       ### Services
       valent

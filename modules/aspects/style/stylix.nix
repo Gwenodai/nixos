@@ -98,7 +98,7 @@
           color-scheme = "prefer-dark";
         };
 
-        # Changed to `null` in home-manager version `26.05`
+        # Defaults to `null` in home-manager version `26.05`
         gtk.gtk4.theme = config.gtk.theme;
 
         # Clean up dots

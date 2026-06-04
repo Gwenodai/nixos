@@ -30,19 +30,17 @@ in
         ];
       };
 
-    _.to-users = {
-      # Niri activation logic
-      niri =
-        { pkgs, ... }:
-        let
-          wakeup-script = mkWakeupScript pkgs;
-        in
-        {
-          # Enable secondary monitor after niri login
-          settings.spawn-at-startup = [
-            { sh = "sudo ${wakeup-script}/bin/wakeup-secondary-display"; }
-          ];
-        };
-    };
+    # Niri activation logic
+    niri =
+      { pkgs, ... }:
+      let
+        wakeup-script = mkWakeupScript pkgs;
+      in
+      {
+        # Enable secondary monitor after niri login
+        settings.spawn-at-startup = [
+          { sh = "sudo ${wakeup-script}/bin/wakeup-secondary-display"; }
+        ];
+      };
   };
 }
