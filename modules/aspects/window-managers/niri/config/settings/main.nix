@@ -1,10 +1,6 @@
+{ inputs, ... }:
 {
-  inputs,
-  den,
-  ...
-}:
-let
-  main = {
+  den.aspects.niri = {
     homeManager =
       { config, ... }:
       {
@@ -74,7 +70,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ main ];
 }

@@ -1,6 +1,6 @@
-{ den, lib, ... }:
-let
-  binds = {
+{ lib, ... }:
+{
+  den.aspects.niri = {
     homeManager =
       { config, pkgs, ... }:
       {
@@ -155,7 +155,4 @@ let
           );
       };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ binds ];
 }

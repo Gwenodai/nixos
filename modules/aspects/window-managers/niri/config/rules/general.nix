@@ -1,11 +1,10 @@
-{ den, ... }:
-let
-  general = {
+{
+  den.aspects.niri = {
     homeManager = {
       programs.niri.settings = {
         window-rules = [
           {
-            # Relocate Steam notifications to the bottom right of the screen
+            ### Relocate Steam notifications to the bottom right of the screen
             matches = [
               {
                 app-id = "steam";
@@ -20,17 +19,17 @@ let
             open-focused = false;
           }
           {
-            # Don't start Steam games floating
+            ### Don't start Steam games floating
             matches = [ { app-id = "^steam_app.*"; } ];
             open-floating = false;
           }
           {
-            # Don't start bottles apps floating
+            ### Don't start bottles apps floating
             matches = [ { app-id = "^.*\\.exe"; } ];
             open-floating = false;
           }
           {
-            # Floating file-roller
+            ### Floating file-roller
             matches = [ { app-id = "^org.gnome.FileRoller$"; } ];
             open-floating = true;
             max-height = 600;
@@ -40,7 +39,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ general ];
 }

@@ -7,8 +7,7 @@
 
       includes = with den.aspects; [
         ### Core Aspects
-        <niri>
-        <niri/config>
+        niri
         <noctalia> # Minimal desktop shell
         <noctalia/config>
         <noctalia/colour-schemes>

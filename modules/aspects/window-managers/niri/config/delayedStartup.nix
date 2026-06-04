@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  delay = {
+{
+  den.aspects.niri = {
     homeManager =
       { config, pkgs, ... }:
       let
@@ -20,9 +19,4 @@ let
         programs.niri.settings.spawn-at-startup = [ { command = [ "${delayedStartup}" ]; } ];
       };
   };
-in
-{
-  den.aspects.niri._.config.includes = [
-    delay
-  ];
 }

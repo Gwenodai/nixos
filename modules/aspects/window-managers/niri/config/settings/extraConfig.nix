@@ -1,12 +1,8 @@
 # NOTE: The `extraConfig` attribute exposed by cmm's PR cannot be defined in
 #       multiple places. Only modify it here.
+{ lib, ... }:
 {
-  den,
-  lib,
-  ...
-}:
-let
-  extra = {
+  den.aspects.niri = {
     homeManager =
       { config, ... }:
       {
@@ -50,7 +46,4 @@ let
         '';
       };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ extra ];
 }

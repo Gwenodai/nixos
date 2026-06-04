@@ -9,47 +9,6 @@
 let
   getNiri = pkgs: pkgs.niri;
 
-  hostConfig = {
-    nixos =
-      { pkgs, ... }:
-      {
-        imports = [ inputs.niri.nixosModules.niri ];
-
-        programs.niri = {
-          enable = true;
-          package = getNiri pkgs;
-        };
-        systemd.user.services.niri-flake-polkit.enable = false;
-      };
-  };
-
-  userConfig = {
-    homeManager =
-      { pkgs, lib, ... }:
-      {
-        programs.niri = {
-          package = getNiri pkgs;
-
-          settings = {
-            xwayland-satellite = {
-              enable = true;
-              path = "${lib.getExe pkgs.xwayland-satellite}";
-            };
-          };
-        };
-
-        xdg.portal.config.niri = {
-          default = [
-            "gnome"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-        };
-      };
-  };
-
   class =
     { host, user }:
     { class, aspect-chain }:
@@ -93,9 +52,44 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.niri.includes = [
-    hostConfig
-    userConfig
-    class
-  ];
+  den.aspects.niri = {
+    nixos =
+      { pkgs, ... }:
+      {
+        imports = [ inputs.niri.nixosModules.niri ];
+
+        programs.niri = {
+          enable = true;
+          package = getNiri pkgs;
+        };
+        systemd.user.services.niri-flake-polkit.enable = false;
+      };
+
+    homeManager =
+      { pkgs, lib, ... }:
+      {
+        programs.niri = {
+          package = getNiri pkgs;
+
+          settings = {
+            xwayland-satellite = {
+              enable = true;
+              path = "${lib.getExe pkgs.xwayland-satellite}";
+            };
+          };
+        };
+
+        xdg.portal.config.niri = {
+          default = [
+            "gnome"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        };
+      };
+
+    includes = [ class ];
+  };
 }

@@ -1,11 +1,10 @@
-{ den, ... }:
-let
-  vrr = {
+{
+  den.aspects.niri = {
     homeManager = {
       programs.niri.settings = {
         window-rules = [
           {
-            # VRR allowlist
+            ### VRR allowlist
             matches = [
               { app-id = "^steam_app.*"; } # Most steam games
               { app-id = "^RSG-Linux-Shipping$"; } # Everspace native linux version
@@ -17,7 +16,7 @@ let
             open-focused = true;
           }
           {
-            # VRR blocklist
+            ### VRR blocklist
             matches = [
               {
                 app-id = "^steam_app.*";
@@ -38,7 +37,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ vrr ];
 }

@@ -1,11 +1,10 @@
-{ den, ... }:
-let
-  screencast = {
+{
+  den.aspects.niri = {
     homeManager = {
       programs.niri.settings = {
         window-rules = [
           {
-            # Screencast blocklist
+            ### Screencast blocklist
             matches = [
               { app-id = "^vesktop$"; }
               { app-id = "^Caprine$"; }
@@ -17,7 +16,7 @@ let
             block-out-from = "screencast";
           }
           {
-            # Screencast target outline effect
+            ### Screencast target outline effect
             matches = [
               { is-window-cast-target = true; }
             ];
@@ -32,7 +31,8 @@ let
         ];
 
         layer-rules = [
-          # { # Screencast blocklist
+          ### Screencast blocklist
+          # {
           #   matches = [
           #     { namespace = "notifications"; }
           #   ];
@@ -43,7 +43,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ screencast ];
 }

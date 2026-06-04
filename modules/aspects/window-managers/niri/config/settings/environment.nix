@@ -1,6 +1,6 @@
-{ inputs, den, ... }:
-let
-  environment = {
+{ inputs, ... }:
+{
+  den.aspects.niri = {
     homeManager = {
       programs.niri.settings.environment = inputs.self.lib.applyDefaults {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
@@ -14,7 +14,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ environment ];
 }

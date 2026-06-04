@@ -1,6 +1,6 @@
-{ inputs, den, ... }:
-let
-  input = {
+{ inputs, ... }:
+{
+  den.aspects.niri = {
     homeManager = {
       programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
         keyboard = {
@@ -29,7 +29,4 @@ let
       };
     };
   };
-in
-{
-  den.aspects.niri._.config.includes = [ input ];
 }
