@@ -8,13 +8,23 @@
         };
       };
 
+      ### Persist config
       persistUser =
         { hmConfig, ... }:
         {
           directories = [
+            # "~/.cache/mesa_shader_cache"
             "${hmConfig.xdg.cacheHome}/mesa_shader_cache"
+            # "~/.cache/radv_builtin_shaders"
             "${hmConfig.xdg.cacheHome}/radv_builtin_shaders"
           ];
+        };
+
+      persistUserTmp =
+        { hmConfig, ... }:
+        {
+          # "~/.cache"
+          "${hmConfig.xdg.cacheHome}" = { };
         };
     };
 
