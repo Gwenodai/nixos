@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.gdm = {
     nixos = {
@@ -12,8 +11,11 @@
       };
     };
 
-    persist.directories = [
-      "/var/lib/gdm"
-    ];
+    ### Persist config
+    persist = {
+      directories = [
+        "/var/lib/gdm"
+      ];
+    };
   };
 }

@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.ly = {
     nixos = {
@@ -20,12 +19,21 @@
       };
     };
 
-    persist.files = [
-      {
-        file = "/etc/ly/save.txt";
-        mode = "0644";
-      }
-    ];
-    persistUserIgnore.files = [ "ly-session.log" ];
+    ### Persist config
+    persist = {
+      files = [
+        {
+          file = "/etc/ly/save.txt";
+          mode = "0644";
+        }
+      ];
+    };
+
+    persistUserIgnore = {
+      files = [
+        # "~/ly-session.log"
+        "ly-session.log"
+      ];
+    };
   };
 }

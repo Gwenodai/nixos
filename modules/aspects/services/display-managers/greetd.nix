@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.greetd = {
     nixos =
