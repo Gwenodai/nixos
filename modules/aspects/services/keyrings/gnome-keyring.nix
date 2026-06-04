@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.gnome-keyring = {
     nixos =
@@ -12,16 +11,19 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.local/share/keyrings"
           {
             directory = "${hmConfig.xdg.dataHome}/keyrings";
             how = "symlink";
             mode = "0700";
             createLinkTarget = true;
           }
+          # "~/.gnupg"
           {
             directory = "${hmConfig.home.homeDirectory}/.gnupg";
             how = "symlink";
@@ -33,8 +35,9 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        ".local" = { }; # "~/.local"
-        "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+        # "~/.local/share"
+        ".local" = { };
+        "${hmConfig.xdg.dataHome}" = { };
       };
   };
 }
