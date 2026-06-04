@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.valent = {
     nixos =
@@ -10,16 +9,19 @@
         };
       };
 
+    ### Persist config
     persistUser =
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/valent"
           {
             directory = "${hmConfig.xdg.configHome}/valent";
             mode = "0700";
             how = "symlink";
             createLinkTarget = true;
           }
+          # "~/.cache/valent"
           {
             directory = "${hmConfig.xdg.cacheHome}/valent";
             mode = "0700";
@@ -31,8 +33,10 @@
     persistUserTmp =
       { hmConfig, ... }:
       {
-        "${hmConfig.xdg.configHome}" = { }; # "~/.config
-        "${hmConfig.xdg.cacheHome}" = { }; # "~/.cache
+        # "~/.config"
+        "${hmConfig.xdg.configHome}" = { };
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
       };
   };
 }
