@@ -1,10 +1,22 @@
-{ __findFile, den, ... }:
+{ den, ... }:
 {
   den.aspects.system-type = {
     basic = {
       includes = with den.aspects; [
         ### Core Aspects
+        nix
+        firmware
+        garbage-collection
+        locale
+        # Use the latest NixOS kernel by default
+        kernel
+        disko
+        home-manager
+        sops-nix
         xdg
+        # Automatically configures core hardware functionality based on the provided
+        # host hardware profile configuration defined within `./hosts.nix`
+        hardware.autoConfig
 
         ### Basic Tools
         coolercontrol
@@ -27,7 +39,7 @@
         gdm
         audio
         fonts
-        # Security aspects
+        ## Security
         gnome-keyring
         polkit-gnome
 

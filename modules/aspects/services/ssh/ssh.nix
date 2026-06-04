@@ -1,6 +1,5 @@
-{ den, ... }:
-let
-  hostConfig = {
+{
+  den.aspects.ssh = {
     nixos = {
       services.openssh = {
         enable = true;
@@ -14,27 +13,6 @@ let
       };
     };
 
-    persist =
-      { lib, ... }:
-      {
-        files =
-          lib.map
-            (path: {
-              file = path;
-              how = "symlink";
-              inInitrd = true; # Needed for `sops-nix`
-              configureParent = true;
-            })
-            [
-              "/etc/ssh/ssh_host_ed25519_key"
-              "/etc/ssh/ssh_host_ed25519_key.pub"
-              "/etc/ssh/ssh_host_rsa_key"
-              "/etc/ssh/ssh_host_rsa_key.pub"
-            ];
-      };
-  };
-
-  userConfig = {
     homeManager = {
       programs.ssh = {
         enable = true;
@@ -64,11 +42,24 @@ let
         createLinkTarget = true;
       }
     ];
+
+    persist =
+      { lib, ... }:
+      {
+        files =
+          lib.map
+            (path: {
+              file = path;
+              how = "symlink";
+              inInitrd = true; # Needed for `sops-nix`
+              configureParent = true;
+            })
+            [
+              "/etc/ssh/ssh_host_ed25519_key"
+              "/etc/ssh/ssh_host_ed25519_key.pub"
+              "/etc/ssh/ssh_host_rsa_key"
+              "/etc/ssh/ssh_host_rsa_key.pub"
+            ];
+      };
   };
-in
-{
-  den.aspects.ssh.includes = [
-    hostConfig
-    userConfig
-  ];
 }

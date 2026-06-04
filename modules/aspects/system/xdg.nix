@@ -1,14 +1,13 @@
-{ den, ... }:
-let
-  hostConfig = {
+{
+  den.aspects.xdg = {
     # Ensure portal definitions and DE provided configurations get linked
-    nixos.environment.pathsToLink = [
-      "/share/xdg-desktop-portal"
-      "/share/applications"
-    ];
-  };
+    nixos = {
+      environment.pathsToLink = [
+        "/share/xdg-desktop-portal"
+        "/share/applications"
+      ];
+    };
 
-  userConfig = {
     homeManager =
       { config, pkgs, ... }:
       {
@@ -99,10 +98,4 @@ let
         "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
       };
   };
-in
-{
-  den.aspects.xdg.includes = [
-    hostConfig
-    userConfig
-  ];
 }

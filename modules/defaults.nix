@@ -11,40 +11,18 @@
   # Enables the use of den's angle brackets syntax
   _module.args.__findFile = den.lib.__findFile;
 
-  ### Global Aspects
-  den.default.includes = with den.aspects; [
-    den.batteries.inputs'
-    den.batteries.self'
-    den.batteries.hostname
-    # Automatically create the user on host
-    den.batteries.define-user
-    # Sets the default shell to zsh
-    (den.batteries.user-shell "zsh")
-    home-manager.userConfig
+  ### Global
+  den.default.includes = with den.batteries; [
+    inputs'
+    self'
+    hostname
+    define-user
+    (user-shell "zsh")
   ];
 
-  ### Host Aspects
-  den.schema.host.includes = with den.aspects; [
-    # Automatically configures core hardware functionality based on the provided
-    # host hardware profile configuration defined within `./hosts.nix`
-    hardware.autoConfig
-    firmware
-    kernel # Use the latest NixOS kernel by default
-    disko
-    sops-nix.hostConfig
-    nix
-    garbage-collection
-    locale
-  ];
-
-  ### Home-Manager Host Aspects
-  den.schema.hm-host.includes = with den.aspects; [
-    home-manager.hostConfig
-  ];
-
-  ### User Aspects
+  ### Users
   den.schema.user.includes = with den.aspects; [
-    sops-nix.userConfig
+    ## Aspects
     # Inserts specific authorised ssh keys by default in all users
     lib.ssh.authorizedKeys
   ];
