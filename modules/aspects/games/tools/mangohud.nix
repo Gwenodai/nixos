@@ -31,6 +31,34 @@
             MANGOHUD_CONFIGFILE="${config.xdg.cacheHome}/mh-tmp.conf" exec mangohud "$@"
           '';
         };
+
+        ### Host Display Code
+        # Logic to check hosts main display and store info about it
+        mainDisplay =
+          lib.findSingle (d: d.focus-at-startup or false) null
+            (abort "Error: Multiple displays have focus-at-startup set!")
+            (lib.attrValues host.hardware.displays);
+        getRefreshRate = mainDisplay.mode.refresh or 60;
+        roundedRefresh = lib.floor (getRefreshRate + 0.5);
+        refreshHigherThanSixty = roundedRefresh > 60;
+        # Optimal VRR fps cap = REFRESH-(REFRESH×REFRESH/3600)
+        calculatedFps = lib.floor (roundedRefresh - (roundedRefresh * roundedRefresh / 3600.0) + 0.5);
+        hasVrr =
+          (mainDisplay.variable-refresh-rate or null) != null
+          && (mainDisplay.variable-refresh-rate == true || mainDisplay.variable-refresh-rate == "on-demand");
+
+        # Automatically generate optimal fps caps based on gathered data
+        fpsLimitList =
+          let
+            isVrrDisplay = hasVrr && refreshHigherThanSixty;
+            IsHighRefreshDisplay = refreshHigherThanSixty;
+          in
+          lib.optional isVrrDisplay calculatedFps
+          ++ [ roundedRefresh ]
+          ++ [ 0 ]
+          ++ lib.optional (roundedRefresh > 120) 120
+          ++ lib.optional IsHighRefreshDisplay 60
+          ++ [ 30 ];
       in
       {
         programs.mangohud = {
@@ -42,16 +70,9 @@
             gl_vsync = 1; # on
             # late = lowest latency. early = smoothest frametimes
             fps_limit_method = "late";
-            # TODO: fps limit function using host monitor metadata
-            fps_limit = [
-              223 # (REFRESH×(1−REFRESH×0.00028))
-              0
-              120
-              60
-              30
-            ];
+            fps_limit = fpsLimitList;
 
-            ### Peset settings
+            ### Preset settings
             preset = [
               1 # No UI
               2 # Only fps counter
@@ -88,7 +109,7 @@
             frametime_color = "00FF00"; # Green
 
             ## GPU values and colours
-            # gpu_load_change = true;
+            gpu_load_change = true;
             gpu_load_value = [
               50 # Low GPU load value
               90 # High GPU load value
@@ -118,9 +139,6 @@
             log_duration = 30;
             autostart_log = 0;
             log_interval = 100;
-          }
-          // lib.optionalAttrs (host.hardware.cpu.lowLatencyScheduler) {
-            gpu_load_change = true;
           };
         };
 

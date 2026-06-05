@@ -2,7 +2,11 @@
 {
   den.aspects.niri = {
     homeManager =
-      { config, host, ... }:
+      {
+        config,
+        host,
+        ...
+      }:
       {
         programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
           outputs = host.hardware.displays;
