@@ -37,12 +37,12 @@
         mainDisplay =
           lib.findSingle (d: d.focus-at-startup or false) null
             (abort "Error: Multiple displays have focus-at-startup set!")
-            (lib.attrValues host.hardware.displays);
+            (lib.attrValues host.hardware.display);
         getRefreshRate = mainDisplay.mode.refresh or 60;
         roundedRefresh = lib.floor (getRefreshRate + 0.5);
         refreshHigherThanSixty = roundedRefresh > 60;
         # Optimal VRR fps cap = REFRESH-(REFRESH×REFRESH/3600)
-        calculatedFps = lib.floor (roundedRefresh - (roundedRefresh * roundedRefresh / 3600.0) + 0.5);
+        calculatedFps = lib.floor (roundedRefresh - (roundedRefresh * roundedRefresh / 3600.00) + 0.5);
         hasVrr =
           (mainDisplay.variable-refresh-rate or null) != null
           && (mainDisplay.variable-refresh-rate == true || mainDisplay.variable-refresh-rate == "on-demand");
@@ -55,10 +55,12 @@
           in
           lib.optional isVrrDisplay calculatedFps
           ++ [ roundedRefresh ]
-          ++ [ 0 ]
           ++ lib.optional (roundedRefresh > 120) 120
           ++ lib.optional IsHighRefreshDisplay 60
-          ++ [ 30 ];
+          ++ [
+            30
+            0
+          ];
       in
       {
         programs.mangohud = {

@@ -70,7 +70,7 @@
                 };
               };
 
-              displays = lib.mkOption {
+              display = lib.mkOption {
                 description = "The display configuration of the host system.";
                 type = nullOr (attrsOf anything);
                 default = null;
