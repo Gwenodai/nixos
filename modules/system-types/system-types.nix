@@ -44,7 +44,7 @@
         polkit-gnome
 
         ### Basic Desktop Applications
-        kitty
+        terminal-kitty
         nemo
       ];
     };

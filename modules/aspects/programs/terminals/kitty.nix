@@ -1,8 +1,18 @@
 # https://mynixos.com/home-manager/options/programs.kitty
+{ lib, ... }:
 {
-  den.aspects.kitty = {
+  den.aspects.terminal-kitty = {
+    meta = {
+      pkgBinPath = pkgs: "${lib.getExe pkgs.kitty}";
+    };
+
     homeManager =
-      { pkgs, lib, ... }:
+      {
+        host,
+        pkgs,
+        lib,
+        ...
+      }:
       {
         programs.kitty = {
           enable = true;

@@ -10,16 +10,22 @@
     {
       includes = with den.aspects; [
         ### Persistence
-        preservation # Opt into system wide ephemeral state management
+        # Opt into system wide ephemeral state management
+        preservation
 
         ### System Config
-        systemd-boot # Use systemd boot
-        kernel.cachyos # Use the CachyOS kernel instead of the NixOS kernel
-        kernel-modules.it87 # Driver for MB fan control (needed for AIO)
+        # Use systemd boot
+        systemd-boot
+        # Use the CachyOS kernel
+        kernel.cachyos
+        # Custom driver for MB fan control (needed for AIO control)
+        kernel-modules.it87
 
         ### System-Type
-        system-type.desktop-gaming # Use the gaming desktop system preset
-        environment.niri # Use the Niri desktop preset
+        # Use the gaming desktop system preset
+        system-type.desktop-gaming
+        # Use the Niri desktop preset
+        environment.niri
 
         ### Services
         valent

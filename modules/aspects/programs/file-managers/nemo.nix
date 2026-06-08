@@ -1,4 +1,5 @@
 # Nemo file browser
+{ den, ... }:
 {
   den.aspects.nemo = {
     ### Nemo required host services
@@ -15,7 +16,23 @@
     };
 
     homeManager =
-      { pkgs, lib, ... }:
+      {
+        host,
+        pkgs,
+        lib,
+        ...
+      }:
+      let
+        activeTerminalAspect =
+          let
+            allAspectNames = lib.attrNames (lib.filterAttrs (name: aspect: host.hasAspect aspect) den.aspects);
+
+            terminalAspectName = lib.head (lib.filter (name: lib.hasPrefix "terminal-" name) allAspectNames);
+          in
+          terminalAspectName;
+
+        terminalPkgBinPath = den.aspects.${activeTerminalAspect}.meta.pkgBinPath pkgs;
+      in
       {
         ### Nemo package config
         home.packages = with pkgs; [
@@ -60,8 +77,7 @@
           };
 
           "org/cinnamon/desktop/applications/terminal" = {
-            # Default terminal is set to kitty (change this if using another terminal)
-            exec = "${lib.getExe pkgs.kitty}";
+            exec = terminalPkgBinPath;
           };
         };
 
