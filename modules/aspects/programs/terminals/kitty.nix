@@ -1,8 +1,9 @@
 # https://mynixos.com/home-manager/options/programs.kitty
 { lib, ... }:
 {
-  den.aspects.terminal-kitty = {
+  den.aspects.kitty = {
     meta = {
+      category = "terminal";
       binPath = pkgs: "${lib.getExe pkgs.kitty}";
     };
 

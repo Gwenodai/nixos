@@ -8,7 +8,7 @@
         ...
       }:
       {
-        programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
+        programs.niri.settings = inputs.self.lib.mkDefaultsRecursive {
           outputs = host.hardware.display;
 
           prefer-no-csd = true;

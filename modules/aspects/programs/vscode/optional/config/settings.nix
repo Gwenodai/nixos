@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ den, ... }:
 {
   den.aspects.vscode.config = {
     nixos =
@@ -93,15 +93,9 @@
           github.gitProtocol = "ssh";
 
           terminal = {
-            external.linuxExec = (
-              inputs.self.lib.getActiveAspectBinByPrefix {
-                inherit
-                  host
-                  pkgs
-                  ;
-                prefix = "terminal-";
-              }
-            );
+            external.linuxExec =
+              den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath
+                pkgs;
 
             integrated = {
               defaultProfile.linux = "zsh";

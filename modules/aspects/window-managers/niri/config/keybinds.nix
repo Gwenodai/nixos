@@ -1,4 +1,8 @@
-{ inputs, lib, ... }:
+{
+  den,
+  lib,
+  ...
+}:
 {
   den.aspects.niri = {
     homeManager =
@@ -13,15 +17,7 @@
           with config.lib.niri.actions;
           let
             # Find the first active terminal emulator aspects bin path
-            terminalPkgBinPath = (
-              inputs.self.lib.getActiveAspectBinByPrefix {
-                inherit
-                  host
-                  pkgs
-                  ;
-                prefix = "terminal-";
-              }
-            );
+            terminalBin = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
 
             ### Niri bind helpers
             # Makeshift `spawn-sh` functionality
@@ -29,7 +25,7 @@
             # Spawn a single package's executable
             spawnPkg = pkg: spawn (lib.getExe pkg);
             # Spawn an executable wrapped in a terminal
-            spawnTermPkg = pkg: spawn terminalPkgBinPath (lib.getExe pkg);
+            spawnTermPkg = pkg: spawn terminalBin (lib.getExe pkg);
             # Apply the same action to a list of keys
             bindMany =
               keys: action:
@@ -51,7 +47,7 @@
               {
                 # Applications etc.
                 # "Mod+R".action = RUNNER;
-                "Mod+T".action = spawn terminalPkgBinPath;
+                "Mod+T".action = spawn terminalBin;
                 "Mod+E".action = spawn "nemo"; # Use predefined nemo override pkg
                 "Mod+G".action = spawnPkg pkgs.google-chrome;
                 "Ctrl+Shift+Escape".action = spawnTermPkg pkgs.btop;

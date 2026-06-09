@@ -4,7 +4,7 @@
     homeManager =
       { host, ... }:
       {
-        programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
+        programs.niri.settings.input = inputs.self.lib.mkDefaultsRecursive {
           keyboard = {
             xkb.layout = "us";
             numlock = true;

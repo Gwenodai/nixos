@@ -39,13 +39,10 @@
         gdm
         audio
         fonts
+
         ## Security
         gnome-keyring
         polkit-gnome
-
-        ### Basic Desktop Applications
-        terminal-kitty
-        nemo
       ];
     };
 

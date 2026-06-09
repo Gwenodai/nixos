@@ -1,4 +1,3 @@
-# This file defines the base schema for all hosts
 {
   den.schema.host =
     { host, lib, ... }:

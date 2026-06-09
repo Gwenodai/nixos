@@ -31,10 +31,11 @@
         valent
 
         ### Applications
+        kitty
+        nemo
         google-chrome
         vscode
         vscode.config
-        dconf-editor
         ## Messaging
         vesktop
         vesktop.config
@@ -45,6 +46,8 @@
         heroic.config
         ## Music
         spotify
+        ## Debug
+        dconf-editor
       ];
 
       provides = {

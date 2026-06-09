@@ -1,10 +1,12 @@
 # Nemo file browser
 {
-  inputs,
+  den,
   ...
 }:
 {
   den.aspects.nemo = {
+    meta.category = "file-manager";
+
     ### Nemo required host services
     nixos = {
       services = {
@@ -26,6 +28,8 @@
         ...
       }:
       {
+        systemd.user.targets."test".Unit.Documentation = host.activeAspectsByCategory.terminal;
+
         ### Nemo package config
         home.packages = with pkgs; [
           (nemo-with-extensions.override {
@@ -69,15 +73,7 @@
           };
 
           "org/cinnamon/desktop/applications/terminal" = {
-            exec = (
-              inputs.self.lib.getActiveAspectBinByPrefix {
-                inherit
-                  host
-                  pkgs
-                  ;
-                prefix = "terminal-";
-              }
-            );
+            exec = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
           };
         };
 

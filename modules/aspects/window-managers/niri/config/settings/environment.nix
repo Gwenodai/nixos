@@ -2,7 +2,7 @@
 {
   den.aspects.niri = {
     homeManager = {
-      programs.niri.settings.environment = inputs.self.lib.applyDefaults {
+      programs.niri.settings.environment = inputs.self.lib.mkDefaults {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         QT_QPA_PLATFORM = "wayland";
