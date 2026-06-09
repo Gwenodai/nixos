@@ -47,14 +47,12 @@
               }
               {
                 # Applications etc.
-                # "Mod+R".action = RUNNER;
                 "Mod+T".action = spawn terminal-cmd;
                 "Mod+E".action = spawn fileManager-cmd;
                 "Mod+G".action = spawnPkg pkgs.google-chrome;
                 "Ctrl+Shift+Escape".action = spawnTermPkg pkgs.btop;
                 "MoD+Shift+P".action = power-off-monitors;
                 "Mod+Ctrl+Shift+Q".action = sh "pkill -9 winedevice.exe";
-                # "MoD+Shift+C".action = CLIPBOARD;
               }
               {
                 # Fullscreen
@@ -78,12 +76,6 @@
                 "Mod+Print".action = set-dynamic-cast-window;
                 "Mod+Ctrl+Print".action = set-dynamic-cast-monitor;
                 "Mod+Shift+Print".action = clear-dynamic-cast-target;
-              }
-              {
-                # Audio keys
-                # "XF86AudioMute".action        = spawn MUTE AUDIO;
-                # "XF86AudioRaiseVolume".action = spawn RAISE VOLUME;
-                # "XF86AudioLowerVolume".action = spawn LOWER VOLUME;
               }
               (
                 # Music keys

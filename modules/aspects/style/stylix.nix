@@ -7,7 +7,13 @@
 
   den.aspects.stylix = {
     nixos =
-      { config, pkgs, ... }:
+      {
+        config,
+        host,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
@@ -66,14 +72,19 @@
           targets = {
             gtk.enable = true;
             qt.enable = true;
-            gnome.enable = config.services.displayManager.gdm.enable;
+            gnome.enable = lib.elem "gdm" host.activeAspects;
             regreet.enable = config.programs.regreet.enable;
           };
         };
       };
 
     homeManager =
-      { config, ... }:
+      {
+        config,
+        lib,
+        host,
+        ...
+      }:
       {
         stylix = {
           targets = {
@@ -88,7 +99,7 @@
               '';
             };
 
-            kitty.enable = config.programs.kitty.enable;
+            kitty.enable = lib.elem "kitty" host.activeAspects;
             btop.enable = config.programs.btop.enable;
             qt.enable = true;
           };
