@@ -27,13 +27,15 @@
         ### Shells
         zsh
         bash
+        # Shell addons
         starship
       ];
     };
 
     desktop = {
       includes = with den.aspects; [
-        system-type.basic # Inherit `basic` system-type
+        # Inherit `basic` system-type
+        system-type.basic
 
         ### Core Aspects
         gdm
@@ -47,10 +49,12 @@
     };
 
     desktop-gaming = {
-      nixos.hardware.xone.enable = true; # Xbox One controllers
+      # Xbox One controller support
+      nixos.hardware.xone.enable = true;
 
       includes = with den.aspects; [
-        system-type.desktop # Inherit `desktop` system-type
+        # Inherit `desktop` system-type
+        system-type.desktop
 
         ### Core Aspects
         lact # GPU control

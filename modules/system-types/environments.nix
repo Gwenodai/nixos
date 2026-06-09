@@ -12,9 +12,6 @@
 
         ### Theming
         stylix
-
-        ### Applications
-        gnome-calendar
       ];
     };
   };

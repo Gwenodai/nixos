@@ -36,6 +36,7 @@
         google-chrome
         vscode
         vscode.config
+        gnome-calendar
         ## Messaging
         vesktop
         vesktop.config
