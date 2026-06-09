@@ -46,7 +46,7 @@
         ## Debug
         dconf-editor
 
-        ## Gaming
+        ### Gaming
         steam
         heroic
         heroic.config
