@@ -67,10 +67,12 @@
           enable = true;
           settings = {
             ### Performance settings
-            vulkan_present_mode = "mailbox"; # Takes precedence over `vsync=`
+            # `vulkan_present_mode` takes precedence over `vsync` setting
+            vulkan_present_mode = "mailbox";
             vsync = 2; # mailbox
             gl_vsync = 1; # on
-            # late = lowest latency. early = smoothest frametimes
+            # `late` = lowest latency
+            # `early` = smoothest frametimes
             fps_limit_method = "late";
             fps_limit = fpsLimitList;
 

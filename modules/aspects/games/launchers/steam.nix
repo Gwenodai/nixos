@@ -25,7 +25,7 @@
               NIXOS_OZONE_WL = "0";
             }
             # Enable MangoHud for all Vulkan Steam games if `mangohud` aspect is included
-            // lib.optionalAttrs (host.hasAspect den.aspects.mangohud) {
+            // lib.optionalAttrs (lib.elem "mangohud" host.activeAspects) {
               MANGOHUD = "1";
             };
           };

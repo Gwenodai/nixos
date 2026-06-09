@@ -16,8 +16,9 @@
         programs.niri.settings.binds =
           with config.lib.niri.actions;
           let
-            # Find the first active terminal emulator aspects bin path
-            terminalBin = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
+            ### Auto application per category detection run commands
+            terminal-cmd = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
+            fileManager-cmd = den.aspects.${lib.head host.activeAspectsByCategory.file-manager}.meta.binPath;
 
             ### Niri bind helpers
             # Makeshift `spawn-sh` functionality
@@ -25,7 +26,7 @@
             # Spawn a single package's executable
             spawnPkg = pkg: spawn (lib.getExe pkg);
             # Spawn an executable wrapped in a terminal
-            spawnTermPkg = pkg: spawn terminalBin (lib.getExe pkg);
+            spawnTermPkg = pkg: spawn terminal-cmd (lib.getExe pkg);
             # Apply the same action to a list of keys
             bindMany =
               keys: action:
@@ -47,8 +48,8 @@
               {
                 # Applications etc.
                 # "Mod+R".action = RUNNER;
-                "Mod+T".action = spawn terminalBin;
-                "Mod+E".action = spawn "nemo"; # Use predefined nemo override pkg
+                "Mod+T".action = spawn terminal-cmd;
+                "Mod+E".action = spawn fileManager-cmd;
                 "Mod+G".action = spawnPkg pkgs.google-chrome;
                 "Ctrl+Shift+Escape".action = spawnTermPkg pkgs.btop;
                 "MoD+Shift+P".action = power-off-monitors;

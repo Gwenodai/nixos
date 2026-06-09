@@ -1,11 +1,11 @@
 # Nemo file browser
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.nemo = {
-    meta.category = "file-manager";
+    meta = {
+      category = "file-manager";
+      binPath = "nemo"; # Use predefined nemo override pkg
+    };
 
     ### Nemo required host services
     nixos = {
