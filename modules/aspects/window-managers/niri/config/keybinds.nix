@@ -1,4 +1,4 @@
-{ den, lib, ... }:
+{ inputs, lib, ... }:
 {
   den.aspects.niri = {
     homeManager =
@@ -12,16 +12,16 @@
         programs.niri.settings.binds =
           with config.lib.niri.actions;
           let
-            # Find the first active terminal emulator aspect
-            activeTerminalAspect =
-              let
-                allAspectNames = lib.attrNames (lib.filterAttrs (name: aspect: host.hasAspect aspect) den.aspects);
-
-                terminalAspectName = lib.head (lib.filter (name: lib.hasPrefix "terminal-" name) allAspectNames);
-              in
-              terminalAspectName;
-            # Retrieve it's bin path
-            terminalPkgBinPath = den.aspects.${activeTerminalAspect}.meta.pkgBinPath pkgs;
+            # Find the first active terminal emulator aspects bin path
+            terminalPkgBinPath = (
+              inputs.self.lib.getActiveAspectBinByPrefix {
+                inherit
+                  host
+                  pkgs
+                  ;
+                prefix = "terminal-";
+              }
+            );
 
             ### Niri bind helpers
             # Makeshift `spawn-sh` functionality

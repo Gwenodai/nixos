@@ -3,7 +3,7 @@
 {
   den.aspects.terminal-kitty = {
     meta = {
-      pkgBinPath = pkgs: "${lib.getExe pkgs.kitty}";
+      binPath = pkgs: "${lib.getExe pkgs.kitty}";
     };
 
     homeManager =

@@ -1,4 +1,4 @@
-{ den, ... }:
+{ inputs, ... }:
 {
   den.aspects.vscode.config = {
     nixos =
@@ -15,17 +15,6 @@
         lib,
         ...
       }:
-      let
-        activeTerminalAspect =
-          let
-            allAspectNames = lib.attrNames (lib.filterAttrs (name: aspect: host.hasAspect aspect) den.aspects);
-
-            terminalAspectName = lib.head (lib.filter (name: lib.hasPrefix "terminal-" name) allAspectNames);
-          in
-          terminalAspectName;
-
-        terminalPkgBinPath = den.aspects.${activeTerminalAspect}.meta.pkgBinPath pkgs;
-      in
       {
         programs.vscode.profiles.default.userSettings = {
           editor = {
@@ -104,7 +93,15 @@
           github.gitProtocol = "ssh";
 
           terminal = {
-            external.linuxExec = terminalPkgBinPath;
+            external.linuxExec = (
+              inputs.self.lib.getActiveAspectBinByPrefix {
+                inherit
+                  host
+                  pkgs
+                  ;
+                prefix = "terminal-";
+              }
+            );
 
             integrated = {
               defaultProfile.linux = "zsh";
