@@ -7,7 +7,7 @@
         ...
       }:
       {
-        # "~/.config/MangoHud/presets.conf"
+        # "~/.local/share/Steam/steamapps/common/HaloWarsDE/startup/game.cfg"
         home.file."${config.xdg.dataHome}/Steam/steamapps/common/HaloWarsDE/startup/game.cfg" = {
           text = ''
             // game.cfg
