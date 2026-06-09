@@ -1,5 +1,5 @@
 {
-  # Host metadata for later reference
+  # Host metadata for global use
   # TODO: Port public host metadata to den's quirk/pipe system
   flake.lib.hosts = {
     gwen-t1 = {

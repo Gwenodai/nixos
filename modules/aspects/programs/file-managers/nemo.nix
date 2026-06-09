@@ -28,8 +28,6 @@
         ...
       }:
       {
-        systemd.user.targets."test".Unit.Documentation = host.activeAspectsByCategory.terminal;
-
         ### Nemo package config
         home.packages = with pkgs; [
           (nemo-with-extensions.override {

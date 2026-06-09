@@ -41,14 +41,17 @@
         vesktop
         vesktop.config
         caprine
-        ## Gaming
-        steam
-        heroic
-        heroic.config
         ## Music
         spotify
         ## Debug
         dconf-editor
+
+        ## Gaming
+        steam
+        heroic
+        heroic.config
+        ## Mods
+        mods.halo-wars.cameraZoom
       ];
 
       provides = {
