@@ -29,34 +29,6 @@ in
           ### System-Type
           # Use the gaming desktop system preset
           system-type.desktop-gaming
-          # Use the Niri desktop preset
-          # environment.niri
-
-          ### Services
-          valent
-
-          ### Applications
-          kitty
-          nemo
-          google-chrome
-          vscode
-          vscode.config
-          gnome-calendar
-          ## Messaging
-          vesktop
-          vesktop.config
-          caprine
-          ## Music
-          spotify
-          ## Debug
-          dconf-editor
-
-          ### Gaming
-          steam
-          heroic
-          heroic.config
-          ## Mods
-          mods.halo-wars.cameraZoom
         ];
 
         provides = {
@@ -89,7 +61,34 @@ in
         # Gwen is the primary user of this host
         den.batteries.primary-user
 
+        ### User Environment
         environment.niri
+
+        ### Services
+        valent
+
+        ### Applications
+        kitty
+        nemo
+        google-chrome
+        vscode
+        vscode.config
+        gnome-calendar
+        ## Messaging
+        vesktop
+        vesktop.config
+        caprine
+        ## Music
+        spotify
+        ## Debug
+        dconf-editor
+
+        ### Gaming
+        steam
+        heroic
+        heroic.config
+        ## Mods
+        mods.halo-wars.cameraZoom
       ];
     };
 
