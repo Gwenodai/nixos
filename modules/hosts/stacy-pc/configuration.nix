@@ -30,23 +30,27 @@ in
         scripts.fix-camera
       ];
 
-    _.to-users = {
-      includes =
-        with den.aspects;
-        sharedAspects
-        ++ [
-          ### Applications
-          spotify
-          caprine
-        ];
-    };
+    _.to-users =
+      { user, ... }:
+      {
+        includes =
+          with den.aspects;
+          sharedAspects
+          ++ [
+            ### Applications
+            spotify
+            caprine
+          ];
+      };
 
-    _.stacy = {
-      includes = [
-        ### User Config
-        den.batteries.primary-user
-      ];
-    };
+    _.stacy =
+      { user, ... }:
+      {
+        includes = [
+          ### User Config
+          den.batteries.primary-user
+        ];
+      };
 
     nixos =
       { lib, ... }:

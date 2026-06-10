@@ -1,7 +1,7 @@
 { den, ... }:
 {
   ### DEBUG FLAG ####
-  # flake.den = den;
+  flake.den = den;
 
   systems = [
     "x86_64-linux"

@@ -21,16 +21,20 @@ in
         systemd-boot # Use systemd boot
       ];
 
-    _.to-users = {
-      includes = with den.aspects; sharedAspects ++ [ ];
-    };
+    _.to-users =
+      { user, ... }:
+      {
+        includes = with den.aspects; sharedAspects ++ [ ];
+      };
 
-    _.gwen = {
-      includes = [
-        ### User Config
-        den.batteries.primary-user
-      ];
-    };
+    _.gwen =
+      { user, ... }:
+      {
+        includes = [
+          ### User Config
+          den.batteries.primary-user
+        ];
+      };
 
     nixos =
       { lib, ... }:

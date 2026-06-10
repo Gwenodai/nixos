@@ -2,39 +2,39 @@
 # https://noctalia.dev/
 {
   inputs,
-  lib,
   den,
   ...
 }:
-let
-  class =
-    { class, aspect-chain }:
-    den.batteries.forward {
-      each = lib.singleton true;
-      fromClass = _: "noctalia";
-      intoClass = _: "homeManager";
-      intoPath = _: [
+{
+  flake-file.inputs = {
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell/v4.7.6";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  ### Noctalia Class Policy
+  den.policies.noctalia-to-homeManager = _: [
+    (den.lib.policy.route {
+      fromClass = "noctalia";
+      intoClass = "homeManager";
+      path = [
         "programs"
         "noctalia-shell"
       ];
-      fromAspect = _: lib.head aspect-chain;
-      adaptArgs = lib.id;
-    };
-in
-{
-  flake-file.inputs.noctalia = {
-    url = "github:noctalia-dev/noctalia-shell/v4.7.6";
-    inputs.nixpkgs.follows = "nixpkgs";
-    inputs.noctalia-qs.follows = "noctalia-qs";
-  };
-
-  flake-file.inputs.noctalia-qs = {
-    url = "github:noctalia-dev/noctalia-qs";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
+    })
+  ];
 
   den.aspects.noctalia = {
-    includes = [ class ];
+    includes = [
+      den.policies.noctalia-to-homeManager
+    ];
 
     homeManager =
       { inputs', ... }:

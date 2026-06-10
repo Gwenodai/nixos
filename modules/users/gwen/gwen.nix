@@ -1,7 +1,9 @@
 { den, ... }:
 {
   den.aspects.gwen = {
-    includes = [ den.batteries.host-aspects ];
+    includes = [
+      den.batteries.host-aspects
+    ];
 
     nixos =
       { config, ... }:

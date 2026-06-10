@@ -3,46 +3,10 @@
 {
   inputs,
   den,
-  lib,
   ...
 }:
 let
   getNiri = pkgs: pkgs.niri;
-
-  class =
-    { class, aspect-chain }:
-    den.batteries.forward {
-      each = lib.singleton true;
-      fromClass = _: "niri";
-      intoClass = _: "homeManager";
-      intoPath = _: [
-        "programs"
-        "niri"
-      ];
-      fromAspect = _: lib.head aspect-chain;
-      adaptArgs = lib.id;
-      # This `adapterModule` allows the following lists to append
-      # rather than overwrite each other
-      adapterModule =
-        let
-          listOption = lib.mkOption {
-            type = lib.types.listOf lib.types.anything;
-            default = [ ];
-          };
-          attrOption = lib.mkOption {
-            type = lib.types.attrsOf lib.types.anything;
-            default = { };
-          };
-        in
-        {
-          options.settings = {
-            spawn-at-startup = listOption;
-            window-rules = listOption;
-            layer-rules = listOption;
-            binds = attrOption;
-          };
-        };
-    };
 in
 {
   flake-file.inputs.niri = {
@@ -51,7 +15,23 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  ### Niri Class Policy
+  den.policies.niri-to-homeManager = _: [
+    (den.lib.policy.route {
+      fromClass = "niri";
+      intoClass = "homeManager";
+      path = [
+        "programs"
+        "niri"
+      ];
+    })
+  ];
+
   den.aspects.niri = {
+    includes = [
+      den.policies.niri-to-homeManager
+    ];
+
     nixos =
       { pkgs, ... }:
       {
@@ -88,7 +68,5 @@ in
           "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         };
       };
-
-    includes = [ class ];
   };
 }

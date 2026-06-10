@@ -1,14 +1,17 @@
+let
+  hostName = "gwen-t1";
+in
 {
   # Host metadata for global use
   # TODO: Port public host metadata to den's quirk/pipe system
   flake.lib.hosts = {
-    gwen-t1 = {
+    ${hostName} = {
       ip = "192.168.1.37";
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAJ1rnquy24cUcTB0c/B/2sYTsH+TzHRcIYcqRciQIu root@gwen-t1";
     };
   };
 
-  den.hosts.x86_64-linux.gwen-t1 = {
+  den.hosts.x86_64-linux.${hostName} = {
     users.gwen = { };
     # users.stacy = { };
 
