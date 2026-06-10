@@ -1,76 +1,94 @@
+{
+  self,
+  den,
+  ...
+}:
 let
   hostName = "gwen-t1";
+  system = "x86_64-linux";
 in
 {
-  # Host metadata for global use
-  # TODO: Port public host metadata to den's quirk/pipe system
-  flake.lib.hosts = {
-    ${hostName} = {
-      ip = "192.168.1.37";
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAJ1rnquy24cUcTB0c/B/2sYTsH+TzHRcIYcqRciQIu root@gwen-t1";
-    };
+  den.hosts.${system}.${hostName}.users = {
+    gwen = { };
+    # stacy = { };
   };
 
-  den.hosts.x86_64-linux.${hostName} = {
-    users.gwen = { };
-    # users.stacy = { };
+  den.aspects = {
+    ${hostName} =
+      { host, ... }:
+      {
+        nixos =
+          { pkgs, ... }:
+          {
+            # Override the default secrets file for this host
+            sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+            # Use the latest CachyOS kernel with Zen4/5 specific optimizations
+            boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
+          };
 
-    hardware = {
-      platform = "desktop";
+        includes = with den.aspects; [
+          #---Boot & Kernel---#
+          # Use systemd boot
+          systemd-boot
+          # Use the CachyOS kernel
+          kernel.cachyos
+          # Custom driver for MB fan control (needed for AIO control)
+          kernel-modules.it87
 
-      cpu = {
-        vendor = "amd";
-        lowLatencyScheduler = true;
-        cores = 8;
+          #---Storage & Persistence---#
+          # Opt into system wide ephemeral state management
+          preservation
+
+          #---System Profile Base---#
+          # Use the gaming desktop system preset
+          system-type.desktop-gaming
+        ];
       };
 
-      gpu = {
-        vendor = "amd";
-        advancedPowerManagement = true;
-      };
+    gwen.provides.${hostName} = {
+      includes = with den.aspects; [
+        #---Identity & Permissions---#
+        # This is the primary user of this host
+        den.batteries.primary-user
 
-      display."Dell Inc. AW3425DW 4ZZD274" = {
-        mode = {
-          width = 3440;
-          height = 1440;
-          refresh = 239.984;
-        };
-        position = {
-          x = 0;
-          y = 0;
-        };
-        scale = 1;
-        focus-at-startup = true;
-        variable-refresh-rate = "on-demand";
-      };
+        #---Desktop Environment Base---#
+        environment.niri
 
-      touchscreen = "Invalid Vendor Codename - RTK 0x1920 0x19201080";
-      display."Invalid Vendor Codename - RTK 0x1920 0x19201080" = {
-        mode = {
-          width = 1920;
-          height = 1080;
-        };
-        position = {
-          x = 740;
-          y = 1440;
-        };
-        scale = 1;
-        transform.rotation = 180;
-      };
+        #---Core Desktop Apps---#
+        kitty
+        nemo
+        google-chrome
+        vscode
+        vscode.config
+        gnome-calendar
 
-      ### External Display
-      display."Philips Consumer Electronics Company PHILIPS FTV 0x01010101" = {
-        mode = {
-          width = 1920;
-          height = 1080;
-          refresh = 60.000;
-        };
-        position = {
-          x = -1920;
-          y = 180;
-        };
-        scale = 1;
-      };
+        #---Communication---#
+        vesktop
+        vesktop.config
+        caprine
+
+        #---Media & Background Services---#
+        spotify
+        valent
+        dconf-editor
+
+        #---Gaming---#
+        ## Launchers
+        steam
+        heroic
+        heroic.config
+        ## Runtime Tools & Overlays
+        umu-launcher
+        mangohud
+        ## Mods & Mod Tools
+        mods.halo-wars.cameraZoom
+      ];
+    };
+
+    stacy.provides.${hostName} = {
+      includes = with den.aspects; [
+        # environment.niri
+      ];
     };
   };
 }

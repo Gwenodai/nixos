@@ -6,11 +6,11 @@
       nixos.services.displayManager.defaultSession = "niri";
 
       includes = with den.aspects; [
-        ### Core Aspects
+        #---Compositor & Desktop Shell---#
         niri
         noctalia
 
-        ### Theming
+        #---Visual Theming---#
         stylix
       ];
     };

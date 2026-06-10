@@ -14,14 +14,26 @@ in
         wakeup-script = mkWakeupScript pkgs;
       in
       {
+        #---Boot Config---#
+        boot.initrd.availableKernelModules = [
+          "nvme"
+          "ahci"
+          "usbhid"
+          "xhci_pci"
+          "usb_storage"
+          "thunderbolt"
+        ];
+        # Kernel-based Virtual Machine support
+        boot.kernelModules = [ "kvm-amd" ];
+
+        #---Disable Secondary Display Activation---#
         environment.systemPackages = [ wakeup-script ];
-        boot.kernelParams = [ "video=HDMI-A-1:d" ]; # Disable secondary screen at boot
+        boot.kernelParams = [ "video=HDMI-A-1:d" ];
         security.sudo.extraRules = [
           {
             users = [ "%wheel" ];
             commands = [
               {
-                # Allow 'wheel' group to run this specific script with sudo and no password
                 command = "${wakeup-script}/bin/wakeup-secondary-display";
                 options = [ "NOPASSWD" ];
               }
@@ -30,14 +42,14 @@ in
         ];
       };
 
-    # Niri activation logic
+    #---Display Activation Post Login---#
+    ### Niri
     niri =
       { pkgs, ... }:
       let
         wakeup-script = mkWakeupScript pkgs;
       in
       {
-        # Enable secondary monitor after niri login
         settings.spawn-at-startup = [
           { sh = "sudo ${wakeup-script}/bin/wakeup-secondary-display"; }
         ];

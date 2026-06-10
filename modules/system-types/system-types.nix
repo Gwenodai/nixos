@@ -3,32 +3,33 @@
   den.aspects.system-type = {
     basic = {
       includes = with den.aspects; [
-        ### Core Aspects
+        #---System Foundation---#
         nix
         home-manager
         disko
+        sops-nix
+        xdg
+
+        #---Hardware & Base Platform---#
         # Automatically configures core hardware functionality based on the provided
         # host hardware profile configuration defined within `./hosts.nix`
         hardware.autoConfig
         firmware
+        kernel # Use the latest NixOS kernel
+        coolercontrol
         garbage-collection
         locale
-        # Use the latest NixOS kernel by default
-        kernel
-        sops-nix
-        xdg
 
-        ### Basic Tools
-        coolercontrol
-        ssh
-        cli-tools
-        git
-
-        ### Shells
+        #---Shells & Addons---#
         zsh
         bash
-        # Shell addons
+        ## Prompt & Styles
         starship
+
+        #---CLI Utilities---#
+        ssh
+        git
+        cli-tools
       ];
     };
 
@@ -37,12 +38,12 @@
         # Inherit `basic` system-type
         system-type.basic
 
-        ### Core Aspects
+        #---Display & Media---#
         gdm
         audio
         fonts
 
-        ## Security
+        #---Security & Authentication---#
         gnome-keyring
         polkit-gnome
       ];
@@ -56,13 +57,9 @@
         # Inherit `desktop` system-type
         system-type.desktop
 
-        ### Core Aspects
+        #---Performance & Tuning---#
         lact # GPU control
         ananicy # Auto-nice daemon
-
-        ### Gaming Related Aspects
-        umu-launcher
-        mangohud
       ];
     };
   };
