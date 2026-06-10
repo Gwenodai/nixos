@@ -3,7 +3,7 @@
   den.aspects.stacy-pc = {
     includes = [
       # Network storage mount
-      (den.aspects.mount-cifs {
+      (den.batteries.mount-cifs {
         host = inputs.self.lib.hosts.ymir.ip;
         resource = "Storage";
         destination = "/mnt/ymir/storage";
@@ -18,7 +18,7 @@
       })
 
       # Webpages mount
-      (den.aspects.mount-cifs {
+      (den.batteries.mount-cifs {
         host = inputs.self.lib.hosts.ymir.ip;
         resource = "www";
         destination = "/mnt/ymir/www";

@@ -1,5 +1,5 @@
 {
-  den.aspects.mount-cifs = {
+  den.batteries.mount-cifs = {
     # This aspect takes mount parameters as context
     includes = [
       (
