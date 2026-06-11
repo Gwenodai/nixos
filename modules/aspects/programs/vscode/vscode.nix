@@ -49,6 +49,12 @@
         directories = [
           # "~/.config/Code/User"
           "${hmConfig.xdg.configHome}/Code/User"
+          # "~/.vscode-shared/sharedStorage"
+          {
+            directory = "${hmConfig.home.homeDirectory}/.vscode-shared/sharedStorage";
+            how = "symlink";
+            createLinkTarget = true;
+          }
         ];
         files = [
           # "~/.config/Code/Trust Tokens"
@@ -77,6 +83,8 @@
         "${hmConfig.xdg.configHome}/Code" = { };
         # "~/.vscode"
         "${hmConfig.home.homeDirectory}/.vscode" = { };
+        # "~/.vscode-shared"
+        "${hmConfig.home.homeDirectory}/.vscode-shared" = { };
       };
 
     persistUserIgnore =
