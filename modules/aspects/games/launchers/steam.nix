@@ -9,7 +9,7 @@
     nixos =
       {
         pkgs,
-        host,
+        user,
         lib,
         ...
       }:
@@ -25,7 +25,7 @@
               NIXOS_OZONE_WL = "0";
             }
             # Enable MangoHud for all Vulkan Steam games if `mangohud` aspect is included
-            // lib.optionalAttrs (lib.elem "mangohud" host.activeAspects) {
+            // lib.optionalAttrs (lib.elem "mangohud" user.activeAspects) {
               MANGOHUD = "1";
             };
           };
