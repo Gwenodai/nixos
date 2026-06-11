@@ -10,7 +10,7 @@
 
     homeManager =
       {
-        host,
+        user,
         pkgs,
         lib,
         ...
@@ -94,7 +94,7 @@
 
           terminal = {
             external.linuxExec =
-              den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath
+              den.aspects.${lib.head user.activeAspectsByCategory.terminal}.meta.binPath
                 pkgs;
 
             integrated = {

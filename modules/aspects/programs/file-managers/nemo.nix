@@ -80,7 +80,7 @@
           };
 
           "org/cinnamon/desktop/applications/terminal" = {
-            exec = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
+            exec = den.aspects.${lib.head user.activeAspectsByCategory.terminal}.meta.binPath pkgs;
           };
         };
 

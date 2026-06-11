@@ -8,7 +8,7 @@
     homeManager =
       {
         config,
-        host,
+        user,
         pkgs,
         ...
       }:
@@ -17,8 +17,8 @@
           with config.lib.niri.actions;
           let
             ### Auto application per category detection run commands
-            terminal-cmd = den.aspects.${lib.head host.activeAspectsByCategory.terminal}.meta.binPath pkgs;
-            fileManager-cmd = den.aspects.${lib.head host.activeAspectsByCategory.file-manager}.meta.binPath;
+            terminal-cmd = den.aspects.${lib.head user.activeAspectsByCategory.terminal}.meta.binPath pkgs;
+            fileManager-cmd = den.aspects.${lib.head user.activeAspectsByCategory.file-manager}.meta.binPath;
 
             ### Niri bind helpers
             # Makeshift `spawn-sh` functionality
