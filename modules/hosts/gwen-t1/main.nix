@@ -10,7 +10,6 @@ in
 {
   den.hosts.${system}.${hostName}.users = {
     gwen = { };
-    # stacy = { };
   };
 
   den.aspects = {
@@ -82,12 +81,6 @@ in
         mangohud
         ## Mods & Mod Tools
         mods.halo-wars.cameraZoom
-      ];
-    };
-
-    stacy.provides.${hostName} = {
-      includes = with den.aspects; [
-        # environment.niri
       ];
     };
   };
