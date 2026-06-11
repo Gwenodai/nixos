@@ -31,7 +31,7 @@ let
       {
         each = lib.singleton true;
         fromClass = _: fromClass;
-        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoClass = _: "nixos";
         intoPath = _: intoPath;
         fromAspect = _: lib.head aspect-chain;
         adaptArgs = args@{ config, ... }: args // { osConfig = config; };

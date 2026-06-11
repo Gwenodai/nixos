@@ -1,22 +1,3 @@
-{ den, lib, ... }:
-let
-  # Factory to generate cooler-control classes
-  mkClass =
-    { fromClass, intoSubPath }:
-    { host }:
-    { class, aspect-chain }:
-    den.batteries.forward ({
-      each = lib.singleton true;
-      fromClass = _: fromClass;
-      intoClass = _: host.class;
-      intoPath = _: [
-        "environment"
-        "etc"
-        "coolercontrol/${intoSubPath}"
-      ];
-      fromAspect = _: lib.head aspect-chain;
-    });
-in
 {
   den.aspects.coolercontrol = {
     nixos =
@@ -34,7 +15,7 @@ in
           liquidctl # Drivers for AIO liquid coolers and other devices
         ];
 
-        # Set up the environment config defaults
+        # Set up environment config defaults
         environment.etc =
           lib.genAttrs
             [
@@ -72,20 +53,5 @@ in
           "${hmConfig.xdg.configHome}/org.coolercontrol.CoolerControl"
         ];
       };
-
-    includes = [
-      (mkClass {
-        fromClass = "coolercontrol-config";
-        intoSubPath = "config.toml";
-      })
-      (mkClass {
-        fromClass = "coolercontrol-alerts";
-        intoSubPath = "alerts.json";
-      })
-      (mkClass {
-        fromClass = "coolercontrol-ui";
-        intoSubPath = "config-ui.json";
-      })
-    ];
   };
 }

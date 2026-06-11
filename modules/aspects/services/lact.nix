@@ -1,13 +1,13 @@
 {
   den.aspects.lact = {
     nixos =
-      { lib, ... }:
+      { config, lib, ... }:
       {
         services.lact.enable = true;
 
         # Set up the environment config defaults
         environment.etc."lact/config.yaml" = {
-          enable = lib.mkDefault false;
+          enable = lib.mkDefault (config.environment.etc."lact/config.yaml".text != null);
           mode = lib.mkDefault "0644";
           text = lib.mkDefault null;
         };
