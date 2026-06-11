@@ -19,21 +19,21 @@ let
   };
 
   ### Class factories
-  ## Factory to generate host-level custom classes
+  # Factory to generate host-level custom classes
   mkHostClass =
     {
       fromClass,
       intoPath,
       dedup ? false,
     }:
-    { class, aspect-chain }:
+    { host }:
     den.batteries.forward (
       {
         each = lib.singleton true;
         fromClass = _: fromClass;
-        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoClass = _: "nixos";
         intoPath = _: intoPath;
-        fromAspect = _: lib.head aspect-chain;
+        fromAspect = _: den.aspects.${host.aspect};
         adaptArgs = args@{ config, ... }: args // { osConfig = config; };
       }
       // lib.optionalAttrs dedup {
@@ -41,7 +41,7 @@ let
       }
     );
 
-  ## Factory to generate user-level custom classes
+  # Factory to generate user-level custom classes
   mkUserClass =
     {
       fromClass,
@@ -49,19 +49,18 @@ let
       dedup ? false,
     }:
     { user }:
-    { class, aspect-chain }:
     den.batteries.forward (
       {
         each = lib.singleton user;
         fromClass = _: fromClass;
-        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoClass = _: "nixos";
         intoPath = u: [
           "hostConfig"
           "preservation"
           intoSubPath
           u.userName
         ];
-        fromAspect = _: lib.head aspect-chain;
+        fromAspect = user: den.aspects.${user.aspect};
         adaptArgs =
           args@{ config, ... }:
           args
