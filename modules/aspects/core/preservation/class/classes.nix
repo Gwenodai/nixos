@@ -26,14 +26,14 @@ let
       intoPath,
       dedup ? false,
     }:
-    { host }:
+    { class, aspect-chain }:
     den.batteries.forward (
       {
         each = lib.singleton true;
         fromClass = _: fromClass;
-        intoClass = _: "nixos";
+        intoClass = _: "nixos"; # Preservation only supports NixOS
         intoPath = _: intoPath;
-        fromAspect = _: den.aspects.${host.aspect};
+        fromAspect = _: lib.head aspect-chain;
         adaptArgs = args@{ config, ... }: args // { osConfig = config; };
       }
       // lib.optionalAttrs dedup {

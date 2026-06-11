@@ -29,14 +29,6 @@
         ...
       }:
       {
-        systemd.user.targets."test".Unit.Documentation =
-          let
-            activeAspectsList = lib.filter (aspect: user.hasAspect aspect) (lib.attrValues den.aspects);
-            # Only list the aspect name itself, not the full attribute set
-            activeAspectNames = lib.map (aspect: aspect.name) activeAspectsList;
-          in
-          activeAspectNames;
-
         ### Nemo package config
         home.packages = with pkgs; [
           (nemo-with-extensions.override {
