@@ -82,7 +82,7 @@
       {
         config,
         lib,
-        host,
+        user,
         ...
       }:
       {
@@ -99,7 +99,7 @@
               '';
             };
 
-            kitty.enable = lib.elem "kitty" host.activeAspects;
+            kitty.enable = lib.elem "kitty" user.activeAspects;
             btop.enable = config.programs.btop.enable;
             qt.enable = true;
           };
