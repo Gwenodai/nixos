@@ -1,23 +1,24 @@
 {
   den.aspects.preservation = {
     ### Persist config
-    nixos =
-      { pkgs, ... }:
-      {
-        # Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
-        systemd.services.systemd-machine-id-commit = {
-          # Ensure service will only run if the persistent storage is mounted
-          unitConfig.ConditionPathIsMountPoint = [
-            ""
-            "/persist"
-          ];
-          # Ensure service commits the ID to the persistent volume
-          serviceConfig.ExecStart = [
-            ""
-            "${pkgs.systemd}/bin/systemd-machine-id-setup --commit --root /persist"
-          ];
-        };
+    nixos = {
+      ### Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
+      boot.initrd.systemd.tmpfiles.settings.preservation."/sysroot/persistent/etc/machine-id".f = {
+        argument = "uninitialized";
       };
+
+      # Let the service commit the transient ID to the persistent volume
+      systemd.services.systemd-machine-id-commit = {
+        unitConfig.ConditionPathIsMountPoint = [
+          ""
+          "/persist"
+        ];
+        serviceConfig.ExecStart = [
+          ""
+          "systemd-machine-id-setup --commit --root /persist"
+        ];
+      };
+    };
 
     ## Host Preservation Config
     persist = {
@@ -35,7 +36,9 @@
         {
           file = "/etc/machine-id";
           inInitrd = true;
+          how = "symlink";
           configureParent = true;
+          createLinkTarget = true;
         }
         {
           file = "/var/lib/systemd/random-seed";
