@@ -1,5 +1,5 @@
 let
-  hostName = "gwen-t1";
+  hostName = "stacy-pc";
   system = "x86_64-linux";
 in
 {
@@ -20,12 +20,12 @@ in
       };
 
       #---Displays---#
-      display."Dell Inc. AW3425DW 4ZZD274" = {
+      display."ViewSonic Corporation XG2401 SERIES 0x01010101" = {
         focus-at-startup = true;
         mode = {
-          width = 3440;
-          height = 1440;
-          refresh = 239.984;
+          width = 1920;
+          height = 1080;
+          refresh = 143.855;
         };
         position = {
           x = 0;
@@ -35,18 +35,16 @@ in
         variable-refresh-rate = "on-demand";
       };
 
-      touchscreen = "Invalid Vendor Codename - RTK 0x1920 0x19201080";
-      display."Invalid Vendor Codename - RTK 0x1920 0x19201080" = {
+      display."Samsung Electric Company S24D300 0x5A5A4631" = {
         mode = {
           width = 1920;
           height = 1080;
         };
         position = {
-          x = 740;
-          y = 1440;
+          x = 1920;
+          y = 0;
         };
         scale = 1;
-        transform.rotation = 180;
       };
 
       ### External Display
@@ -58,7 +56,7 @@ in
         };
         position = {
           x = -1920;
-          y = 180;
+          y = 0;
         };
         scale = 1;
       };
