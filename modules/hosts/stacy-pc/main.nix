@@ -33,7 +33,7 @@ in
           kernel.cachyos
 
           #---System Profile Base---#
-          # Use the gaming desktop system preset
+          # Use the gaming desktop system type
           system-type.desktop-gaming
 
           #---Scripts---#

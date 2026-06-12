@@ -49,7 +49,7 @@ in
         transform.rotation = 180;
       };
 
-      ### External Display
+      ## External Display
       display."Philips Consumer Electronics Company PHILIPS FTV 0x01010101" = {
         mode = {
           width = 1920;
