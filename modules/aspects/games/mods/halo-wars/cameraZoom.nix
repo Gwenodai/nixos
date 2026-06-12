@@ -9,6 +9,7 @@
       {
         # "~/.local/share/Steam/steamapps/common/HaloWarsDE/startup/game.cfg"
         home.file."${config.xdg.dataHome}/Steam/steamapps/common/HaloWarsDE/startup/game.cfg" = {
+          force = true;
           text = ''
             // game.cfg
             unlockAllCampaignMissions
@@ -441,7 +442,6 @@
 
             MaximumSPCLifetimeLeaderboardScore 60000000
           '';
-          force = true;
         };
       };
   };

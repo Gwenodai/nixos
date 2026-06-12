@@ -14,6 +14,7 @@
         ];
 
         home.file."${config.xdg.configHome}/heroic/config.json" = {
+          force = true;
           text = lib.replaceStrings [ "# syntax: json\n" ] [ "" ] ''
             # syntax: json
             {
@@ -80,7 +81,6 @@
               "version": "v0"
             }
           '';
-          force = true;
         };
       };
 

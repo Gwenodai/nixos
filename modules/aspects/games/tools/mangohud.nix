@@ -148,6 +148,7 @@
 
         # "~/.config/MangoHud/presets.conf"
         home.file."${config.xdg.configHome}/MangoHud/presets.conf" = {
+          force = true;
           text = ''
             [preset 1]
             no_display
@@ -160,7 +161,6 @@
             fps_metrics=avg,0.01
             dynamic_frame_timing
           '';
-          force = true;
         };
 
         home.packages = [ mangohudPrependFps ];

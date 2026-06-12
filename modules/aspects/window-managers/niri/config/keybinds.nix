@@ -16,7 +16,7 @@
         programs.niri.settings.binds =
           with config.lib.niri.actions;
           let
-            ### Auto application per category detection run commands
+            ### Auto application by category detection run commands
             terminal-cmd = den.aspects.${lib.head user.activeAspectsByCategory.terminal}.meta.binPath pkgs;
             fileManager-cmd = den.aspects.${lib.head user.activeAspectsByCategory.file-manager}.meta.binPath;
 
@@ -36,8 +36,8 @@
           in
           lib.mapAttrs (_: value: lib.mkDefault value) (
             lib.attrsets.mergeAttrsList [
+              ## Shortcuts
               {
-                # Shortcuts
                 "Mod+Escape".action = show-hotkey-overlay;
                 "Mod+Tab".action = toggle-overview;
                 "Mod+Q" = {
@@ -45,8 +45,8 @@
                   repeat = false;
                 };
               }
+              ## Applications etc.
               {
-                # Applications etc.
                 "Mod+T".action = spawn terminal-cmd;
                 "Mod+E".action = spawn fileManager-cmd;
                 "Mod+G".action = spawnPkg pkgs.google-chrome;
@@ -54,15 +54,15 @@
                 "MoD+Shift+P".action = power-off-monitors;
                 "Mod+Ctrl+Shift+Q".action = sh "pkill -9 winedevice.exe";
               }
+              ## Fullscreen
               {
-                # Fullscreen
                 "Mod+F".action = maximize-column;
                 "Mod+Shift+F".action = fullscreen-window;
                 "Mod+Ctrl+F".action = toggle-windowed-fullscreen;
                 "Mod+Ctrl+Shift+F".action = maximize-window-to-edges;
               }
+              ## Screenshots
               {
-                # Screenshots
                 "Print".action.screenshot-window = [ ];
                 "Ctrl+Print".action.screenshot-screen = {
                   show-pointer = false;
@@ -71,14 +71,14 @@
                   show-pointer = false;
                 };
               }
+              ## Screenshare
               {
-                # Screenshare
                 "Mod+Print".action = set-dynamic-cast-window;
                 "Mod+Ctrl+Print".action = set-dynamic-cast-monitor;
                 "Mod+Shift+Print".action = clear-dynamic-cast-target;
               }
+              ## Media shortcut keys
               (
-                # Music keys
                 let
                   spotifyControl = command: {
                     action = spawnPkg pkgs.playerctl "--player=spotify" command;
@@ -92,8 +92,8 @@
                   "XF86AudioPrev" = spotifyControl "previous";
                 }
               )
+              ## Window actions
               {
-                # Window actions
                 "Mod+Z".action = switch-preset-column-width;
                 "Mod+Shift+Z".action = reset-window-height;
                 "Mod+X".action = center-column;
@@ -102,13 +102,13 @@
                 "Mod+V".action = toggle-window-floating;
                 "Mod+Shift+V".action = switch-focus-between-floating-and-tiling;
               }
-              # Focus navigation
+              ## Focus navigation
               (bindMany [ "Mod+W" "Mod+Up" ] focus-workspace-up)
               (bindMany [ "Mod+S" "Mod+Down" ] focus-workspace-down)
               (bindMany [ "Mod+A" "Mod+Left" ] focus-window-up-or-column-left)
               (bindMany [ "Mod+D" "Mod+Right" ] focus-window-down-or-column-right)
+              ## Sroll wheel focus navigation
               {
-                # Sroll wheel focus navigation
                 "Mod+WheelScrollUp" = {
                   action = focus-workspace-up;
                   cooldown-ms = 150;
@@ -122,41 +122,38 @@
                 "Mod+Ctrl+WheelScrollUp".action = focus-monitor-up;
                 "Mod+Ctrl+WheelScrollDown".action = focus-monitor-down;
               }
-              # Move columns
+              ## Move columns
               (bindMany [ "Mod+Shift+W" "Mod+Shift+Up" ] move-column-to-workspace-up)
               (bindMany [ "Mod+Shift+S" "Mod+Shift+Down" ] move-column-to-workspace-down)
               (bindMany [ "Mod+Shift+A" "Mod+Shift+Left" ] move-column-left)
               (bindMany [ "Mod+Shift+D" "Mod+Shift+Right" ] move-column-right)
-              # Move windows
+              ## Move windows
               (bindMany [ "Mod+Ctrl+W" "Mod+Ctrl+Up" ] move-window-up)
               (bindMany [ "Mod+Ctrl+S" "Mod+Ctrl+Down" ] move-window-down)
               (bindMany [ "Mod+Ctrl+A" "Mod+Ctrl+Left" ] consume-or-expel-window-left)
               (bindMany [ "Mod+Ctrl+D" "Mod+Ctrl+Right" ] consume-or-expel-window-right)
-
-              (
-                # Mod+[1-9] = Focus workspace | Mod+Shift+[1-9] = Move column to workspace
-                lib.attrsets.mergeAttrsList (
-                  lib.map
-                    (number: {
-                      "Mod+${toString number}".action = focus-workspace number;
-                      "Mod+Shift+${toString number}".action.move-column-to-workspace = [
-                        { focus = false; }
-                        number
-                      ];
-                    })
-                    [
-                      1
-                      2
-                      3
-                      4
-                      5
-                      6
-                      7
-                      8
-                      9
-                    ]
-                )
-              )
+              ## Mod+[1-9] = Focus workspace | Mod+Shift+[1-9] = Move column to workspace
+              (lib.attrsets.mergeAttrsList (
+                lib.map
+                  (number: {
+                    "Mod+${toString number}".action = focus-workspace number;
+                    "Mod+Shift+${toString number}".action.move-column-to-workspace = [
+                      { focus = false; }
+                      number
+                    ];
+                  })
+                  [
+                    1
+                    2
+                    3
+                    4
+                    5
+                    6
+                    7
+                    8
+                    9
+                  ]
+              ))
             ]
           );
       };

@@ -3,8 +3,8 @@
     homeManager = {
       programs.niri.settings = {
         window-rules = [
+          #---Screencast Blocklist---#
           {
-            ### Screencast blocklist
             matches = [
               { app-id = "^vesktop$"; }
               { app-id = "^Caprine$"; }
@@ -15,8 +15,8 @@
             ];
             block-out-from = "screencast";
           }
+          ## Screencast target outline effect
           {
-            ### Screencast target outline effect
             matches = [
               { is-window-cast-target = true; }
             ];
@@ -31,7 +31,7 @@
         ];
 
         layer-rules = [
-          ### Screencast blocklist
+          #---Screencast Blocklist---#
           # {
           #   matches = [
           #     { namespace = "notifications"; }

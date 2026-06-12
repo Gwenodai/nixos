@@ -3,8 +3,8 @@
     homeManager = {
       programs.niri.settings = {
         window-rules = [
+          ### Rounded corners
           {
-            ### Rounded corners
             geometry-corner-radius =
               let
                 radius = 18.0;
@@ -17,9 +17,10 @@
               };
             clip-to-geometry = true;
           }
+          ### Shadow behind windows
           {
-            ### Shadow behind windows
             matches = [
+              ## Kitty terminal
               { app-id = "^kitty$"; }
             ];
             shadow = {
@@ -27,10 +28,10 @@
               color = "#000000B3";
             };
           }
+          ### 90% Transparent windows + Shadow behind
           {
-            ### 90% Transparent windows + Shadow behind
             matches = [
-              { is-floating = true; }
+              ## Vesktop
               { app-id = "^vesktop$"; }
             ];
             opacity = 0.9;
@@ -40,10 +41,12 @@
               color = "#000000B3";
             };
           }
+          ### 80% Transparent windows + Shadow behind
           {
-            ### 80% Transparent windows + Shadow behind
             matches = [
+              ## Any floating window
               { is-floating = true; }
+              ## Nemo file manager
               { app-id = "^nemo$"; }
             ];
             opacity = 0.8;

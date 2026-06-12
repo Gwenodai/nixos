@@ -3,8 +3,8 @@
     homeManager = {
       programs.niri.settings = {
         window-rules = [
+          ### Relocate Steam notifications to the bottom right of the screen
           {
-            ### Relocate Steam notifications to the bottom right of the screen
             matches = [
               {
                 app-id = "steam";
@@ -18,18 +18,18 @@
             };
             open-focused = false;
           }
+          #---Floating Blocklist---#
           {
-            ### Don't start Steam games floating
-            matches = [ { app-id = "^steam_app.*"; } ];
+            matches = [
+              ## Steam games
+              { app-id = "^steam_app.*"; }
+              ## Bottles apps
+              { app-id = "^.*\\.exe"; }
+            ];
             open-floating = false;
           }
+          ### File-roller
           {
-            ### Don't start bottles apps floating
-            matches = [ { app-id = "^.*\\.exe"; } ];
-            open-floating = false;
-          }
-          {
-            ### Floating file-roller
             matches = [ { app-id = "^org.gnome.FileRoller$"; } ];
             open-floating = true;
             max-height = 600;
