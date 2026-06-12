@@ -14,7 +14,7 @@
       #---Ymir Network Shares---#
       ### Network Storage
       (den.batteries.mount-cifs {
-        host = inputs.self.lib.hosts.ymir.ip;
+        hostAddress = inputs.self.lib.hosts.ymir.ip;
         resource = "Storage";
         destination = "/mnt/ymir/storage";
         UID = 1000;
@@ -28,7 +28,7 @@
       })
       ### Webpages
       (den.batteries.mount-cifs {
-        host = inputs.self.lib.hosts.ymir.ip;
+        hostAddress = inputs.self.lib.hosts.ymir.ip;
         resource = "www";
         destination = "/mnt/ymir/www";
         UID = 1000;
@@ -42,7 +42,7 @@
       })
       ### Movies & TV Shows
       (den.batteries.mount-cifs {
-        host = inputs.self.lib.hosts.ymir.ip;
+        hostAddress = inputs.self.lib.hosts.ymir.ip;
         resource = "Media";
         destination = "/mnt/ymir/media";
         UID = 1000;
