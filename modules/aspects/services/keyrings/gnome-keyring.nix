@@ -24,12 +24,12 @@
             createLinkTarget = true;
           }
           # "~/.gnupg"
-          {
-            directory = "${hmConfig.home.homeDirectory}/.gnupg";
-            how = "symlink";
-            mode = "0700";
-            createLinkTarget = true;
-          }
+          # {
+          #   directory = "${hmConfig.home.homeDirectory}/.gnupg";
+          #   how = "symlink";
+          #   mode = "0700";
+          #   createLinkTarget = true;
+          # }
         ];
       };
     persistUserTmp =

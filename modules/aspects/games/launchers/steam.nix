@@ -70,8 +70,6 @@
       { hmConfig, ... }:
       {
         directories = [
-          # "~/.steam"
-          ".steam"
           # "~/.local/share/Steam"
           {
             directory = "${hmConfig.xdg.dataHome}/Steam";
@@ -80,11 +78,22 @@
           # "~/.local/share/vulkan/implicit_layer.d"
           "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d"
         ];
+        files = [
+          # "~/.steam/steam/registry.vdf"
+          {
+            file = "${hmConfig.home.homeDirectory}/.steam/registry.vdf";
+            mode = "0755";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ];
       };
 
     persistUserTmp =
       { hmConfig, ... }:
       {
+        # "~/.steam"
+        ".steam" = { };
         # "~/.local/share/vulkan"
         ".local" = { };
         "${hmConfig.xdg.dataHome}" = { };
@@ -95,6 +104,8 @@
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.steam"
+          ".steam"
           # "~/.cache/winetricks"
           "${hmConfig.xdg.cacheHome}/winetricks"
         ];
