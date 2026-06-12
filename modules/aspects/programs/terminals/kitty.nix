@@ -25,6 +25,9 @@
           };
 
           settings = {
+            ### `auto_reload_config` must be set to a negative value
+            # This prevents kitty from using up all the systems ionotify watches
+            auto_reload_config = -1;
             background_blur = 1;
             scrollback_lines = 10000;
             update_check_interval = 0;
