@@ -12,7 +12,7 @@
       let
         # Creates and uses a temporary mangohud config when launching games.
         # Works around mangohud's `read_cfg` errors by giving it a regular config file.
-        # Use within game launch options like: `mhfps 240 %command%`
+        # Use within game launch options like: `mhfps 120 %command%`
         mangohudPrependFps = pkgs.writeShellApplication {
           name = "mhfps";
           runtimeInputs = [ pkgs.gnused ];
