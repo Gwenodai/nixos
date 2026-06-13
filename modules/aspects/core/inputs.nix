@@ -1,4 +1,4 @@
-# Declare tools for use in implementing the dendritic pattern
+# Tools for use in implementing the dendritic pattern
 { inputs, ... }:
 {
   imports = [

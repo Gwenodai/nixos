@@ -1,5 +1,5 @@
-let
-  git-config = {
+{
+  den.aspects.stacy = {
     homeManager =
       { config, ... }:
       {
@@ -39,8 +39,7 @@ let
 
         # Assign the ssh key to github
         programs.ssh = {
-          matchBlocks."github.com" = {
-            host = "github.com";
+          settings."github.com" = {
             user = "git";
             identityFile = config.sops.secrets."git/ssh-key/private".path;
             identitiesOnly = true;
@@ -48,7 +47,4 @@ let
         };
       };
   };
-in
-{
-  den.aspects.stacy.includes = [ git-config ];
 }

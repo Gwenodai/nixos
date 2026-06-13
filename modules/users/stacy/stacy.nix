@@ -1,5 +1,8 @@
+{ den, ... }:
 {
   den.aspects.stacy = {
+    includes = [ den.batteries.host-aspects ];
+
     nixos = {
       sops.secrets = {
         user-password.neededForUsers = true;
