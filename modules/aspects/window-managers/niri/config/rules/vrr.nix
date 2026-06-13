@@ -16,6 +16,8 @@
               # { app-id = "^riftbreaker_win_release.exe$"; }
               ## Halo: MCC
               { app-id = "^mcc-win64-shipping.exe$"; }
+              ## Halo: Infinite
+              { app-id = "^haloinfinite.exe$"; }
             ];
             variable-refresh-rate = true;
             open-focused = true;
