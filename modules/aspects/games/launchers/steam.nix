@@ -23,6 +23,7 @@
             extraEnv = {
               # Force Steam to fall back to XWayland (fixes various issues)
               NIXOS_OZONE_WL = "0";
+              WINEDLLOVERRIDES = "dinput8,dxgi,dsound.dll=n,b";
             }
             # Enable MangoHud for all Vulkan Steam games if `mangohud` aspect is included
             // lib.optionalAttrs (lib.elem "mangohud" user.activeAspects) {

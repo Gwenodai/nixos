@@ -50,8 +50,13 @@
     };
 
     desktop-gaming = {
-      # Xbox One controller support
-      nixos.hardware.xone.enable = true;
+      nixos = {
+        environment.sessionVariables = {
+          MESA_SHADER_CACHE_MAX_SIZE = "16G";
+        };
+        # Xbox One controller support
+        hardware.xone.enable = true;
+      };
 
       includes = with den.aspects; [
         # Inherit `desktop` system-type
@@ -60,6 +65,10 @@
         #---Performance & Tuning---#
         lact # GPU control
         ananicy # Auto-nice daemon
+
+        #---Runtime Tools & Overlays---#
+        umu-launcher
+        mangohud
       ];
     };
   };
