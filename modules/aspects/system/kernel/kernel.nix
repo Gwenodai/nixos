@@ -22,9 +22,6 @@
         ];
 
         boot.kernelPackages = lib.mkOverride 900 pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-
-        # Swap ananicy rules to cachyos rules in case ananicy is enabled
-        services.ananicy.rulesProvider = pkgs.ananicy-rules-cachyos;
       };
   };
 }

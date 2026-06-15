@@ -72,9 +72,6 @@ in
         steam
         heroic
         heroic.config
-        ## Runtime Tools & Overlays
-        umu-launcher
-        mangohud
         ## Mods & Mod Tools
         mods.halo-wars.cameraZoom
       ];
