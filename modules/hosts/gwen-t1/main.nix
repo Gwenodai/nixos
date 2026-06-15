@@ -56,6 +56,7 @@ in
         #---Core Desktop Apps---#
         kitty
         nemo
+        file-roller
         google-chrome
         vscode
         vscode.config
