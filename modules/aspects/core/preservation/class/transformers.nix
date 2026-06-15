@@ -43,7 +43,7 @@
                 transform =
                   val:
                   if lib.isList val then
-                    map transform val
+                    lib.map transform val
                   else if lib.isAttrs val then
                     lib.mapAttrs (
                       key: value:
@@ -118,7 +118,7 @@
                   pathType:
                   lib.concatLists (
                     lib.mapAttrsToList (
-                      userName: userConfig: map (mkAbsolute userName) (userConfig.${pathType} or [ ])
+                      userName: userConfig: lib.map (mkAbsolute userName) (userConfig.${pathType} or [ ])
                     ) config.hostConfig.preservation.userIgnore
                   );
               in
