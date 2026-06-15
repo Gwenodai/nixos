@@ -52,9 +52,16 @@
       { hmConfig, ... }:
       {
         directories = [
+          # "~/.config/google-chrome"
           {
-            # "~/.config/google-chrome"
             directory = "${hmConfig.xdg.configHome}/google-chrome";
+            how = "symlink";
+            mode = "0700";
+            createLinkTarget = true;
+          }
+          # "~/.cache/google-chrome"
+          {
+            directory = "${hmConfig.xdg.cacheHome}/google-chrome";
             how = "symlink";
             mode = "0700";
             createLinkTarget = true;
@@ -67,15 +74,8 @@
       {
         # "~/.config"
         "${hmConfig.xdg.configHome}" = { };
-      };
-
-    persistUserIgnore =
-      { hmConfig, ... }:
-      {
-        directories = [
-          # "~/.cache/google-chrome"
-          "${hmConfig.xdg.cacheHome}/google-chrome"
-        ];
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
       };
   };
 }
