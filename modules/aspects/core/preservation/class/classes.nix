@@ -76,6 +76,13 @@ let
 in
 {
   den.aspects.preservation = {
+    persist = { };
+    persistTmp = { };
+    persistIgnore = { };
+    persistUser = { };
+    persistUserTmp = { };
+    persistUserIgnore = { };
+
     includes = [
       (mkHostClass {
         fromClass = "persist";
