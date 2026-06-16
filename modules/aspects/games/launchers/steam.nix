@@ -40,7 +40,7 @@
     homeManager =
       { pkgs, lib, ... }:
       {
-        xdg.mimeApps.defaultApplications = (
+        xdg.mimeApps.defaultApplications =
           let
             application = "steam.desktop";
             mimeTypes = [
@@ -48,8 +48,7 @@
               "x-scheme-handler/steamlink"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application)
-        );
+          lib.genAttrs mimeTypes (mimetype: application);
 
         xdg.configFile."autostart/steam.desktop" = {
           text = ''

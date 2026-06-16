@@ -11,15 +11,14 @@
       {
         home.packages = with pkgs; [ heroic ];
 
-        xdg.mimeApps.defaultApplications = (
+        xdg.mimeApps.defaultApplications =
           let
             application = "com.heroicgameslauncher.hgl.desktop";
             mimeTypes = [
               "x-scheme-handler/heroic"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application)
-        );
+          lib.genAttrs mimeTypes (mimetype: application);
 
         xdg.configFile."autostart/com.heroicgameslauncher.hgl.desktop" = {
           text = ''

@@ -50,7 +50,7 @@
           };
 
           mimeApps = {
-            defaultApplications = (
+            defaultApplications =
               let
                 application = "kitty-open.desktop";
                 mimeTypes = [
@@ -58,8 +58,7 @@
                   "x-scheme-handler/ssh"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application)
-            );
+              lib.genAttrs mimeTypes (mimetype: application);
 
             associations.added =
               let

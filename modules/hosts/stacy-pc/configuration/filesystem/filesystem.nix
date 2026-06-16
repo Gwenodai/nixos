@@ -3,7 +3,7 @@
   den.aspects.stacy-pc = {
     #---Filesystem Config---#
     nixos = {
-      disko = (import ./_disko.nix).disko;
+      inherit (import ./_disko.nix) disko;
       fileSystems = {
         "/var/log".neededForBoot = true;
       };

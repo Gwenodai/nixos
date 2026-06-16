@@ -77,7 +77,7 @@
         };
 
         xdg.mimeApps = {
-          defaultApplications = (
+          defaultApplications =
             let
               application = "nemo.desktop";
               mimeTypes = [
@@ -85,8 +85,7 @@
                 "application/x-gnome-saved-search"
               ];
             in
-            lib.genAttrs mimeTypes (mimetype: application)
-          );
+            lib.genAttrs mimeTypes (mimetype: application);
           associations.added =
             let
               application = "nemo-autorun-software.desktop";

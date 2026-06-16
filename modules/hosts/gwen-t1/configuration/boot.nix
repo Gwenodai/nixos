@@ -14,21 +14,23 @@ in
         wakeup-script = mkWakeupScript pkgs;
       in
       {
-        #---Boot Config---#
-        boot.initrd.availableKernelModules = [
-          "nvme"
-          "ahci"
-          "usbhid"
-          "xhci_pci"
-          "usb_storage"
-          "thunderbolt"
-        ];
-        # Kernel-based Virtual Machine support
-        boot.kernelModules = [ "kvm-amd" ];
+        boot = {
+          #---Boot Config---#
+          initrd.availableKernelModules = [
+            "nvme"
+            "ahci"
+            "usbhid"
+            "xhci_pci"
+            "usb_storage"
+            "thunderbolt"
+          ];
+          # Kernel-based Virtual Machine support
+          kernelModules = [ "kvm-amd" ];
 
-        #---Disable Secondary Display Activation---#
+          #---Disable Secondary Display Activation---#
+          kernelParams = [ "video=HDMI-A-1:d" ];
+        };
         environment.systemPackages = [ wakeup-script ];
-        boot.kernelParams = [ "video=HDMI-A-1:d" ];
         security.sudo.extraRules = [
           {
             users = [ "%wheel" ];
