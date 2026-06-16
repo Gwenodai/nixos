@@ -9,7 +9,7 @@
 
         xdg = {
           mimeApps = {
-            defaultApplications = (
+            defaultApplications =
               let
                 application = "google-chrome.desktop";
                 mimeTypes = [
@@ -26,8 +26,7 @@
                   "x-scheme-handler/google-chrome"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application)
-            );
+              lib.genAttrs mimeTypes (mimetype: application);
             associations.added =
               let
                 application = "google-chrome.desktop";

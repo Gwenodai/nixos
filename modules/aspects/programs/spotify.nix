@@ -12,15 +12,14 @@
 
         xdg = {
           mimeApps = {
-            defaultApplications = (
+            defaultApplications =
               let
                 application = "spotify.desktop";
                 mimeTypes = [
                   "x-scheme-handler/spotify"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application)
-            );
+              lib.genAttrs mimeTypes (mimetype: application);
           };
         };
       };

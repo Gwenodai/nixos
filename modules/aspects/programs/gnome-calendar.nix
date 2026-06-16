@@ -16,15 +16,14 @@
           gnome-calendar
         ];
 
-        xdg.mimeApps.defaultApplications = (
+        xdg.mimeApps.defaultApplications =
           let
             application = "org.gnome.Calendar.desktop";
             mimeTypes = [
               "text/calendar"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application)
-        );
+          lib.genAttrs mimeTypes (mimetype: application);
 
         # Allow GNOME settings to run outside of GNOME
         xdg.desktopEntries."org.gnome.Settings" = {

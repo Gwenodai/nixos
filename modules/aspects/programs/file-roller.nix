@@ -9,7 +9,7 @@
         ];
 
         xdg.mimeApps = {
-          defaultApplications = (
+          defaultApplications =
             let
               application = "org.gnome.FileRoller.desktop";
               mimeTypes = [
@@ -82,8 +82,7 @@
                 "application/zstd"
               ];
             in
-            lib.genAttrs mimeTypes (mimetype: application)
-          );
+            lib.genAttrs mimeTypes (mimetype: application);
         };
       };
   };

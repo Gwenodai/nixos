@@ -3,7 +3,7 @@
   den.aspects.gwen-t1 = {
     #---Filesystem Config---#
     nixos = {
-      disko = (import ./_disko.nix).disko;
+      inherit (import ./_disko.nix) disko;
       fileSystems = {
         "/persist".neededForBoot = true;
         "/var/log".neededForBoot = true;

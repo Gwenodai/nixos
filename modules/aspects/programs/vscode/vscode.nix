@@ -16,7 +16,7 @@
       {
         programs.vscode.enable = true;
 
-        xdg.mimeApps.defaultApplications = (
+        xdg.mimeApps.defaultApplications =
           let
             application = "code.desktop";
             mimeTypes = [
@@ -38,8 +38,7 @@
               "text/plain"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application)
-        );
+          lib.genAttrs mimeTypes (mimetype: application);
       };
 
     ### Persist config
