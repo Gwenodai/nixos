@@ -1,42 +1,31 @@
 keys:
-  # User keys
-  - &gwen_gwen-t1 age1elhax2j7l8u8ww3j3gcpuqm7vfv883ct9k3rtz0r9e7au5nwu9uqjg4p7f
-  - &gwen_ymir age134npz65rup8fghfuht20hauuxn6y2ysds9ru6zzgf8s8kjzdqsrqaa40g0
-  - &gwen_gwen-s23plus age18v6g4khqca6e0gcq57mryrttqghecpgdq4ex8s7sx4ssmfgkjf0sdcwdem
-  - &stacy_stacy-pc age10u7r8hu6grmpasqcjcga2zlq6du0maypzd85wyq8x9z7d6qwv9fskzuwjq
+  #---Hosts---#
+  - &host_gwen-t1 age1q8d8fvahe4h23ta8smxasjnzreh79jjm7d78s4wqnm95rjz5fsjs4uvhl4
+  - &host_stacy-pc age1t9k93h7cz5cka4vaq8ecu26ajjd5p3qchyx42uvvkpvkwl08jccqhlhjw9
+  - &host_ymir age16x5mw02yt83tlnnuc3ag2ua6u3wkc8pgspkxf7kjlq0e6za46g6sr9654t
+  - &host_hp-x360 age1ja36fxqsxay8wk7ngzdcmzwj8ch02xz5yqval0ffglqv5n3a05dququruy
 
-  # Host keys
-  - &gwen-t1 age1q8d8fvahe4h23ta8smxasjnzreh79jjm7d78s4wqnm95rjz5fsjs4uvhl4
-  - &ymir age16x5mw02yt83tlnnuc3ag2ua6u3wkc8pgspkxf7kjlq0e6za46g6sr9654t
-  - &stacy-pc age1t9k93h7cz5cka4vaq8ecu26ajjd5p3qchyx42uvvkpvkwl08jccqhlhjw9
+  #---Users---#
+  - &gwen-t1_gwen age1elhax2j7l8u8ww3j3gcpuqm7vfv883ct9k3rtz0r9e7au5nwu9uqjg4p7f
+  - &gwen-s23plus_gwen age18v6g4khqca6e0gcq57mryrttqghecpgdq4ex8s7sx4ssmfgkjf0sdcwdem
+  - &stacy-pc_stacy age10u7r8hu6grmpasqcjcga2zlq6du0maypzd85wyq8x9z7d6qwv9fskzuwjq
+  - &ymir_gwen age134npz65rup8fghfuht20hauuxn6y2ysds9ru6zzgf8s8kjzdqsrqaa40g0
+  - &hp-x360_gwen age18gmq89q0gk9xpqlypg63hcefe6748990av4juh8n6ktymcsa845s65xkp4
+  - &hp-x360_stacy age1jhluu4yaw3gt6e3gwkde50sq6qpcj0vs7lq9690mx5sudksrm95sgcqefn
 
 creation_rules:
-  # Gwen secrets
-  - path_regex: secrets/gwen/[^/]+\.(yaml|json|env|ini|sops)$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
-      - *gwen_gwen-t1
-      - *gwen_ymir
-      - *gwen_gwen-s23plus
-      - *gwen-t1
-      - *ymir
-
-  
-  # Stacy secrets
-  - path_regex: secrets/stacy/[^/]+\.(yaml|json|env|ini|sops)$
-    key_groups:
-    - age:
-      - *stacy_stacy-pc
-      - *stacy-pc
-  
-  # Shared secrets
-  - path_regex: secrets/common/[^/]+\.(yaml|json|env|ini|sops)$
-    key_groups:
-    - age:
-      - *gwen_gwen-t1
-      - *gwen_ymir
-      - *gwen_gwen-s23plus
-      - *stacy_stacy-pc
-      - *gwen-t1
-      - *ymir
-      - *stacy-pc
+      # Hosts
+      - *host_gwen-t1
+      - *host_stacy-pc
+      - *host_ymir
+      - *host_hp-x360
+      # Users
+      - *gwen-t1_gwen
+      - *gwen-s23plus_gwen
+      - *stacy-pc_stacy
+      - *ymir_gwen
+      - *hp-x360_gwen
+      - *hp-x360_stacy

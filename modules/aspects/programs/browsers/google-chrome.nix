@@ -13,35 +13,34 @@
               let
                 application = "google-chrome.desktop";
                 mimeTypes = [
-                  "text/html"
+                  "application/pdf"
                   "application/rdf+xml"
                   "application/rss+xml"
                   "application/xhtml+xml"
                   "application/xhtml_xml"
+                  "application/xml"
+                  "image/gif"
+                  "image/jpeg"
+                  "image/png"
+                  "image/webp"
+                  "text/html"
+                  "text/xml"
                   "x-scheme-handler/http"
                   "x-scheme-handler/https"
-                  "x-scheme-handler/about"
-                  "x-scheme-handler/mailto"
-                  "x-scheme-handler/unknown"
                   "x-scheme-handler/google-chrome"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application);
+              lib.genAttrs mimeTypes (_: application);
             associations.added =
               let
                 application = "google-chrome.desktop";
                 mimeTypes = [
-                  "application/xml"
-                  "application/pdf"
                   "text/markdown"
-                  "text/xml"
-                  "image/jpeg"
-                  "image/webp"
-                  "image/gif"
-                  "image/png"
+                  "x-scheme-handler/mailto"
+                  "x-scheme-handler/about"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application);
+              lib.genAttrs mimeTypes (_: application);
           };
         };
       };

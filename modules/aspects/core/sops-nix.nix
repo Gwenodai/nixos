@@ -10,9 +10,6 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  # A common sops file which can be accessed by all hosts/users
-  flake.lib.secrets.commonSopsFile = "${self + "/secrets/common/secrets.yaml"}";
-
   den.aspects.sops-nix = {
     nixos =
       {
@@ -31,7 +28,6 @@
 
         sops = {
           age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-          defaultSopsFile = lib.mkDefault inputs.self.lib.secrets.commonSopsFile;
         };
       };
 
@@ -42,7 +38,7 @@
 
         sops = {
           age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
-          defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
+          defaultSopsFile = lib.mkDefault "${self}/secrets/${config.home.username}.yaml";
         };
       };
   };

@@ -82,7 +82,7 @@
                 "application/zstd"
               ];
             in
-            lib.genAttrs mimeTypes (mimetype: application);
+            lib.genAttrs mimeTypes (_: application);
         };
       };
   };

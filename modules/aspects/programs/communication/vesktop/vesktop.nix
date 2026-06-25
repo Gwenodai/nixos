@@ -1,22 +1,36 @@
 {
   den.aspects.vesktop = {
-    homeManager = {
+    homeManager = { lib, ... }: {
       programs.vesktop.enable = true;
 
-      xdg.configFile."autostart/vesktop.desktop" = {
-        text = ''
-          [Desktop Entry]
-          NotShowIn=niri
-          Categories=Network;InstantMessaging;Chat
-          Exec=vesktop --start-minimized
-          GenericName=Internet Messenger
-          Icon=vesktop
-          Keywords=discord;vencord;electron;chat
-          Name=Vesktop
-          StartupWMClass=Vesktop
-          Type=Application
-          Version=1.5
-        '';
+      xdg = {
+        mimeApps = {
+          defaultApplications =
+            let
+              application = "vesktop.desktop";
+              mimeTypes = [
+                "x-scheme-handler/discord"
+              ];
+            in
+            lib.genAttrs mimeTypes (_: application);
+        };
+
+        configFile."autostart/vesktop.desktop" = {
+          text = ''
+            [Desktop Entry]
+            NotShowIn=niri
+            Categories=Network;InstantMessaging;Chat
+            Exec=vesktop --start-minimized
+            GenericName=Internet Messenger
+            Icon=vesktop
+            Keywords=discord;vencord;electron;chat
+            MimeType=x-scheme-handler/discord
+            Name=Vesktop
+            StartupWMClass=Vesktop
+            Type=Application
+            Version=1.5
+          '';
+        };
       };
 
       services.arrpc = {

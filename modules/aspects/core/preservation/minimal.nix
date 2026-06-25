@@ -2,8 +2,8 @@
   den.aspects.preservation = {
     ### Persist config
     nixos = {
-      ### Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
-      boot.initrd.systemd.tmpfiles.settings.preservation."/sysroot/persistent/etc/machine-id".f = {
+      ## Required compatibility with systemd's ConditionFirstBoot for `/etc/machine-id`
+      boot.initrd.systemd.tmpfiles.settings.preservation."/sysroot/persist/etc/machine-id".f = {
         argument = "uninitialized";
       };
 

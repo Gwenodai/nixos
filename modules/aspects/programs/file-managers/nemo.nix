@@ -84,16 +84,13 @@
                 "inode/directory"
                 "application/x-gnome-saved-search"
               ];
-            in
-            lib.genAttrs mimeTypes (mimetype: application);
-          associations.added =
-            let
-              application = "nemo-autorun-software.desktop";
-              mimeTypes = [
+
+              application2 = "nemo-autorun-software.desktop";
+              mimeTypes2 = [
                 "x-content/unix-software"
               ];
             in
-            lib.genAttrs mimeTypes (mimetype: application);
+            lib.genAttrs mimeTypes (_: application) // lib.genAttrs mimeTypes2 (_: application2);
         };
       };
 

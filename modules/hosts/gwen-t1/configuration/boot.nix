@@ -30,6 +30,7 @@ in
           #---Disable Secondary Display Activation---#
           kernelParams = [ "video=HDMI-A-1:d" ];
         };
+
         environment.systemPackages = [ wakeup-script ];
         security.sudo.extraRules = [
           {

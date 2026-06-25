@@ -19,7 +19,7 @@
                   "x-scheme-handler/spotify"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application);
+              lib.genAttrs mimeTypes (_: application);
           };
         };
       };
@@ -33,7 +33,6 @@
           {
             directory = "${hmConfig.xdg.configHome}/spotify";
             how = "symlink";
-            mode = "0755";
             createLinkTarget = true;
           }
           # "~/.cache/spotify"

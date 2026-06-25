@@ -1,18 +1,25 @@
-{ den, ... }:
+{ den, self, ... }:
 {
   den.aspects.stacy = {
-    includes = [ den.batteries.host-aspects ];
+    includes = [
+      den.batteries.host-aspects
+      den.batteries.primary-user
+    ];
 
     nixos = {
       sops.secrets = {
-        user-password.neededForUsers = true;
+        stacy-password = {
+          sopsFile = "${self}/secrets/stacy.yaml";
+          key = "user-password";
+          neededForUsers = true;
+        };
       };
     };
 
     user =
       { config, ... }:
       {
-        hashedPasswordFile = config.sops.secrets.user-password.path;
+        hashedPasswordFile = config.sops.secrets.stacy-password.path;
       };
   };
 }

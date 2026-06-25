@@ -10,7 +10,6 @@
     homeManager =
       {
         host,
-        pkgs,
         lib,
         ...
       }:
@@ -54,24 +53,16 @@
               let
                 application = "kitty-open.desktop";
                 mimeTypes = [
+                  "image/*"
+                  "application/x-sh"
+                  "application/x-shellscript"
+                  "inode/directory"
+                  "text/*"
                   "x-scheme-handler/kitty"
                   "x-scheme-handler/ssh"
                 ];
               in
-              lib.genAttrs mimeTypes (mimetype: application);
-
-            associations.added =
-              let
-                application = "kitty-open.desktop";
-                mimeTypes = [
-                  "application/x-sh"
-                  "application/x-shellscript"
-                  "inode/directory"
-                  "image/*"
-                  "text/*"
-                ];
-              in
-              lib.genAttrs mimeTypes (mimetype: application);
+              lib.genAttrs mimeTypes (_: application);
           };
         };
       };

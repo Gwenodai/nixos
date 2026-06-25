@@ -1,24 +1,37 @@
 {
   den.aspects.caprine = {
     homeManager =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         home.packages = [ pkgs.caprine ];
 
-        xdg.configFile."autostart/caprine.desktop" = {
-          text = ''
-            [Desktop Entry]
-            NotShowIn=niri
-            Categories=Network;InstantMessaging;Chat
-            Comment=Elegant Facebook Messenger desktop app
-            Exec=${pkgs.caprine}/bin/caprine
-            Icon=caprine
-            MimeType=x-scheme-handler/caprine
-            Name=Caprine
-            Terminal=false
-            Type=Application
-            Version=1.5
-          '';
+        xdg = {
+          mimeApps = {
+            defaultApplications =
+              let
+                application = "caprine.desktop";
+                mimeTypes = [
+                  "x-scheme-handler/caprine"
+                ];
+              in
+              lib.genAttrs mimeTypes (_: application);
+          };
+
+          configFile."autostart/caprine.desktop" = {
+            text = ''
+              [Desktop Entry]
+              NotShowIn=niri
+              Categories=Network;InstantMessaging;Chat
+              Comment=Elegant Facebook Messenger desktop app
+              Exec=caprine
+              Icon=caprine
+              MimeType=x-scheme-handler/caprine
+              Name=Caprine
+              Terminal=false
+              Type=Application
+              Version=1.5
+            '';
+          };
         };
       };
 
