@@ -17,8 +17,8 @@ in
       { host, ... }:
       {
         nixos = {
-          # Override the default secrets file for this host
-          sops.defaultSopsFile = self + "/secrets/gwen/secrets.yaml";
+          # Set the default secrets file for this host
+          sops.defaultSopsFile = "${self}/secrets/gwen.yaml";
         };
 
         includes = with den.aspects; [
@@ -34,9 +34,6 @@ in
 
     gwen.provides.${hostName} = {
       includes = [
-        #---Identity & Permissions---#
-        # This is the primary user of this host
-        den.batteries.primary-user
       ];
     };
   };

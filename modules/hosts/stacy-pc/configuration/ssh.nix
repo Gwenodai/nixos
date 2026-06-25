@@ -7,7 +7,7 @@ in
   # TODO: Port public host metadata to den's quirk/pipe system
   flake.lib.hosts.${hostName} = {
     ip = "192.168.1.92";
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKvThXtl26G7nOsGPtJC82cGGMFjLtQHYuzlHZM7xi8 root@stacy-pc";
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKvThXtl26G7nOsGPtJC82cGGMFjLtQHYuzlHZM7xi8 host@stacy-pc";
   };
 
   den.aspects.ssh = {

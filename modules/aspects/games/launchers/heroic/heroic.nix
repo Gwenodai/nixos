@@ -18,7 +18,7 @@
               "x-scheme-handler/heroic"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application);
+          lib.genAttrs mimeTypes (_: application);
 
         xdg.configFile."autostart/com.heroicgameslauncher.hgl.desktop" = {
           text = ''
@@ -31,6 +31,11 @@
             Type=Application
             Icon=com.heroicgameslauncher.hgl
             StartupWMClass=heroic
+            Comment=An Open Source Launcher for GOG, Epic Games and Amazon Games
+            Comment[de]=Ein OSS-Spielelauncher für GOG, Epic Games und Amazon Games
+            Comment[pl]=Otwartoźródłowy launcher dla GOG, Epic Games i Amazon Games
+            Comment[tr]=Açık Kaynaklı GOG ve Epic Games başlatıcısı
+            MimeType=x-scheme-handler/heroic;
             Categories=Game;
           '';
         };

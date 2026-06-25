@@ -19,8 +19,8 @@ in
         nixos =
           { pkgs, ... }:
           {
-            # Override the default secrets file for this host
-            sops.defaultSopsFile = self + "/secrets/stacy/secrets.yaml";
+            # Set the default secrets file for this host
+            sops.defaultSopsFile = "${self}/secrets/stacy.yaml";
             # Use the latest CachyOS kernel with Zen4/5 specific optimizations
             boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
           };
@@ -43,10 +43,6 @@ in
 
     stacy.provides.${hostName} = {
       includes = with den.aspects; [
-        #---Identity & Permissions---#
-        # This is the primary user of this host
-        den.batteries.primary-user
-
         #---Desktop Environment Base---#
         environment.niri
 
@@ -66,6 +62,7 @@ in
 
         #---Media & Background Services---#
         spotify
+        vlc
         valent
 
         #---Gaming---#

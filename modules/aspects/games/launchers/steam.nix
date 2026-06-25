@@ -9,7 +9,7 @@
     nixos =
       {
         pkgs,
-        user,
+        host,
         lib,
         ...
       }:
@@ -24,9 +24,10 @@
               # Force Steam to fall back to XWayland (fixes various issues)
               NIXOS_OZONE_WL = "0";
               WINEDLLOVERRIDES = "dinput8,dxgi,dsound.dll=n,b";
+              PROTON_DISCORD_BRIDGE = "1";
             }
             # Enable MangoHud for all Vulkan Steam games if `mangohud` aspect is included
-            // lib.optionalAttrs (lib.elem "mangohud" user.activeAspects) {
+            // lib.optionalAttrs (lib.elem "mangohud" host.activeAspects) {
               MANGOHUD = "1";
             };
           };
@@ -38,7 +39,7 @@
       };
 
     homeManager =
-      { pkgs, lib, ... }:
+      { lib, ... }:
       {
         xdg.mimeApps.defaultApplications =
           let
@@ -48,19 +49,23 @@
               "x-scheme-handler/steamlink"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application);
+          lib.genAttrs mimeTypes (_: application);
 
         xdg.configFile."autostart/steam.desktop" = {
           text = ''
             [Desktop Entry]
             NotShowIn=niri
-            Categories=Network;FileTransfer;Game;
-            Exec=steam -silent
-            GenericName=Internet Messenger
-            Icon=steam
-            Keywords=discord;vencord;electron;chat
             Name=Steam
+            Comment=Application for managing and playing games on Steam
+            Exec=steam -silent
+            Icon=steam
+            Terminal=false
             Type=Application
+            Categories=Network;FileTransfer;Game;
+            MimeType=x-scheme-handler/steam;x-scheme-handler/steamlink;
+            Actions=Store;Community;Library;Servers;Screenshots;News;Settings;BigPicture;Friends;
+            PrefersNonDefaultGPU=true
+            X-KDE-RunOnDiscreteGpu=true
           '';
         };
       };

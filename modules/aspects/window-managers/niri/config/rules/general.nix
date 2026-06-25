@@ -30,10 +30,10 @@
           }
           ### File-roller
           {
-            matches = [ { app-id = "^org.gnome.FileRoller$"; } ];
+            matches = [ { app-id = "org.gnome.FileRoller"; } ];
             open-floating = true;
-            max-height = 600;
-            max-width = 900;
+            min-height = 600;
+            min-width = 900;
           }
         ];
       };

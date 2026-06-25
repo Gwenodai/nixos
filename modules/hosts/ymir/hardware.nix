@@ -1,5 +1,5 @@
 let
-  hostName = "gwen-t1";
+  hostName = "ymir";
   system = "x86_64-linux";
 in
 {

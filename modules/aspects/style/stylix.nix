@@ -27,7 +27,8 @@
           override = {
             base00 = "121012";
             base02 = "b5b0b5";
-            base0C = "a972fc";
+            base0C = "8b3ffc";
+            base0D = "fa3ebe";
           };
 
           cursor = {
@@ -76,6 +77,8 @@
             regreet.enable = config.programs.regreet.enable;
           };
         };
+
+        qt.style = lib.mkForce "adwaita-dark";
       };
 
     homeManager =
@@ -102,8 +105,23 @@
             kitty.enable = lib.elem "kitty" user.activeAspects;
             btop.enable = config.programs.btop.enable;
             qt.enable = true;
+            qt.standardDialogs = "xdgdesktopportal";
+            kde.enable = true;
           };
         };
+
+        xdg.configFile.kdeglobals.source =
+          let
+            themePackage = lib.head (
+              lib.filter (p: lib.match ".*stylix-kde-theme.*" (lib.baseNameOf p) != null) config.home.packages
+            );
+            colorSchemeSlug = lib.concatStrings (
+              lib.filter lib.isString (lib.split "[^a-zA-Z]" config.lib.stylix.colors.scheme)
+            );
+          in
+          "${themePackage}/share/color-schemes/${colorSchemeSlug}.colors";
+
+        qt.style.name = lib.mkForce "adwaita-dark";
 
         dconf.settings."org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";

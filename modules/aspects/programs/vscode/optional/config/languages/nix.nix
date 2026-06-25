@@ -5,7 +5,9 @@
       { pkgs, lib, ... }:
       {
         home.packages = with pkgs; [
-          nil # Nix language server (Needed for nix-ide)
+          # Nix language server (Needed for nix-ide)
+          nil
+          # Nix formatter
           nixfmt
         ];
 

@@ -23,7 +23,7 @@
               "text/calendar"
             ];
           in
-          lib.genAttrs mimeTypes (mimetype: application);
+          lib.genAttrs mimeTypes (_: application);
 
         # Allow GNOME settings to run outside of GNOME
         xdg.desktopEntries."org.gnome.Settings" = {

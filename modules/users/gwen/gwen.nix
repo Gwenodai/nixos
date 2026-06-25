@@ -1,27 +1,34 @@
-{ den, ... }:
+{ den, self, ... }:
 {
   den.aspects.gwen = {
     includes = [
       den.batteries.host-aspects
+      den.batteries.primary-user
     ];
 
     nixos =
       { config, ... }:
       {
         sops.secrets = {
-          user-password.neededForUsers = true;
-          "git/access-tokens/nixos-flake-updates" = { };
+          gwen-password = {
+            sopsFile = "${self}/secrets/gwen.yaml";
+            key = "user-password";
+            neededForUsers = true;
+          };
+          flake-update-token = {
+            sopsFile = "${self}/secrets/gwen.yaml";
+          };
         };
 
         nix.extraOptions = ''
-          !include ${config.sops.secrets."git/access-tokens/nixos-flake-updates".path}
+          !include ${config.sops.secrets.flake-update-token.path}
         '';
       };
 
     user =
       { config, ... }:
       {
-        hashedPasswordFile = config.sops.secrets.user-password.path;
+        hashedPasswordFile = config.sops.secrets.gwen-password.path;
       };
   };
 }

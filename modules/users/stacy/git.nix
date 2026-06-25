@@ -1,4 +1,4 @@
-{
+{ self, ... }: {
   den.aspects.stacy = {
     homeManager =
       { config, ... }:
@@ -6,12 +6,14 @@
         sops = {
           # Initialise secrets
           secrets = {
-            "git/email" = { };
-            "git/ssh-key/private" = {
+            email.sopsFile = "${self}/secrets/stacy.yaml";
+            "ssh-keys/git_private" = {
+              sopsFile = "${self}/secrets/stacy.yaml";
               mode = "0600";
               path = "${config.home.homeDirectory}/.ssh/skyora92@github";
             };
-            "git/ssh-key/public" = {
+            "ssh-keys/git_public" = {
+              sopsFile = "${self}/secrets/stacy.yaml";
               mode = "0644";
               path = "${config.home.homeDirectory}/.ssh/skyora92@github.pub";
             };
@@ -21,7 +23,7 @@
             content = ''
               [user]
                 name = Stacy
-                email = ${config.sops.placeholder."git/email"}
+                email = ${config.sops.placeholder.email}
             '';
           };
         };
@@ -32,7 +34,7 @@
           ];
           signing = {
             format = "ssh";
-            key = config.sops.secrets."git/ssh-key/public".path;
+            key = config.sops.secrets."ssh-keys/git_public".path;
             signByDefault = true; # Automatically sign all commits
           };
         };
@@ -41,7 +43,7 @@
         programs.ssh = {
           settings."github.com" = {
             user = "git";
-            identityFile = config.sops.secrets."git/ssh-key/private".path;
+            identityFile = config.sops.secrets."ssh-keys/git_private".path;
             identitiesOnly = true;
           };
         };

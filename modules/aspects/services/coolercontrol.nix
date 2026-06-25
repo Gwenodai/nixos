@@ -33,8 +33,10 @@
     ### Persist config
     persist = {
       directories = [
+        "/etc/coolercontrol"
         {
-          directory = "/etc/coolercontrol";
+          directory = "/var/lib/coolercontrol";
+          mode = "0711";
           how = "symlink";
           createLinkTarget = true;
         }
