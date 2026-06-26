@@ -66,8 +66,7 @@ in
         #---Media & Background Services---#
         spotify
         vlc
-        valent
-        # kde-connect
+        kde-connect
         dconf-editor
 
         #---Gaming---#

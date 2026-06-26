@@ -83,6 +83,7 @@
               mimeTypes = [
                 "inode/directory"
                 "application/x-gnome-saved-search"
+                "x-scheme-handler/sftp"
               ];
 
               application2 = "nemo-autorun-software.desktop";

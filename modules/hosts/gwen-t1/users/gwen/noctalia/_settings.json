@@ -70,7 +70,7 @@
           "id": "MediaMini",
           "maxWidth": 500,
           "panelShowAlbumArt": true,
-          "scrollingMode": "hover",
+          "scrollingMode": "always",
           "showAlbumArt": true,
           "showArtistFirst": true,
           "showProgressRing": true,
@@ -89,7 +89,8 @@
           "pinned": [
             "Vesktop",
             "Caprine",
-            "steam"
+            "steam",
+            "KDE Connect"
           ]
         },
         {

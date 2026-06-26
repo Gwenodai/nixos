@@ -20,6 +20,8 @@
               { app-id = "haloinfinite.exe"; }
               ## Raccoin
               { app-id = "raccoin.exe"; }
+              ## Overwatch
+              { app-id = "overwatch.exe"; }
             ];
             variable-refresh-rate = true;
             open-focused = true;
