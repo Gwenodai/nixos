@@ -16,6 +16,12 @@ in
     ${hostName} =
       { host, ... }:
       {
+        network-backends = { config, ... }: {
+          hostName = config.networking.hostName;
+          ip = "192.168.1.64";
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKO3VzqMSHdWwg9QH5qMuYjkDAgfmqzzncq7bBRAXm8 host@ymir";
+        };
+
         nixos = {
           # Set the default secrets file for this host
           sops.defaultSopsFile = "${self}/secrets/gwen.yaml";

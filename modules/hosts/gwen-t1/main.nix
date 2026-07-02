@@ -16,6 +16,12 @@ in
     ${hostName} =
       { host, ... }:
       {
+        network-backends = { config, ... }: {
+          hostName = config.networking.hostName;
+          ip = "192.168.1.37";
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAJ1rnquy24cUcTB0c/B/2sYTsH+TzHRcIYcqRciQIu host@gwen-t1";
+        };
+
         nixos =
           { pkgs, ... }:
           {

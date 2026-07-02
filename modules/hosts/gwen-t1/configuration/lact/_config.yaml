@@ -54,7 +54,7 @@ profiles:
         min_memory_clock: 97
         max_memory_clock: 1259
         gpu_clock_offsets:
-          0: -150
+          0: -175
         voltage_offset: -85
         power_profile_mode_index: 4
 current_profile: 270w-85uv
