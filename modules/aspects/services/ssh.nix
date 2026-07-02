@@ -1,18 +1,46 @@
 {
   den.aspects = {
     ssh = {
-      nixos = {
-        services.openssh = {
-          enable = true;
-          openFirewall = true;
-          generateHostKeys = false;
-          settings = {
-            PermitRootLogin = "no";
-            PasswordAuthentication = false;
-            KbdInteractiveAuthentication = false;
+      nixos =
+        {
+          host,
+          network-backends,
+          lib,
+          ...
+        }:
+        {
+          services.openssh = {
+            enable = true;
+            openFirewall = true;
+            generateHostKeys = false;
+            settings = {
+              PermitRootLogin = "no";
+              PasswordAuthentication = false;
+              KbdInteractiveAuthentication = false;
+            };
+
+            knownHosts = lib.listToAttrs (
+              lib.map
+                (entry: {
+                  name = entry.source.host.name;
+                  value = {
+                    hostNames = [
+                      entry.value.hostName
+                      entry.value.ip
+                    ];
+                    publicKey = entry.value.publicKey;
+                  };
+                })
+                # TODO: temporarily ignore ymir until the host is fully configured
+                (
+                  lib.filter (
+                    entry: entry.source.host.name != host.name && entry.source.host.name != "ymir"
+                  ) network-backends
+                )
+              # (lib.filter (entry: entry.source.host.name != host.name) network-backends)
+            );
           };
         };
-      };
 
       homeManager = {
         programs.ssh = {

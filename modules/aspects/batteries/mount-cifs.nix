@@ -2,8 +2,7 @@
 {
   den.batteries.mount-cifs =
     {
-
-      hostAddress,
+      hostName,
       resource,
       destination,
       credentialsPath ? null,
@@ -14,33 +13,46 @@
       ...
     }:
     {
-      nixos.fileSystems."${destination}" = {
-        device = "//${hostAddress}/${resource}";
-        fsType = "cifs";
-        options =
-          let
-            mountoptions = [
-              "x-systemd.automount"
-              "noauto"
-              "nofail"
-              "_netdev"
-              "soft"
-              "iocharset=utf8"
-              "x-systemd.idle-timeout=60"
-              "x-systemd.device-timeout=5s"
-              "x-systemd.mount-timeout=5s"
-            ];
+      nixos =
+        {
+          network-backends,
+          lib,
+          ...
+        }:
+        {
+          fileSystems."${destination}" =
+            let
+              hostIp =
+                (lib.head (lib.filter (entry: entry.source.host.name == hostName) network-backends)).value.ip;
+            in
+            {
+              device = "//${hostIp}/${resource}";
+              fsType = "cifs";
+              options =
+                let
+                  mountoptions = [
+                    "x-systemd.automount"
+                    "noauto"
+                    "nofail"
+                    "_netdev"
+                    "soft"
+                    "iocharset=utf8"
+                    "x-systemd.idle-timeout=60"
+                    "x-systemd.device-timeout=5s"
+                    "x-systemd.mount-timeout=5s"
+                  ];
 
-            user = [
-              "uid=${toString UID}"
-              "gid=${toString GID}"
-            ];
+                  user = [
+                    "uid=${toString UID}"
+                    "gid=${toString GID}"
+                  ];
 
-            perms = if readOnly then [ "ro" ] else [ "rw" ];
+                  perms = if readOnly then [ "ro" ] else [ "rw" ];
 
-            credentials = if credentialsPath != null then [ "credentials=${credentialsPath}" ] else [ ];
-          in
-          mountoptions ++ extraOptions ++ user ++ perms ++ credentials;
-      };
+                  credentials = if credentialsPath != null then [ "credentials=${credentialsPath}" ] else [ ];
+                in
+                mountoptions ++ extraOptions ++ user ++ perms ++ credentials;
+            };
+        };
     };
 }

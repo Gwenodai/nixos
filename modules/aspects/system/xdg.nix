@@ -32,6 +32,7 @@
               videos = "${docs}/Videos";
               music = "${docs}/Music";
               templates = "${docs}/Templates";
+              projects = null;
               publicShare = null;
             };
 
@@ -77,18 +78,18 @@
             [
               # "~/Documents"
               "${hmConfig.xdg.userDirs.documents}"
-              # "~/Documents/Desktop"
-              "${hmConfig.xdg.userDirs.desktop}"
-              # "~/Documents/Downloads"
-              "${hmConfig.xdg.userDirs.download}"
-              # "~/Documents/Pictures"
-              "${hmConfig.xdg.userDirs.pictures}"
-              # "~/Documents/Videos"
-              "${hmConfig.xdg.userDirs.videos}"
-              # "~/Documents/Music"
-              "${hmConfig.xdg.userDirs.music}"
-              # "~/Documents/Templates"
-              "${hmConfig.xdg.userDirs.templates}"
+              # # "~/Documents/Desktop"
+              # "${hmConfig.xdg.userDirs.desktop}"
+              # # "~/Documents/Downloads"
+              # "${hmConfig.xdg.userDirs.download}"
+              # # "~/Documents/Pictures"
+              # "${hmConfig.xdg.userDirs.pictures}"
+              # # "~/Documents/Videos"
+              # "${hmConfig.xdg.userDirs.videos}"
+              # # "~/Documents/Music"
+              # "${hmConfig.xdg.userDirs.music}"
+              # # "~/Documents/Templates"
+              # "${hmConfig.xdg.userDirs.templates}"
             ];
 
         files = [
