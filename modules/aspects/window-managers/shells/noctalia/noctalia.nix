@@ -6,17 +6,9 @@
   ...
 }:
 {
-  flake-file.inputs = {
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/v4.7.6";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.noctalia-qs.follows = "noctalia-qs";
-    };
-
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  flake-file.inputs.noctalia = {
+    url = "github:noctalia-dev/noctalia-shell/v5.0.0-beta1";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   ### Noctalia Class Policy
@@ -26,7 +18,7 @@
       intoClass = "homeManager";
       path = [
         "programs"
-        "noctalia-shell"
+        "noctalia"
       ];
     })
   ];
@@ -37,51 +29,51 @@
     ];
 
     homeManager =
-      { inputs', ... }:
+      { inputs', lib, ... }:
       {
         imports = [ inputs.noctalia.homeModules.default ];
 
-        programs.noctalia-shell = {
+        programs.noctalia = {
           enable = true;
-          package = inputs'.noctalia.packages.default.override {
-            calendarSupport = true;
-          };
+          systemd.enable = true;
         };
+
+        services.polkit-gnome.enable = lib.mkForce false;
       };
 
     ### Persist config
-    persistUser =
-      { hmConfig, ... }:
-      {
-        directories = [
-          # "~/.cache/noctalia"
-          "${hmConfig.xdg.cacheHome}/noctalia"
-          # "~/.cache/noctalia-qs"
-          "${hmConfig.xdg.cacheHome}/noctalia-qs"
-          # "~/.cache/cliphist"
-          {
-            directory = "${hmConfig.xdg.cacheHome}/cliphist";
-            mode = "0700";
-            how = "symlink";
-            createLinkTarget = true;
-          }
-          # "~/.config/noctalia/colorschemes"
-          {
-            directory = "${hmConfig.xdg.configHome}/noctalia/colorschemes";
-            how = "symlink";
-            createLinkTarget = true;
-          }
-        ];
-      };
+    # persistUser =
+    #   { hmConfig, ... }:
+    #   {
+    #     directories = [
+    #       # "~/.cache/noctalia"
+    #       "${hmConfig.xdg.cacheHome}/noctalia"
+    #       # "~/.cache/noctalia-qs"
+    #       "${hmConfig.xdg.cacheHome}/noctalia-qs"
+    #       # "~/.cache/cliphist"
+    #       {
+    #         directory = "${hmConfig.xdg.cacheHome}/cliphist";
+    #         mode = "0700";
+    #         how = "symlink";
+    #         createLinkTarget = true;
+    #       }
+    #       # "~/.config/noctalia/colorschemes"
+    #       {
+    #         directory = "${hmConfig.xdg.configHome}/noctalia/colorschemes";
+    #         how = "symlink";
+    #         createLinkTarget = true;
+    #       }
+    #     ];
+    #   };
 
-    persistUserTmp =
-      { hmConfig, ... }:
-      {
-        # "~/.cache"
-        "${hmConfig.xdg.cacheHome}" = { };
-        # "~/.config/noctalia"
-        "${hmConfig.xdg.configHome}" = { };
-        "${hmConfig.xdg.configHome}/noctalia" = { };
-      };
+    # persistUserTmp =
+    #   { hmConfig, ... }:
+    #   {
+    #     # "~/.cache"
+    #     "${hmConfig.xdg.cacheHome}" = { };
+    #     # "~/.config/noctalia"
+    #     "${hmConfig.xdg.configHome}" = { };
+    #     "${hmConfig.xdg.configHome}/noctalia" = { };
+    #   };
   };
 }

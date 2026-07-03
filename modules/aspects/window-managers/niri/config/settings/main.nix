@@ -72,7 +72,10 @@
 
           screenshot-path = "${config.xdg.userDirs.pictures}/Screenshots/%Y-%m-%d %H-%M-%S.png";
 
-          debug.skip-cursor-only-updates-during-vrr = [ ];
+          debug = {
+            skip-cursor-only-updates-during-vrr = [ ];
+            honor-xdg-activation-with-invalid-serial = [ ];
+          };
         };
       };
   };

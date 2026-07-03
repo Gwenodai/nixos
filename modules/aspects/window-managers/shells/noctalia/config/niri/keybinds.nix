@@ -9,13 +9,13 @@
             # Makeshift `spawn-sh` functionality
             sh = spawn "sh" "-c";
             # Noctalia IPC command runner
-            noctalia = command: {
-              action = sh "${lib.getExe config.programs.noctalia-shell.package} ipc call ${command}";
+            noct = command: {
+              action = sh "noctalia msg ${command}";
             };
             # Noctalia IPC command runner available on lock screen
-            noctaliaWhileLocked =
+            noctWhileLocked =
               command:
-              (noctalia command)
+              (noct command)
               // {
                 allow-when-locked = true;
               };
@@ -24,19 +24,14 @@
             lib.attrsets.mergeAttrsList [
               ## Launcher
               {
-                "Mod+R" = noctalia "launcher toggle";
-                "Mod+Shift+R" = noctalia "launcher command";
-                "MoD+Ctrl+C" = noctalia "launcher clipboard";
+                "Mod+R" = noct "panel-toggle launcher";
+                "MoD+Ctrl+C" = noct "panel-toggle clipboard";
               }
               ## Media shortcut keys
               {
-                "XF86AudioMute" = noctaliaWhileLocked "volume muteOutput";
-                "XF86AudioRaiseVolume" = noctaliaWhileLocked "volume increase";
-                "XF86AudioLowerVolume" = noctaliaWhileLocked "volume decrease";
-              }
-              ## Plugins
-              {
-                "Mod+Escape" = noctalia "plugin:keybind-cheatsheet toggle";
+                "XF86AudioMute" = noctWhileLocked "volume-mute";
+                "XF86AudioRaiseVolume" = noctWhileLocked "volume-up";
+                "XF86AudioLowerVolume" = noctWhileLocked "volume-down";
               }
             ]
           );

@@ -31,7 +31,7 @@
           }
 
           layer-rule {
-            match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+            match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
             background-effect {
               xray false
             }

@@ -4,7 +4,7 @@
       layer-rules = [
         ## Render walpaper in backdrop for overview mode
         {
-          matches = [ { namespace = "^noctalia-overview*"; } ];
+          matches = [ { namespace = "^noctalia-backdrop"; } ];
           place-within-backdrop = true;
         }
       ];

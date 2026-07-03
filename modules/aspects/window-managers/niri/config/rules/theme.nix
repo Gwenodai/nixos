@@ -33,6 +33,8 @@
             matches = [
               ## Vesktop
               { app-id = "^vesktop$"; }
+              ## Noctalia Settings window
+              # { app-id = "dev.noctalia.Noctalia.Settings"; }
             ];
             opacity = 0.9;
             draw-border-with-background = false;
