@@ -1,5 +1,5 @@
-{
-  den.aspects.cli-tools = {
+{ den, ... }: {
+  den.aspects.nh = {
     homeManager =
       { config, ... }:
       {
@@ -11,9 +11,11 @@
 
           clean = {
             enable = true;
-            extraArgs = "--keep-since 30d --keep 3";
+            dates = "weekly";
+            extraArgs = "--keep-since 30d --keep 5 --optimise --no-gc";
           };
         };
       };
   };
+  den.aspects.cli-tools.includes = [ den.aspects.nh ];
 }
