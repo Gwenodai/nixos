@@ -22,6 +22,12 @@
               { app-id = "raccoin.exe"; }
               ## Overwatch
               { app-id = "overwatch.exe"; }
+              ## Plague Inc: Evolved
+              { app-id = "plagueincevolved.exe"; }
+              ## Miniairways
+              { app-id = "miniairways.exe"; }
+              ## KFGAME
+              { app-id = "kfgame.exe"; }
             ];
             variable-refresh-rate = true;
             open-focused = true;
