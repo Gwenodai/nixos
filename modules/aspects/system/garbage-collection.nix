@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{
   den.aspects.garbage-collection = {
     nixos = { host, lib, ... }: {
       nix = {
