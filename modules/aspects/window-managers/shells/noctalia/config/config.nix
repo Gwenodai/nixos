@@ -6,6 +6,7 @@
 {
   den.aspects.noctalia = {
     homeManager = { config, ... }: {
+      home.file."${config.xdg.stateHome}/noctalia/.setup-complete".text = "";
       programs.noctalia.settings = {
         audio.enable_overdrive = true;
         backdrop.enabled = true;
@@ -37,6 +38,16 @@
         calendar.enabled = true;
         desktop_widgets.enabled = false;
 
+        dock = {
+          auto_hide = true;
+          background_opacity = 0.75;
+          enabled = true;
+          position = "right";
+          reserve_space = false;
+          show_dots = true;
+          show_instance_count = false;
+        };
+
         idle = {
           behavior_order = [
             "screen-off"
@@ -57,7 +68,7 @@
             lock-and-suspend = {
               action = "lock_and_suspend";
               enabled = true;
-              timeout = 600.0;
+              timeout = 1800.0;
             };
           };
         };
@@ -65,7 +76,7 @@
         location.auto_locate = true;
         lockscreen.fingerprint = false;
 
-        notifications = {
+        notification = {
           background_opacity = 0.75;
           layer = "overlay";
         };
@@ -79,6 +90,8 @@
         };
 
         shell = {
+          avatar_path = "${config.xdg.userDirs.pictures}/.avatar";
+          clipboard_auto_paste = "off";
           launch_apps_as_systemd_services = true;
           niri_overview_type_to_launch_enabled = true;
           polkit_agent = true;
@@ -96,7 +109,8 @@
         theme = {
           community_palette = "Rosey AMOLED";
           mode = "dark";
-          source = "community";
+          pure_black_dark = true;
+          source = "wallpaper";
         };
 
         wallpaper = {
@@ -155,6 +169,7 @@
           workspaces = {
             font_family = "Adwaita Sans";
             font_weight = 1000;
+            hide_when_empty = true;
             labels_only_when_occupied = true;
           };
         };
