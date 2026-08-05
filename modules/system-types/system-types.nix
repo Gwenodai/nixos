@@ -45,7 +45,7 @@
 
         #---Security & Authentication---#
         gnome-keyring
-        polkit-gnome
+        polkit-base
       ];
     };
 

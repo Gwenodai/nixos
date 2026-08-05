@@ -1,8 +1,6 @@
-{
+{ den, ... }: {
   den.aspects.polkit-gnome = {
-    nixos = {
-      security.polkit.enable = true;
-    };
+    includes = [ den.aspects.polkit-base ];
 
     homeManager =
       {
