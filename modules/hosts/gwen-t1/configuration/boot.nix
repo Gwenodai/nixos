@@ -9,7 +9,7 @@ in
 {
   den.aspects.gwen-t1 = {
     nixos =
-      { pkgs, host, ... }:
+      { pkgs, ... }:
       let
         wakeup-script = mkWakeupScript pkgs;
       in

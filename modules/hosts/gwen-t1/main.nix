@@ -47,6 +47,10 @@ in
           #---System Profile Base---#
           # Use the gaming desktop system type
           system-type.desktop-gaming
+
+          #---Batteries---#
+          # Fixes touchscreen input reverting to mouse input after sleep
+          (den.batteries.reload-touchscreen "0003:32D7:0010")
         ];
       };
 

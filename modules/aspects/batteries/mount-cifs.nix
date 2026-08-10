@@ -1,7 +1,8 @@
-# This battery takes mount parameters as context
+# Mounts a CIFS share at the specified destination
 {
   den.batteries.mount-cifs =
     {
+      # This battery takes the following mount parameters as context:
       hostName,
       resource,
       destination,
