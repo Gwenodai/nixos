@@ -16,6 +16,7 @@
         hardware.autoConfig
         firmware
         kernel # Use the latest NixOS kernel
+        networking
         coolercontrol
         garbage-collection
         locale

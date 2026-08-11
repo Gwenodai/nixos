@@ -44,9 +44,11 @@ in
           # Opt into system wide ephemeral state management
           preservation
 
-          #---System Profile Base---#
+          #---System---#
           # Use the gaming desktop system type
           system-type.desktop-gaming
+          # Enable bluetooth support
+          bluetooth
 
           #---Batteries---#
           # Fixes touchscreen input reverting to mouse input after sleep
