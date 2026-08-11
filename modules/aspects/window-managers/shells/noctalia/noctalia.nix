@@ -29,7 +29,7 @@
     ];
 
     homeManager =
-      { inputs', lib, ... }:
+      { lib, ... }:
       {
         imports = [ inputs.noctalia.homeModules.default ];
 
@@ -37,43 +37,42 @@
           enable = true;
           systemd.enable = true;
         };
-
-        services.polkit-gnome.enable = lib.mkForce false;
       };
 
-    ### Persist config
-    # persistUser =
-    #   { hmConfig, ... }:
-    #   {
-    #     directories = [
-    #       # "~/.cache/noctalia"
-    #       "${hmConfig.xdg.cacheHome}/noctalia"
-    #       # "~/.cache/noctalia-qs"
-    #       "${hmConfig.xdg.cacheHome}/noctalia-qs"
-    #       # "~/.cache/cliphist"
-    #       {
-    #         directory = "${hmConfig.xdg.cacheHome}/cliphist";
-    #         mode = "0700";
-    #         how = "symlink";
-    #         createLinkTarget = true;
-    #       }
-    #       # "~/.config/noctalia/colorschemes"
-    #       {
-    #         directory = "${hmConfig.xdg.configHome}/noctalia/colorschemes";
-    #         how = "symlink";
-    #         createLinkTarget = true;
-    #       }
-    #     ];
-    #   };
+    ## Persist config
+    persistUser =
+      { hmConfig, ... }:
+      {
+        directories = [
+          # "~/.cache/noctalia"
+          {
+            directory = "${hmConfig.xdg.cacheHome}/noctalia";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+          # "~/.cache/cliphist"
+          {
+            directory = "${hmConfig.xdg.cacheHome}/cliphist";
+            mode = "0700";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+          # "~/.local/state/noctalia"
+          {
+            directory = "${hmConfig.xdg.stateHome}/noctalia";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ];
+      };
 
-    # persistUserTmp =
-    #   { hmConfig, ... }:
-    #   {
-    #     # "~/.cache"
-    #     "${hmConfig.xdg.cacheHome}" = { };
-    #     # "~/.config/noctalia"
-    #     "${hmConfig.xdg.configHome}" = { };
-    #     "${hmConfig.xdg.configHome}/noctalia" = { };
-    #   };
+    persistUserTmp =
+      { hmConfig, ... }:
+      {
+        # "~/.cache"
+        "${hmConfig.xdg.cacheHome}" = { };
+        # "~/.local/state"
+        "${hmConfig.xdg.stateHome}" = { };
+      };
   };
 }

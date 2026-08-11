@@ -14,7 +14,7 @@
         bar = {
           order = [ "default" ];
           default = {
-            background_opacity = 0.75;
+            background_opacity = 0.3;
             center = [ "workspaces" ];
             end = [
               "media"
@@ -25,8 +25,8 @@
               "volume"
               "notifications"
             ];
-            margin_edge = 5;
-            margin_ends = 5;
+            margin_edge = 0;
+            margin_ends = 0;
             radius = 20;
             start = [
               "clock"
@@ -36,11 +36,34 @@
         };
 
         calendar.enabled = true;
+
+        control_center = {
+          hidden_tabs = [
+            "monitor"
+            "power"
+          ];
+          sidebar_section = "none";
+          shortcuts = [
+            {
+              type = "wifi";
+            }
+            {
+              type = "bluetooth";
+            }
+            {
+              type = "caffeine";
+            }
+            {
+              type = "nightlight";
+            }
+          ];
+        };
+
         desktop_widgets.enabled = false;
 
         dock = {
           auto_hide = true;
-          background_opacity = 0.75;
+          background_opacity = 0.3;
           enabled = true;
           position = "right";
           reserve_space = false;
@@ -68,7 +91,7 @@
             lock-and-suspend = {
               action = "lock_and_suspend";
               enabled = true;
-              timeout = 1800.0;
+              timeout = 3600.0;
             };
           };
         };
@@ -92,6 +115,7 @@
         shell = {
           avatar_path = "${config.xdg.userDirs.pictures}/.avatar";
           clipboard_auto_paste = "off";
+          corner_radius_scale = 1.5;
           launch_apps_as_systemd_services = true;
           niri_overview_type_to_launch_enabled = true;
           polkit_agent = true;
@@ -101,10 +125,12 @@
             borders = false;
             open_near_click_control_center = true;
             open_near_click_session = true;
-            transparency_mode = "soft";
+            transparency_mode = "glass";
           };
           screen_corners.enabled = true;
         };
+
+        system.monitor.gpu_poll_seconds = 0;
 
         theme = {
           community_palette = "Rosey AMOLED";
@@ -137,6 +163,7 @@
           clock = {
             font_family = "JetBrainsMono NF";
             font_weight = 700;
+            format = "{:%H:%M - %a %e/%m}";
           };
           media = {
             art_size = 24;
