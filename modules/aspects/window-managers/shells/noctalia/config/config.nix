@@ -163,7 +163,7 @@
           clock = {
             font_family = "JetBrainsMono NF";
             font_weight = 700;
-            format = "{:%H:%M - %a %e/%m}";
+            format = "{:%H:%M - %a, %e/%m}";
           };
           media = {
             art_size = 24;
