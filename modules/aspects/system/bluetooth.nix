@@ -1,7 +1,10 @@
 {
   den.aspects.bluetooth = {
-    nixos = {
-      hardware.bluetooth.enable = true;
+    nixos = { host, ... }: {
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = host.hostConfig.bluetoothPowerOnBoot;
+      };
     };
 
     ### Persist config
@@ -12,6 +15,14 @@
           mode = "0700";
         }
       ];
+    };
+  };
+
+  den.schema.host = { lib, ... }: {
+    options.hostConfig.bluetoothPowerOnBoot = lib.mkOption {
+      description = "Whether bluetooth should be powered on at boot.";
+      type = lib.types.bool;
+      default = false;
     };
   };
 }
