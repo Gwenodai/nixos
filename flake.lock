@@ -566,7 +566,8 @@
         "noctalia": "noctalia",
         "preservation": "preservation",
         "sops-nix": "sops-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "teamspeak6-server": "teamspeak6-server"
       }
     },
     "sops-nix": {
@@ -635,6 +636,19 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "teamspeak6-server": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785250703,
+        "narHash": "sha256-aTMoiZ53i6ZPxCxmfoDk3mUbp090T69wnMMDkM6GKOI=",
+        "type": "tarball",
+        "url": "https://github.com/teamspeak/teamspeak6-server/releases/latest/download/teamspeak6-server-linux-amd64.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/teamspeak/teamspeak6-server/releases/latest/download/teamspeak6-server-linux-amd64.tar.xz"
       }
     },
     "tinted-kitty": {

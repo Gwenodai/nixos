@@ -46,5 +46,9 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    teamspeak6-server = {
+      url = "https://github.com/teamspeak/teamspeak6-server/releases/latest/download/teamspeak6-server-linux-amd64.tar.xz";
+      flake = false;
+    };
   };
 }

@@ -74,5 +74,14 @@
         # "~/.local/state"
         "${hmConfig.xdg.stateHome}" = { };
       };
+
+    persistUserIgnore =
+      { hmConfig, ... }:
+      {
+        directories = [
+          # "~/local/share/qalculate"
+          "${hmConfig.xdg.dataHome}/qalculate"
+        ];
+      };
   };
 }

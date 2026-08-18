@@ -49,6 +49,9 @@ in
         # Enable bluetooth support
         bluetooth
 
+        #---Services---#
+        teamspeak6-server
+
         #---Batteries---#
         # Fixes touchscreen input reverting to mouse input after sleep
         (den.batteries.reload-touchscreen "0003:32D7:0010")
@@ -73,6 +76,7 @@ in
       vesktop
       vesktop.config
       caprine
+      teamspeak6-client
 
       #---Media & Background Services---#
       spotify
