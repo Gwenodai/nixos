@@ -23,7 +23,7 @@
   den.aspects.hardware.autoConfig =
     { host, ... }:
     let
-      hw = host.hardware.cpu;
+      hw = host.hostConfig.hardware.cpu;
       baseAspect = den.aspects.hardware.amdcpu;
     in
     {

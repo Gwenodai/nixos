@@ -12,7 +12,7 @@
   den.aspects.hardware.autoConfig =
     { host, ... }:
     let
-      gpuVendor = host.hardware.gpu.vendor;
+      gpuVendor = host.hostConfig.hardware.gpu.vendor;
       baseAspect = den.aspects.hardware.graphics;
     in
     {

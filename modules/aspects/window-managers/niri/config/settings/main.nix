@@ -9,7 +9,7 @@
       }:
       {
         programs.niri.settings = inputs.self.lib.mkDefaultsRecursive {
-          outputs = host.hardware.display;
+          outputs = host.hostConfig.display;
 
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;

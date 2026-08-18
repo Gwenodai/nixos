@@ -18,7 +18,7 @@
             scroll-method = "no-scroll";
           };
 
-          touch.map-to-output = host.hardware.touchscreen;
+          touch.map-to-output = host.hostConfig.input.touchscreen;
 
           warp-mouse-to-focus = {
             enable = true;

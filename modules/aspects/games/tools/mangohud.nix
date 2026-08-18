@@ -37,7 +37,7 @@
         mainDisplay =
           lib.findSingle (d: d.focus-at-startup or false) null
             (abort "Error: Multiple displays have focus-at-startup set!")
-            (lib.attrValues host.hardware.display);
+            (lib.attrValues host.hostConfig.display);
         getRefreshRate = mainDisplay.mode.refresh or 60;
         roundedRefresh = lib.floor (getRefreshRate + 0.5);
         refreshHigherThanSixty = roundedRefresh > 60;

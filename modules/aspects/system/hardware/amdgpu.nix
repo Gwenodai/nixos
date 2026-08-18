@@ -46,7 +46,7 @@
   den.aspects.hardware.autoConfig =
     { host, ... }:
     let
-      hw = host.hardware.gpu;
+      hw = host.hostConfig.hardware.gpu;
       baseAspect = den.aspects.hardware.amdgpu;
     in
     {

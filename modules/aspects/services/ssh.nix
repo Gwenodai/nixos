@@ -25,7 +25,7 @@
                   name = entry.source.host.name;
                   value = {
                     hostNames = [
-                      entry.value.hostName
+                      entry.source.host.name
                       entry.value.ip
                     ];
                     publicKey = entry.value.publicKey;

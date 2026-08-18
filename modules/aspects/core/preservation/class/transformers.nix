@@ -53,7 +53,7 @@
                     mkRelative userName val;
               in
               transform rawConfig
-            ) config.hostConfig.preservation.userPersist;
+            ) config.nixosConfig.preservation.userPersist;
 
             /*
               Intercept and transform the output of `persistTmp` and `persistUserTmp`
@@ -76,7 +76,7 @@
                   mode = "0755";
                 }
                 // (lib.mapAttrs (_: v: lib.mkOverride 99 v) opts);
-              }) config.hostConfig.preservation.tmpfiles)
+              }) config.nixosConfig.preservation.tmpfiles)
 
               ## User
               (lib.mkMerge (
@@ -96,7 +96,7 @@
                       // (lib.mapAttrs (_: v: lib.mkOverride 99 v) opts);
                     }
                   ) rawConfig
-                ) config.hostConfig.preservation.userTmpfiles
+                ) config.nixosConfig.preservation.userTmpfiles
               ))
             ];
 
@@ -112,14 +112,14 @@
                 directories = [ "/home/<user>/user/dir" ];
                 files = [ "/home/<user>/.config/file.ext" ];
             */
-            hostConfig.preservation.ignore =
+            nixosConfig.preservation.ignore =
               let
                 getTransformedUserPaths =
                   pathType:
                   lib.concatLists (
                     lib.mapAttrsToList (
                       userName: userConfig: lib.map (mkAbsolute userName) (userConfig.${pathType} or [ ])
-                    ) config.hostConfig.preservation.userIgnore
+                    ) config.nixosConfig.preservation.userIgnore
                   );
               in
               {
@@ -129,7 +129,7 @@
           };
 
         ### Options for intermediate config storage
-        options.hostConfig.preservation = with lib.types; {
+        options.nixosConfig.preservation = with lib.types; {
           userPersist = lib.mkOption {
             type = attrsOf (attrsOf anything);
             default = { };

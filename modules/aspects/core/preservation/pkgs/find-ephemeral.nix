@@ -46,8 +46,8 @@
 
         # All ignored paths
         ignores =
-          (config.hostConfig.preservation.ignore.directories or [ ])
-          ++ (config.hostConfig.preservation.ignore.files or [ ]);
+          (config.nixosConfig.preservation.ignore.directories or [ ])
+          ++ (config.nixosConfig.preservation.ignore.files or [ ]);
 
         # Combine, deduplicate, and format for bash
         allIgnorePaths = lib.lists.unique (storageLocations ++ targets ++ ignores);

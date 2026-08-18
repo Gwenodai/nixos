@@ -55,7 +55,7 @@ let
         fromClass = _: fromClass;
         intoClass = _: "nixos";
         intoPath = u: [
-          "hostConfig"
+          "nixosConfig"
           "preservation"
           intoSubPath
           u.userName
@@ -97,7 +97,7 @@ in
       (mkHostClass {
         fromClass = "persistTmp";
         intoPath = [
-          "hostConfig"
+          "nixosConfig"
           "preservation"
           "tmpfiles"
         ];
@@ -106,7 +106,7 @@ in
       (mkHostClass {
         fromClass = "persistIgnore";
         intoPath = [
-          "hostConfig"
+          "nixosConfig"
           "preservation"
           "ignore"
         ];
