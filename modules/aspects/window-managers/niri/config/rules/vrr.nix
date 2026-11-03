@@ -13,7 +13,7 @@
               ## Vampire crawlers
               { app-id = "vampire crawlers.exe"; }
               ## Riftbreaker
-              # { app-id = "riftbreaker_win_release.exe"; }
+              { app-id = "riftbreaker_win_release.exe"; }
               ## Halo: MCC
               { app-id = "mcc-win64-shipping.exe"; }
               ## Halo: Infinite

@@ -184,7 +184,7 @@
             mode = "0700";
             createLinkTarget = true;
           }
-          # "~/.local/share"
+          # "~/.local/share/vlc"
           {
             directory = "${hmConfig.xdg.dataHome}/vlc";
             how = "symlink";

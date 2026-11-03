@@ -89,6 +89,7 @@ in
       steam
       heroic
       heroic.config
+      bolt # Runescape
       ## Mods & Mod Tools
       mods.halo-wars.cameraZoom
     ];
