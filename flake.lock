@@ -102,11 +102,11 @@
     },
     "den": {
       "locked": {
-        "lastModified": 1786475005,
-        "narHash": "sha256-gp7Q7rMEjsqAyW4Uwz+sms8j+XegD5P/lzRCuMW2fNI=",
+        "lastModified": 1792618207,
+        "narHash": "sha256-iBpvVBVBnynNWW9sLX5oKVigXU28oO2oiMPXgcLO1HI=",
         "owner": "vic",
         "repo": "den",
-        "rev": "e8e8de1e32646456cfc613f152175a7a548508ec",
+        "rev": "0f7675b0b789eabe1a62f8a31b5323a7ad3ca5c4",
         "type": "github"
       },
       "original": {
@@ -641,8 +641,8 @@
     "teamspeak6-server": {
       "flake": false,
       "locked": {
-        "lastModified": 1785250703,
-        "narHash": "sha256-aTMoiZ53i6ZPxCxmfoDk3mUbp090T69wnMMDkM6GKOI=",
+        "lastModified": 1790081433,
+        "narHash": "sha256-paWRJmnBY3dkDh8dNfgBUFvwKmCcKoh6WtlNnXui5YM=",
         "type": "tarball",
         "url": "https://github.com/teamspeak/teamspeak6-server/releases/latest/download/teamspeak6-server-linux-amd64.tar.xz"
       },
