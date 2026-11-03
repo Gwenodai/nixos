@@ -20,13 +20,14 @@
 
         ### Aliases
         home.shellAliases = {
-          cat = "bat";
-          man = "batman";
+          bcat = "bat";
+          bman = "batman";
           # Make batgrep properly scale to terminal width
-          grep = "batgrep --terminal-width=$(( $(echo $COLUMNS) - 8 ))";
-          diff = "batdiff";
-          less = "batpipe";
-          watch = "batwatch";
+          batgrep = "batgrep --terminal-width=$(echo $COLUMNS)";
+          bgrep = "batgrep";
+          bdiff = "batdiff";
+          bless = "batpipe";
+          bwatch = "batwatch";
         };
       };
 
