@@ -73,7 +73,7 @@
             ExecStart = ''
               ${ts6-server}/bin/tsserver \
                 --db-sql-path ${ts6-server}/libexec/teamspeak6/sql \
-                --db-sql-create-path create_sqlite
+                --db-sql-create-path ${ts6-server}/libexec/teamspeak6/sql/create_sqlite
             '';
             Restart = "on-failure";
             RestartSec = "5s";
