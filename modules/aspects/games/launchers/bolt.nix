@@ -1,5 +1,5 @@
 {
-  den.aspects.runelite = {
+  den.aspects.bolt = {
     homeManager =
       { pkgs, ... }:
       {
